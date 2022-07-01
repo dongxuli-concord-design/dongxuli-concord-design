@@ -35,7 +35,7 @@
 ### How to build application
 1. Go to `XcExternal` folder and download the packages following the instructions in `README.md`.
 2. Go to `CAD/XcMain` and run `../XcExternal/node.darwin/bin/node ../XcExternal/node.darwin/bin/npm install` command to install npm packages.
-4. Build
+3. Build
    1. Build on Mac first 
      * Go to `CAD` folder and use `pwd` command to get the `{CAD_folder_full_path}`
      * Go to the `CAD` folder in terminal and run `./XcExternal/node.darwin/bin/node ./build_scripts/build_darwin.js {CAD_folder_full_path}`
