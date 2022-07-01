@@ -1,0 +1,5 @@
+/.idea/
+/node_modules/
+/git_stats/
+/build/
+v8.log

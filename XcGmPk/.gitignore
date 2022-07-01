@@ -1,0 +1,15 @@
+/build/
+*.txt.user
+/git_stats/
+.idea
+cmake-build-debug/
+cmake-build-release/
+/CMakeLists.txt
+.vs
+XcGmPkWin/Debug/
+XcGmPkWin/x64/
+XcGmPkWin/XcGmPkWin.VC.db
+XcGmPkWin/XcGmPkWin.vcxproj.filters
+XcGmPkWin/XcGmPkWin.vcxproj.user
+XcGmPkWin/XcGmPkWin.VC.VC.opendb
+/binding.gyp

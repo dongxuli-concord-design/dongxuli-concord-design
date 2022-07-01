@@ -1,0 +1,36 @@
+<html>
+<meta charset="UTF-8">
+<head>
+    <title></title>
+
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="/3rd/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- dependencies -->
+    <script src="3rd/js-uuid.js"></script>
+    <script src="3rd/bootstrap.js"></script>
+    <script src="3rd/three.js"></script>
+    <script src="3rd/FontLoader.js"></script>
+
+    <script src="3rd/leap-0.6.4.js"></script>
+
+    <script src="XcVersion.js"></script>
+    <script type="module" src="main.js"></script>
+</head>
+
+<body>
+<h1 style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 16px solid #f3f3f3; border-radius: 50%; border-top: 16px solid #3498db; width: 120px; height: 120px; animation: spin 2s linear infinite;"></h1>
+</body>
+</html>

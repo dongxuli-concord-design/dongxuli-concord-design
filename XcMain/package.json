@@ -1,0 +1,15 @@
+{
+  "name": "Concord",
+  "main": "index.html",
+  "chromium-args": "--incognito",
+  "js-flags": "--expose-gc",
+  "window": {
+    "width": 1280,
+    "height": 1080,
+    "position": "center"
+  },
+  "dependencies": {
+    "request": "^2.88.0",
+    "ws": "^6.0.0"
+  }
+}
