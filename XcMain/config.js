@@ -4,5 +4,4 @@ XcSysConfig.locale = 'zh';
 XcSysConfig.debug = true;
 XcSysConfig.apps = [
   "Apps/3DCAD/Xc3d",
-  "Apps/MIS/XcEnterprise",
 ];

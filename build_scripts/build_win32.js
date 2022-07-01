@@ -106,35 +106,15 @@ function build({baseFolderPath}) {
     ]);
   }
 
-  // MIS
+  // Automation
   {
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/MIS'));
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/Automation'));
     process.chdir(projectFolder);
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
     ]);
   }
-
-  // TianFurniture
-  {
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/TianFurniture'));
-    process.chdir(projectFolder);
-
-    _runCommands([
-      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
-    ]);
-  }
-
-    // Automation
-    {
-      const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/Automation'));
-      process.chdir(projectFolder);
-  
-      _runCommands([
-        `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
-      ]);
-    }
 }
 
 const args = process.argv.slice(2);

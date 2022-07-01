@@ -133,53 +133,21 @@ function build({baseFolderPath}) {
     ]);
   }
 
-  // MIS
+  // Automation
   {
     _runCommands([
-      `mkdir -p ${baseFolderPath}/XcMain/Apps/MIS`,
-      `mkdir -p ${baseFolderPath}/XcDebug/Apps/MIS`,
+      `mkdir -p ${baseFolderPath}/XcMain/Apps/3DCAD/Plugins/Automation`,
+      `mkdir -p ${baseFolderPath}/XcDebug/Apps/3DCAD/Plugins/Automation`,
     ]);
 
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/MIS'));
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/Automation'));
     process.chdir(projectFolder);
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../XcDebug/Apps/MIS && cp -r res ../../XcDebug/Apps/MIS  && cp build/*.bin ../../XcMain/Apps/MIS && cp -r res ../../XcMain/Apps/MIS`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/`,
     ]);
   }
-
-  // TianFurniture
-  {
-    _runCommands([
-      `mkdir -p ${baseFolderPath}/XcMain/Apps/3DCAD/Plugins/TianFurniture`,
-      `mkdir -p ${baseFolderPath}/XcDebug/Apps/3DCAD/Plugins/TianFurniture`,
-    ]);
-
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/TianFurniture'));
-    process.chdir(projectFolder);
-
-    _runCommands([
-      `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*  ../../XcMain/Apps/3DCAD/Plugins/TianFurniture/ && cp -r res ../../XcMain/Apps/3DCAD/Plugins/TianFurniture/  && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/TianFurniture/ && cp -r res ../../XcDebug/Apps/3DCAD/Plugins/TianFurniture/`,
-    ]);
-  }
-
-    // Automation
-    {
-      _runCommands([
-        `mkdir -p ${baseFolderPath}/XcMain/Apps/3DCAD/Plugins/Automation`,
-        `mkdir -p ${baseFolderPath}/XcDebug/Apps/3DCAD/Plugins/Automation`,
-      ]);
-
-      const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/Automation'));
-      process.chdir(projectFolder);
-  
-      _runCommands([
-        `rm -rf build && mkdir build`,
-        `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/`,
-      ]);
-    }
 }
 
 const args = process.argv.slice(2);

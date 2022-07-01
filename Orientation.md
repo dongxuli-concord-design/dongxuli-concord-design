@@ -3,6 +3,8 @@
 ## Basic Development orientation
 
 * Prerequisite
+  * MacOS
+  * VMWare/Windows 10 (No space allowed in username.)
   * HTML 5
   * Node.js
   * NW.js
@@ -31,22 +33,20 @@
     * 3D CAD
 
 ### How to build application
-
-1. Go to `CAD/XcMain` and run `../XcExternal/node.darwin/bin/node ../XcExternal/node.darwin/bin/npm install` command to install npm packages.
-2. Go to `CAD` folder and use `pwd` command to get the `{CAD_folder_full_path}`
-3. Build
-   * Build on Mac first
-     * Go to the CAD folder in terminal and run `./XcExternal/node.darwin/bin/node ./build_scripts/build_darwin.js {CAD_folder_full_path}`
-
-   * Build on Win32
+1. Go to `XcExternal` folder and download the packages following the instructions in `README.md`.
+2. Go to `CAD/XcMain` and run `../XcExternal/node.darwin/bin/node ../XcExternal/node.darwin/bin/npm install` command to install npm packages.
+4. Build
+   1. Build on Mac first 
+     * Go to `CAD` folder and use `pwd` command to get the `{CAD_folder_full_path}`
+     * Go to the `CAD` folder in terminal and run `./XcExternal/node.darwin/bin/node ./build_scripts/build_darwin.js {CAD_folder_full_path}`
+   2. Build on Win32
      * In the VMWare, share `CAD` folder as `Z:\` in the Windows 10.
-     * Go the command window application, go to `CAD` folder, and then run `.\XcExternal\node.win32\node .\build_scripts\build_win32.js {CAD_folder_full_path}`
+     * Go the command window application, go to `Z:\CAD` folder, and then run `.\XcExternal\node.win32\node .\build_scripts\build_win32.js Z:\CAD`
 
 ### How to run application
 
 1. Go to `XcDebug`
-2. 
-3. Use `../XcExternal/nwjs.sdk.darwin/nwjs.app/Contents/MacOS/nwjs .` on mac or to use `..\XcExternal\nwjs.sdk.win32\nw .` on Windows to launch the application.
+2. Use `../XcExternal/nwjs.sdk.darwin/nwjs.app/Contents/MacOS/nwjs .` on mac or to use `..\XcExternal\nwjs.sdk.win32\nw .` on Windows to launch the application.
 
 ### How to create an app
 
