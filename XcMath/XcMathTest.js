@@ -1,0 +1,8 @@
+class XcMathTest {
+  constructor() {
+  }
+
+  foo() {
+
+  }
+}

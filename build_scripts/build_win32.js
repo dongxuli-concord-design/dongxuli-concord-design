@@ -56,6 +56,36 @@ function build({baseFolderPath}) {
     ]);
   }
 
+  // XcMath
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcMath'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+    ]);
+  }
+
+  // XcGm2
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcGm2'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+    ]);
+  }
+
+  // XcImage
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcImage'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+    ]);
+  }
+
   // Xc3d
   {
     const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/3DCAD/Xc3d'));

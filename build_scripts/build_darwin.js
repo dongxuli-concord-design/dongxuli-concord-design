@@ -57,9 +57,42 @@ function build({baseFolderPath}) {
     ]);
   }
 
+  // XcMath
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcMath'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `rm -rf build && mkdir build`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+    ]);
+  }
+
   // XcGm
   {
     const projectFolder = path.resolve(path.join(baseFolderPath, 'XcGm'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `rm -rf build && mkdir build`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+    ]);
+  }
+
+  // XcGm2
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcGm2'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `rm -rf build && mkdir build`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+    ]);
+  }
+
+  // XcImage
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcImage'));
     process.chdir(projectFolder);
 
     _runCommands([
