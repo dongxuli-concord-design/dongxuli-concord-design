@@ -4,17 +4,16 @@ const platform = os.platform();
 
 // Build single JS file
 const scripts = [
-
   // Robot
-  'XcAtCmdDebugRobot.js',
-  'XcAtCmdSetupRobot.js',
-  'XcAtDoc6DOFRobotArm.js',
   'XcAtKinematics.js',
   'XcAtDocGeneralRobot.js',
   'XcAtGeneralKinematics.js',
   
   'XcAtDocMixer.js',
+
   'XcAtDocBlock.js',
+
+  'XcAtCmdPLCDemo.js',
 
   'XcAtApp.js',
 ];

@@ -1,21 +1,6 @@
 class XcServerManager {
-  static run() {
+  static run({userSSL, portNumber}) {
     process.setMaxListeners(0);
-    process
-      .on('unhandledRejection', (reason, p) => {
-        console.error(reason, 'Unhandled Rejection at Promise', p);
-      })
-      .on('uncaughtException', error => {
-        console.error(error, 'Uncaught Exception thrown', error);
-      });
-
-    console.log('Use "export XCSERVER_SSL=true" to enable SSL.');
-    const useSSL = (process.env.XCSERVER_SSL === 'true');
-
-    const httpPortNumber = 80;
-    const httpsPortNumber = 443;
-
-    const httpApp = XcServerHttpApp.createExpressApp();
 
     // TODO
     const httpsServer = null;
@@ -42,12 +27,13 @@ class XcServerManager {
       });
       httpServer.listen(httpPortNumber);
     } else {
-      console.log(`Listening on http/${httpPortNumber}.`);
 
       httpServer = require('http').createServer(httpApp);
 
       httpServer.listen(httpPortNumber);
     }
+
+    console.log(`Listening on ${portNumber}.`);
 
     // WebSocket task server
     const WebSocket = require('ws');

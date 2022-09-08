@@ -290,7 +290,7 @@ class Xc3dApp extends XcSysApp {
     try {
       yield* command.entry();
     } catch (error) {
-      XcSysManager.outputDisplay.error(Xc3dApp.#i18n.T`Internal command state error`);
+      XcSysManager.outputDisplay.error(Xc3dApp.#i18n.T`Internal command state error`, error);
       Xc3dApp.document.cleanRuntimeData();
     } finally {
       Xc3dUIManager.clearCustomRenderingObjects();

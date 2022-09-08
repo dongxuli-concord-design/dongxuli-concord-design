@@ -1,35 +1,50 @@
 class XcServerDatabase {
-  constructor({
-                databaseFileName, loadCallBack, saveCallback
-              }) {
 
-    this.databaseModifiedCounter = 0;
+  databaseFileName;
+  onSaveCallback;
+  saveDelay;
+
+  #saveNotificationCallbacks;
+
+  constructor({
+                databaseFileName, onSaveCallback, saveDelay = 1000 * 60
+              }) {
+    this.databaseFileName = databaseFileName;
+    this.onSaveCallback = onSaveCallback;
+    this.saveDelay = saveDelay;
+
+    this.#saveNotificationCallbacks  = [];
+  }
+
+  init() {
+    this.#saveNotificationCallbacks.length = 0;
+
     const fs = require('fs');
 
-    // Load database
-    if (fs.existsSync(databaseFileName)) {
-      const loadedDatabaseContent = fs.readFileSync(databaseFileName, 'utf8');
-      loadCallBack(loadedDatabaseContent);
+    if (!fs.existsSync(this.databaseFileName)) {
+      throw 'Database file not found.';
     }
 
-    // Save database
+    const loadedDatabaseContent = fs.readFileSync(this.databaseFileName, 'utf8');
+
     setInterval(()=> {
-      if (this.databaseModifiedCounter === 0) {
+      if (this.#saveNotificationCallbacks.length === 0) {
         return;
       }
 
-      const newDatabaseContent = saveCallback();
-      fs.writeFile(databaseFileName, newDatabaseContent, { flag: 'w' }, (error) => {
-        if (error) {
-          console.error('Cannot save database.')
-        } else {
-          this.databaseModifiedCounter = 0;
+      const newDatabaseContent = this.onSaveCallback();
+      fs.writeFile(this.databaseFileName, newDatabaseContent, { flag: 'w' }, (error) => {
+        for (const saveNotificationCallback of this.#saveNotificationCallbacks) {
+          saveNotificationCallback({error});
         }
+
+        this.#saveNotificationCallbacks.length = 0;
       });
-    }, 10*1000);
+    }, this.saveDelay);
+
   }
 
-  notifyModification() {
-    ++ this.databaseModifiedCounter;
+  notifyModification({saveNotificationCallback}) {
+    this.#saveNotificationCallbacks.push(saveNotificationCallback);
   }
 }
