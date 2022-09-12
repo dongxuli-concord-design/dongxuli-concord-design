@@ -19,6 +19,10 @@ class XcAtCmdPLCDemo {
     this.#state = XcAtCmdPLCDemo.#CommandState.WaitForRobotReady;
   }
 
+  static createModels() {
+    
+  }
+
   static *command() {
     const cmd = new XcAtCmdPLCDemo();
     const ret = yield* cmd.run();
