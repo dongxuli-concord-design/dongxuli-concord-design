@@ -7,10 +7,10 @@ class XcAtCmdPLCDemo {
   };
 
   static Event = {
-    Done: Symbol('Done'),
-    Cancel: Symbol('Cancel'),
-    PartReady: Symbol('PartReady'),
-    RobotReady: Symbol('RobotReady'),
+    Done: 'Done',
+    Cancel: 'Cancel',
+    PartReady: 'PartReady',
+    RobotReady: 'RobotReady',
   };
 
   #state;
@@ -20,7 +20,22 @@ class XcAtCmdPLCDemo {
   }
 
   static createModels() {
-    
+
+  }
+
+  static #createEventButtons({events}) {
+    const widgets = [];
+
+    for (const event of events) {
+      const button = document.createElement('button');
+      button.innerHTML = event;
+      button.addEventListener('click', () => {
+        XcSysManager.dispatchEvent({event});
+      });
+      widgets.push(button);
+    }
+
+    return widgets;
   }
 
   static *command() {
@@ -58,15 +73,19 @@ class XcAtCmdPLCDemo {
   }
 
   * #onWaitForRobotReady() {
+    const expectedEventTypes = [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.RobotReady];
+    const standardWidgets = XcAtCmdPLCDemo.#createEventButtons({events: expectedEventTypes});
+
     let uiContext = new XcSysContext({
       prompt: 'Waiting for XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.RobotReady',
       showCanvasElement: true,
+      standardWidgets,
       cursor: 'pointer',
     });
     
     const event = yield* XcSysManager.waitForEvent({
       uiContext,
-      expectedEventTypes: [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.RobotReady],
+      expectedEventTypes,
     });
     if (event === XcAtCmdPLCDemo.Event.Done) {
       XcSysManager.outputDisplay.info('用户停止系统');
@@ -83,15 +102,19 @@ class XcAtCmdPLCDemo {
   }
 
   * #onWaitForPartReady() {
+    const expectedEventTypes = [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.PartReady];
+    const standardWidgets = XcAtCmdPLCDemo.#createEventButtons({events: expectedEventTypes});
+
     let uiContext = new XcSysContext({
       prompt: 'Waiting for XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.PartReady',
       showCanvasElement: true,
+      standardWidgets,
       cursor: 'pointer',
     });
 
     const event = yield* XcSysManager.waitForEvent({
       uiContext,
-      expectedEventTypes: [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.PartReady],
+      expectedEventTypes,
     });
     if (event === XcAtCmdPLCDemo.Event.Done) {
       XcSysManager.outputDisplay.info('用户停止系统');
