@@ -190,9 +190,13 @@ class XcAtCmdPLCDemo {
       const isGoodPart = (Math.floor(Math.random() * 10) % 2 === 0);
 
       if (isGoodPart) {
-        XcSysManager.outputDisplay.info('零件合格，发信号R1：让机器人执行指令（在XX点抓取零件、放入YY点、回到起始位置）');
+        const message = '零件合格，发信号R1：让机器人执行指令（在XX点抓取零件、放入YY点、回到起始位置）';
+        XcSysManager.outputDisplay.info(message);
+        XcAtCmdPLCDemo.plcWebSocket.send(message)
       } else {
-        XcSysManager.outputDisplay.info('零件不合格，发信号R2：让机器人执行指令（在XX点抓取零件、放入ZZ点、回到起始位置）');
+        const message = '零件不合格，发信号R2：让机器人执行指令（在XX点抓取零件、放入ZZ点、回到起始位置）';
+        XcSysManager.outputDisplay.info(message);
+        XcAtCmdPLCDemo.plcWebSocket.send(message)
       }
 
       return XcAtCmdPLCDemo.#CommandState.WaitForRobotReady;
