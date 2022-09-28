@@ -11,7 +11,12 @@ class XcAtCmdPLCDemo {
     Cancel: 'Cancel',
     PartReady: 'PartReady',
     RobotReady: 'RobotReady',
+    PLCServerConnectionError: 'PLCServerConnectionError',
+    PLCServerConnectionClose: 'PLCServerConnectionClose',
   };
+
+  static plcServerAddress = 'ws://127.0.0.1';
+  static plcWebSocket = null;
 
   #state;
 
@@ -21,6 +26,42 @@ class XcAtCmdPLCDemo {
 
   static createModels() {
 
+  }
+
+  static #startWebSocket() {
+    XcAtCmdPLCDemo.#closeWebSocket();
+    XcSysAssert({assertion: XcAtCmdPLCDemo.plcWebSocket === null});
+
+    XcAtCmdPLCDemo.plcWebSocket = new WebSocket(XcAtCmdPLCDemo.plcServerAddress);
+
+    XcAtCmdPLCDemo.plcWebSocket.onopen = () => {
+      XcSysManager.outputDisplay.info('Connected to PLC WebSocket server.');
+    };
+
+    XcAtCmdPLCDemo.plcWebSocket.onmessage = (event) => {
+      XcSysManager.outputDisplay.info(`Got message from PLC WebSocket server: ${event.data}.`);
+      XcSysManager.dispatchEvent({event: event.data});
+    };
+
+    XcAtCmdPLCDemo.plcWebSocket.onclose = (event) => {
+      XcSysManager.outputDisplay.error(`Disconnected PLC WebSocket server: ${event}.`);
+      XcSysManager.dispatchEvent(XcAtCmdPLCDemo.Event.PLCServerConnectionClose);
+    };
+
+    XcAtCmdPLCDemo.plcWebSocket.onerror = (event) => {
+      XcSysManager.outputDisplay.error(`Failed to connect PLC WebSocket server: ${event}.`);
+      XcSysManager.dispatchEvent(XcAtCmdPLCDemo.Event.PLCServerConnectionError);
+    };
+  }
+
+  static #closeWebSocket() {
+    if (XcAtCmdPLCDemo.plcWebSocket) {
+      XcAtCmdPLCDemo.plcWebSocket.onmessage = null;
+      XcAtCmdPLCDemo.plcWebSocket.onerror = null;
+      XcAtCmdPLCDemo.plcWebSocket.onclose = null;
+      XcAtCmdPLCDemo.plcWebSocket.close();
+      XcAtCmdPLCDemo.plcWebSocket = null;
+    }
   }
 
   static #createEventButtons({events}) {
@@ -48,32 +89,40 @@ class XcAtCmdPLCDemo {
     XcSysManager.outputDisplay.info('系统启动');
     XcSysManager.outputDisplay.info('Use XcSysManager.dispatchEvent({event: foo}) to dispatch an event.');
 
-    while ((this.#state !== XcAtCmdPLCDemo.#CommandState.Done) && (this.#state !== XcAtCmdPLCDemo.#CommandState.Cancel)) {
-      switch (this.#state) {
-        case XcAtCmdPLCDemo.#CommandState.WaitForRobotReady:
-          this.#state = yield* this.#onWaitForRobotReady();
-          break;
-        case XcAtCmdPLCDemo.#CommandState.WaitForPartReady:
-          this.#state = yield* this.#onWaitForPartReady();
-          break;
-        default:
-          XcSysAssert({assertion: false});
-          break;
-      }
-    }
+    try {
+      XcAtCmdPLCDemo.#startWebSocket();
 
-    if (this.#state === XcAtCmdPLCDemo.#CommandState.Done) {
-      // Done
-      XcSysManager.outputDisplay.info('系统正常停止');
-    } else {
-      XcSysAssert({assertion: false});
+      while ((this.#state !== XcAtCmdPLCDemo.#CommandState.Done) && (this.#state !== XcAtCmdPLCDemo.#CommandState.Cancel)) {
+        switch (this.#state) {
+          case XcAtCmdPLCDemo.#CommandState.WaitForRobotReady:
+            this.#state = yield* this.#onWaitForRobotReady();
+            break;
+          case XcAtCmdPLCDemo.#CommandState.WaitForPartReady:
+            this.#state = yield* this.#onWaitForPartReady();
+            break;
+          default:
+            XcSysAssert({assertion: false});
+            break;
+        }
+      }
+
+      if (this.#state === XcAtCmdPLCDemo.#CommandState.Done) {
+        // Done
+        XcSysManager.outputDisplay.info('系统正常停止');
+      } else {
+        XcSysAssert({assertion: false});
+      }
+    } catch (error) {
+      XcSysManager.outputDisplay.error(`Exception caught: ${error}`);
+    } finally {
+      XcAtCmdPLCDemo.#closeWebSocket();
     }
 
     return this.#state;
   }
 
   * #onWaitForRobotReady() {
-    const expectedEventTypes = [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.RobotReady];
+    const expectedEventTypes = [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.RobotReady, XcAtCmdPLCDemo.Event.PLCServerConnectionClose, XcAtCmdPLCDemo.Event.PLCServerConnectionError];
     const standardWidgets = XcAtCmdPLCDemo.#createEventButtons({events: expectedEventTypes});
 
     let uiContext = new XcSysContext({
@@ -92,7 +141,13 @@ class XcAtCmdPLCDemo {
       return XcAtCmdPLCDemo.#CommandState.Done;
     } else if (event === XcAtCmdPLCDemo.Event.Cancel) {
       XcSysManager.outputDisplay.info('系统发生错误');
-      return XcAtCmdPLCDemo.#CommandState.Done;
+      return XcAtCmdPLCDemo.#CommandState.Cancel;
+    } else if (event === XcAtCmdPLCDemo.Event.PLCServerConnectionClose) {
+      XcSysManager.outputDisplay.error('PLC服务器关闭');
+      return XcAtCmdPLCDemo.#CommandState.Cancel;
+    } else if (event === XcAtCmdPLCDemo.Event.PLCServerConnectionError) {
+      XcSysManager.outputDisplay.error('PLC服务器连接错误');
+      return XcAtCmdPLCDemo.#CommandState.Cancel;
     } else if (event === XcAtCmdPLCDemo.Event.RobotReady) {
       XcSysManager.outputDisplay.info('机器人就绪');
       return XcAtCmdPLCDemo.#CommandState.WaitForPartReady;
@@ -102,7 +157,7 @@ class XcAtCmdPLCDemo {
   }
 
   * #onWaitForPartReady() {
-    const expectedEventTypes = [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.PartReady];
+    const expectedEventTypes = [XcAtCmdPLCDemo.Event.Done, XcAtCmdPLCDemo.Event.Cancel, XcAtCmdPLCDemo.Event.PartReady, XcAtCmdPLCDemo.Event.PLCServerConnectionClose, XcAtCmdPLCDemo.Event.PLCServerConnectionError];
     const standardWidgets = XcAtCmdPLCDemo.#createEventButtons({events: expectedEventTypes});
 
     let uiContext = new XcSysContext({
@@ -120,9 +175,15 @@ class XcAtCmdPLCDemo {
       XcSysManager.outputDisplay.info('用户停止系统');
       return XcAtCmdPLCDemo.#CommandState.Done;
     } else if (event === XcAtCmdPLCDemo.Event.Cancel) {
-      XcSysManager.outputDisplay.info('系统发生错误');
-      return XcAtCmdPLCDemo.#CommandState.Done;
-    } if (event === XcAtCmdPLCDemo.Event.PartReady) {
+      XcSysManager.outputDisplay.error('系统发生错误');
+      return XcAtCmdPLCDemo.#CommandState.Cancel;
+    } else if (event === XcAtCmdPLCDemo.Event.PLCServerConnectionClose) {
+      XcSysManager.outputDisplay.error('PLC服务器关闭');
+      return XcAtCmdPLCDemo.#CommandState.Cancel;
+    } else if (event === XcAtCmdPLCDemo.Event.PLCServerConnectionError) {
+      XcSysManager.outputDisplay.error('PLC服务器连接错误');
+      return XcAtCmdPLCDemo.#CommandState.Cancel;
+    } else if (event === XcAtCmdPLCDemo.Event.PartReady) {
       XcSysManager.outputDisplay.info('零件就绪');
 
       // Check if the part is good
