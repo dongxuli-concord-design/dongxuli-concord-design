@@ -211,6 +211,6 @@ class XcAtCmdPLCDemo {
 Xc3dApp.commands.push(
   new Xc3dUICommand({
     name: 'PLC Demo',
-    entry: XcAtCmdPLCDemo.command
+    entry: XcAtCmdPLCDemo.command,
   }),
 );
