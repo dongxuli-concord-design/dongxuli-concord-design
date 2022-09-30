@@ -1,4 +1,13 @@
 class XcAtGeneralKinematics {
+  // The max convergence error requirement: the convergence error is defined as the sum of squared
+  // distance between the current and target, and the distances are for TCP positions and unified TCP orientation direction vectors.
+  static COVERGENCE_LIMIT = 1e-8;
+  // Maximum steps of iterations: if this number of steps is reached before convergence,
+  // increase this number to troubleshoot. If convergence is reached with a larger number of steps,
+  // the robot model is complex for this simple IK algorithm.
+  // If convergence is not reached with an increased number of steps, this IK algorithm fails, and a new algorithm is required.
+  static MAX_IK_STEPS = 40000;
+
   #geometryDefinition;
   #jointCoordinateSystem;
 
@@ -7,19 +16,18 @@ class XcAtGeneralKinematics {
     this.#jointCoordinateSystem = jointCoordinateSystem;
   }
 
-  forwardKinematics(angles)
-  {
+  forwardKinematics(angles) {
     const zeroPoint = new XcGm3dPosition({x: 0.0, y: 0.0, z: 0.0});
     const jointAngles = [...angles];
 
     // assuming all types are revolute
     let joints = this.#geometryDefinition;
-    if (jointAngles.length < joints.length){
+    if (jointAngles.length < joints.length) {
       jointAngles.push(0.0);
     }
 
     // overall transform from TCP to base coordinates
-    const finalMatrix=new XcGm3dMatrix();
+    const finalMatrix = new XcGm3dMatrix();
     const arrayMatrix = [];
 
     for (let index = 0; index < joints.length; ++index) {
@@ -56,9 +64,9 @@ class XcAtGeneralKinematics {
   // Input:       currentAngles - the current motor angles
   // Returns:     optimized robot parameters to reach the target TCP
   IK(targetMatrix, currentAngles) {
-    let targetMat = targetMatrix.toThreeMatrix4();
-    let target = this.#getPositionOrientation(targetMat);
-    let N = this.#geometryDefinition.length;
+    const targetMat = targetMatrix.toThreeMatrix4();
+    const target = this.#getPositionOrientation(targetMat);
+    const N = this.#geometryDefinition.length;
 
     // the parameters to optimize
     let angles = [...currentAngles];
@@ -67,22 +75,23 @@ class XcAtGeneralKinematics {
     }
 
     // the maximum step sizes for parameter adjustment. The step sizes will be adjusted automatically during optimization
-    let steps = new Array(N).fill(1.);
+    let steps = new Array(N).fill(10.);
+    // the steps of over maximum step size, to avoid to reduce the step size quickly.
+    let oversteps = new Array(N).fill(0);
 
     // initial error: the optimization objective function
-    let err = this.#ds2(angles, target);
-    for (let i = 0; i < 40000; i++) {
-      //debugger;
-      // choose a random parameter to adjust
-      let j = Math.floor(Math.random() * (N-1));
-      let oldAngle = angles[j];
+    let err = this.#alignmentErrorSquared(angles, target);
+    for (let i = 0; i < XcAtGeneralKinematics.MAX_IK_STEPS; i++) {
+        // choose a random parameter to adjust
+        let j = Math.floor(Math.random() * (N-1));
+        let oldAngle = angles[j];
 
       // Randomly adjust the parameter within the step size
       angles[j] += steps[j] * Math.random();
       angles[j] = this.#clamp(angles[j], this.#geometryDefinition[j]);
 
       // The new objective value for adjusted parameter
-      let errNew = this.#ds2(angles, target);
+      let errNew = this.#alignmentErrorSquared(angles, target);
       if (errNew > err) {
 
         // The error is now larger: try to move to the opposite direction
@@ -90,10 +99,17 @@ class XcAtGeneralKinematics {
         angles[j] = this.#clamp(angles[j], this.#geometryDefinition[j]);
 
         // The new objective value
-        errNew = this.#ds2(angles, target);
+        errNew = this.#alignmentErrorSquared(angles, target);
         if (errNew > err) {
-          // The error is larger in both directions: reduce the step size
-          steps[j] *= 0.9;
+          if ( oversteps[j] >= 1 ) {
+              oversteps[j] = 0;
+              //The error is larger in both directions: reduce the step size
+              steps[j] *= 0.99;
+          }
+          else {
+              oversteps[j] += 1;
+          }
+
           angles[j] = oldAngle;
           continue;
         }
@@ -107,7 +123,7 @@ class XcAtGeneralKinematics {
       err = errNew;
 
       // Convergence condition
-      if (err < 1e-10) {
+      if (err < XcAtGeneralKinematics.COVERGENCE_LIMIT) {
         return angles;
       }
     }
@@ -118,23 +134,22 @@ class XcAtGeneralKinematics {
 
   // Get translation and orientation from a Matrix4
   #getPositionOrientation(mat4) {
-    let ret = [];
-    let pos = new THREE.Vector3();
+    const pos = new THREE.Vector3();
     pos.setFromMatrixPosition(mat4);
 
-    let xAxis = new THREE.Vector3();
-    let yAxis = new THREE.Vector3();
-    let zAxis = new THREE.Vector3();
+    const xAxis = new THREE.Vector3();
+    const yAxis = new THREE.Vector3();
+    const zAxis = new THREE.Vector3();
     mat4.extractBasis(xAxis, yAxis, zAxis);
 
     return [pos, xAxis, yAxis, zAxis];
   }
 
-// Error function: squared distance from the target position to the current position by angles
-  #ds2(angles, target) {
+  // Error function: squared distance from the target position to the current position by angles
+  #alignmentErrorSquared(angles, target) {
     const [finalMatrix, arrayMatrix] = this.forwardKinematics(angles);
-    let mat = finalMatrix.toThreeMatrix4();;
-    let poses = this.#getPositionOrientation(mat);
+    const mat = finalMatrix.toThreeMatrix4();;
+    const poses = this.#getPositionOrientation(mat);
 
     // TODO: weights for position and orientation differences
     let error = 0.;
@@ -145,7 +160,7 @@ class XcAtGeneralKinematics {
     return error;
   }
 
-// clamp the parameters to its range
+  // clamp the parameters to its range
   #clamp(angle, joint) {
     angle = Math.max(angle, joint.minValue);
     angle = Math.min(angle, joint.maxValue);
