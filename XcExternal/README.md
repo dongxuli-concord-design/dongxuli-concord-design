@@ -12,4 +12,4 @@ Download and make the following folders:
 
 ## Current version
 
-NW.js 0.54.1 (Chromium 91 + Node 16.4.0)
+  "NW": "0.61.0 (Chromium 98 + Node 17.3.0)",
