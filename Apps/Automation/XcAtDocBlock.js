@@ -13,7 +13,7 @@ class XcAtDocBlock extends Xc3dDocDrawableObject {
                 y,
                 z,
                 coordinateSystem = new XcGmCoordinateSystem(),
-                color,
+                color = new THREE.Color('gray'),
               }) {
     super({name});
     this.x = x;

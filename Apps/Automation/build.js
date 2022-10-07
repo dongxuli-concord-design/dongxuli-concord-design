@@ -13,8 +13,6 @@ const scripts = [
 
   'XcAtDocBlock.js',
 
-  'XcAtCmdPLCDemo.js',
-
   'XcAtApp.js',
 ];
 
