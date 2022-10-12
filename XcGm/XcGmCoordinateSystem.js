@@ -81,8 +81,8 @@ class XcGmCoordinateSystem {
   }
 
   transformToCoordinateSystem({coordinateSystem}) {
-    const matrix1 = this.toMatrix().inverse();
-    const matrix2 = coordinateSystem.toMatrix();
+    const matrix1 = coordinateSystem.toMatrix();
+    const matrix2 = this.toMatrix().inverse();
 
     const matrix = XcGm3dMatrix.multiply({matrix1, matrix2});
     return matrix;
