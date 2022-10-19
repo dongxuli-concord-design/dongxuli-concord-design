@@ -3,7 +3,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
   static ROBOT_MOVE_DELT = 0.2;
   #geometryDefinition;
   #angles;
-  #matrix;    
+  #matrix;
 
   #jointCoordinateSystems;
   #jointTypes;
@@ -68,7 +68,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
   set angles(angles) {
     this.#angles = [...angles];
 
-    const [, arrayMatrix] = this.#kinematics.forwardKinematics(this.#angles);
+    const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
   }
 
@@ -82,7 +82,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     const zAxisDirection = new XcGm3dVector({x: 0, y: 0, z: 1});
     const coordinateSystemWorld = new XcGmCoordinateSystem({origin: origin, zAxisDirection: zAxisDirection, xAxisDirection: xAxisDirection});
 
-    const [finalMatrix, ] = this.#kinematics.forwardKinematics(this.#angles);
+    const {finalMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     finalMatrix.preMultiply({matrix: this.#matrix});
     const matrix = coordinateSystemWorld.toMatrix();
     finalMatrix.preMultiply({matrix});
@@ -92,9 +92,9 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
 
   set target(coordinateSystem) {
     const matrix = coordinateSystem.toMatrix();
-    const angles = this.#kinematics.IK(matrix,this.#angles);
+    const angles = this.#kinematics.IK({targetMatrix: matrix, currentAngles: this.#angles});
     this.#angles = [...angles];
-    const [, arrayMatrix] = this.#kinematics.forwardKinematics(this.#angles);
+    const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
   }
 
@@ -124,7 +124,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     }
 
     this.#kinematics = new XcAtGeneralKinematics(this.#geometryDefinition, this.#jointCoordinateSystems);
-    const [, arrayMatrix] = this.#kinematics.forwardKinematics(this.#angles);
+    const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
   }
 
@@ -250,7 +250,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       this.#renderRobotBones.push(boneClone);
       parentObject = boneClone;
     }
-   
+
     this.#robotRenderObject.applyMatrix4(this.#matrix.toThreeMatrix4());
     this.#robotRenderObject.updateMatrix();
     this.#robotRenderObject.updateMatrixWorld();
@@ -267,11 +267,11 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       this.#angles[index] = 0.0;
     }
 
-    const [, arrayMatrix] = this.#kinematics.forwardKinematics(this.#angles);
+    const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
     yield;
   }
-  
+
   * moveLine({targetCoordinateSystem}) {
     const currentCoordinateSystem = this.target;
     const currentPosition = currentCoordinateSystem.origin;
@@ -291,9 +291,9 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       detCoordinateSystem.origin = position;
       detCoordinateSystem.xAxisDirection = targetXDir;
       detCoordinateSystem.zAxisDirection = targetZDir;
-      
-      this.#angles = this.#kinematics.IK(detCoordinateSystem.toMatrix(),this.#angles);
-      const [, arrayMatrix] = this.#kinematics.forwardKinematics(this.#angles);
+
+      this.#angles = this.#kinematics.IK({targetMatrix: detCoordinateSystem.toMatrix(), currentAngles: this.#angles});
+      const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
       this.#jointMatrixes = [...arrayMatrix];
 
       for (let index = 0; index < this.#renderRobotBones.length; ++index) {
@@ -304,7 +304,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
         this.#renderRobotBones[index].updateMatrix();
         this.#renderRobotBones[index].updateMatrixWorld();
       }
-    
+
       this.#robotRenderObject.rotation.set(0, 0, 0);
       this.#robotRenderObject.scale.set(1, 1, 1);
       this.#robotRenderObject.applyMatrix4(this.#matrix.toThreeMatrix4());
