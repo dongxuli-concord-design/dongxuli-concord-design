@@ -196,15 +196,11 @@ class XcGm3dVector {
       return Math.PI;
     }
 
-    let angle = this.dotProduct({vector}) / (this.length() * vector.length());
-    // clamp, to handle numerical problems
-    if (angle < -1.0) {
-      angle = -1.0;
-    }
-    if (angle > 1.0) {
-      angle = 1.0;
-    }
-    return Math.acos(angle);
+    // for vectors a,b: the length of the cross product is |a| |b| \sin \theta
+    // the dotProduct is |a| |b| \cos \theta
+    const crossLength = this.crossProduct({vector}).length();
+    const dotValue = this.dotProduct({value});
+    return Math.atan2(crossLength, dotValue);
   }
 
   rotationAngleTo({vector, axis}) {
