@@ -19,12 +19,12 @@
 * Javascript coding styles
 * Software development process
 * How to report an issue
-  
+
 ## CAD introduction
 
 * Basic structure
   * XcMain
-  * Libraries  
+  * Libraries
     * Parasolid
     * XcUI
     * XcSys
@@ -37,12 +37,11 @@
 2. Since macOS has very strict permission control policy or unzip tools may damage the file attributes, we need to right-click and open the executable files so those executables can be loaded or launched.
 3. Go to `CAD/XcMain` and run `../XcExternal/node.darwin/bin/node ../XcExternal/node.darwin/bin/npm install` command to install npm packages.
 4. Build
-   1. Build on Mac first 
-     * Go to `CAD` folder and use `pwd` command to get the `{CAD_folder_full_path}`
-     * Go to the `CAD` folder in terminal and run `./XcExternal/node.darwin/bin/node ./build_scripts/build_darwin.js {CAD_folder_full_path}`
+   1. Build on Mac first
+     * Go to the `CAD` folder in terminal and run `./XcExternal/node.darwin/bin/node ./build_scripts/build_darwin.js`
    2. Build on Win32
      * In the VMWare, share `CAD` folder as `Z:\` in the Windows 10.
-     * Go the command window application, go to `Z:\CAD` folder, and then run `.\XcExternal\node.win32\node .\build_scripts\build_win32.js Z:\CAD`
+     * Go the command window application, go to `Z:\CAD` folder, and then run `.\XcExternal\node.win32\node .\build_scripts\build_win32.js`
 
 ### How to run application
 

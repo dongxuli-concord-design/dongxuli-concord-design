@@ -21,8 +21,6 @@ function build({baseFolderPath}) {
     throw 'base folder must be a absolute path';
   }
 
-  console.info('Current base folder is: ', baseFolderPath);
-
   process.chdir(baseFolderPath);
 
   // Create folders for debugging and apps
@@ -183,12 +181,8 @@ function build({baseFolderPath}) {
   }
 }
 
-const args = process.argv.slice(2);
-if (args.length < 1) {
-  console.error('Usage: node build_darwin.js <baseFolder>');
-  throw 'base folder must be provided.';
-}
+const path = require('path');
 
-build({baseFolderPath: args[0]});
+build({baseFolderPath: path.join(__dirname, '..')});
 
-//Usage: node build_darwin.js <baseFolder>
+//Usage: node build_darwin.js
