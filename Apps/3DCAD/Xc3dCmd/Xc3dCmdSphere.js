@@ -55,7 +55,7 @@ class Xc3dCmdSphere {
     });
     widgets.push(this.radiusInput);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please input dimensions`,
       showCanvasElement: true,
       standardWidgets: widgets,

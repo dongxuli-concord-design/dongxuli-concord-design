@@ -55,7 +55,7 @@ class Xc3dUIGetFloat {
     });
     widgets.push(this.#floatInputWidget);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

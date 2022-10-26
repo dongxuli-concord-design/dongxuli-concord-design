@@ -129,7 +129,7 @@ class Xc3dCmdProperty {
     this.colorInput.querySelector('input').value = `#${this.#model.color? this.#model.color.getHexString() : ''}`;
     widgets.push(this.colorInput);
 
-    const uiContext = new XcSysContext({
+    const uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please select object`,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -54,7 +54,7 @@ class Xc3dCmdInsert {
     });
     widgets.push(fileChooseButton);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please select file`,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -131,7 +131,7 @@ class XcSysManager {
     XcSysManager.standardDialog = document.body.children[3].children[1];
 
     // Init with the initial context
-    XcSysManager.#currentUiContext = new XcSysContext();
+    XcSysManager.#currentUiContext = new XcSysUIContext();
 
     XcSysManager.canvasDiv.style.visibility = 'hidden';
     XcSysManager.promptDiv.style.display = 'none';
@@ -177,7 +177,7 @@ class XcSysManager {
   }
 
   static* waitForEvent({
-    uiContext = new XcSysContext(), 
+    uiContext = new XcSysUIContext(), 
     timeOut = null, 
     expectedEventTypes = null} = {},
     ) {

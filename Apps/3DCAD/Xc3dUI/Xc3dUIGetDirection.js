@@ -100,7 +100,7 @@ class Xc3dUIGetDirection {
       });
       widgets.push(codeInputButton);
       
-      this.#uiContextForInitialInput = new XcSysContext({
+      this.#uiContextForInitialInput = new XcSysUIContext({
         prompt: this.#prompt,
         showCanvasElement: true,
         standardWidgets: widgets,
@@ -138,7 +138,7 @@ class Xc3dUIGetDirection {
       });
       widgets.push(this.#directionInputWidget);
 
-      this.#uiContextForTextBoxInput = new XcSysContext({
+      this.#uiContextForTextBoxInput = new XcSysUIContext({
         prompt: this.#prompt,
         showCanvasElement: true,
         standardWidgets: widgets,

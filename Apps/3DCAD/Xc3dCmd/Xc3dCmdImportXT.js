@@ -68,7 +68,7 @@ class Xc3dCmdImportXT {
     });
     widgets.push(fileChooseButton);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please specify file to import`,
       showCanvasElement: true,
       standardWidgets: widgets,

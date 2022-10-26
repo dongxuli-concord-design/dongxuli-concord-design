@@ -58,7 +58,7 @@ class Xc3dUIGetChoice {
       widgets.push(button);
     }
 
-    this.#uicontext = new XcSysContext({
+    this.#uicontext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -105,7 +105,7 @@ class Xc3dUIGetAxis {
       widgets.push(button);
     }
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

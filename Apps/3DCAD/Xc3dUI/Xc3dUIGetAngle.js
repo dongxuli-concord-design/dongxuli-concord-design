@@ -87,7 +87,7 @@ class Xc3dUIGetAngle {
     });
     widgets.push(measureButton);
 
-    this.#uicontextForWaitForAngleOrMeasurement = new XcSysContext({
+    this.#uicontextForWaitForAngleOrMeasurement = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

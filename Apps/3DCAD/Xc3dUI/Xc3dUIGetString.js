@@ -56,7 +56,7 @@ class Xc3dUIGetString {
     });
     widgets.push(this.#stringInputWidget);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

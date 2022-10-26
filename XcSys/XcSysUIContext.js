@@ -1,4 +1,4 @@
-class XcSysContext {
+class XcSysUIContext {
   constructor({
                 prompt = null,
                 showCanvasElement = false,

@@ -75,7 +75,7 @@ class Xc3dCmdPrism {
     });
     widgets.push(this.sidesInput);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please input dimensions`,
       showCanvasElement: true,
       standardWidgets: widgets,

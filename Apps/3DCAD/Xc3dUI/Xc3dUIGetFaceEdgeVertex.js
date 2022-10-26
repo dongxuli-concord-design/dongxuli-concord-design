@@ -66,7 +66,7 @@ class Xc3dUIGetFaceEdgeVertex {
       });
       widgets.push(doneButton);
     }
-    this.uiContext = new XcSysContext({
+    this.uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets

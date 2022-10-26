@@ -55,7 +55,7 @@ class Xc3dUIGetInteger {
     });
     widgets.push(this.#integerInputWidget);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -4,7 +4,7 @@ The XcSys provides very fundamental classes and functions for the whole system.
 
 The classes in this module include:
 * **XcSysApp** Define an application object which can be loaded by the system.
-* **XcSysContext** Define an user interface context in a system.
+* **XcSysUIContext** Define an user interface context in a system.
 * **XcSysI18n** Provide i18n tools.
 * **XcSysAssert** Provide assertion functionality.
 * **XcSysManager** Provide basic system management functionalities, including user interface, system control flow, load scripts etc.
@@ -52,7 +52,7 @@ class HelloApp extends XcSysApp {
         </div>        
     `;
 
-    let helloContext = new XcSysContext({
+    let helloContext = new XcSysUIContext({
       prompt: `Say Hello!`,
       showCanvasElement: true,
       standardWidgets: helloUI,
@@ -128,7 +128,7 @@ XcSysManager.registerApp({appClass: HelloApp});
 
 This initialization function will be called when the application object is loaded by the system.
 
-# XcSysContext
+# XcSysUIContext
 
 Define the system context, including the prompt, canvas, standard widgets, stand dialog, custom HTML Div element, and cursor shape.
 
@@ -352,10 +352,10 @@ Wait for some time to check if there is event in the event queue.
 ## waitForEvent
 
 ```
-static* waitForEvent({uiContext = new XcSysContext(), timeOut = null, expectedEventTypes = null} = {})
+static* waitForEvent({uiContext = new XcSysUIContext(), timeOut = null, expectedEventTypes = null} = {})
 ```
 
-* **uiContext** XcSysContext object representing the context for this call. 
+* **uiContext** XcSysUIContext object representing the context for this call. 
 * **timeOut** Time in milliseconds.
 * **expectedEventTypes** Array of expected event types.
 * **return** Array of apps.
@@ -370,7 +370,7 @@ If `expectedEventTypes` is set, this function will return only the expected even
 Example:
 
 ```
-    let uiContext = new XcSysContext({
+    let uiContext = new XcSysUIContext({
       prompt: 'hello',
       showCanvasElement: true,
       cursor: 'pointer',

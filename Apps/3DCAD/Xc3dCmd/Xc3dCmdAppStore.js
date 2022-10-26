@@ -29,7 +29,7 @@ class Xc3dCmdAppStore {
     });
     widgets.push(cancelButton);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.i18n.T`AppStore Demo`,
       showCanvasElement: true,
       standardWidgets: widgets,

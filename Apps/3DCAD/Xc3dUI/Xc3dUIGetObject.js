@@ -60,7 +60,7 @@ class Xc3dUIGetObject {
     });
     widgets.push(okButton);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -74,7 +74,7 @@ class Xc3dUIGetDistance {
     });
     widgets.push(button);
 
-    this.#uiContextForWaitForDistanceOrMeasurement = new XcSysContext({
+    this.#uiContextForWaitForDistanceOrMeasurement = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

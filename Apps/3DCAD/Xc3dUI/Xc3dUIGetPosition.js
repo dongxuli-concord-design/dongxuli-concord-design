@@ -163,7 +163,7 @@ class Xc3dUIGetPosition {
       this.positionCursor = new THREE.Points(positionCursorGeometry, positionCursorMaterial);
       Xc3dUIManager.addCustomRenderingObject({renderingObject: this.positionCursor});
 
-      this.#uiContextForInput = new XcSysContext({
+      this.#uiContextForInput = new XcSysUIContext({
         prompt: this.#prompt,
         showCanvasElement: true,
         standardWidgets: widgets,
@@ -204,7 +204,7 @@ class Xc3dUIGetPosition {
       });
       widgets.push(this.#positionInputWidget);
 
-      this.#uiContextForTextBoxInput = new XcSysContext({
+      this.#uiContextForTextBoxInput = new XcSysUIContext({
         prompt: this.#prompt,
         showCanvasElement: true,
         standardWidgets: widgets,

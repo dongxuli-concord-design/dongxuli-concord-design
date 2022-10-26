@@ -88,7 +88,7 @@ class Xc3dCmdExport {
     pathInput.innerHTML = `${path} <input type="text" value="${this.#path}">`;
     widgets.push(pathInput);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please input path`,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -128,7 +128,7 @@ class Xc3dCmdSetupUCS {
     });
     widgets.push(setUCSByTransform);
 
-    const uiContext = new XcSysContext({
+    const uiContext = new XcSysUIContext({
       prompt: Xc3dUII18n.i18n.T`Please specify which axes to set`,
       showCanvasElement: true,
       standardWidgets: widgets,
@@ -253,7 +253,7 @@ class Xc3dCmdSetupUCS {
     });
     widgets.push(yzButton);
 
-    const uiContext = new XcSysContext({
+    const uiContext = new XcSysUIContext({
       prompt: Xc3dUII18n.i18n.T`Please specify which axes to set`,
       showCanvasElement: true,
       standardWidgets: widgets,

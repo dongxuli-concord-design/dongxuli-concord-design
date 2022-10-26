@@ -66,7 +66,7 @@ class Xc3dCmdTorus {
     });
     widgets.push(this.minorRadiusInput);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please input dimensions`,
       showCanvasElement: true,
       standardWidgets: widgets,

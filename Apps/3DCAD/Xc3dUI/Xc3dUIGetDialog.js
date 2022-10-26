@@ -53,7 +53,7 @@ class Xc3dUIGetDialog {
       widgets.push(doneButton);
     }
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

@@ -8,7 +8,7 @@ const scripts = [
   'XcSysI18n.js',
   'XcSysConfig.js',
   'XcSysApp.js',
-  'XcSysContext.js',
+  'XcSysUIContext.js',
   'XcSysMainCoroutine.js',
   'XcSysManager.js',
   'server.js',

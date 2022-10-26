@@ -35,7 +35,7 @@ class HelloApp extends XcSysApp {
         </div>        
     `;
 
-    let helloContext = new XcSysContext({
+    let helloContext = new XcSysUIContext({
       prompt: `Say Hello!`,
       showCanvasElement: true,
       standardWidgets: helloUI,

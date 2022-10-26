@@ -89,7 +89,7 @@ class Xc3dCmdView {
     widgets.push(this.#viewManagementDiv);
     this.#updateViewManagementDiv();
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       showCanvasElement: true,
       standardWidgets: widgets,
       cursor: 'pointer'

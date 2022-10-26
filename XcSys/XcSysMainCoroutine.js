@@ -15,7 +15,7 @@ class XcSysMainCoroutine {
 
   static #i18n = null;
 
-  static #uiContextOfHalt = new XcSysContext({
+  static #uiContextOfHalt = new XcSysUIContext({
     prompt: 'System is off.',
   });
 
@@ -110,7 +110,7 @@ class XcSysMainCoroutine {
       appsDiv.appendChild(appDiv);
     }
 
-    const uiContextForWaitingCommands = new XcSysContext({
+    const uiContextForWaitingCommands = new XcSysUIContext({
       prompt: XcSysMainCoroutine.#i18n.T`Please select an app`,
       showCanvasElement: false,
       standardWidgets: null,

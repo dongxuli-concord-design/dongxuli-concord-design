@@ -58,7 +58,7 @@ class Xc3dApp extends XcSysApp {
   }
 
   static* #loadConfig() {
-    const context = new XcSysContext({
+    const uiContext = new XcSysUIContext({
       showOutputElement: false,
       showCanvasElement: false,
       standardWidgets: null,
@@ -74,7 +74,7 @@ class Xc3dApp extends XcSysApp {
       }
     });   
     const event = yield* XcSysManager.waitForEvent({
-      uiContext: context,
+      uiContext,
       expectedEventTypes: [loadedEvent],
     });
     XcSysAssert({assertion: event === loadedEvent});
@@ -95,14 +95,14 @@ class Xc3dApp extends XcSysApp {
         }
       });
 
-      const context = new XcSysContext({
+      const uiContext = new XcSysUIContext({
         showOutputElement: false,
         showCanvasElement: false,
         standardWidgets: null,
         standardDialog: null,
       });
       const event = yield* XcSysManager.waitForEvent({
-        uiContext: context,
+        uiContext,
         expectedEventTypes: [loadedEvent],
       });
       XcSysAssert({assertion: event === loadedEvent});
@@ -118,14 +118,14 @@ class Xc3dApp extends XcSysApp {
         }
       });
 
-      const context = new XcSysContext({
+      const uiContext = new XcSysUIContext({
         showOutputElement: false,
         showCanvasElement: false,
         standardWidgets: null,
         standardDialog: null,
       });      
       const event = yield* XcSysManager.waitForEvent({
-        uiContext: context,
+        uiContext,
         expectedEventTypes: [loadedEvent],
       });
       XcSysAssert({assertion: event === loadedEvent});
@@ -220,7 +220,7 @@ class Xc3dApp extends XcSysApp {
       chooser.click();
     });
 
-    const uiContextForWaitingOpenOrCreate = new XcSysContext({
+    const uiContextForWaitingOpenOrCreate = new XcSysUIContext({
       showOutputElement: false,
       showCanvasElement: false,
       standardWidgets: null,

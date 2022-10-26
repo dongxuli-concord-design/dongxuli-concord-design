@@ -75,7 +75,7 @@ class Xc3dUIGetScreenPosition {
     Xc3dUIManager.addCustomRenderingObject({renderingObject: this.dragObjects});
 
     // get some parameter from the config
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

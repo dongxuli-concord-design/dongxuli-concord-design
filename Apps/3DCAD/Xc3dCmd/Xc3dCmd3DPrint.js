@@ -69,7 +69,7 @@ class Xc3dCmd3DPrint {
     });
     widgets.push(fileChooseButton);
 
-    this.#uiContext = new XcSysContext({
+    this.#uiContext = new XcSysUIContext({
       prompt: this.#i18n.T`Please specify export location`,
       showCanvasElement: true,
       standardWidgets: widgets,

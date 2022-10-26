@@ -221,7 +221,7 @@ class Xc3dUIGetTransform {
       widgets.push(scaleInput);
     }
 
-    let uiContextForInputValue = new XcSysContext({
+    let uiContextForInputValue = new XcSysUIContext({
       prompt: this.#prompt,
       showCanvasElement: true,
       standardWidgets: widgets,

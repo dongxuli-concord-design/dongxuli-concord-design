@@ -61,7 +61,7 @@ class Xc3dUIGetCommand {
       widgets.push(button);
     }
 
-    this.#uicontext = new XcSysContext({
+    this.#uicontext = new XcSysUIContext({
       prompt,
       standardWidgets: widgets,
       cursor: 'auto',
