@@ -1,4 +1,5 @@
 const {execSync} = require('child_process');
+const path = require('path');
 
 function _runCommand(commandString) {
   execSync(commandString, {maxBuffer: 1024 * 1024 * 10}, (error, stdout, stderr) => {
@@ -16,7 +17,6 @@ function _runCommands(commandStringArray) {
 }
 
 function build({baseFolderPath}) {
-  const path = require('path');
   if (!path.isAbsolute(baseFolderPath)) {
     throw 'base folder must be a absolute path';
   }
@@ -180,8 +180,6 @@ function build({baseFolderPath}) {
     ]);
   }
 }
-
-const path = require('path');
 
 build({baseFolderPath: path.join(__dirname, '..')});
 
