@@ -93,21 +93,24 @@ class XcSysBootloader {
 
   static* #run() {
     const loadedEvent = Symbol('Loaded');
-    const event = yield XcSysManager.loadJavascriptAsync({
+    XcSysManager.loadJavascriptAsync({
       scriptSrc: './config', asModule: false, doneCallback: () => {
         XcSysBootloader.#dispatchEvent({event: loadedEvent});
       }
     });
+
+    const event = yield;
     XcSysAssert({assertion: event === loadedEvent});
 
     // Load apps
     for (const app of XcSysConfig.apps) {
       const loadedEvent = Symbol('Loaded');
-      const event = yield XcSysManager.loadJavascriptAsync({
+      XcSysManager.loadJavascriptAsync({
         scriptSrc: app, asModule: false, doneCallback: () => {
           XcSysBootloader.#dispatchEvent({event: loadedEvent});
         }
-      });
+      });      
+      const event = yield;
       XcSysAssert({assertion: event === loadedEvent});
     }
 

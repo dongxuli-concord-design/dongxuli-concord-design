@@ -41,9 +41,8 @@ class XcAtDocBlock extends Xc3dDocDrawableObject {
     const y = json.y;
     const z = json.z;
     const matrix = XcGm3dMatrix.fromJSON({json: json.matrix});
-    const colorArray = json.colorArray;
     const color = new THREE.Color();
-    color.fromArray(colorArray);
+    color.fromArray(json.color);
 
     const obj = new XcAtDocBlock({name, x, y, z, matrix, color});
 

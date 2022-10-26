@@ -7,7 +7,7 @@ class Xc3dApp extends XcSysApp {
 
   static #CommandState = {
     WaitForOpenOrCreate: Symbol('WaitForOpenOrCreate'),
-    WaitForInitModules: Symbol('WaitForInitModules'),
+    WaitForLoadingDocument: Symbol('WaitForLoadingDocument'),
     WaitForCommand: Symbol('WaitForCommand'),
   };
 
@@ -55,11 +55,32 @@ class Xc3dApp extends XcSysApp {
     }
 
     Xc3dApp.filePath = null;
-
-    Xc3dApp.#loadLibs();
   }
 
-  static #loadLibs() {
+  static* #loadConfig() {
+    const context = new XcSysContext({
+      showOutputElement: false,
+      showCanvasElement: false,
+      standardWidgets: null,
+      standardDialog: null,
+    });
+
+    const loadedEvent = Symbol('Loaded');
+    XcSysManager.loadJavascriptAsync({
+      scriptSrc: 'Apps/3DCAD/res/config.js',
+      asModule: false,
+      doneCallback: () => {
+        XcSysManager.dispatchEvent({event: loadedEvent});
+      }
+    });   
+    const event = yield* XcSysManager.waitForEvent({
+      uiContext: context,
+      expectedEventTypes: [loadedEvent],
+    });
+    XcSysAssert({assertion: event === loadedEvent});
+  }
+
+  static* #loadLibs() {    
     const libs = [
       'Apps/3DCAD/Xc3dDoc',
       'Apps/3DCAD/Xc3dUI',
@@ -67,30 +88,59 @@ class Xc3dApp extends XcSysApp {
     ];
 
     for (const lib of libs) {
+      const loadedEvent = Symbol('Loaded');
       XcSysManager.loadJavascriptAsync({
         scriptSrc: lib, asModule: false, doneCallback: () => {
+          XcSysManager.dispatchEvent({event: loadedEvent});
         }
       });
+
+      const context = new XcSysContext({
+        showOutputElement: false,
+        showCanvasElement: false,
+        standardWidgets: null,
+        standardDialog: null,
+      });
+      const event = yield* XcSysManager.waitForEvent({
+        uiContext: context,
+        expectedEventTypes: [loadedEvent],
+      });
+      XcSysAssert({assertion: event === loadedEvent});
     }
   }
 
   static* #loadPlugins() {
     for (const plugin of Xc3dAppConfig.plugins) {
       const loadedEvent = Symbol('Loaded');
-      const event = yield XcSysManager.loadJavascriptAsync({
+      XcSysManager.loadJavascriptAsync({
         scriptSrc: plugin, asModule: false, doneCallback: () => {
           XcSysManager.dispatchEvent({event: loadedEvent});
         }
+      });
+
+      const context = new XcSysContext({
+        showOutputElement: false,
+        showCanvasElement: false,
+        standardWidgets: null,
+        standardDialog: null,
+      });      
+      const event = yield* XcSysManager.waitForEvent({
+        uiContext: context,
+        expectedEventTypes: [loadedEvent],
       });
       XcSysAssert({assertion: event === loadedEvent});
     }
   }
 
   static* #run({filePath = null} = {}) {
+    yield* Xc3dApp.#loadConfig(); 
+    yield* Xc3dApp.#loadLibs();
+    yield* Xc3dApp.#loadPlugins();
+
     if (filePath) {
       Xc3dApp.filePath = filePath;
       document.title = `${document.title} - ${filePath}`;
-      Xc3dApp.state = Xc3dApp.#CommandState.WaitForInitModules;
+      Xc3dApp.state = Xc3dApp.#CommandState.WaitForLoadingDocument;
     } else {
       Xc3dApp.state = Xc3dApp.#CommandState.WaitForOpenOrCreate;
     }
@@ -100,8 +150,8 @@ class Xc3dApp extends XcSysApp {
         case Xc3dApp.#CommandState.WaitForOpenOrCreate:
           Xc3dApp.state = yield* Xc3dApp.#onWaitForOpenOrCreate();
           break;
-        case Xc3dApp.#CommandState.WaitForInitModules:
-          Xc3dApp.state = yield* Xc3dApp.#onWaitForInitModules();
+        case Xc3dApp.#CommandState.WaitForLoadingDocument:
+          Xc3dApp.state = yield* Xc3dApp.#onWaitForLoadingDocument();
           break;
         case Xc3dApp.#CommandState.WaitForCommand:
           Xc3dApp.state = yield* Xc3dApp.#onWaitForCommand();
@@ -215,41 +265,16 @@ class Xc3dApp extends XcSysApp {
         alert(error);
         return Xc3dApp.#CommandState.WaitForOpenOrCreate;
       }
-      return Xc3dApp.#CommandState.WaitForInitModules;
+      return Xc3dApp.#CommandState.WaitForLoadingDocument;
     } else if (event === Xc3dApp.#Event.Create) {
       XcSysManager.outputDisplay.clear();
-      return Xc3dApp.#CommandState.WaitForInitModules;
+      return Xc3dApp.#CommandState.WaitForLoadingDocument;
     } else {
       return Xc3dApp.#CommandState.WaitForOpenOrCreate;
     }
   }
 
-  static* #onWaitForInitModules() {
-    const waitForInitContext = new XcSysContext({
-      showOutputElement: false,
-      showCanvasElement: false,
-      standardWidgets: null,
-      standardDialog: null,
-    });
-
-    // Load Config
-    XcSysManager.loadJavascriptAsync({
-      scriptSrc: 'Apps/3DCAD/res/config.js',
-      asModule: false,
-      doneCallback: () => {
-        XcSysManager.dispatchEvent({event: Xc3dApp.#Event.ScriptLoaded});
-      }
-    });
-
-    const event = yield* XcSysManager.waitForEvent({
-      uiContext: waitForInitContext,
-      expectedEventTypes: [Xc3dApp.#Event.ScriptLoaded],
-    });
-    if (event !== Xc3dApp.#Event.ScriptLoaded) {
-      XcSysAssert({assertion: false});
-    }
-
-    // Init other modules
+  static* #onWaitForLoadingDocument() {
     try {
       if (Xc3dApp.newFile) {
         Xc3dApp.document = new Xc3dDocDocument({filePath: Xc3dApp.filePath});
@@ -260,17 +285,14 @@ class Xc3dApp extends XcSysApp {
         const documentData = fileData.documentData;
         Xc3dApp.document = Xc3dDocDocument.load({json: documentData, filePath: Xc3dApp.filePath});
       }
-  
+
       Xc3dUIManager.init({document: Xc3dApp.document});
       Xc3dCmdManager.init(Xc3dAppConfig.debug);
-  
-      // Load plugins
-      yield* Xc3dApp.#loadPlugins();
-  
-      return Xc3dApp.#CommandState.WaitForCommand;        
+
+      return Xc3dApp.#CommandState.WaitForCommand;
     } catch (error) {
       XcSysManager.outputDisplay.fatal(error);
-      return Xc3dApp.#CommandState.WaitForOpenOrCreate;              
+      return Xc3dApp.#CommandState.WaitForOpenOrCreate;
     }
   }
 
