@@ -77,7 +77,7 @@ class Xc3dUIGetTransform {
     // TODO: Respect UCS
     const zDir = this.#coordinateSystem.zAxisDirection.toThreeVector3();
     const xDir = this.#coordinateSystem.xAxisDirection.toThreeVector3();
-    const yDir = this.#coordinateSystem.zAxisDirection.crossProduct({vector: this.#coordinateSystem.xAxisDirection}).normal().toThreeVector3();
+    const yDir = this.#coordinateSystem.zAxisDirection.crossProduct({vector: this.#coordinateSystem.xAxisDirection}).normal.toThreeVector3();
 
     const origin = this.#coordinateSystem.origin.toThreeVector3();
     const axisLength = (XcSysManager.canvasDiv.clientHeight / 4.0) / Xc3dUIManager.getNumPixelsInUnit();
@@ -107,7 +107,7 @@ class Xc3dUIGetTransform {
       angle: this.#rotationAngleY,
       axis: new XcGm3dAxis({
         position: this.#origin,
-        direction: this.#coordinateSystem.zAxisDirection.crossProduct({vector: this.#coordinateSystem.xAxisDirection}).normal()
+        direction: this.#coordinateSystem.zAxisDirection.crossProduct({vector: this.#coordinateSystem.xAxisDirection}).normal,
       })
     });
     const zRotationMatrix = XcGm3dMatrix.rotationMatrix({

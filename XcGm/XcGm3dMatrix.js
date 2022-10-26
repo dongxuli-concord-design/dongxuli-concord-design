@@ -379,14 +379,14 @@ class XcGm3dMatrix {
     }
   }
 
-  inverse() {
+  get inverse() {
     const inv = this.clone();
     inv.invert();
 
     return inv;
   }
 
-  isSingular({tolerance = XcGmContext.gTol} = {}) {
+  isSingular() {
     // todo
     return false;
   }
@@ -408,10 +408,10 @@ class XcGm3dMatrix {
     return transposedMatrix;
   }
 
-  isEqualTo({matrix, tolerance = XcGmContext.gTol} = {}) {
+  isEqualTo({matrix}) {
     for (let i = 0; i < 4; i += 1) {
       for (let j = 0; j < 4; j++) {
-        if (Math.abs(matrix.entry[i][j] - this.entry[i][j]) > tolerance.anglePrecision)
+        if (Math.abs(matrix.entry[i][j] - this.entry[i][j]) > XcGmContext.gTol.anglePrecision)
           return false;
       }
     }
@@ -419,11 +419,11 @@ class XcGm3dMatrix {
     return true;
   }
 
-  isUniScaledOrtho({tolerance = XcGmContext.gTol} = {}) {
+  isUniScaledOrtho() {
     // TODO
   }
 
-  isScaledOrtho({tolerance = XcGmContext.gTol} = {}) {
+  isScaledOrtho() {
     // TODO
   }
 
@@ -481,7 +481,7 @@ class XcGm3dMatrix {
   }
 
   setToRotation({angle, axis}) {
-    const normalVec = axis.direction.clone().normal();
+    const normalVec = axis.direction.clone().normal;
 
     const cosAngle = Math.cos(angle);
     const sinAngle = Math.sin(angle);

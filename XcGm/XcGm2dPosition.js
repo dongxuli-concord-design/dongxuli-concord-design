@@ -148,9 +148,9 @@ class XcGm2dPosition {
     return Math.sqrt((this.x - position.x) * (this.x - position.x) + (this.y - position.y) * (this.y - position.y));
   }
 
-  isEqualTo({position, tolerance = XcGmContext.gTol}) {
-    if ((Math.abs(position.x - this.x) <= tolerance.linearPrecision)
-      && (Math.abs(position.y - this.y) <= tolerance.linearPrecision)) {
+  isEqualTo({position}) {
+    if ((Math.abs(position.x - this.x) <= XcGmContext.gTol.linearPrecision)
+      && (Math.abs(position.y - this.y) <= XcGmContext.gTol.linearPrecision)) {
       return true;
     } else {
       return false;

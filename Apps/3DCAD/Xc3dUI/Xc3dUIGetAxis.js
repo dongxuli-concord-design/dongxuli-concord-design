@@ -149,7 +149,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } catch (error) {
         XcSysManager.outputDisplay.warn('Invalid position input.');
@@ -167,7 +167,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } else if (axis === '-X') {
         this.firstPosition = new XcGm3dPosition({x: 0, y: 0, z: 0});
@@ -177,7 +177,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } else if (axis === 'Y') {
         this.firstPosition = new XcGm3dPosition({x: 0, y: 0, z: 0});
@@ -187,7 +187,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } else if (axis === '-Y') {
         this.firstPosition = new XcGm3dPosition({x: 0, y: 0, z: 0});
@@ -197,7 +197,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } else if (axis === 'Z') {
         this.firstPosition = new XcGm3dPosition({x: 0, y: 0, z: 0});
@@ -207,7 +207,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } else if (axis === '-Z') {
         this.firstPosition = new XcGm3dPosition({x: 0, y: 0, z: 0});
@@ -217,7 +217,7 @@ class Xc3dUIGetAxis {
         this.direction = XcGm3dPosition.subtract({
           position: this.#secondPosition,
           positionOrVector: this.firstPosition
-        }).normal();
+        }).normal;
         return Xc3dUIGetAxis.CommandState.Ok;
       } else {
         XcSysAssert({assertion: false});
@@ -250,7 +250,7 @@ class Xc3dUIGetAxis {
           this.direction = XcGm3dPosition.subtract({
             position: this.#secondPosition,
             positionOrVector: this.firstPosition
-          }).normal();
+          }).normal;
           this.#draggingCallback(this.firstPosition, this.direction);
         }
       }
@@ -264,7 +264,7 @@ class Xc3dUIGetAxis {
       this.direction = XcGm3dPosition.subtract({
         position: this.#secondPosition,
         positionOrVector: this.firstPosition
-      }).normal();
+      }).normal;
       this.inputState = Xc3dUIInputState.eInputNormal;
       return Xc3dUIGetAxis.CommandState.Done;
     }

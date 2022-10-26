@@ -251,7 +251,7 @@ class Xc3dUIGetDirection {
           this.direction = XcGm3dVector.subtract({
             position: this.#secondPosition,
             positionOrVector: this.#firstPosition
-          }).normal();
+          }).normal;
           this.#draggingCallback(this.direction);
         }
       }
@@ -265,7 +265,7 @@ class Xc3dUIGetDirection {
       this.direction = XcGm3dPosition.subtract({
         position: this.#secondPosition,
         positionOrVector: this.#firstPosition
-      }).normal();
+      }).normal;
       this.inputState = Xc3dUIInputState.eInputNormal;
       return Xc3dUIGetDirection.CommandState.Ok;
     }
@@ -282,7 +282,7 @@ class Xc3dUIGetDirection {
     } else {
       const posAndDir = this.#getDirectionFromPlanarFace(value);
       if (posAndDir) {
-        this.direction = posAndDir.direction.normal();
+        this.direction = posAndDir.direction.normal;
         this.inputState = Xc3dUIInputState.eInputNormal;
 
         // Add arrow handle

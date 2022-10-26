@@ -348,7 +348,7 @@ class Xc3dUIManager {
     const distance = Xc3dUIManager.renderingCameraTarget.distanceToPosition({position: XcGm3dPosition.fromThreeVector3({threeVector3: Xc3dUIManager.renderingCamera.position})});
     const ucs = Xc3dUIManager.ucs;
     const xAxisDirection = ucs.xAxisDirection.clone();
-    const yAxisDirection = ucs.zAxisDirection.crossProduct({vector: ucs.xAxisDirection}).normal();
+    const yAxisDirection = ucs.zAxisDirection.crossProduct({vector: ucs.xAxisDirection}).normal;
     const zAxisDirection = ucs.zAxisDirection.clone();
     const axes = [
       xAxisDirection,
@@ -471,9 +471,9 @@ class Xc3dUIManager {
 
     const target = Xc3dUIManager.renderingCameraTarget.toThreeVector3().clone();
 
-    const n = XcGm3dPosition.subtract({position: newPosition, positionOrVector: target}).normal();
+    const n = XcGm3dPosition.subtract({position: newPosition, positionOrVector: target}).normal;
 
-    const u = XcGm3dVector.fromThreeVector3({threeVector3: Xc3dUIManager.renderingCamera.up}).crossProduct({vector: n}).normal();
+    const u = XcGm3dVector.fromThreeVector3({threeVector3: Xc3dUIManager.renderingCamera.up}).crossProduct({vector: n}).normal;
 
     const v = n.crossProduct({vector: u});
 
@@ -603,12 +603,12 @@ class Xc3dUIManager {
     const targetDiffVector = XcGm3dPosition.subtract({position: newRenderingCameraTarget, positionOrVector: oldRenderingCameraTarget});
     const upDiffVector = XcGm3dPosition.subtract({position: newRenderingCameraUp, positionOrVector: oldRenderingCameraUp});
 
-    const positionDiffVectorNormal = positionDiffVector.normal();
-    const positionDiffVectorLength = positionDiffVector.length();
-    const targetDiffVectorNormal = targetDiffVector.normal();
-    const targetDiffVectorLength = targetDiffVector.length();
-    const upDiffVectorNormal = upDiffVector.normal();
-    const upDiffVectorLength = upDiffVector.length();
+    const positionDiffVectorNormal = positionDiffVector.normal;
+    const positionDiffVectorLength = positionDiffVector.length;
+    const targetDiffVectorNormal = targetDiffVector.normal;
+    const targetDiffVectorLength = targetDiffVector.length;
+    const upDiffVectorNormal = upDiffVector.normal;
+    const upDiffVectorLength = upDiffVector.length;
 
     for (let i = 0; i <= animationSteps; i += 1) {
       const intermediatePositionDiff = XcGm3dVector.multiply({vector: positionDiffVectorNormal, scale: (i / animationSteps) * positionDiffVectorLength});
@@ -763,7 +763,7 @@ class Xc3dUIManager {
 
   static getUCSPositionFromWorldPosition({worldPosition}) {
     const ucsToWorld = Xc3dUIManager.ucs.toMatrix();
-    const worldToUcs = ucsToWorld.inverse();
+    const worldToUcs = ucsToWorld.inverse;
 
     const ucsPosition = worldPosition.clone();
     ucsPosition.transform({matrix: worldToUcs});

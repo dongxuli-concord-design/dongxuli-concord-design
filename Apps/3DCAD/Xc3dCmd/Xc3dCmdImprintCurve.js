@@ -71,7 +71,7 @@ class Xc3dCmdImprintCurve {
       const direction = XcGm3dPosition.subtract({
         position: this.#position2,
         positionOrVector: this.#position1
-      }).normal();
+      }).normal;
       const axis = new XcGm3dAxis({position, direction});
       const curve = XcGm3dLine.create({axis});
       const interval = new XcGmInterval({

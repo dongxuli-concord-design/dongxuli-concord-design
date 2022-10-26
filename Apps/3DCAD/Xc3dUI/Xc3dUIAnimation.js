@@ -87,8 +87,8 @@ class Xc3dUIAnimation {
 
   static* orbitView({vector, duration}) {
     const orbitVector = new XcGm3dVector({x: vector.x, y: vector.y, z: vector.z});
-    const normalizedOrbitVector = orbitVector.normal();
-    const vectorLength = orbitVector.length();
+    const normalizedOrbitVector = orbitVector.normal;
+    const vectorLength = orbitVector.length;
 
     const steps = duration / Xc3dUIAnimation.animationDelay;
     const stepLength = vectorLength / steps;
@@ -104,8 +104,8 @@ class Xc3dUIAnimation {
 
   static* panView({vector, duration}) {
     const panVector = new XcGm3dVector({x: vector.x, y: vector.y, z: vector.z});
-    const normalizedOrbitVector = panVector.normal();
-    const vectorLength = panVector.length();
+    const normalizedOrbitVector = panVector.normal;
+    const vectorLength = panVector.length;
 
     const steps = duration / Xc3dUIAnimation.animationDelay;
     const stepLength = vectorLength / steps;

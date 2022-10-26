@@ -156,20 +156,20 @@ class XcGm2dVector {
     // TODO
   }
 
-  perpVector() {
+  get perpendicularVector() {
     // TODO
   }
 
   angleTo({vector}) {
-    if (this.length() < XcGmContext.gTol.linearPrecision) {
+    if (this.length < XcGmContext.gTol.linearPrecision) {
       return Math.PI;
     }
 
-    if (vector.length() < XcGmContext.gTol.linearPrecision) {
+    if (vector.length < XcGmContext.gTol.linearPrecision) {
       return Math.PI;
     }
 
-    let angle = this.dotProduct({vector}) / (this.length() * vector.length());
+    let angle = this.dotProduct({vector}) / (this.length * vector.length);
     // clamp, to handle numerical problems
     if (angle < -1.0) {
       angle = -1.0;
@@ -190,13 +190,13 @@ class XcGm2dVector {
     return angle;
   }
 
-  normal({tolerance = XcGmContext.gTol} = {}) {
+  get normal() {
     const normalizedVector = new XcGm2dVector();
     normalizedVector.x = this.x;
     normalizedVector.y = this.y;
 
     const vecLength = Math.sqrt(this.x * this.x + this.y * this.y);
-    if (vecLength >= tolerance.anglePrecision) {
+    if (vecLength >= XcGmContext.gTol.anglePrecision) {
       normalizedVector.x /= vecLength;
       normalizedVector.y /= vecLength;
     }
@@ -204,30 +204,30 @@ class XcGm2dVector {
     return normalizedVector;
   }
 
-  normalize({tolerance = XcGmContext.gTol} = {}) {
+  normalize() {
     const vecLength = Math.sqrt(this.x * this.x + this.y * this.y);
 
-    if (vecLength >= tolerance.anglePrecision) {
+    if (vecLength >= XcGmContext.gTol.anglePrecision) {
       this.x /= vecLength;
       this.y /= vecLength;
     }
   }
 
-  length() {
+  get length() {
     const len = Math.sqrt(this.x * this.x + this.y * this.y);
     return len;
   }
 
-  isUnitLength({tolerance = XcGmContext.gTol} = {}) {
-    if (Math.abs(this.length() - 1) < tolerance.anglePrecision) {
+  isUnitLength() {
+    if (Math.abs(this.length - 1) < XcGmContext.gTol.anglePrecision) {
       return true;
     } else {
       return false;
     }
   }
 
-  isZeroLength({tolerance = XcGmContext.gTol} = {}) {
-    const threshold = tolerance.linearPrecision;
+  isZeroLength() {
+    const threshold = XcGmContext.gTol.linearPrecision;
 
     if (this.lengthSquared() < threshold * threshold) {
       return true;
@@ -236,32 +236,32 @@ class XcGm2dVector {
     }
   }
 
-  isParallelTo({vector, tolerance = XcGmContext.gTol}) {
-    const len1 = this.length();
-    const len2 = vector.length();
+  isParallelTo() {
+    const len1 = this.length;
+    const len2 = vector.length;
 
-    if ((len1 < tolerance.anglePrecision) || (len2 < tolerance.anglePrecision)) {
+    if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
     }
 
-    if (Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < tolerance.anglePrecision) {
+    if (Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < XcGmContext.gTol.anglePrecision) {
       return true;
     } else {
       return false;
     }
   }
 
-  isCodirectionalTo({vector, tolerance = XcGmContext.gTol}) {
+  isCodirectionalTo({vector}) {
     // TODO
   }
 
-  isPerpendicularTo({vector, tolerance = XcGmContext.gTol}) {
+  isPerpendicularTo({vector}) {
     // TODO
   }
 
-  isEqualTo({vector, tolerance = XcGmContext.gTol}) {
-    if ((Math.abs(this.x - vector.x) < tolerance.anglePrecision)
-      && (Math.abs(this.y - vector.y) < tolerance.anglePrecision)) {
+  isEqualTo({vector}) {
+    if ((Math.abs(this.x - vector.x) < XcGmContext.gTol.anglePrecision)
+      && (Math.abs(this.y - vector.y) < XcGmContext.gTol.anglePrecision)) {
       return true;
     } else {
       return false;
@@ -272,11 +272,11 @@ class XcGm2dVector {
     // TODO
   }
 
-  project({plane, projectDirection, tolerance = XcGmContext.gTol}) {
+  project({plane, projectDirection}) {
     // TODO
   }
 
-  orthoProject({plane, projectDirection, tolerance = XcGmContext.gTol}) {
+  orthoProject({plane, projectDirection}) {
     // TODO
   }
 }

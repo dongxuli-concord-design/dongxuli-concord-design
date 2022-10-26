@@ -55,7 +55,7 @@ class XcGmCoordinateSystem {
     const origin = this.origin;
     const zAxisDirection = this.zAxisDirection;
     const xAxisDirection = this.xAxisDirection;
-    const yAxisDirection = zAxisDirection.crossProduct({vector: xAxisDirection}).normal();
+    const yAxisDirection = zAxisDirection.crossProduct({vector: xAxisDirection}).normal;
 
     matrix.entry[0][0] = xAxisDirection.x;
     matrix.entry[1][0] = xAxisDirection.y;
@@ -82,7 +82,7 @@ class XcGmCoordinateSystem {
 
   transformToCoordinateSystem({coordinateSystem}) {
     const matrix1 = coordinateSystem.toMatrix();
-    const matrix2 = this.toMatrix().inverse();
+    const matrix2 = this.toMatrix().inverse;
 
     const matrix = XcGm3dMatrix.multiply({matrix1, matrix2});
     return matrix;

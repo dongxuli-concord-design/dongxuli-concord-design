@@ -332,8 +332,8 @@ class Xc3dDocDocument {
       const tmpVec = axisDir.clone();
       tmpVec.x += 0.1;
       tmpVec.y += 0.1;
-      const xDir = tmpVec.crossProduct({vector: axisDir}).normal();
-      const yDir = axisDir.crossProduct({vector: xDir}).normal();
+      const xDir = tmpVec.crossProduct({vector: axisDir}).normal;
+      const yDir = axisDir.crossProduct({vector: xDir}).normal;
 
       const vertices = [];
       const curveRenderingResolution = Xc3dDocDocument.#getDefaultCurveRenderResolution();
@@ -357,13 +357,13 @@ class Xc3dDocDocument {
       const xDir = XcGm3dPosition.subtract({
         position: startPosition.toVector(),
         positionOrVector: centerPosition.toVector()
-      }).normal();
-      const yDir = axisDir.crossProduct({vector: xDir}).normal();
+      }).normal;
+      const yDir = axisDir.crossProduct({vector: xDir}).normal;
 
       const endVec = XcGm3dPosition.subtract({
         position: endPosition.toVector(),
         positionOrVector: centerPosition.toVector()
-      }).normal();
+      }).normal;
 
       const rotationAngle = xDir.rotationAngleTo({vector: endVec, axis: axisDir});
 

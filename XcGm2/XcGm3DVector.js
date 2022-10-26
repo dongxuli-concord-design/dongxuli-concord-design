@@ -181,7 +181,7 @@ class XcGm3DVector {
     // TODO
   }
 
-  perpVector() {
+  perpendicularVector() {
     let newVector = new XcGm3DVector();
     if (Math.abs(this.x) < XcGm3DVector.#MIN_LENGTH && Math.abs(this.y) < XcGm3DVector.#MIN_LENGTH) {
       newVector.x = this.z;
@@ -198,7 +198,7 @@ class XcGm3DVector {
   }
 
   angleTo({vector}) {
-    let angle = this.dotProduct({vector}) / (this.length() * vector.length());
+    let angle = this.dotProduct({vector}) / (this.length * vector.length);
     return Math.acos(THREE.Math.clamp(angle, -1, 1));
   }
 
@@ -213,7 +213,7 @@ class XcGm3DVector {
     return angle;
   }
 
-  normal({tolerance = XcGmContext.gTol} = {}) {
+  get normal() {
     let vecLength;
     let normalizedVector = new XcGm3DVector();
     normalizedVector.x = this.x;
@@ -221,7 +221,7 @@ class XcGm3DVector {
     normalizedVector.z = this.z;
 
     vecLength = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-    if (vecLength >= tolerance.anglePrecision) {
+    if (vecLength >= XcGmContext.gTol.anglePrecision) {
       normalizedVector.x /= vecLength;
       normalizedVector.y /= vecLength;
       normalizedVector.z /= vecLength;
@@ -230,10 +230,10 @@ class XcGm3DVector {
     return normalizedVector;
   }
 
-  normalize({tolerance = XcGmContext.gTol} = {}) {
+  normalize() {
     let vecLength = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
 
-    if (vecLength >= tolerance.anglePrecision) {
+    if (vecLength >= XcGmContext.gTol.anglePrecision) {
       this.x /= vecLength;
       this.y /= vecLength;
       this.z /= vecLength;
@@ -247,16 +247,16 @@ class XcGm3DVector {
     return len;
   }
 
-  isUnitLength({tolerance = XcGmContext.gTol} = {}) {
-    if (Math.abs(this.length() - 1) < tolerance.anglePrecision) {
+  isUnitLength() {
+    if (Math.abs(this.length - 1) < XcGmContext.gTol.anglePrecision) {
       return true;
     } else {
       return false;
     }
   }
 
-  isZeroLength({tolerance = XcGmContext.gTol} = {}) {
-    let threshold = tolerance.linearPrecision;
+  isZeroLength() {
+    let threshold = XcGmContext.gTol.linearPrecision;
 
     if (this.lengthSqrd() < threshold * threshold) {
       return true;
@@ -265,25 +265,25 @@ class XcGm3DVector {
     }
   }
 
-  isParallelTo({vector, tolerance = XcGmContext.gTol}) {
-    let len1 = this.length();
-    let len2 = vector.length();
+  isParallelTo() {
+    let len1 = this.length;
+    let len2 = vector.length;
 
-    if ((len1 < tolerance.anglePrecision) || (len2 < tolerance.anglePrecision)) {
+    if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
     }
 
-    if (Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < tolerance.anglePrecision) {
+    if (Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < XcGmContext.gTol.anglePrecision) {
       return true;
     } else {
       return false;
     }
   }
 
-  isCodirectionalTo({vector, tolerance = XcGmContext.gTol}) {
-    let len1 = this.length();
-    let len2 = vector.length();
-    if ((len1 < tolerance.anglePrecision) || (len2 < tolerance.anglePrecision)) {
+  isCodirectionalTo({vector}) {
+    let len1 = this.length;
+    let len2 = vector.length;
+    if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
     }
 
@@ -291,32 +291,32 @@ class XcGm3DVector {
       + (vector.y / len2 - this.y / len1) * (vector.y / len2 - this.y / len1)
       + (vector.z / len2 - this.z / len1) * (vector.z / len2 - this.z / len1));
 
-    if (dist < tolerance.anglePrecision * tolerance.anglePrecision) {
+    if (dist < XcGmContext.gTol.anglePrecision * XcGmContext.gTol.anglePrecision) {
       return true;
     } else {
       return false;
     }
   }
 
-  isPerpendicularTo({vector, tolerance = XcGmContext.gTol}) {
-    let len1 = this.length();
-    let len2 = vector.length();
+  isPerpendicularTo({vector}) {
+    let len1 = this.length;
+    let len2 = vector.length;
 
-    if ((len1 < tolerance.anglePrecision) || (len2 < tolerance.anglePrecision)) {
+    if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
     }
 
-    if (Math.abs((this.x * vector.x + this.y * vector.y + this.z * vector.z) / (len1 * len2)) > tolerance.anglePrecision) {
+    if (Math.abs((this.x * vector.x + this.y * vector.y + this.z * vector.z) / (len1 * len2)) > XcGmContext.gTol.anglePrecision) {
       return false;
     } else {
       return true;
     }
   }
 
-  isEqualTo({vector, tolerance = XcGmContext.gTol}) {
-    if ((Math.abs(this.x - vector.x) < tolerance.anglePrecision)
-      && (Math.abs(this.y - vector.y) < tolerance.anglePrecision)
-      && (Math.abs(this.z - vector.z) < tolerance.anglePrecision)) {
+  isEqualTo({vector}) {
+    if ((Math.abs(this.x - vector.x) < XcGmContext.gTol.anglePrecision)
+      && (Math.abs(this.y - vector.y) < XcGmContext.gTol.anglePrecision)
+      && (Math.abs(this.z - vector.z) < XcGmContext.gTol.anglePrecision)) {
       return true;
     } else {
       return false;
@@ -332,11 +332,11 @@ class XcGm3DVector {
     return newVector;
   }
 
-  project({plane, projectDirection, tolerance = XcGmContext.gTol}) {
+  project({plane, projectDirection}) {
 
   }
 
-  orthoProject({plane, projectDirection, tolerance = XcGmContext.gTol}) {
+  orthoProject({plane, projectDirection}) {
 
   }
 }

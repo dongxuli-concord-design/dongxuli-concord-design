@@ -463,7 +463,7 @@ Invert this matrix.
 
 ## inverse
 
-`inverse()`
+`get inverse()`
 
 * **return** `XcGm3dMatrix` object.
 
@@ -471,9 +471,8 @@ Return the inverse of this matrix.
 
 ## isSingular
 
-`isSingular({tolerance = XcGmContext.gTol} = {})`
+`isSingular()`
 
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the matrix is singular.
 
 ## transpose
@@ -492,9 +491,8 @@ Return the transposition of the object.
 
 ## isEqualTo
 
-`isEqualTo({matrix, tolerance = XcGmContext.gTol} = {})`
+`isEqualTo({matrix})`
 
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the matrix is equal to the provided matrix.
 
 Check if this matrix is equal to another matrix.
@@ -804,10 +802,9 @@ Transform the object with the provided matrix.
 
 ## isEqualTo
 
-`isEqualTo({position, tolerance = XcGmContext.gTol})`
+`isEqualTo({position})`
 
 * **position** `XcGm3dPosition` object.
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value representing if the object is equal to the provided position.
 
 # XcGm3dVector
@@ -1041,9 +1038,9 @@ Set the object value to the product of the provided matrix and vector.
 
 Transform the object with the provided matrix.
 
-## perpVector
+## perpendicularVector
 
-`perpVector()`
+`get perpendicularVector()`
 
 * **return** `XcGm3dVector` object.
 
@@ -1066,69 +1063,60 @@ Calculate a perpendicular vector of the vector.
 
 ## normal
 
-`normal({tolerance = XcGmContext.gTol} = {})`
+`get normal()`
 
-* **tolerance** A floating point number representing tolerance.
 * **return** `XcGm3dVector` object representing the normal vector of the object.
 
 ## normalize
 
-`normalize({tolerance = XcGmContext.gTol} = {})`
-
-* **tolerance** A floating point number representing tolerance.
+`normalize()`
 
 Normalize the object.
 
 ## length
 
-`length()`
+`get length()`
 
 * **return** A floating number representing the length of the object.
 
 ## isUnitLength
 
-`isUnitLength({tolerance = XcGmContext.gTol} = {})`
+`isUnitLength()`
 
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the object is unit length.
 
 ## isZeroLength
 
-`isZeroLength({tolerance = XcGmContext.gTol} = {})`
+`isZeroLength()`
 
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the object is zero length.
 
 ## isParallelTo
 
-`isParallelTo({vector, tolerance = XcGmContext.gTol})`
+`isParallelTo({vector})`
 
 * **vector** `XcGm3dVector` object to check.
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the object is parallel to the given vector.
 
 ## isCodirectionalTo
 
-`isCodirectionalTo({vector, tolerance = XcGmContext.gTol})`
+`isCodirectionalTo({vector})`
 
 * **vector** `XcGm3dVector` object to check.
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the object is co-directional to the given vector.
 
 ## isPerpendicularTo
 
-`isPerpendicularTo({vector, tolerance = XcGmContext.gTol})`
+`isPerpendicularTo({vector})`
 
 * **vector** `XcGm3dVector` object to check.
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the object is perpendicular to the given vector.
 
 ## isEqualTo
 
-`isEqualTo({vector, tolerance = XcGmContext.gTol})`
+`isEqualTo({vector})`
 
 * **vector** `XcGm3dVector` object to check.
-* **tolerance** A floating point number representing tolerance.
 * **return** Boolean value to indicate if the object is equal to the given vector.
 
 ## crossProduct

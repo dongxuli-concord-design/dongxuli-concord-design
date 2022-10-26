@@ -398,7 +398,7 @@ class XcGm3DMatrix {
     return inv;
   }
 
-  isSingular({tolerance = XcGmContext.gTol} = {}) {
+  isSingular() {
     // todo
     return false;
   }
@@ -422,10 +422,10 @@ class XcGm3DMatrix {
     return tmpMat;
   }
 
-  isEqualTo({matrix, tolerance = XcGmContext.gTol}) {
+  isEqualTo({matrix}) {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        if (Math.abs(matrix.entry[i][j] - this.entry[i][j]) > tolerance.anglePrecision)
+        if (Math.abs(matrix.entry[i][j] - this.entry[i][j]) > XcGmContext.gTol.anglePrecision)
           return false;
       }
     }
@@ -433,11 +433,11 @@ class XcGm3DMatrix {
     return true;
   }
 
-  isUniScaledOrtho({tolerance = XcGmContext.gTol} = {}) {
+  isUniScaledOrtho() {
     // TODO
   }
 
-  isScaledOrtho({tolerance = XcGmContext.gTol} = {}) {
+  isScaledOrtho() {
     // TODO
   }
 
@@ -677,7 +677,7 @@ class XcGm3DMatrix {
     matrixFrom.setCoordinateSystemFrom({coordSystem: fromCoordinateSystem});
     matrixTo.setCoordinateSystemFrom({coordSystem: toCoordinateSystem});
 
-    let tmpMatrix = matrixTo.multiply({matrix: matrixFrom.inverse()});
+    let tmpMatrix = matrixTo.multiply({matrix: matrixFrom.inverse});
     XcGm3DMatrix.#copyEntry({to: this.entry, src: tmpMatrix.entry});
 
     return this;

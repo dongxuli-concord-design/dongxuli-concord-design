@@ -177,7 +177,7 @@ class Xc3dUIGetAngle {
       const arrowDirection = XcGm3dPosition.subtract({
         position: this.#firstPosition,
         positionOrVector: this.#centerPosition
-      }).normal();
+      }).normal;
       this.#arrowHelper = new THREE.ArrowHelper(arrowDirection.toThreeVector3(), this.#centerPosition.toThreeVector3(), 100 / Xc3dUIManager.getNumPixelsInUnit(), 0xFF69B4);
       this.hints.add(this.#arrowHelper);
 

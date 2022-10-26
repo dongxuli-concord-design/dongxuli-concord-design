@@ -64,7 +64,7 @@ class Xc3dCmdLine {
       const direction = XcGm3dPosition.subtract({
         position: this.#endPosition,
         positionOrVector: this.#startPosition
-      }).normal();
+      });
       const axis = new XcGm3dAxis({position, direction});
       const line = XcGm3dLine.create({axis});
 
