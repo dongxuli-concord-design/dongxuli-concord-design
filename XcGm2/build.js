@@ -1,9 +1,10 @@
 const {execSync} = require('child_process');
-let os = require('os');
-let platform = os.platform();
+const os = require('os');
+const platform = os.platform();
+const fs = require('fs');
 
 // Build single JS file
-let scripts = [
+const scripts = [
   'XcGmAssert.js',
   'XcGmPrecision.js',
   'XcGmContext.js',
@@ -15,22 +16,21 @@ let scripts = [
   'XcGm3DMatrix.js',
 ];
 
-let moduleName = 'XcGm2';
-let buildSourceName = `${moduleName}.js`;
-let buildTargetName = `${moduleName}_${platform}.bin`;
+const moduleName = 'XcGm2';
+const buildSourceName = `${moduleName}.js`;
+const buildTargetName = `${moduleName}_${platform}.bin`;
 
 function concat(opts) {
-  let _fs = require('fs');
-  let FILE_ENCODING = 'utf-8';
-  let EOL = '\n';
+  const FILE_ENCODING = 'utf-8';
+  const EOL = '\n';
 
-  let fileList = opts.src;
-  let distPath = opts.dest;
-  let out = fileList.map(function (filePath) {
-    return _fs.readFileSync(filePath, FILE_ENCODING);
+  const fileList = opts.src;
+  const distPath = opts.dest;
+  const out = fileList.map(function (filePath) {
+    return fs.readFileSync(filePath, FILE_ENCODING);
   });
 
-  _fs.writeFileSync(distPath, out.join(EOL), FILE_ENCODING);
+  fs.writeFileSync(distPath, out.join(EOL), FILE_ENCODING);
 }
 
 concat({
@@ -43,14 +43,12 @@ if (platform === 'darwin') {
   execSync(`../XcExternal/nwjs.sdk.${platform}/nwjc ./build/${buildSourceName} ./build/${buildTargetName}`, {maxBuffer: 1024 * 1024 * 10}, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
-
     }
   });
 } else if (platform === 'win32') {
   execSync(`..\\XcExternal\\nwjs.sdk.${platform}\\nwjc .\\build\\${buildSourceName} .\\build\\${buildTargetName}`, {maxBuffer: 1024 * 1024 * 10}, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
-
     }
   });
 } else {

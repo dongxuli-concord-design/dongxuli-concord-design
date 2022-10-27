@@ -1,6 +1,6 @@
-let os = require('os');
+const os = require('os');
 const fs = require('fs');
-let win = nw.Window.get();
+const win = nw.Window.get();
 
 function ___xc_load_lib(lib) {
   if (fs.existsSync(`${lib}.js`)) {

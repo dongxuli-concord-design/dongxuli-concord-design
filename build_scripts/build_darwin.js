@@ -27,6 +27,23 @@ function build({baseFolderPath}) {
   _runCommands([
     `mkdir -p ${baseFolderPath}/XcDebug`,
     `mkdir -p ${baseFolderPath}/XcMain/Apps`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcSys`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcUI`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcMath`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcGm`,
+
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcGm2`,
+
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcImage`,
+
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3d`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3dCmd`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3dDoc`,
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3dUI`,
+
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/Automation`,
+
     `cp -rf ${baseFolderPath}/XcMain/* ${baseFolderPath}/XcDebug/`
   ]);
 
@@ -40,7 +57,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcSys && cp -r Documentation/* ../XcMain/Documentation/XcSys`,
     ]);
   }
 
@@ -51,7 +68,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcUI && cp -r Documentation/* ../XcMain/Documentation/XcUI`,
     ]);
   }
 
@@ -62,7 +79,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcMath && cp -r Documentation/* ../XcMain/Documentation/XcMath`,
     ]);
   }
 
@@ -73,7 +90,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcGm && cp -r Documentation/* ../XcMain/Documentation/XcGm`,
     ]);
   }
 
@@ -84,7 +101,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcGm2 && cp -r Documentation/* ../XcMain/Documentation/XcGm2`,
     ]);
   }
 
@@ -95,7 +112,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcImage && cp -r Documentation/* ../XcMain/Documentation/XcImage`,
     ]);
   }
 
@@ -111,7 +128,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp -r res ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r res ../../../XcMain/Apps/3DCAD`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp -r res ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r res ../../../XcMain/Apps/3DCAD && cp -r Documentation/* ../../..//XcDebug/Documentation/Apps/3DCAD/Xc3d && cp -r Documentation/* ../../..//XcMain/Documentation/Apps/3DCAD/Xc3d`,
     ]);
   }
 
@@ -122,7 +139,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp -r res ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r res ../../../XcMain/Apps/3DCAD`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp -r res ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r res ../../../XcMain/Apps/3DCAD && cp -r Documentation/* ../../..//XcDebug/Documentation/Apps/3DCAD/Xc3dCmd && cp -r Documentation/* ../../..//XcMain/Documentation/Apps/3DCAD/Xc3dCmd`,
     ]);
   }
 
@@ -133,7 +150,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp -r res ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r res ../../../XcMain/Apps/3DCAD`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp -r res ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r res ../../../XcMain/Apps/3DCAD && cp -r Documentation/* ../../..//XcDebug/Documentation/Apps/3DCAD/Xc3dUI && cp -r Documentation/* ../../..//XcMain/Documentation/Apps/3DCAD/Xc3dUI`,
     ]);
   }
 
@@ -144,7 +161,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../../XcDebug/Apps/3DCAD && cp build/*.bin ../../../XcMain/Apps/3DCAD && cp -r Documentation/* ../../..//XcDebug/Documentation/Apps/3DCAD/Xc3dDoc && cp -r Documentation/* ../../..//XcMain/Documentation/Apps/3DCAD/Xc3dDoc`,
     ]);
   }
 
@@ -176,7 +193,7 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/ && cp -r Documentation/* ../..//XcDebug/Documentation/Apps/Automation && cp -r Documentation/* ../..//XcMain/Documentation/Apps/Automation`,
     ]);
   }
 }
