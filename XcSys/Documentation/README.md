@@ -328,10 +328,10 @@ Dispatch an event to the system. The event could be any object.
 Example:
 
 ```
-XcSysManager.#dispatchEvent('stop');
+XcSysManager.dispatchEvent({event: 'an event'});
 
 let myEvent = Symbol('my event');
-XcSysManager.#dispatchEvent(myEvent);
+XcSysManager.dispatchEvent({event: myEvent});
 ```
 
 ## peekEvent
