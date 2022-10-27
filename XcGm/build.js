@@ -57,7 +57,8 @@ const scripts = [
   'XcGm3dBCurve.js',
   'XcGm3dLine.js',
   'XcGm3dCircle.js',
-  'XcGm3dEllipse.js'
+  'XcGm3dEllipse.js',
+  'XcGmQuaternion.js'
 ];
 
 const moduleName = 'XcGm';

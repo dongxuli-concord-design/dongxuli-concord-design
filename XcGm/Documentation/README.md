@@ -1680,7 +1680,7 @@ Example
 Example
 
 ```
-      let face = ...;  
+      let face = ...;
       let {surf, orientation} = face.surfAndOrientation();
       if (surf instanceof XcGmPlane) {
         let coordinateSystem = surf.coordinateSystem;
@@ -2341,3 +2341,70 @@ Return XcGmBody
 `get faces()`
 
 Return XcGmFace array
+
+# XcGmQuaternion
+`class XcGmQuaternion`
+
+
+   * Construct a quaternion.
+   *
+   * @param {*} the components of the quaternion to construct. The default is the unit.
+   */
+## constructor
+`constructor({w = 1, x = 0, y = 0, z = 0} = {})`
+
+## fromRotationMatrix
+`static fromRotationMatrix({matrix})`
+
+  *matrix a rotation matrix
+  Convert a rotation matrix to a unit quaternion
+  Assuming the input matrix is a pure rotation matrix:
+  any perspective factor or translation vector is ignored
+
+## conjugate
+`conjugate()`
+  The inverse quaternion for a unit quaternion
+
+## multiply
+`multiply({qRight})`
+
+*qRight the quaternion on the right
+Hamliton product. The multiplication order puts the current quaternion on the left
+
+## normalize
+`normalize()` {
+
+Normalize the current quaternion. If the normal is zero within tolerance, no-op.
+
+## normal
+`normal()`
+
+A normalized quaternion from the current. The current is not changed
+
+## lengthSquared
+`lengthSquared()`
+
+The Squared length
+
+## pow
+`pow({exponent})`
+
+*exponent the exponent
+
+The power function, assuming unit quaternions
+
+##   lerpTo
+`lerpTo({target, exponent})`
+
+*target the target unit quaternion for linear interpolation from the current
+*exponent the interpolation parameter. If the parameter is 0, the interpolation result is the current quaterion.
+If the parameter is 1, the result is the target quaternion
+
+linear interpolation of two rotation quaterions:
+q0 to q1, with parameter t: q0 * (q0' * q1)^t, q0' being the conjugate: q0' = 1/q0 for unit quaternions;
+  - t=0, the result is q0;
+  - t=1, the result is q1;
+  - otherwise, the result is a linear interpolation
+
+## toRotationMatrix
+`toRotationMatrix()`
