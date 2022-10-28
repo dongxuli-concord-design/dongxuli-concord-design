@@ -4,4 +4,10 @@ log.txt
 v8.log
 /Apps
 *.bin
-/Documentation
+/Documentation/XcSys
+/Documentation/XcUI
+/Documentation/XcMath
+/Documentation/XcImage
+/Documentation/XcGm
+/Documentation/XcGm2
+/Documentation/Apps

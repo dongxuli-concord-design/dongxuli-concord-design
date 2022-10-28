@@ -1,0 +1,614 @@
+<html>
+<meta charset="UTF-8">
+
+<head>
+  <title>Documentation</title>
+  <link rel="stylesheet" type="text/css" href="../bootstrap.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+
+<body style="margin: 10px;">
+
+<h1>Introduction</h1>
+
+<p>
+  The XcSys provides very fundamental classes and functions for the whole system.
+
+  The classes in this module include:
+<ul>
+  <li>
+    <dl>XcSysApp</dl>
+    <dd>Define an application object which can be loaded by the system.</dd>
+  </li>
+  <li>
+    <dl>XcSysUIContext</dl>
+    <dd>Define an user interface context in a system.</dd>
+  </li>
+  <li>
+    <dl>XcSysI18n</dl>
+    <dd>Provide i18n tools.</dd>
+  </li>
+  <li>
+    <dl>XcSysAssert</dl>
+    <dd>Provide assertion functionality.</dd>
+  </li>
+  <li>
+    <dl>XcSysManager</dl>
+    <dd>Provide basic system management functionalities, including user interface, system control flow,
+      load scripts etc.
+    </dd>
+  </li>
+</ul>
+</p>
+
+<h2>XcSysApp</h2>
+
+<p>
+  Define an application object. A user-defined application class should be extended from this class.
+
+  Example:
+</p>
+
+<code>
+    <pre>
+  class HelloApp extends XcSysApp {
+    static #CommandState = {
+      SayHello: Symbol('SayHello'),
+    };
+    static #Event = {
+      Quit: Symbol('Quit'),
+    };
+    #state = HelloApp.#CommandState.SayHello;
+
+    constructor() {
+      super();
+      this.name = 'Hello';
+      this.description = 'This is a Hello app!';
+      this.icon = 'Apps/Hello/res/icon.png';
+      this.entry = Hello_command;
+    }
+
+    static init() {
+    }
+
+    * sayHello() {
+      let helloUI = [];
+      let sayHelloButton = document.createElement('button');
+      sayHelloButton.innerHTML = `sayHello`;
+      sayHelloButton.addEventListener('click', (event) => {
+        alert('HelloApp!');
+      });
+      helloUI.push(sayHelloButton);
+
+      let helloView = document.createElement('div');
+      helloView.style.cssText = "display: flex; position: fixed; width: fit-content; max-width: 700px; max-height: 98vh; top: 1em; left: 20em; overflow: auto;";
+      helloView.innerHTML = `
+          &lt;div&gt;
+            &lt;h1&gt;Hello World!&lt;/h1&gt;
+          &lt;/div&gt;        
+      `;
+
+      let helloContext = new XcSysUIContext({
+        prompt: `Say Hello!`,
+        showCanvasElement: true,
+        standardWidgets: helloUI,
+        customDiv: helloView
+      });
+
+      let event = yield* XcSysManager.waitForEvent({
+        uiContext: helloContext,
+      });
+
+      return HelloApp.#CommandState.SayHello;
+    }
+
+    * run() {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      XcSysManager.canvasDiv.appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      camera.position.z = 5;
+
+      const animate = function () {
+        requestAnimationFrame(animate);
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+      };
+
+      animate();
+
+      while (true) {
+        switch (this.#state) {
+          case HelloApp.#CommandState.SayHello:
+            this.#state = yield* this.sayHello();
+            break;
+          default:
+            XcSysAssert({assertion: false, message: `Internal command #state error`});
+            break;
+        }
+      }
+    }
+  }
+
+  function* Hello_command() {
+    let cmd = new HelloApp();
+    yield* cmd.run();
+  }
+
+  XcSysManager.registerApp({appClass: HelloApp});
+    </pre>
+</code>
+
+<h3>constructor</h3>
+
+<p><code>constructor({name, description, icon, initGenerator})</code></p>
+
+<ul>
+  <li>
+    <dl>name</dl>
+    <dd>The app name.</dd>
+  </li>
+  <li>
+    <dl>description</dl>
+    <dd>The app description.</dd>
+  </li>
+  <li>
+    <dl>icon</dl>
+    <dd>The path to the app icon file. e.g., 'Apps/Hello/res/icon.png'.</dd>
+  </li>
+  <li>
+    <dl>entry</dl>
+    <dd>The entry generator function.</dd>
+  </li>
+</ul>
+
+<h3>init</h3>
+
+<p><code>static init()</code></p>
+
+<p>This initialization function will be called when the application object is loaded by the system.</p>
+
+<h2>XcSysUIContext</h2>
+
+<p>
+  Define the system context, including the prompt, canvas, standard widgets, stand dialog, custom HTML Div element,
+  and
+  cursor shape.
+
+  The elements in the context look like:
+
+<pre>
+  _________________________________________________________
+  [prompt]
+
+  [standard widget] [standard dialog]
+  [standard widget] [background canvas(100% screen size)]
+  ... [custom div (could be anywhere)]
+  [standard widget]
+  __________________________________________________________
+  </pre>
+</p>
+
+<h3>constructor</h3>
+
+<code>
+  <pre>
+  constructor({
+                  prompt = null,
+                  showCanvasElement = false,
+                  standardWidgets = null,
+                  standardDialog = null,
+                  customDiv = null,
+                  cursor = 'auto'
+                } = {})
+  </pre>
+</code>
+
+<ul>
+  <li>prompt
+    <dl></dl>
+    <dd>The prompt to be displayed.</dd>
+  </li>
+  <li>
+    <dl>showCanvasElement</dl>
+    <dd>Boolean flag to show or hide canvas element.</dd>
+  </li>
+  <li>
+    <dl>standardWidgets</dl>
+    <dd>Standard HTML widgets to be displayed in the default position.</dd>
+  </li>
+  <li>
+    <dl>standardDialog</dl>
+    <dd>Standard HTML dialog to be displayed in the default position.</dd>
+  </li>
+  <li>
+    <dl>customDiv</dl>
+    <dd>Custom HTML Div to be displayed in the custom position.</dd>
+  </li>
+  <li>
+    <dl>cursor</dl>
+    <dd>The cursor shape.</dd>
+  </li>
+</ul>
+
+<h2>XcSysAssert</h2>
+
+<p><code>function XcSysAssert({assertion, message = 'Unknown'})</code></p>
+
+<ul>
+  <li>
+    <dl>assertion</dl>
+    <dd>Any boolean assertion. If the assertion is false, the message is reported by the system.</dd>
+  </li>
+  <li>
+    <dl>message</dl>
+    <dd>A description string.</dd>
+  </li>
+</ul>
+
+<h2>XcSysConfig</h2>
+
+<code>
+  <pre>
+  class XcSysConfig {
+    static title = '协和 Concord';
+    static server = 'http://localhost';
+    static locale = 'en';
+    static apps = [];
+    static debug = false;
+  }
+  </pre>
+</code>
+
+<p>XcSysConfig could be configured in the <code>config.js</code>.</p>
+
+<h3>title</h3>
+
+<code>static title</code>
+
+<p>The system title.</p>
+
+<h3>locale</h3>
+
+<code>static locale</code>
+
+<p>The system language.</p>
+
+<h3>apps</h3>
+
+<code>static apps</code>
+
+<p>
+The apps to be loaded by the system. With the provided app name `foo`, the system will try `foo.js`
+first and then
+<code>foo.bin</code> when <code>js</code> file is not there.
+</p>
+
+<p>Example:</p>
+
+<code>
+  <pre>
+  XcSysConfig.apps = [
+  'Apps/Hello/Hello',
+  'Apps/MyApp/MyApp',
+  ];
+  </pre>
+</code>
+
+<h2>XcSysI18n</h2>
+
+<p>
+  This class provides i18n functionalities. Example:
+</p>
+
+<code>
+  <pre>
+  let messageBundle_zh = {
+  'Ready': '就绪',
+  'Hello {0}, you have {1} in your bank account.': '你好{0}，你有{1}在您的銀行帳戶。'
+  };
+
+  let modulei18n = null;
+
+  if (XcSysConfig.locale === 'zh') {
+  modulei18n = new XcSysI18n({messageBundle: messageBundle_zh});
+  } else {
+  modulei18n = new XcSysI18n();
+  }
+
+  let message1 = modulei18n.T`Ready`});
+  let message2 = modulei18n.T`Hello ${name}, you have ${amount}:c in your bank
+  account.`});
+</pre>
+</code>
+
+<h3>constructor</h3>
+
+<code>constructor({messageBundle = null} = {})</code>
+
+<h3>T</h3>
+
+<code>T(strings, ...values)</code>
+
+<p>Get translated string from template keys.</p>
+
+<h2>XcSysManager</h2>
+
+<p>
+  The fundamental class to manage the system, which provides many basic
+  functionalities.
+</p>
+
+<h3>canvasDiv</h3>
+
+<code>static canvasDiv</code>
+
+<p>The HTML div element which contains a HTML canvas. This div covers the
+  whole viewport.</p>
+
+<h3>outputDisplay</h3>
+
+<code>static outputDisplay</code>
+
+<p>The HTML element (<code>XcUIDisplay</code>) which is for outputting messages. This element is located on the left top
+  of the viewport.</p>
+
+<h3>promptDiv</h3>
+
+<code>static promptDiv</code>
+
+<p>The HTML element which is for displaying prompt message. The element is located just below
+  the<code>outputDisplay</code> element.</p>
+
+<h3>standardWidgetDiv</h3>
+
+<code>static standardWidgetDiv</code>
+
+<p>The HTML div container for the standard HTML widgets, which is located at the left side of the viewport.</p>
+
+<h3>standardDialog</h3>
+
+<code>static standardDialog</code>
+
+<p>The HTML div container for the standard HTML dialog, which is located at the center of the viewport.</p>
+
+<h3>apps</h3>
+
+<code>static * apps()</code>
+
+<ul>
+  <li><dl>return</dl><dd>Array of apps.</dd></li>
+</ul>
+
+<p>Iterate <code>XcSysApp</code> objects.
+
+  Example:
+</p>
+
+<code>
+  for (let app of XcSysManager.apps()) {
+  console.log(app.name, app.description);
+  }
+</code>
+
+
+<h3>loadJavascriptAsync</h3>
+
+<code> static loadJavascriptAsync({scriptSrc, doneCallback, asModule = true})</code>
+
+<ul>
+  <li>
+    <dl>scriptSrc</dl>
+    <dd>Source of the script.</dd>
+  </li>
+  <li>
+    <dl>doneCallback</dl>
+    <dd>Callback function when the script loading is done.</dd>
+  </li>
+  <li>
+    <dl>asModule</dl>
+    <dd>Boolean flag indicating if the script is loaded as module.</dd>
+  </li>
+</ul>
+
+<h3>run</h3>
+
+<code>static run({customInitFunction = null, customInitFunctionArg = null} = {})</code>
+
+<p>It starts the XcSysManager.</p>
+
+<ul>
+  <li>
+    <dl>customInitFunction</dl>
+    <dd>The initialization function called when running the system.</dd>
+  </li>
+  <li>
+    <dl>customInitFunctionArg</dl>
+    <dd>The argument for the initialization function.</dd>
+  </li>
+</ul>
+
+<h3>registerApp</h3>
+
+<code>static registerApp({appClass})</code>
+
+<ul>
+  <li><dl>appClass</dl><dd>The app class</dd></li>
+</ul>
+
+<p>Register an <code>XcSysApp</code> object.</p>
+
+<h3>dispatchEvent</h3>
+
+<code>static dispatchEvent({event})</code>
+
+<ul>
+  <li><dl>event</dl><dd>The event to be dispatched, which could be any data.</dd></li>
+</ul>
+
+<p>
+  Dispatch an event to the system. The event could be any object.
+  Example:
+</p>
+
+<code>
+  XcSysManager.dispatchEvent({event: 'an event'});
+
+  let myEvent = Symbol('my event');
+  XcSysManager.dispatchEvent({event: myEvent});
+</code>
+
+<h3>peekEvent</h3>
+
+<code>static* peekEvent({delay})</code>
+
+<p>
+  Wait for some time to check if there is event in the event queue.
+
+<ul>
+  <li>
+    <dl>delay</dl>
+    <dd>milli-seconds to delay</dd>
+  </li>
+</ul>
+
+Example:
+</p>
+
+<code>
+  let hasEvent =
+  yield*
+  XcSysManager.peekEvent({delay:
+  300});
+  if (hasEvent) {
+  return;
+  }
+</code>
+
+<h3>waitForEvent</h3>
+
+<code>
+  static* waitForEvent({uiContext = new XcSysUIContext(), timeOut = null, expectedEventTypes = null} = {})
+</code>
+
+<ul>
+  <li>
+    <dl>uiContext</dl>
+    <dd>XcSysUIContext object representing the context for this call.</dd>
+  </li>
+  <li>
+    <dl>timeOut</dl>
+    <dd>Time in milliseconds.</dd>
+  </li>
+  <li>
+    <dl>expectedEventTypes</dl>
+    <dd>Array of expected event types.</dd>
+  </li>
+  <li>
+    <dl>return</dl>
+    <dd>Array of apps.</dd>
+  </li>
+</ul>
+
+<p>
+  Pause the current generator function and wait for the event. <code>uiContext</code> is to set the current context of
+  the moment of waiting events.
+
+  If the <code>timeOut</code> is set, this function will return after the time is up.
+
+  If<code>expectedEventTypes</code> is set, this function will return only the expected event types are caught.
+
+  Example:
+</p>
+<code>
+    <pre>
+    let uiContext = new XcSysUIContext({
+    prompt: 'hello',
+    showCanvasElement: true,
+    cursor: 'pointer',
+    });
+
+    let event = yield*
+    XcSysManager.waitForEvent({
+    uiContext: uiContext
+    });
+
+    // Dispatch event somewhere else
+    // XcSysManager.dispatchEvent({event: 'my
+    event'});
+    </pre>
+</code>
+
+<h3>sleep</h3>
+
+<code>static* sleep({delay, interruptors = []} = {})</code>
+
+<ul>
+  <li><dl>delay</dl><dd>Time to sleep, in milliseconds.</dd></li>
+  <li><dl>interruptors</dl><dd>Event that can interrupt the sleep process.</dd></li>
+</ul>
+
+<h3>htmlToElement</h3>
+
+<code>static htmlToElement({htmlString})</code>
+
+<ul>
+  <li>
+    <dl>htmlString</dl>
+    <dd>An HTML element string.</dd>
+  </li>
+  <li>
+    <dl>return</dl>
+    <dd>An HTML element.</dd>
+  </li>
+</ul>
+
+<p>
+  Generate an HTML element from an HTML element string.
+
+  Example:
+</p>
+
+<code>let 零件编号输入 = XcSysManager.htmlToElement(`&lt;label&gt;待检验零件编号&lt;input type="text"
+  value=${Vim生成零件编号()} data-id="零件编号"&gt;&lt;/label&gt;`);</code>
+
+<h3>htmlToElements</h3>
+
+<code>static htmlToElements({htmlStringArray})</code>
+
+<ul>
+  <li>
+    <dl>htmlStringArray</dl>
+    <dd>An array of HTML element strings.</dd>
+  </li>
+  <li>
+    <dl>return</dl>
+    <dd>Array of HTML elements.</dd>
+  </li>
+</ul>
+
+<p>
+  Generate HTML elements from an array of HTML element strings. Example:
+</p>
+
+<code> let 等待轮廓界面 = XcSysManager.htmlToElements(['
+  &lt;button&gt;button1&lt;/button&gt;
+  ', '
+  &lt;button&gt;button2&lt;/button&gt;
+  ']);
+</code>
+
+</body>
+
+</html>
