@@ -275,24 +275,17 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
   * moveLine({targetCoordinateSystem}) {
     const currentCoordinateSystem = this.target;
     const currentPosition = currentCoordinateSystem.origin;
-    const targetPostion = targetCoordinateSystem.origin;
-    const targetXDir = targetCoordinateSystem.xAxisDirection;
-    const targetZDir = targetCoordinateSystem.zAxisDirection;
+    const sourceMatrix = currentCoordinateSystem.toMatrix();
+    const targetMatrix = targetCoordinateSystem.toMatrix();
 
     const detPosition = XcGm3dPosition.subtract({position: targetPostion, positionOrVector: currentPosition.toVector()});
     const distance = detPosition.length();
     const steps = Math.ceil(distance / XcAtDocGeneralRobot.ROBOT_MOVE_DELT);
-    detPosition.divide({scale: steps});
 
-    const position = currentPosition.clone();
-    for (let i = 0; i < steps; ++i) {
-      const detCoordinateSystem = new XcGmCoordinateSystem();
-      position.add({vector: detPosition});
-      detCoordinateSystem.origin = position;
-      detCoordinateSystem.xAxisDirection = targetXDir;
-      detCoordinateSystem.zAxisDirection = targetZDir;
+    for (let i = 0; i <= steps; ++i) {
+      const ikTargetMatrix = sourceMatrix.lerpTo({targetMatrix, scale: i / steps});
 
-      this.#angles = this.#kinematics.IK({targetMatrix: detCoordinateSystem.toMatrix(), currentAngles: this.#angles});
+      this.#angles = this.#kinematics.IK({targetMatrix: ikTargetMatrix, currentAngles: this.#angles});
       const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
       this.#jointMatrixes = [...arrayMatrix];
 

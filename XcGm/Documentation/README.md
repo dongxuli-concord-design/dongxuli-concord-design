@@ -566,6 +566,20 @@ Set the matrix representing a uniform scaling.
 
 Get the Three.js matrix representation of the object.
 
+## lerpTo
+
+`lerpTo({targetMatrix, scale})`
+
+* **return** A linear interpolation of between the current matrix to the target matrix.
+* **targetMatrix** target matrix
+* **scale** the interpolation parameter, expected range from 0 to 1, the result is a weighted average.
+If scale=0, the result is the current matrix;
+if scale=1, the result is targetMatrix
+
+
+linear interpolation of position and orientation. The matrices are assumed to be rigid transform matrices, i.e. rotation
+and translation only
+
 # XcGm3dPoint
 
 `class XcGm3dPoint extends XcGmGeometry`

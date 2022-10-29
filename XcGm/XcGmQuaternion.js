@@ -59,7 +59,7 @@ class XcGmQuaternion {
   /**
    * The inverse quaternion for a unit quaternion
    */
-  conjugate() {
+  get conjugate() {
     return new XcGmQuaternion({w: this.w, x: -this.x, y: -this.y, z: -this.z});
   }
 
@@ -81,7 +81,7 @@ class XcGmQuaternion {
    * Normalize the current quaternion. If the normal is zero within tolerance, no-op.
    */
   normalize() {
-    const normal = Math.sqrt(this.lengthSquared());
+    const normal = Math.sqrt(this.lengthSquared);
     if (normal <= new XcGmPrecision().linearPrecision)
       return;
 
@@ -94,7 +94,7 @@ class XcGmQuaternion {
   /**
    * A normalized quaternion from the current. The current is not changed
    */
-  normal() {
+  get normal() {
     const unitQ = {...this};
     unitQ.normalize();
     return unitQ;
@@ -103,7 +103,7 @@ class XcGmQuaternion {
   /**
    * The Squared length
    */
-  lengthSquared() {
+  get lengthSquared() {
     return this.w * this.w + this.x * this.x + this.y * this.y + this.z * this.z;
   }
 
@@ -135,16 +135,16 @@ class XcGmQuaternion {
    * If the parameter is 1, the result is the target quaternion
    */
   lerpTo({target, exponent}) {
-    const qn = this.conjugate();
+    const qn = this.conjugate;
     const factor = qn.multiply({qRight: target});
     const power = factor.pow({exponent});
-    return this.multiply({qRight: power}).normal();
+    return this.multiply({qRight: power}).normal;
   }
 
   /**
    * Conversion from the current quaternion to its corresponding rotation matrix
    */
-  toRotationMatrix() {
+  get matrix() {
     // the quaternion could be non-unit due to rounding errors
     const s = 2. / this.lengthSquared();
     const bs = this.x * s;

@@ -579,5 +579,32 @@ class XcGm3dMatrix {
     this.setToThreeMatrix4({threeMatrix4});
   }
 
+  /**
+   * linear interpolation of position and orientation. The matrices are assumed to be transform matrices, i.e. rotation
+   * and translation only
+   *
+   * @targetMatrix target matrix
+   * @scale        interpolation parameter, expected range from 0 to 1, the result is a weighted average
+   *               if scale=0, the result is the current matrix; if scale=1, the result is targetMatrix
+   *  */
+  lerpTo({targetMatrix, scale}) {
+
+    // The lerp of translation
+    const sourceVector = this.translationVector();
+    const targetVector = targetMatrix.translationVector();
+    let lerpVector = sourceVector.multiply({scale: 1 - scale});
+    lerpVector.add({vector: targetVector.multiply({scale})});
+
+    // The lerp of orientation
+    const sourceQuaternion = XcGmQuaternion.fromRotationMatrix(this);
+    const targetQuaternion = XcGmQuaternion.fromRotationMatrix(targetMatrix);
+    let lerpQuaternion = sourceQuaternion.lerpTo({target: targetQuaternion, scale});
+
+    // The lerp of orientation and translatioin
+    let lerpMatrix = lerpQuaternion.matrix;
+    lerpMatrix.setToTranslation({lerpVector});
+    return lerpMatrix;
+  }
+
   // todo: Other useful functions
 }
