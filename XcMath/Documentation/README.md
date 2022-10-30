@@ -1,4 +1,0 @@
-# Introduction
-
-Foundational mathematical library
-

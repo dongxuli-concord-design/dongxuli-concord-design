@@ -1,4 +1,0 @@
-# Introduction
-
-Image processing library
-

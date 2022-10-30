@@ -40,8 +40,7 @@
   </li>
 </ul>
 </p>
-
-<h2>XcSysApp</h2>
+<h1>XcSysApp</h1>
 
 <p>
   Define an application object. A user-defined application class should be extended from this class.
@@ -150,7 +149,7 @@
     </pre>
 </code>
 
-<h3>constructor</h3>
+<h2>constructor</h2>
 
 <p><code>constructor({name, description, icon, initGenerator})</code></p>
 
@@ -173,13 +172,12 @@
   </li>
 </ul>
 
-<h3>init</h3>
+<h2>init</h2>
 
 <p><code>static init()</code></p>
 
 <p>This initialization function will be called when the application object is loaded by the system.</p>
-
-<h2>XcSysUIContext</h2>
+<h1>XcSysUIContext</h1>
 
 <p>
   Define the system context, including the prompt, canvas, standard widgets, stand dialog, custom HTML Div element,
@@ -200,7 +198,7 @@
   </pre>
 </p>
 
-<h3>constructor</h3>
+<h2>constructor</h2>
 
 <code>
   <pre>
@@ -242,7 +240,7 @@
   </li>
 </ul>
 
-<h2>XcSysAssert</h2>
+<h1>XcSysAssert</h1>
 
 <p><code>function XcSysAssert({assertion, message = 'Unknown'})</code></p>
 
@@ -257,7 +255,7 @@
   </li>
 </ul>
 
-<h2>XcSysConfig</h2>
+<h1>XcSysConfig</h1>
 
 <code>
   <pre>
@@ -273,19 +271,19 @@
 
 <p>XcSysConfig could be configured in the <code>config.js</code>.</p>
 
-<h3>title</h3>
+<h2>title</h2>
 
 <code>static title</code>
 
 <p>The system title.</p>
 
-<h3>locale</h3>
+<h2>locale</h2>
 
 <code>static locale</code>
 
 <p>The system language.</p>
 
-<h3>apps</h3>
+<h2>apps</h2>
 
 <code>static apps</code>
 
@@ -306,7 +304,7 @@ first and then
   </pre>
 </code>
 
-<h2>XcSysI18n</h2>
+<h1>XcSysI18n</h1>
 
 <p>
   This class provides i18n functionalities. Example:
@@ -333,57 +331,56 @@ first and then
 </pre>
 </code>
 
-<h3>constructor</h3>
+<h2>constructor</h2>
 
 <code>constructor({messageBundle = null} = {})</code>
 
-<h3>T</h3>
+<h2>T</h2>
 
 <code>T(strings, ...values)</code>
 
 <p>Get translated string from template keys.</p>
-
-<h2>XcSysManager</h2>
+<h1>XcSysManager</h1>
 
 <p>
   The fundamental class to manage the system, which provides many basic
   functionalities.
 </p>
 
-<h3>canvasDiv</h3>
+<h2>canvasDiv</h2>
 
 <code>static canvasDiv</code>
 
 <p>The HTML div element which contains a HTML canvas. This div covers the
   whole viewport.</p>
 
-<h3>outputDisplay</h3>
+<h2>outputDisplay</h2>
 
 <code>static outputDisplay</code>
 
 <p>The HTML element (<code>XcUIDisplay</code>) which is for outputting messages. This element is located on the left top
   of the viewport.</p>
 
-<h3>promptDiv</h3>
+<h2>promptDiv</h2>
 
 <code>static promptDiv</code>
 
 <p>The HTML element which is for displaying prompt message. The element is located just below
   the<code>outputDisplay</code> element.</p>
 
-<h3>standardWidgetDiv</h3>
+<h2>standardWidgetDiv</h2>
 
 <code>static standardWidgetDiv</code>
 
 <p>The HTML div container for the standard HTML widgets, which is located at the left side of the viewport.</p>
 
-<h3>standardDialog</h3>
+<h2>standardDialog</h2>
 
 <code>static standardDialog</code>
 
 <p>The HTML div container for the standard HTML dialog, which is located at the center of the viewport.</p>
 
-<h3>apps</h3>
+<h2>apps</h2>
 
 <code>static * apps()</code>
 
@@ -403,7 +400,7 @@ first and then
 </code>
 
 
-<h3>loadJavascriptAsync</h3>
+<h2>loadJavascriptAsync</h2>
 
 <code> static loadJavascriptAsync({scriptSrc, doneCallback, asModule = true})</code>
 
@@ -422,7 +419,7 @@ first and then
   </li>
 </ul>
 
-<h3>run</h3>
+<h2>run</h2>
 
 <code>static run({customInitFunction = null, customInitFunctionArg = null} = {})</code>
 
@@ -439,7 +436,7 @@ first and then
   </li>
 </ul>
 
-<h3>registerApp</h3>
+<h2>registerApp</h2>
 
 <code>static registerApp({appClass})</code>
 
@@ -449,7 +446,7 @@ first and then
 
 <p>Register an <code>XcSysApp</code> object.</p>
 
-<h3>dispatchEvent</h3>
+<h2>dispatchEvent</h2>
 
 <code>static dispatchEvent({event})</code>
 
@@ -463,13 +460,15 @@ first and then
 </p>
 
 <code>
+  <pre>
   XcSysManager.dispatchEvent({event: 'an event'});
 
   let myEvent = Symbol('my event');
   XcSysManager.dispatchEvent({event: myEvent});
+  </pre>
 </code>
 
-<h3>peekEvent</h3>
+<h2>peekEvent</h2>
 
 <code>static* peekEvent({delay})</code>
 
@@ -487,16 +486,13 @@ Example:
 </p>
 
 <code>
-  let hasEvent =
-  yield*
-  XcSysManager.peekEvent({delay:
-  300});
+  let hasEvent = yield* XcSysManager.peekEvent({delay: 300});
   if (hasEvent) {
-  return;
+    return;
   }
 </code>
 
-<h3>waitForEvent</h3>
+<h2>waitForEvent</h2>
 
 <code>
   static* waitForEvent({uiContext = new XcSysUIContext(), timeOut = null, expectedEventTypes = null} = {})
@@ -550,7 +546,7 @@ Example:
     </pre>
 </code>
 
-<h3>sleep</h3>
+<h2>sleep</h2>
 
 <code>static* sleep({delay, interruptors = []} = {})</code>
 
@@ -559,7 +555,7 @@ Example:
   <li><dl>interruptors</dl><dd>Event that can interrupt the sleep process.</dd></li>
 </ul>
 
-<h3>htmlToElement</h3>
+<h2>htmlToElement</h2>
 
 <code>static htmlToElement({htmlString})</code>
 
@@ -583,7 +579,7 @@ Example:
 <code>let 零件编号输入 = XcSysManager.htmlToElement(`&lt;label&gt;待检验零件编号&lt;input type="text"
   value=${Vim生成零件编号()} data-id="零件编号"&gt;&lt;/label&gt;`);</code>
 
-<h3>htmlToElements</h3>
+<h2>htmlToElements</h2>
 
 <code>static htmlToElements({htmlStringArray})</code>
 
@@ -602,12 +598,7 @@ Example:
   Generate HTML elements from an array of HTML element strings. Example:
 </p>
 
-<code> let 等待轮廓界面 = XcSysManager.htmlToElements(['
-  &lt;button&gt;button1&lt;/button&gt;
-  ', '
-  &lt;button&gt;button2&lt;/button&gt;
-  ']);
-</code>
+<code> let 等待轮廓界面 = XcSysManager.htmlToElements(['&lt;button&gt;button1&lt;/button&gt;', '&lt;button&gt;button2&lt;/button&gt;']);</code>
 
 </body>
 

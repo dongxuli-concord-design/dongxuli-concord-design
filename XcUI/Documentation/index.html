@@ -1,0 +1,190 @@
+<html>
+<meta charset="UTF-8">
+
+<head>
+  <title>Documentation</title>
+  <link rel="stylesheet" type="text/css" href="../bootstrap.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+
+<body style="margin: 10px;">
+
+<h1>Introduction</h1>
+
+<p>UI Components.</p>
+
+<h1>XcUIDialog</h1>
+
+<pre>
+let dialog = new XcUIDialog( {
+      content : ```
+        &lt;textarea rows="10" cols="50"&gt;
+        &lt;/textarea&gt;
+        &lt;hr/&gt;
+        &lt;button data-id="run" class="btn btn-outline-primary">▶&lt;/button&gt;
+        &lt;p data-id="error" class="text-danger" style="height:1em;"> &lt;/p&gt;
+        ```,
+      title: 'MyTitle',
+    });
+</pre>
+
+<h2>constructor</h2>
+
+<code>constructor({content = '', title = '', open = false} = {})</code>
+
+<ul>
+  <li>
+    <dl>content</dl>
+    <dd>HTML content string</dd>
+  </li>
+  <li>
+    <dl>title</dl>
+    <dd>title string</dd>
+  </li>
+</ul>
+
+<h2>title</h2>
+
+<code>get title()</code>
+
+<p>Get the title</p>
+
+<h2>title</h2>
+
+<code>set title(val)</code>
+
+<ul>
+  <li>
+    <dl>val</dl>
+    <dd>The title string</dd>
+  </li>
+</ul>
+
+<h2>setContent</h2>
+
+<code>setContent(content)</code>
+
+<ul>
+  <li>
+    <dl>content</dl>
+    <dd>HTML content string</dd>
+  </li>
+</ul>
+
+<p>Set the HTML content of the dialog.</p>
+
+<h1>XcUIDisplay</h1>
+
+<p>This is a HUD like message display board.</p>
+
+<pre>
+      &lt;xcui-display id="test" style="position: fixed; left: 0em; top: 0em; width: fit-content; height: 5em; max-width: 50em; margin: 0.5em; overflow: auto; overflow-wrap: break-word; word-wrap: break-word; word-break:break-word;"&gt;&lt;/xcui-display&gt;
+</pre>
+
+<pre>
+    let outputDisplay = document.getElementById("test");
+    outputDisplay.log('Do not forget to logout if you have finished your tasks.');
+
+    for (var i=0; i<5; i += 1) {
+      outputDisplay.warn("Hello, %s. You've called me %d times.", "Bob", i+1);
+    }
+</pre>
+
+<h2>constructor</h2>
+
+<code>constructor()</code>
+
+<h2>clear</h2>
+
+<code>clear()</code>
+
+<p>Clear all of the content.</p>
+
+<h2>log</h2>
+
+<code>log(...args)</code>
+
+<ul>
+  <li>
+    <dl>args</dl>
+    <dd>A JavaScript string containing zero or more substitution strings.</dd>
+  </li>
+</ul>
+
+<p>Print messages with the log style. The message may be a single string (with optional substitution values).</p>
+
+<h2>warn</h2>
+
+<code>warn(...args)</code>
+
+<ul>
+  <li>
+    <dl>args</dl>
+    <dd>A JavaScript string containing zero or more substitution strings.</dd>
+  </li>
+</ul>
+
+<p>Print messages with the warning style. The message may be a single string (with optional substitution values).</p>
+
+<h2>error</h2>
+
+<code>error(...args)</code>
+
+<ul>
+  <li>
+    <dl>args</dl>
+    <dd>A JavaScript string containing zero or more substitution strings.</dd>
+  </li>
+</ul>
+
+<p>Print messages with the error style. The message may be a single string (with optional substitution values).</p>
+
+<h2>debug</h2>
+
+<code>debug(...args)</code>
+
+<ul>
+  <li>
+    <dl>args</dl>
+    <dd>A JavaScript string containing zero or more substitution strings.</dd>
+  </li>
+</ul>
+
+<p>Print messages with the debug style. The message may be a single string (with optional substitution values).</p>
+
+<h2>info</h2>
+
+<code>info(...args)</code>
+
+<ul>
+  <li>
+    <dl>args</dl>
+    <dd>A JavaScript string containing zero or more substitution strings.</dd>
+  </li>
+</ul>
+
+<p>Print messages with the info style. The message may be a single string (with optional substitution values).</p>
+
+<h2>showElement</h2>
+
+<code>showElement(elem)</code>
+
+<ul>
+  <li>
+    <dl>elem</dl>
+    <dd>An HTML element</dd>
+  </li>
+</ul>
+
+<pre>
+    const outputDisplay = document.getElementById("test");
+
+    const p = document.createElement('p');
+    p.innerText = str;
+    p.style.cssText = 'margin: 0.5em; padding: 0em;';
+    
+    outputDisplay.showElement(p);
+ </pre>
+
+</body>
+</html>
