@@ -1,0 +1,179 @@
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Documentation</title>
+  <link href="../../bootstrap.css" rel="stylesheet" type="text/css">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+</head>
+<body style="margin: 10px;">
+
+<h1>Introduction</h1>
+
+Document and key object model classes for automation.
+
+<h2>XcAtDocGeneralRobot</h2>
+
+<h3>constructor</h3>
+
+<pre>
+    <code>
+    constructor({name = `XcAtDocGeneralRobot`,
+            geometryDefinition = null,  
+            matrix = new XcGm3dMatrix(),
+            })
+    </code>
+</pre>
+
+<dl>
+  <dt>geometryDefinition</dt>
+  <dd>the geometry definition of a robot.</dd>
+  <dt>matrix</dt>
+  <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Example:
+<pre><code>
+let defaultRobotGeometryDefinition = [
+    {
+    location: [0,0,0],
+    direction: [0,0,1],
+    type: 'revolute',  //`fix` `prismatic`
+    minValue: -110,
+    maxValue: 77
+    },
+    {
+    location: [0,0.0,0.5],
+    direction: [0,1,0],
+    type: 'revolute',
+    minValue: -110,
+    maxValue: 77
+    },
+    {
+    location: [0.5,0.0,1],
+    direction: [0,0,1],
+    type: 'revolute',
+    minValue: -110,
+    maxValue: 77
+    },
+]
+</code>
+</pre>
+
+<h3>init</h3>
+
+<pre><code>
+init({
+name = `XcAtDocGeneralRobot`,
+geometryDefinition = null,
+matrix = new XcGm3dMatrix(),
+})
+</code></pre>
+
+Example:
+<pre><code>
+const defaultRobotGeometryDefinition = [
+    {
+    location: [0,0,0],
+    direction: [0,0,1],
+    type: 'revolute',  //`fix` `prismatic`
+    minValue: -110,
+    maxValue: 77
+    },
+    {
+    location: [0,0.0,0.5],
+    direction: [0,1,0],
+    type: 'revolute',
+    minValue: -110,
+    maxValue: 77
+    },
+]
+
+const myRobot = new XcAtDocGeneralRobot({name: `myRobot`}）;
+myRobot.init({geometryDefinition: defaultRobotGeometryDefinition}); 
+</code></pre>
+
+Initialize the XcAtDocGeneralRobot object.
+
+<h3>get angles</h3>
+
+<code>get angles()</code>
+
+<h3>set angles</h3>
+
+<code>set angles(angles)</code>
+
+<h3>set geometryDefinition</h3>
+
+<code>set geometryDefinition(geometryDefinition)</code>
+
+<h3>set matrix</h3>
+
+<code>set matrix(matrix)</code>
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+  <dt>return</dt>
+  <dd>XcAtDocGeneralRobot object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>copy</h3>
+
+<code>copy()</code>
+
+<dl>
+  <dt>return</dt>
+  <dd>XcAtDocGeneralRobot object.</dd>
+</dl>
+
+Copy the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+  <dt>return</dt>
+  <dd>Object containing the serialized data.</dd>
+</dl>
+
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+  <dt>data</dt>
+  <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+  <dt>return</dt>
+  <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+  <dt>matrix</dt>
+  <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Documentation</title>
+  <link href="../../../bootstrap.css" rel="stylesheet" type="text/css">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+</head>
+<body style="margin: 10px;">
+
+<h1>Introduction</h1>
+
+Document and key object model classes for 3D modeling.
+
+<h2>Xc3dDocDocument</h2>
+
+<h3>fileVersion</h3>
+
+<code>static fileVersion</code>
+
+<dl>
+<dt>fileVersion</dt> <dd>Integer number representing the document file version.</dd>
+</dl>
+
+<h3>constructor</h3>
+
+<code>constructor({filePath})</code>
+
+<dl>
+<dt>filePath</dt> <dd>String representing file path.</dd>
+</dl>
+
+<h3>renderingScene (getter)</h3>
+
+<code>get renderingScene()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.Scene</dd>
+</dl>
+
+<h3>userData (getter)</h3>
+
+<code>get userData()</code>
+
+<dl>
+<dt>return</dt> <dd>An object containing user data.</dd>
+</dl>
+
+User data is the place to put user-defined data.
+
+<h3>registerDrawableObjectType</h3>
+
+<code>static registerDrawableObjectType({cls})</code>
+
+<dl>
+<dt>cls</dt> <dd>Class object representing the object type.</dd>
+</dl>
+
+Any user-defined model classes need to be registered so that the class objects can be serialized. The name will used as
+the class identifier in the serialized data.
+
+Example:
+
+<pre><code>
+class MyModelingModel extends Xc3dDocDrawableObject {
+  ...
+}
+
+Xc3dDocDocument.registerDrawableObjectType({
+  cls: MyModelingModel
+});
+</code></pre>
+
+<h3>getDrawableObjectClassByType</h3>
+
+<code>static getDrawableObjectClassByType({className})</code>
+
+<dl>
+<dt>className</dt> <dd>String representing class name.</dd>
+<dt>return</dt> <dd>Class object representing the object type.</dd>
+</dl>
+
+<h3>getRenderingObjectFromDrawableObject</h3>
+
+<code>static getRenderingObjectFromDrawableObject({drawableObject})</code>
+
+</dl>
+<dt>drawableObject</dt> <dd>An <code>Xc3dDocDrawableObject object</code></dd>
+<dt>return</dt> <dd>A Three.js Object3D.</dd>
+</dl>
+
+<h3>getDrawableObjectFromRenderingObject</h3>
+
+<code>static getDrawableObjectFromRenderingObject({renderingObject})</code>
+
+<dl>
+<dt>renderingObject</dt> <dd>A Three.js Object3D.</dd>
+<dt>return</dt> <dd>An <code>Xc3dDocDrawableObject object</code></dd>
+</dl>
+
+<h3>getDrawableObjectFromKernelEntity</h3>
+
+<code>static getDrawableObjectFromKernelEntity({kernelEntity})</code>
+
+<h3>getRenderingObjectFromModelingKernelEntity</h3>
+
+<code>static getRenderingObjectFromModelingKernelEntity({kernelEntity})</code>
+
+<h3>getModelingKernelEntityFromRenderingObject</h3>
+
+<code>static getModelingKernelEntityFromRenderingObject({renderingObject})</code>
+
+<h3>generateRenderingForBody</h3>
+
+<pre><code>
+  static generateRenderingForBody({
+                                    body,
+                                    color = null,
+                                    map = null,
+                                    opacity = 1.0,
+                                    transparent = false
+                                  })
+</code></pre>
+
+<h3>generateMeshForFace</h3>
+
+<code>static generateMeshForFace({face, color, map, opacity, transparent})</code>
+
+<h3>generateLineForEdge</h3>
+
+<code>static generateLineForEdge({edge, color})</code>
+
+<h3>generatePointForVertex</h3>
+
+<code>static generatePointForVertex({vertex, color, size = 1})</code>
+
+<h3>load</h3>
+
+<code>static load({json, filePath})</code>
+
+<h3>get drawableObjects</h3>
+
+<code>get drawableObjects()</code>
+
+<h3>get textures</h3>
+
+<code>get textures()</code>
+
+<h3>get undoEnabled</h3>
+
+<code>get undoEnabled()</code>
+
+<h3>set undoEnabled</h3>
+
+<code>set undoEnabled(v)</code>
+
+<h3>cleanRuntimeData</h3>
+
+<code>cleanRuntimeData()</code>
+
+Clean all runtime data, including undo and redo data. This is usually be called whenever there is an excpetion or
+critical error happened in the system.
+
+<h3>addDrawableObject</h3>
+
+<code>addDrawableObject({drawableObject})</code>
+
+<dl>
+<dt>drawableObject</dt> <dd>Xc3dDocDrawableObject objects.</dd>
+<dt>return</dt> <dd>String representing object ID.</dd>
+</dl>
+
+Add a Xc3dDocDrawableObject object to the document.
+
+<h3>removeDrawableObject</h3>
+
+<code>removeDrawableObject({drawableObject})</code>
+
+<dl>
+<dt>drawableObject</dt> <dd>Xc3dDocDrawableObject objects.</dd>
+</dl>
+
+Remove a Xc3dDocDrawableObject object from the document.
+
+<h3>modifyDrawableObject</h3>
+
+<code>modifyDrawableObject({drawableObject})</code>
+
+<dl>
+<dt>drawableObject</dt> <dd>Xc3dDocDrawableObject objects.</dd>
+</dl>
+
+Modify a Xc3dDocDrawableObject object from the document.
+
+<h3>startTransaction</h3>
+
+<code>startTransaction()</code>
+
+Start a transaction.
+
+<h3>endTransaction</h3>
+
+<code>endTransaction()</code>
+
+End a transaction. <code>startTransaction()</code> is supposed to be called previously.
+
+<h3>addTexture</h3>
+
+<code>addTexture({texture})</code>
+
+<dl>
+<dt>texture</dt> <dd>Xc3dDocTexture object.</dd>
+</dl>
+
+Add a texture to the system.
+
+<h3>removeTexture</h3>
+
+<code>removeTexture({texture})</code>
+
+<dl>
+<dt>texture</dt> <dd>Xc3dDocTexture object.</dd>
+</dl>
+
+Remove a texture from the system.
+
+<h3>getObjectID</h3>
+
+<code>getObjectID({object})</code>
+
+<h3>getObjectById</h3>
+
+<code>getObjectById({id})</code>
+
+<h3>queryDrawableObjectsByName</h3>
+
+<code>queryDrawableObjectsByName({name})</code>
+
+<h3>undo</h3>
+
+<code>undo()</code>
+
+Undo the last change in the document.
+
+<h3>redo</h3>
+
+<code>redo()</code>
+
+Redo the last change in the document.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the document data.</dd>
+</dl>
+
+Serialize the document to data.
+
+<h2>Xc3dDocModel</h2>
+
+<code>class Xc3dDocModel extends Xc3dDocDrawableObject</code>
+
+Represent a document model which is built from the XcGm kernel.
+
+<h3>constructor</h3>
+
+<code>constructor({body = null, color = null, name = 'model', texture = null} = {})</code>
+
+<dl>
+<dt>body</dt> <dd>XcGmBody object.</dd>
+<dt>color</dt> <dd>Three.js color object.</dd>
+<dt>name</dt> <dd>String representing name.</dd>
+<dt>texture</dt> <dd>Xc3dDocTexture object.</dd>
+</dl>
+
+<h3>body (getter)</h3>
+
+<code>get body()</code>
+
+<dl>
+<dt>return</dt> <dd>XcGmBody object.</dd>
+</dl>
+
+Get the internal XcGmBody.
+
+<h3>body (setter)</h3>
+
+<code>set body(body)</code>
+
+<dl>
+<dt>body</dt> <dd>XcGmBody object.</dd>
+</dl>
+
+Set the internal XcGmBody.
+
+<h3>getModelFromBody</h3>
+
+<code>static getModelFromBody({body})</code>
+
+<dl>
+<dt>body</dt> <dd>XcGmBody object.</dd>
+<dt>return</dt> <dd>Xc3dDocModel object or undefined if not found.</dd>
+</dl>
+
+Find the Xc3dDocModel object.
+
+<h3>setAttributesFrom</h3>
+
+<code>setAttributesFrom({model})</code>
+
+<dl>
+<dt>model</dt> <dd>Xc3dDocModel object.</dd>
+</dl>
+
+Set the attributes for the object from another Xc3dDocModel object.
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+<dt>return</dt> <dd>Xc3dDocModel object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+<h2>Xc3dDocAnnotation</h2>
+
+<code>class Xc3dDocAnnotation extends Xc3dDocDrawableObject</code>
+
+<h3>constructor</h3>
+
+<code>constructor()</code>
+
+<h3>setAssociatedParts</h3>
+
+<code>setAssociatedParts({associatedParts})</code>
+
+<dl>
+<dt>associatedParts</dt> <dd>Array containing associated parts.</dd>
+</dl>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h2>Xc3dDocConstruction</h2>
+
+<code>class Xc3dDocConstruction extends Xc3dDocDrawableObject</code>
+
+<h3>constructor</h3>
+
+<code>constructor()</code>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<h2>Xc3dDocDrawableObject</h2>
+
+<code>class Xc3dDocDrawableObject</code>
+
+<h3>constructor</h3>
+
+<code>constructor({name = ''} = {})</code>
+
+<dl>
+<dt>name</dt> <dd>String representing name.</dd>
+</dl>
+
+<h3>userData</h3>
+
+<code>get userData()</code>
+
+<dl>
+  <dt>return</dt> <dd>Object containing user data.</dd>
+</dl>
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+<dt>return</dt> <dd>Xc3dDocModel object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+<h2>Xc3dDocExternalDocument</h2>
+
+<code>class Xc3dDocExternalDocument extends Xc3dDocDrawableObject</code>
+
+<h3>constructor</h3>
+
+<code>constructor({filePath, name = 'assembly', matrix = new XcGm3dMatrix()} = {})</code>
+
+<dl>
+<dt>filePath</dt> <dd>String representing file path.</dd>
+<dt>name</dt> <dd>String representing the name.</dd>
+<dt>matrix</dt> <dd>XcGm3dMatrix representing transform.</dd>
+</dl>
+
+<h3>getModelFromAssembly</h3>
+
+<code>static getModelFromAssembly({assembly})</code>
+
+<dl>
+<dt>assembly</dt> <dd>XcGmAssembly object</dd>
+<dt>return</dt> <dd>Xc3dDocExternalDocument object or undefined if not found.</dd>
+</dl>
+
+Find the Xc3dDocExternalDocument object using XcGmAssembly object.
+
+<h3>filePath</h3>
+
+<code>filePath</code> String representing file path.
+
+<h3>matrix</h3>
+
+<code>matrix</code> XcGm3dMatrix representing transform.
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+<dt>return</dt> <dd>Xc3dDocExternalDocument object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+<h2>Xc3dDocLinearDimension</h2>
+
+<code>class Xc3dDocLinearDimension extends Xc3dDocAnnotation</code>
+
+<h3>constructor</h3>
+
+<code>constructor({position1, position2, upVector, height, name = 'linear dimension'})</code>
+
+<h3>setParameters</h3>
+
+<code>setParameters({position1, position2, upVector, height})</code>
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+<dt>return</dt> <dd>Xc3dDocModel object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+<h2>Xc3dDocProgrammableModel</h2>
+
+<code>class Xc3dDocProgrammableModel extends Xc3dDocDrawableObject</code>
+
+<h3>matrix</h3>
+
+<code>matrix</code> XcGm3dMatrix object representing a transform.
+
+<h3>constructor</h3>
+
+<code>constructor({ color = null, name = 'programmable model', texture = null, matrix = null, } = {})</code>
+
+<h3>code (getter)</h3>
+
+<code>get code()</code>
+
+<h3>code (setter)</h3>
+
+<code>set code(code)</code>
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+<dt>return</dt> <dd>Xc3dDocModel object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+<h2>Xc3dDocSTLModel</h2>
+
+<code>class Xc3dDocSTLModel extends Xc3dDocDrawableObject</code>
+
+<h3>constructor</h3>
+
+<pre><code>
+constructor({
+                name = 'stl model',
+                filePath,
+                document,
+                isStaticPath = false,
+                matrix = new XcGm3dMatrix(),
+                color = new THREE.Color('lightslategray'),  
+              })
+</code></pre>
+
+<dl>
+<dt>name</dt> <dd>String representing Xc3dDocSTLModel object's name.</dd>
+<dt>filePath</dt> <dd>String representing file path.</dd>
+<dt>document</dt> <dd>Xc3dDocDocument object representing document for 3D modeling.</dd>
+<dt>isStaticPath</dt> <dd>Boolean representing the path whether static or not.</dd>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing the position and direction of Xc3dDocSTLModel object.</dd>
+<dt>color</dt> <dd>THREE.Color object representing object color, the default color is <code>lightslategray</code>.</dd>
+</dl>
+
+<h3>clone</h3>
+
+<code>clone()</code>
+
+<dl>
+<dt>return</dt> <dd>Xc3dDocExternalDocument object.</dd>
+</dl>
+
+Clone the object.
+
+<h3>save</h3>
+
+<code>save()</code>
+
+<dl>
+<dt>return</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+<h3>load</h3>
+
+<code>load({data})</code>
+
+<dl>
+<dt>data</dt> <dd>Object containing the serialized data.</dd>
+</dl>
+
+Load the serialized data.
+
+<h3>generateRenderingObject</h3>
+
+<code>generateRenderingObject()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D.</dd>
+</dl>
+
+Generate the Three.js Object3D representing the object.
+
+<h3>transformBy</h3>
+
+<code>transformBy({matrix})</code>
+
+<dl>
+<dt>matrix</dt> <dd>XcGm3dMatrix object representing a transform.</dd>
+</dl>
+
+Transform the object using the provided matrix.
+
+</body>
+</html>

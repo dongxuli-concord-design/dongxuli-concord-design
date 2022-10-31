@@ -1,0 +1,824 @@
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Documentation</title>
+  <link href="../../../bootstrap.css" rel="stylesheet" type="text/css">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+</head>
+<body style="margin: 10px;">
+
+<h1>Introduction</h1>
+
+Document classes for 3D modeling
+
+<h2>Xc3dUICommand</h2>
+
+<code>class Xc3dUICommand</code>
+
+A command object
+
+<h3>constructor</h3>
+
+<code>constructor({name, entry, icon = null, help = null, keywords=[]})</code>
+
+<dl>
+<dt>name</dt> <dd>String representing command name.</dd>
+<dt>entry</dt> <dd>Generator function as the entry of the command.</dd>
+<dt>icon</dt> <dd>Path string for the icon file.</dd>
+<dt>help</dt> <dd>Path string for the help document.</dd>
+<dt>keywords</dt> <dd>Array of strings used for command search.</dd>
+</dl>
+
+<h2>Xc3dUIInputState</h2>
+
+<pre><code>
+const Xc3dUIInputState = {
+  eInputNormal: Symbol('eInputNormal'), // User cancelled the input
+  eInputCancel: Symbol('eInputCancel'), // User cancelled the input
+  eInputNone: Symbol('eInputNone'), // User input nothing and return (click the Done button directly)
+};
+</code></pre>
+  
+<h2>Xc3dUIParser</h2>
+
+<code>class Xc3dUIParser</code>
+
+<h3>parseInteger</h3>
+
+<code>static parseInteger({string})</code>
+
+<dl>
+<dt>string</dt> <dd>String to be parsed.</dd>
+<dt>return</dt> <dd>Integer number.</dd>
+</dl>
+
+This function will parse a string to an integer number. This function will throw exception when the string cannot be parsed correctly.
+
+<h3>parseFloat</h3>
+
+<code>static parseFloat({string})</code>
+
+<dl>
+<dt>string</dt> <dd>String to be parsed.</dd>
+<dt>return</dt> <dd>Float number.</dd>
+</dl>
+
+This function will parse a string to an float number. This function will throw exception when the string cannot be parsed correctly.
+
+<h3>parseDistance</h3>
+
+<code>static parseDistance({string})</code>
+
+<dl>
+<dt>string</dt> <dd>String to be parsed.</dd>
+<dt>return</dt> <dd>Float number representing a distance.</dd>
+</dl>
+
+This function will parse a string to an float number. This function will throw exception when the string cannot be parsed correctly.
+
+<h3>parsePosition</h3>
+
+<code>static parsePosition({string})</code>
+
+<dl>
+<dt>string</dt> <dd>String to be parsed.</dd>
+<dt>return</dt> <dd>XcGm3dPosition object.</dd>
+</dl>
+
+This function will parse a string to <code>XcGm3dPosition</code> object. This function will throw exception when the string cannot be parsed correctly.
+
+<h3>parseScreenPosition</h3>
+
+<code>static parseScreenPosition(string)</code>
+
+<dl>
+<dt>string</dt> <dd>String to be parsed.</dd>
+<dt>return</dt> <dd>XcGm2dVector object.</dd>
+</dl>
+
+This function will parse a string to <code>XcGm2dVector</code> object. This function will throw exception when the string cannot be parsed correctly.
+
+<h3>parseVector</h3>
+
+<code>static parseVector(string)</code>
+
+<dl>
+<dt>string</dt> <dd>String to be parsed.</dd>
+<dt>return</dt> <dd>XcGm3dVector object.</dd>
+</dl>
+
+This function will parse a string to <code>XcGm3dVector</code> object. This function will throw exception when the string cannot be parsed correctly.
+
+<h2>Xc3dUIMouseEvent</h2>
+
+<code>class Xc3dUIMouseEvent</code>
+
+<h3>TYPE</h3>
+
+<pre><code>
+  static TYPE = {
+    DOWN: Symbol('DOWN'),
+    UP: Symbol('UP'),
+    ENTER: Symbol('ENTER'),
+    LEAVE: Symbol('LEAVE'),
+    MOVE: Symbol('MOVE')
+  };
+
+</code></pre>
+
+<h3>constructor</h3>
+
+<code>constructor({type, position, which = null})</code>
+
+<h3>type (getter)</h3>
+
+<code>get type()</code>
+
+<h3>which (getter)</h3>
+
+<code>get which()</code>
+
+<h3>position (getter)</h3>
+
+<code>get position()</code>
+
+<h2>Xc3dUITouchEvent</h2>
+
+<h3>TYPE</h3>
+
+<pre><code>
+  static TYPE = {
+    START: Symbol('START'),
+    MOVE: Symbol('MOVE'),
+    END: Symbol('END')
+  };
+</code></pre>
+
+<h3>constructor</h3>
+
+<code>constructor({type, touches, targetTouches, changedTouches})</code>
+
+<h3>type (getter)</h3>
+
+<code>get type()</code>
+
+<h3>touches (getter)</h3>
+
+<code>get touches()</code>
+
+<h3>targetTouches (getter)</h3>
+
+<code>get targetTouches()</code>
+
+<h3>changedTouches (getter)</h3>
+
+<code>get changedTouches()</code>
+
+<h2>Xc3dUIManager</h2>
+
+<h3>renderingFont</h3>
+
+<code>static renderingFont</code>
+
+An <code>THREE.Font</code> object.
+
+<h3>canvas</h3>
+
+<code>static canvas</code>
+
+The canvas element of the application.
+
+<h3>mainScene</h3>
+
+<code>static mainScene</code>
+
+The <code>THREE.Scene</code> object for the main rendering scene of the canvas.
+
+<h3>overlayScene</h3>
+
+<code>static overlayScene</code>
+
+The <code>THREE.Scene</code> object for the overlay scene of the canvas.
+
+<h3>webGLRenderer</h3>
+
+<code>static webGLRenderer</code>
+
+The <code>THREE.WebGLRenderer</code> object for the WebGL render.
+
+<h3>renderingCamera</h3>
+
+<code>static renderingCamera</code>
+
+The <code>THREE.OrthographicCamera</code> object.
+
+<h3>groundPlane</h3>
+
+<code>static groundPlane</code>
+
+The Three.js Object3D representing the ground plane.
+
+<h3>ucsAxesHelper</h3>
+
+<code>static ucsAxesHelper</code>
+
+The Three.js Object3D representing the axes.
+
+<h3>document</h3>
+
+<code>static document</code>
+
+The <code>Xc3dDocDocument</code> object managed by this manager.
+
+<h3>namedViews</h3>
+
+<code>static namedViews</code>
+
+A <code>Map</code> object manages the names and camera views.
+
+<h3>DraggingIntensity</h3>
+
+<pre><code>
+  static DraggingIntensity = {
+    LOW: Symbol('LOW'),
+    MEDIUM: Symbol('MEDIUM'),
+    HIGH: Symbol('HIGH')
+  };
+</code></pre>
+
+<h3>customRenderingObjectGroup</h3>
+
+<code>static customRenderingObjectGroup</code>
+
+<h3>customOverlayRenderingObjectGroup</h3>
+
+<code>static customOverlayRenderingObjectGroup</code>
+
+<h3>highlightsRenderingObjectGroup</h3>
+
+<code>static highlightsRenderingObjectGroup</code>
+
+<h3>ucs (getter)</h3>
+
+<code>static get ucs()</code>
+
+<dl>
+<dt>return</dt> <dd>XcGmCoordinateSystem representing the current user coordinate system.</dd>
+</dl>
+
+<h3>ucs (setter)</h3>
+
+<code>static set ucs(coordinateSystem)</code>
+
+<dl>
+<dt>coordinateSystem</dt> <dd>XcGmCoordinateSystem representing the current user coordinate system.</dd>
+</dl>
+
+<h3>resetUCS</h3>
+
+<code>static resetUCS()</code>
+
+Reset the coordinate system to the default world coordinate system.
+
+<h3>init</h3>
+
+<code>static init()</code>
+
+<h3>resetCamera</h3>
+
+<code>static resetCamera()</code>
+
+Reset the camera to default settings.
+
+<h3>orthogonalizeCamera</h3>
+
+<code>static orthogonalizeCamera()</code>
+
+Orthogonalize the camera.
+
+<h3>zoomCamera</h3>
+
+<code>static zoomCamera({factor})</code>
+
+<dl>
+<dt>factor</dt> <dd>Float number representing the zoom factor, which could less then 1 or greater than 1.</dd>
+</dl>
+
+<h3>zoomExtent</h3>
+
+<code>static zoomExtent()</code>
+
+Zoom the camera to show all objects in the scene.
+
+<h3>panCamera</h3>
+
+<code>static panCamera({panVector})</code>
+
+<dl>
+<dt>panVector</dt> <dd>THREE.Vector2 representing the pan camera vector.</dd>
+</dl>
+
+Pan camera.
+
+<h3>orbitCamera</h3>
+
+<code>static orbitCamera({orbitVector})</code>
+
+<dl>
+<dt>orbitVector</dt> <dd>THREE.Vector2 representing the orbit camera vector.</dd>
+</dl>
+
+<h3>setNamedView</h3>
+
+<code>static setNamedView({name, viewJSONData})</code>
+
+<dl>
+<dt>name</dt> <dd>String representing the view name.</dd>
+<dt>viewJSONData</dt> <dd>JSON object representing view settings, which could get from <code>getCurrentViewJSONData</code>.</dd>
+</dl>
+
+Add named view.
+
+<h3>namedViews</h3>
+
+<code>static get namedViews()</code>
+
+<dl>
+<dt>return</dt> <dd>Return entries of named view map, including the name and the view JSON data.</dd>
+</dl>
+
+<h3>getCurrentViewJSONData</h3>
+
+<code>static getCurrentViewJSONData()</code>
+
+<dl>
+<dt>return</dt> <dd>JSON object representing view settings.</dd>
+</dl>
+
+<h3>deleteNamedView</h3>
+
+<code>static deleteNamedView({name})</code>
+
+<dl>
+<dt>name</dt> <dd>String representing the view name.</dd>
+</dl>
+
+<h3>setCurrentView</h3>
+
+<code>static setCurrentView({name})</code>
+
+<dl>
+<dt>name</dt> <dd>String representing the view name.</dd>
+</dl>
+
+<h3>setViewToLookAtUCS</h3>
+
+<code>static *setViewToLookAtUCS()</code>
+
+Change the view to look at user coordinate system with animation.
+
+<h3>renderingObjectsOfUCS</h3>
+
+<code>static renderingObjectsOfUCS()</code>
+
+<dl>
+<dt>return</dt> <dd>Three.js Object3D representing user coordinate system, including the ground plane and axes.</dd>
+</dl>
+
+<h3>redraw</h3>
+
+<code>static redraw()</code>
+
+Redraw the scene.
+
+<h3>getNumPixelsInUnit</h3>
+
+<code>static getNumPixelsInUnit()</code>
+
+<dl>
+<dt>return</dt> <dd>Integer value.</dd>
+</dl>
+
+Get the number of pixels of one unit in the model space.
+
+<h3>getPositionInNDCFromScreen</h3>
+
+<code>static getPositionInNDCFromScreen({screenPosition})</code>
+
+Get Normalized device coordinate from screen position.
+
+<h3>getUCSPositionFromWorldPosition</h3>
+<code>static getUCSPositionFromWorldPosition({worldPosition})</code>
+
+<dl>
+<dt>worldPosition</dt> <dd>XcGm3dPosition in world coordinate system.</dd>
+<dt>return</dt> <dd>XcGm3dPosition in user coordinate system.</dd>
+</dl>
+
+<h3>getWorldPositionFromUCSPosition</h3>
+
+<code>static getWorldPositionFromUCSPosition({ucsPosition})</code>
+
+<dl>
+<dt>ucsPosition</dt> <dd>XcGm3dPosition in user coordinate system.</dd>
+<dt>return</dt> <dd>XcGm3dPosition in world coordinate system.</dd>
+</dl>
+
+<h3>getPositionInScreenFromWorld</h3>
+
+<code>static getPositionInScreenFromWorld({worldPosition})</code>
+
+<dl>
+<dt>worldPosition</dt> <dd>XcGm3dPosition in world coordinate system.</dd>
+<dt>return</dt> <dd>XcGm2dPosition in screen coordinate system.</dd>
+</dl>
+
+<h3>getPositionWorldFromScreen</h3>
+
+<pre><code>
+static getPositionWorldFromScreen({
+                                       screenPosition,
+                                       depth = XcGm3dPosition.fromThreeVector3({threeVector3: Xc3dUIManager.renderingCamera.position}).distanceToPosition({position: Xc3dUIManager.renderingCameraTarget})
+                                     })
+</code></pre>
+  
+<dl>
+<dt>screenPosition</dt> <dd>XcGm2DPosition in screen coordinate system.</dd>
+<dt>depth</dt> <dd>Float number representing the depth from the view point.</dd>
+<dt>return</dt> <dd>XcGm3dPosition in world coordinate system.</dd>
+</dl>
+
+<h3>pick</h3>
+
+<pre><code>
+static pick({
+                screenPosition,
+                targetRenderingObjects
+    })
+</code></pre>
+
+<dl>
+<dt>screenPosition</dt> <dd>XcGm2DPosition in screen coordinate system.</dd>
+<dt>targetRenderingObjects</dt> <dd>Array of Three.Object3D objects.</dd>
+<dt>return</dt> <dd>Array of picking object in {renderingObject, position} form.</dd>
+</dl>
+
+<h3>showUCSGrid</h3>
+
+<code>static showUCSGrid()</code>
+
+<h3>hideUCSGrid</h3>
+
+<code>static hideUCSGrid()</code>
+
+<h3>toggleUCSGrid</h3>
+
+<code>static toggleUCSGrid()</code>
+
+<h3>computerScreenPositionFromMouseCoordinates</h3>
+
+<code>static computerScreenPositionFromMouseCoordinates({clientX, clientY})</code>
+
+<dl>
+<dt>clientX</dt> <dd>Integer number representing <code>x</code> coordinate of the mouse position.</dd>
+<dt>clientY</dt> <dd>Integer number representing <code>y</code> coordinate of the mouse position.</dd>
+<dt>return</dt> <dd>XcGm2dPosition in screen coordinate system.</dd>
+</dl>
+
+<h3>showDrawableObject</h3>
+
+<code>static showDrawableObject({drawableObject})</code>
+
+<h3>hideDrawableObject</h3>
+
+<code>static hideDrawableObject({drawableObject})</code>
+
+<h3>computeDraggingInterval</h3>
+
+<code>static computeDraggingInterval({draggingIntensity})</code>
+
+<dl>
+<dt>draggingIntensity</dt> <dd>Xc3dUIManager.DraggingIntensity.LOW, Xc3dUIManager.DraggingIntensity.MEDIUM, or Xc3dUIManager.DraggingIntensity.HIGH</dd>
+<dt>return</dt> <dd>Time to delay in milliseconds.</dd>
+</dl>
+
+<h3>generateHighlightingRenderingObject</h3>
+
+<code>static generateHighlightingRenderingObject({renderingObject})</code>
+
+<h3>addCustomRenderingObject</h3>
+
+<code>static addCustomRenderingObject({renderingObject})</code>
+
+<h3>removeCustomRenderingObject</h3>
+
+<code>static removeCustomRenderingObject({renderingObject})</code>
+
+<h3>clearCustomRenderingObjects</h3>
+
+<code>static clearCustomRenderingObjects()</code>
+
+<h3>addCustomOverlayRenderingObject</h3>
+
+<code>static addCustomOverlayRenderingObject({renderingObject})</code>
+
+<h3>removeCustomOverlayRenderingObject</h3>
+
+<code>static removeCustomOverlayRenderingObject({renderingObject})</code>
+
+<h3>clearCustomOverlayRenderingObjects</h3>
+
+<code>static clearCustomOverlayRenderingObjects()</code>
+
+<h3>computeStandardValueFromValueWithUnit</h3>
+
+<pre><code>
+  static computeStandardValueFromValueWithUnit({
+                            value,
+                            unit = Xc3dUIConfig.unit
+                          })
+</code></pre>
+
+<dl>
+<dt>value</dt> <dd>Float number representing unitless value.</dd>
+<dt>unit</dt> <dd>String representing unit.</dd>
+<dt>return</dt> <dd>Return unitless value.</dd>
+</dl>
+
+<h3>computeValueWithUnitFromStandardValue</h3>
+
+<pre><code>
+  static computeValueWithUnitFromStandardValue({
+                        value,
+                        unit = Xc3dUIConfig.unit
+                      } = {})
+</code></pre>
+
+<dl>
+<dt>value</dt> <dd>Float number representing unitless value.</dd>
+<dt>unit</dt> <dd>String representing unit.</dd>
+<dt>return</dt> <dd>Return value under the given unit.</dd>
+</dl>
+
+<h3>generateTextLabel</h3>
+
+<code>static generateTextLabel({text, position, size = 0.1, height = 0.01, color = 0x000000} = {})</code>
+
+<dl>
+<dt>text</dt> <dd>String representing the text.</dd>
+<dt>position</dt> <dd>XcGm2dPosition object representing position on screen.</dd>
+<dt>size</dt> <dd>Float number representing size.</dd>
+<dt>height</dt> <dd>Float number representing height.</dd>
+<dt>color</dt> <dd>Three.Color in HEX or color name.</dd>
+<dt>return</dt> <dd>Return Three Object3D representing text label.</dd>
+</dl>
+
+<h3>getAngle</h3>
+
+<pre><code>
+Xc3dUIManager.getAngle = function* ({
+                                              prompt,
+                                              allowReturnNull = false,
+                                              draggingCallback = null,
+                                              draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM
+                                            })
+</code></pre>
+
+<h3>getAxis</h3>
+
+<pre><code>
+Xc3dUIManager.getAxis = function* ({
+                                             prompt,
+                                             allowReturnNull = false,
+                                             draggingCallback = null,
+                                             draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM
+                                           })
+</code></pre>
+
+<h3>getChoice</h3>
+
+<code>Xc3dUIManager.getChoice = function* ({prompt, choices, allowReturnNull = false})</code>
+
+<h3>getCommand</h3>
+
+<code>Xc3dUIManager.getCommand = function* ({prompt, commands, showCanvasElement = true})</code>
+
+<h3>getDialog</h3>
+
+<code>Xc3dUIManager.getDialog = function* ({prompt, dialog, allowReturnNull = false})</code>
+
+<h3>getDirection</h3>
+
+<pre><code>
+Xc3dUIManager.getDirection = function* ({
+                                                  prompt,
+                                                  allowReturnNull = false,
+                                                  draggingCallback = null,
+                                                  draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM
+                                                })
+</code></pre>
+
+<h3>getDistance</h3>
+
+<pre><code>
+Xc3dUIManager.getDistance = function* ({
+                                                 prompt,
+                                                 allowReturnNull = false,
+                                                 draggingCallback = null,
+                                                 draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM
+                                               })
+</code></pre>
+
+<h3>getDrawableObject</h3>
+
+<pre><code>
+Xc3dUIManager.getDrawableObject = function* ({
+                                                       prompt,
+                                                       allowReturnNull = false,
+                                                       filter = [Xc3dDocDrawableObject]
+                                                     })
+</code></pre>
+
+<h3>getFaceEdgeVertex</h3>
+
+<pre><code>
+Xc3dUIManager.getFaceEdgeVertex = function* ({
+                                                       prompt,
+                                                       allowReturnNull = false,
+                                                       targetRenderingObjects = [Xc3dUIManager.document.renderingScene],
+                                                       type = Xc3dUIManager.PICK_TYPE.VERTEX | Xc3dUIManager.PICK_TYPE.EDGE | Xc3dUIManager.PICK_TYPE.FACE,
+                                                     })
+</code></pre>
+
+<h3>getFloat</h3>
+
+<pre><code>
+Xc3dUIManager.getFloat = function* ({
+                                              prompt,
+                                              allowReturnNull = false
+                                            })
+</code></pre>
+
+<h3>getInteger</h3>
+
+<pre><code>
+Xc3dUIManager.getInteger = function* ({
+                                                prompt,
+                                                allowReturnNull = false
+                                              })
+</code></pre>
+
+<h3>getPosition</h3>
+
+<pre><code>
+Xc3dUIManager.getPosition = function* ({
+                                                 prompt,
+                                                 allowReturnNull = false,
+                                                 basePosition = null,
+                                                 mouseIndicator = Xc3dUIMouseEvent.TYPE.UP,
+                                                 touchIndicator = Xc3dUITouchEvent.TYPE.END,
+                                                 draggingCallback = null,
+                                                 draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM,
+                                                 objectSnapMode = true,
+                                               })
+</code></pre>
+
+<h3>getScreenPosition</h3>
+
+<pre><code>
+Xc3dUIManager.getScreenPosition = function* ({
+                                                       prompt,
+                                                       allowReturnNull = false,
+                                                       mouseIndicator = Xc3dUIMouseEvent.TYPE.UP,
+                                                       touchIndicator = Xc3dUITouchEvent.TYPE.END,
+                                                       depth = Xc3dUIManager.renderingCamera.position.distanceTo(new THREE.Vector3(0, 0, 0)),
+                                                       draggingCallback = null,
+                                                       draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM
+                                                     })
+</code></pre>
+
+<h3>getString</h3>
+
+<pre><code>
+Xc3dUIManager.getString = function* ({
+                                               prompt,
+                                               allowReturnNull = false
+                                             })
+</code></pre>
+
+<h3>getTransform</h3>
+
+<pre><code>
+Xc3dUIManager.getTransform = function* ({
+                                                  prompt,
+                                                  coordinateSystem,
+                                                  mouseIndicator = Xc3dUIMouseEvent.TYPE.UP,
+                                                  draggingCallback = null,
+                                                  draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM,
+                                                  needTranslation = true,
+                                                  needRotation = true,
+                                                  needScale = true
+                                                })
+</code></pre>
+
+<h2>Xc3dUIAnimation</h2>
+
+Animation API
+
+Example:
+
+Code to create models:
+
+<pre><code>
+Xc3dUIGetObject.inputObject = function() {
+  const model1 = new XcAtDocBlock({
+    name: '1', x: 0.2, y: 0.6, z: 0.6,
+    coordinateSystem: new XcGmCoordinateSystem({origin: new XcGm3dPosition({x: 0.2, y: 0.5, z: 0})}),
+    color: new THREE.Color('red')
+  });
+
+  const model2 = new XcAtDocBlock({
+    name: '2', x: 0.2, y: 0.6, z: 0.6,
+    coordinateSystem: new XcGmCoordinateSystem({origin: new XcGm3dPosition({x: -0.2, y: -0.5, z: 0})}),
+    color: new THREE.Color('skyblue')
+  });
+
+  const model3 = new XcAtDocMixerTest({name: '3', position: new XcGm3dPosition()});
+
+  return [model1, model2, model3];
+}
+</code></pre>
+  
+Code to run animation:
+
+<pre><code>
+Xc3dUIGetObject.inputObject = function* () {
+  Xc3dUIManager.document.undoEnabled = false;
+  
+  const drawableObject1 = Xc3dUIManager.document.queryDrawableObjectsByName({name: '1'})[0];
+  const drawableObject2 = Xc3dUIManager.document.queryDrawableObjectsByName({name: '2'})[0];
+  const drawableObject3 = Xc3dUIManager.document.queryDrawableObjectsByName({name: '3'})[0];
+
+  yield* Xc3dUIAnimation.runParallelAnimations({
+    actions: [
+      Xc3dUIAnimation.rotate({drawableObject: drawableObject2, angle: 720, axis: new XcGm3dAxis({position: new XcGm3dPosition(), direction: new XcGm3dVector({x: 0, y: 0, z: 1})}), duration: 2000}),
+      Xc3dUIAnimation.runCustomAction({action: drawableObject3.dance10times()}),
+    ]
+  });
+
+  Xc3dUIManager.document.undoEnabled = true;
+};
+</code></pre>
+
+<h3>StopEvent</h3>
+
+<code>static StopEvent = Symbol('StopEvent');</code>
+
+<h3>animationDelay</h3>
+
+By default, animations will be run at 24 fps.
+
+<code>static animationDelay = (1.0 / 24.0) * 1000; </code>
+
+<h3>runParallelAnimations</h3>
+
+<code>static* runParallelAnimations({actions})</code>
+
+<h3>runSerialAnimations</h3>
+
+<code>static* runSerialAnimations({actions})</code>
+
+<h3>setView</h3>
+
+<code>static* setView({name})</code>
+
+<h3>orbitView</h3>
+
+<code>static* orbitView({vector, duration})</code>
+
+<h3>panView</h3>
+
+<code>static* panView({vector, duration})</code>
+
+<h3>zoomView</h3>
+
+<code>static* zoomView({factor, duration})</code>
+
+<h3>translate</h3>
+
+<code>static* translate({drawableObject, distance, direction, duration})</code>
+
+<h3>rotate</h3>
+
+<code>static* rotate({drawableObject, angle, axis, duration})</code>
+
+<h3>transparentize</h3>
+
+<code>static* transparentize({drawableObject, start, end, duration})</code>
+
+<h3>runCustomAction</h3>
+
+<code>static* runCustomAction({action})</code>
+
+</body>
+</html>

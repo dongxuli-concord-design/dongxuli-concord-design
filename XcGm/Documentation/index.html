@@ -8,325 +8,287 @@
 <body style="margin: 10px;">
 
 <h1>Introduction</h1>
-<p>Geometric modeling library</p>
+Geometric modeling library
 
-<h1>XcGmAssert</h1>
-<p><code>function XcGmAssert({assertion, message = 'Unknown'})</code></p>
+<h2>XcGmAssert</h2>
+<code>function XcGmAssert({assertion, message = 'Unknown'})</code>
 
-<h1>XcGm2dPosition</h1>
-<p><code>class XcGm2dPosition</code></p>
-<p>Represents a 2D position.</p>
+<h2>XcGm2dPosition</h2>
+<code>class XcGm2dPosition</code>
 
-<h2>constructor</h2>
-<p><code>constructor({x = 0.0, y = 0.0} = {})</code></p>
+Represents a 2D position.
+
+<h3>constructor</h3>
+<code>constructor({x = 0.0, y = 0.0} = {})</code>
+
 <dl>
-
   <dt>x</dt>
   <dd>A floating number representing X coordinate.</dd>
-
-
   <dt>y</dt>
   <dd>A floating number representing Y coordinate.</dd>
-
 </dl>
 
-<h2>fromArray</h2>
-<p><code>static fromArray({array})</code></p>
-<dl>
+<h3>fromArray</h3>
+<code>static fromArray({array})</code>
 
+<dl>
   <dt>array</dt>
   <dd>Array in the <code>[x, y]</code> form.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm2dPosition</code> object</dd>
-
 </dl>
-<p>Constructs a XcGm2dPosition object from an array.</p>
+Constructs a XcGm2dPosition object from an array.
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
+
 <dl>
-
   <dt>json</dt>
   <dd>json object in the <code>{x, y}</code> form.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm2dPosition</code> object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm2dPosition</code> object from a json object.</p>
+Constructs a <code>XcGm2dPosition</code> object from a json object.
 
-<h2>fromThreeVector2</h2>
-<p><code>static fromThreeVector2({threeVector2})</code></p>
+<h3>fromThreeVector2</h3>
+<code>static fromThreeVector2({threeVector2})</code>
+
 <dl>
-
   <dt>threeVector2</dt>
   <dd>Three.js Vector2 object.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm2dPosition object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm2dPosition</code> object from a Three.js Vector2 object.</p>
+Constructs a <code>XcGm2dPosition</code> object from a Three.js Vector2 object.
 
-<h2>toThreeVector2</h2>
-<p><code>toThreeVector2</code></p>
+<h3>toThreeVector2</h3>
+<code>toThreeVector2</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>Three.js Vector2 object</dd>
-
 </dl>
-<p>Constructs a Three.js Vector2 object from this <code>XcGm2dPosition</code> object.</p>
+Constructs a Three.js Vector2 object from this <code>XcGm2dPosition</code> object.
 
-<h2>toString</h2>
-<p><code>toString()</code></p>
+<h3>toString</h3>
+<code>toString()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>String representation of the object.</dd>
-
 </dl>
 
-<h2>toArray</h2>
-<p><code>toArray()</code></p>
-<dl>
+<h3>toArray</h3>
+<code>toArray()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Array representation of the object.</dd>
-
 </dl>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
-<dl>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Json representation of the object.</dd>
-
 </dl>
 
-<h2>clone</h2>
-<p><code>clone()</code></p>
-<dl>
+<h3>clone</h3>
+<code>clone()</code>
 
+<dl>
   <dt>return</dt>
   <dd>XcGm2dPosition which is cloned from the object.</dd>
-
 </dl>
 
-<h2>copy</h2>
-<p><code>copy({position})</code></p>
-<dl>
+<h3>copy</h3>
+<code>copy({position})</code>
 
+<dl>
   <dt>position</dt>
   <dd>Another XcGm2dPosition object.</dd>
-
 </dl>
-<p>Set the object value from another <code>XcGm2dPosition</code> object.</p>
+Set the object value from another <code>XcGm2dPosition</code> object.
 
-<h1>XcGm2dVector</h1>
-<p><code>class XcGm2dVector</code></p>
-<p>Represents a 2D vector.</p>
+<h2>XcGm2dVector</h2>
+<code>class XcGm2dVector</code>
 
-<h2>constructor</h2>
-<p><code>constructor({x = 0.0, y = 0.0} = {})</code></p>
+Represents a 2D vector.
+
+<h3>constructor</h3>
+<code>constructor({x = 0.0, y = 0.0} = {})</code>
+
 <dl>
-
   <dt>x</dt>
   <dd>A floating number representing X coordinate.</dd>
-
-
   <dt>y</dt>
   <dd>A floating number representing Y coordinate.</dd>
-
 </dl>
 
-<h2>fromArray</h2>
-<p><code>static fromArray({array})</code></p>
-<dl>
+<h3>fromArray</h3>
+<code>static fromArray({array})</code>
 
+<dl>
   <dt>array</dt>
   <dd>Array in the <code>[x, y]</code> form.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm2dVector object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm2dVector</code> object from an array.</p>
+Constructs a <code>XcGm2dVector</code> object from an array.
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
+
 <dl>
-
   <dt>json</dt>
   <dd>json object in the <code>{x, y}</code> form.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm2dVector object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm2dVector</code> object from a json object.</p>
+Constructs a <code>XcGm2dVector</code> object from a json object.
 
-<h2>fromThreeVector2</h2>
-<p><code>static fromThreeVector2({threeVector2})</code></p>
+<h3>fromThreeVector2</h3>
+<code>static fromThreeVector2({threeVector2})</code>
+
 <dl>
-
   <dt>threeVector2</dt>
   <dd>Three.js Vector2 object.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm2dVector object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm2dVector</code> object from a Three.js Vector2 object.</p>
+Constructs a <code>XcGm2dVector</code> object from a Three.js Vector2 object.
 
-<h2>toThreeVector2</h2>
-<p><code>toThreeVector2</code></p>
+<h3>toThreeVector2</h3>
+<code>toThreeVector2</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>Three.js Vector2 object</dd>
-
 </dl>
-<p>Constructs a Three.js Vector2 object from this <code>XcGm2dVector</code> object.</p>
+Constructs a Three.js Vector2 object from this <code>XcGm2dVector</code> object.
 
-<h2>toString</h2>
-<p><code>toString()</code></p>
+<h3>toString</h3>
+<code>toString()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>String representation of the object.</dd>
-
 </dl>
 
-<h2>toArray</h2>
-<p><code>toArray()</code></p>
-<dl>
+<h3>toArray</h3>
+<code>toArray()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Array representation of the object.</dd>
-
 </dl>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
-<dl>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Json representation of the object.</dd>
-
 </dl>
 
-<h2>clone</h2>
-<p><code>clone()</code></p>
-<dl>
+<h3>clone</h3>
+<code>clone()</code>
 
+<dl>
   <dt>return</dt>
   <dd><code>XcGm2dVector</code> object which is cloned from the object.</dd>
-
 </dl>
 
-<h2>copy</h2>
-<p><code>copy({vector})</code></p>
-<dl>
+<h3>copy</h3>
+<code>copy({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm2dVector</code> object.</dd>
-
 </dl>
-<p>Set the object value from another <code>XcGm2dVector</code> object.</p>
+Set the object value from another <code>XcGm2dVector</code> object.
 
-<h1>XcGm3dBCurve</h1>
-<p><code>class XcGm3dCurve extends XcGmGeometry</code></p>
-<p>Represents 3D BCurve.</p>
+<h2>XcGm3dBCurve</h2>
+<code>class XcGm3dCurve extends XcGmGeometry</code>
 
-<h1>XcGm2dAxis</h1>
-<p><code>class XcGm2dAxis</code></p>
+Represents 3D BCurve.
 
-<h2>position</h2>
-<p><code>position</code></p>
-<p>XcGm2dPosition object</p>
+<h2>XcGm2dAxis</h2>
+<code>class XcGm2dAxis</code>
 
-<h2>direction</h2>
-<p><code>direction</code></p>
-<p>XcGm2dVector object</p>
+<h3>position</h3>
+<code>position</code>
 
-<h2>constructor</h2>
+XcGm2dPosition object
+
+<h3>direction</h3>
+<code>direction</code>
+
+XcGm2dVector object
+
+<h3>constructor</h3>
 <pre><code>constructor({
                 position = new XcGm2dPosition(),
                 direction = new XcGm2dVector({x: 0, y: 0, z: 1})
               } = {})
 </code></pre>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>fromJSON({json})</code>
 
-<h1>XcGm3dCircle</h1>
-<p><code>class XcGm3dCircle extends XcGm3dCurve</code></p>
+<h2>XcGm3dCircle</h2>
+<code>class XcGm3dCircle extends XcGm3dCurve</code>
 
-<h2>radius</h2>
-<p><code>get radius()</code></p>
+<h3>radius</h3>
+<code>get radius()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>Return the radius value.</dd>
-
 </dl>
-<p>Return the radius of the object.</p>
+Return the radius of the object.
 
-<h2>XcGmEulerAngles</h2>
-<p>// TODO</p>
+<h3>XcGmEulerAngles</h3>
+// TODO
 
-<h2>coordinateSystem</h2>
-<p><code>get coordinateSystem()</code></p>
+<h3>coordinateSystem</h3>
+<code>get coordinateSystem()</code>
 
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGmCoordinateSystem</code> object.</dd>
-
 </dl>
+Return <code>XcGmCoordinateSystem</code> object of the object.
 
-<p>Return <code>XcGmCoordinateSystem</code> object of the object.</p>
+<h3>create</h3>
+<code>static create({radius, coordinateSystem})</code>
 
-<h2>create</h2>
-<p><code>static create({radius, coordinateSystem})</code></p>
 <dl>
-
   <dt>radius</dt>
   <dd>Radius value.</dd>
-
-
   <dt>coordinateSystem</dt>
   <dd>XcGmCoordinateSystem object of the object.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm3dCircle object</dd>
-
 </dl>
-<p>Create a XcGm3dCircle object from provided radius and coordinate system.</p>
+Create a XcGm3dCircle object from provided radius and coordinate system.
 
-<h1>XcGm3dEllipse</h1>
-<p><code>class XcGm3dEllipse extends XcGm3dCurve</code></p>
-<p>Represents a 3D Ellipse.</p>
+<h2>XcGm3dEllipse</h2>
+<code>class XcGm3dEllipse extends XcGm3dCurve</code>
 
-<h1>XcGm3dCurve</h1>
-<p><code>class XcGm3dCurve extends XcGmGeometry</code></p>
+Represents a 3D Ellipse.
 
-<h2>makeWireBodyFromCurves</h2>
-<p><code>static makeWireBodyFromCurves({curves, bounds})</code></p>
-<p>Example</p>
+<h2>XcGm3dCurve</h2>
+<code>class XcGm3dCurve extends XcGmGeometry</code>
+
+<h3>makeWireBodyFromCurves</h3>
+<code>static makeWireBodyFromCurves({curves, bounds})</code>
+
+Example
 <pre><code>      let position = new XcGm3dPosition();
       let direction = new XcGm3dVector({x: 1, y: 1, z: 0});
       let axis = new XcGm3dAxis({position, direction});
@@ -335,1337 +297,1141 @@
       let {wire} = XcGm3dCurve.makeWireBodyFromCurves({curves: [line], bounds: [bound]});
 </code></pre>
 
-<h1>XcGm3dLine</h1>
-<p><code>class XcGm3dLine extends XcGm3dCurve</code></p>
-<p>Represents a 3D line.</p>
+<h2>XcGm3dLine</h2>
+<code>class XcGm3dLine extends XcGm3dCurve</code>
 
-<h2>axis</h2>
-<p><code>get axis()</code></p>
+Represents a 3D line.
+
+<h3>axis</h3>
+<code>get axis()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dAxis</code> object representing the axis of the 3D line.</dd>
-
 </dl>
-<p>Get the axis of the 3D line.</p>
+Get the axis of the 3D line.
 
-<h2>create</h2>
-<p><code>static create({axis})</code></p>
+<h3>create</h3>
+<code>static create({axis})</code>
+
 <dl>
-
   <dt>axis</dt>
   <dd><code>XcGm3dAxis</code> object representing the axis of the 3D line.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm3dLine</code> object.</dd>
-
 </dl>
-<p>Creates a XcGm3dLine object from the provided axis.</p>
+Creates a XcGm3dLine object from the provided axis.
 
-<h1>XcGm3dMatrix</h1>
-<p><code>class XcGm3dMatrix</code></p>
-<p>Represents a 3D matrix, which is a 4 by 4 matrix.</p>
+<h2>XcGm3dMatrix</h2>
+<code>class XcGm3dMatrix</code>
 
-<h2>identity</h2>
-<p><code>static get identity()</code></p>
+Represents a 3D matrix, which is a 4 by 4 matrix.
+
+<h3>identity</h3>
+<code>static get identity()</code>
+
 <dl>
-  *<em>return</em> XcGm3dMatrix object</dd>
-</dl>
-<p>Constructs a 4 by 4 identity matrix.</p>
-
-<h2>fromArray</h2>
-<p><code>static fromArray({array})</code></p>
-<dl>
-
-  <dt>array</dt>
-  <dd>Array representation of the matrix.</dd>
-
-  *<em>return</em> XcGm3dMatrix object.</dd>
-</dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object from the array representation.</p>
-
-<h2>multiply</h2>
-<p><code>static multiply({matrix1, matrix2})</code></p>
-<dl>
-
-  <dt>matrix1</dt>
-  <dd>First matrix.</dd>
-
-
-  <dt>matrix2</dt>
-  <dd>Second matrix.</dd>
-
-  *<em>return</em> XcGm3dMatrix object</dd>
-</dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object from <code>matrix1 x matrix2</code>.</p>
-
-<h2>translationMatrix</h2>
-<p><code>static translationMatrix({vector})</code></p>
-<dl>
-
-  <dt>vector</dt>
-  <dd>XcGm3dVector object.</dd>
-
-  *<em>return</em> XcGm3dMatrix object</dd>
-</dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object representing a translation.</p>
-
-<h2>rotationMatrix</h2>
-<p><code>static rotationMatrix({angle, axis})</code></p>
-<dl>
-
-  <dt>angle</dt>
-  <dd>A floating point number representing rotation angle.</dd>
-
-
-  <dt>axis</dt>
-  <dd>XcGm3dAxis representing rotation axis.</dd>
-
-  *<em>return</em> XcGm3dMatrix object</dd>
-</dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object representing a rotation around an axis.</p>
-
-<h2>scalingMatrix</h2>
-<p><code>static scalingMatrix({scale, center})</code></p>
-<dl>
-
-  <dt>scale</dt>
-  <dd>A floating point number representing scaling factor.</dd>
-
-
-  <dt>center</dt>
-  <dd>XcGm3dPosition representing scale center.</dd>
-
-  *<em>return</em> XcGm3dMatrix object</dd>
-</dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object representing a scale relative to the center.</p>
-
-<h2>mirroringOverPositionMatrix</h2>
-<p><code>static mirroringOverPositionMatrix({position})</code></p>
-<dl>
-
-  <dt>position</dt>
-  <dd>XcGm3dPosition representing mirror position.</dd>
-
-  *<em>return</em> XcGm3dMatrix object</dd>
-</dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object representing a mirror transform relative to the position.</p>
-
-<h2>mirroringOverPlaneMatrix</h2>
-<p><code>static mirroringOverPlaneMatrix({line})</code></p>
-<dl>
-
-  <dt>line</dt>
-  <dd>XcGm3dAxis representing mirror line.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm3dMatrix object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dMatrix</code> object representing a mirror transform relative to the line.</p>
+Constructs a 4 by 4 identity matrix.
 
-<h2>fromThreeMatrix4</h2>
-<p><code>static fromThreeMatrix4({threeMatrix4})</code><br>
-  //TODO</p>
+<h3>fromArray</h3>
+<code>static fromArray({array})</code>
 
-<h2>rotationMatrixFromEulerAngles</h2>
-<p><code>static rotationMatrixFromEulerAngles({eulerAngles})</code></p>
-
-<h2>setToThreeMatrix4</h2>
-<p><code>setToThreeMatrix4({threeMatrix4})</code></p>
-
-<h2>setToRotationMatrixFromEulerAngles</h2>
-<p><code>setToRotationMatrixFromEulerAngles({eulerAngles})</code></p>
-
-<h2>toArray</h2>
-<p><code>toArray()</code></p>
 <dl>
+  <dt>array</dt>
+  <dd>Array representation of the matrix.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object.</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object from the array representation.
 
+<h3>multiply</h3>
+<code>static multiply({matrix1, matrix2})</code>
+
+<dl>
+  <dt>matrix1</dt>
+  <dd>First matrix.</dd>
+  <dt>matrix2</dt>
+  <dd>Second matrix.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object from <code>matrix1 x matrix2</code>.
+
+<h3>translationMatrix</h3>
+<code>static translationMatrix({vector})</code>
+
+<dl>
+  <dt>vector</dt>
+  <dd>XcGm3dVector object.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object representing a translation.
+
+<h3>rotationMatrix</h3>
+<code>static rotationMatrix({angle, axis})</code>
+
+<dl>
+  <dt>angle</dt>
+  <dd>A floating point number representing rotation angle.</dd>
+  <dt>axis</dt>
+  <dd>XcGm3dAxis representing rotation axis.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object representing a rotation around an axis.
+
+<h3>scalingMatrix</h3>
+<code>static scalingMatrix({scale, center})</code>
+
+<dl>
+  <dt>scale</dt>
+  <dd>A floating point number representing scaling factor.</dd>
+  <dt>center</dt>
+  <dd>XcGm3dPosition representing scale center.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object representing a scale relative to the center.
+
+<h3>mirroringOverPositionMatrix</h3>
+<code>static mirroringOverPositionMatrix({position})</code>
+
+<dl>
+  <dt>position</dt>
+  <dd>XcGm3dPosition representing mirror position.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object representing a mirror transform relative to the position.
+
+<h3>mirroringOverPlaneMatrix</h3>
+<code>static mirroringOverPlaneMatrix({line})</code>
+
+<dl>
+  <dt>line</dt>
+  <dd>XcGm3dAxis representing mirror line.</dd>
+  <dt>return</dt>
+  <dd>XcGm3dMatrix object</dd>
+</dl>
+Constructs a <code>XcGm3dMatrix</code> object representing a mirror transform relative to the line.
+
+<h3>fromThreeMatrix4</h3>
+<code>static fromThreeMatrix4({threeMatrix4})</code>
+//TODO
+
+<h3>rotationMatrixFromEulerAngles</h3>
+<code>static rotationMatrixFromEulerAngles({eulerAngles})</code>
+
+<h3>setToThreeMatrix4</h3>
+<code>setToThreeMatrix4({threeMatrix4})</code>
+
+<h3>setToRotationMatrixFromEulerAngles</h3>
+<code>setToRotationMatrixFromEulerAngles({eulerAngles})</code>
+
+<h3>toArray</h3>
+<code>toArray()</code>
+
+<dl>
   <dt>return</dt>
   <dd>Array representation of the object.</dd>
-
 </dl>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
-<dl>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Json representation of the object.</dd>
-
 </dl>
 
-<h2>clone</h2>
-<p><code>clone()</code></p>
-<dl>
+<h3>clone</h3>
+<code>clone()</code>
 
+<dl>
   <dt>return</dt>
   <dd><code>XcGm3dMatrix</code> object which is cloned from the object.</dd>
-
 </dl>
 
-<h2>copy</h2>
-<p><code>copy({matrix})</code></p>
-<dl>
+<h3>copy</h3>
+<code>copy({matrix})</code>
 
+<dl>
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
 </dl>
-<p>Set the object value from another <code>XcGm3dMatrix</code> object.</p>
+Set the object value from another <code>XcGm3dMatrix</code> object.
 
-<h2>get</h2>
-<p><code>get({row, column})</code></p>
+<h3>get</h3>
+<code>get({row, column})</code>
+
 <dl>
-
   <dt>row</dt>
   <dd>Integer number representing the row index.</dd>
-
-
   <dt>column</dt>
   <dd>Integer number representing the column index.</dd>
-
-
   <dt>return</dt>
   <dd>A floating point number representing the matrix element value.</dd>
-
 </dl>
-<p>Get the matrix element value at the <code>[row, column]</code>.</p>
+Get the matrix element value at the <code>[row, column]</code>.
 
-<h2>setToIdentity</h2>
-<p><code>setToIdentity()</code></p>
-<p>Set this matrix to identity.</p>
+<h3>setToIdentity</h3>
+<code>setToIdentity()</code>
 
-<h2>multiplyScalar</h2>
-<p><code>multiplyScalar({scale})</code></p>
+Set this matrix to identity.
+
+<h3>multiplyScalar</h3>
+<code>multiplyScalar({scale})</code>
+
 <dl>
-
   <dt>scale</dt>
   <dd>A floating point number representing scaling factor</dd>
-
 </dl>
-<p>Scale the matrix using the provided factor.</p>
+Scale the matrix using the provided factor.
 
-<h2>multiply</h2>
-<p><code>multiply({matrix})</code></p>
+<h3>multiply</h3>
+<code>multiply({matrix})</code>
+
 <dl>
-
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
 </dl>
-<p>Do this × matrix.</p>
+Do this × matrix.
 
-<h2>preMultiply</h2>
-<p><code>preMultiply({matrix})</code></p>
+<h3>preMultiply</h3>
+<code>preMultiply({matrix})</code>
+
 <dl>
-
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
 </dl>
-<p>Do matrix × this.</p>
+Do matrix × this.
 
-<h2>setToProduct</h2>
-<p><code>setToProduct({matrix1, matrix2})</code></p>
+<h3>setToProduct</h3>
+<code>setToProduct({matrix1, matrix2})</code>
+
 <dl>
-
   <dt>matrix1</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
-
   <dt>matrix2</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
 </dl>
-<p>Set the object value to the product of the provided matrix1 and matrix2.</p>
+Set the object value to the product of the provided matrix1 and matrix2.
 
-<h2>invert</h2>
-<p><code>invert()</code></p>
-<p>Invert this matrix.</p>
+<h3>invert</h3>
+<code>invert()</code>
 
-<h2>inverse</h2>
-<p><code>get inverse()</code></p>
+Invert this matrix.
+
+<h3>inverse</h3>
+<code>get inverse()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
 </dl>
-<p>Return the inverse of this matrix.</p>
+Return the inverse of this matrix.
 
-<h2>isSingular</h2>
-<p><code>isSingular()</code></p>
+<h3>isSingular</h3>
+<code>isSingular()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>Boolean value to indicate if the matrix is singular.</dd>
-
 </dl>
 
-<h2>transpose</h2>
-<p><code>transpose()</code></p>
-<p>Transpose the matrix.</p>
+<h3>transpose</h3>
+<code>transpose()</code>
 
-<h2>transposition</h2>
-<p><code>transposition()</code></p>
+Transpose the matrix.
+
+<h3>transposition</h3>
+<code>transposition()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
 </dl>
-<p>Return the transposition of the object.</p>
+Return the transposition of the object.
 
-<h2>isEqualTo</h2>
-<p><code>isEqualTo({matrix})</code></p>
+<h3>isEqualTo</h3>
+<code>isEqualTo({matrix})</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>Boolean value to indicate if the matrix is equal to the provided matrix.</dd>
-
 </dl>
-<p>Check if this matrix is equal to another matrix.</p>
+Check if this matrix is equal to another matrix.
 
-<h2>determinant</h2>
-<p><code>determinant()</code></p>
+<h3>determinant</h3>
+<code>determinant()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>A floating number representing matrix determinant.</dd>
-
 </dl>
-<p>Calculate the determinant value.</p>
+Calculate the determinant value.
 
-<h2>setTranslationVector</h2>
-<p><code>setTranslationVector({vector})</code></p>
+<h3>setTranslationVector</h3>
+<code>setTranslationVector({vector})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object representing the translation vector.</dd>
-
 </dl>
-<p>Set the translation part values of the matrix.</p>
+Set the translation part values of the matrix.
 
-<h2>translationVector</h2>
-<p><code>translationVector()</code></p>
+<h3>translationVector</h3>
+<code>translationVector()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object representing the translation vector.</dd>
-
 </dl>
-<p>Get the translation part of the matrix.</p>
+Get the translation part of the matrix.
 
-<h2>setToTranslation</h2>
-<p><code>setToTranslation({vector})</code></p>
+<h3>setToTranslation</h3>
+<code>setToTranslation({vector})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object representing the translation vector.</dd>
-
 </dl>
-<p>Set the matrix representing a translation.</p>
+Set the matrix representing a translation.
 
-<h2>setToRotation</h2>
-<p><code>setToRotation({angle, axis})</code></p>
+<h3>setToRotation</h3>
+<code>setToRotation({angle, axis})</code>
+
 <dl>
-
   <dt>angle</dt>
   <dd>A floating number representing the rotation angle.</dd>
-
-
   <dt>axis</dt>
   <dd><code>XcGm3dAxis</code> object representing the rotation axis.</dd>
-
 </dl>
-<p>Set the matrix representing a rotation.</p>
+Set the matrix representing a rotation.
 
-<h2>setToNonUniformScaling</h2>
-<p><code>setToNonUniformScaling({scaleX, scaleY, scaleZ, center})</code></p>
+<h3>setToNonUniformScaling</h3>
+<code>setToNonUniformScaling({scaleX, scaleY, scaleZ, center})</code>
+
 <dl>
-
   <dt>scaleX</dt>
   <dd>A floating number representing the scaling factor on X.</dd>
-
-
   <dt>scaleY</dt>
   <dd>A floating number representing the scaling factor on Y.</dd>
-
-
   <dt>scaleZ</dt>
   <dd>A floating number representing the scaling factor on Z.</dd>
-
-
   <dt>center</dt>
   <dd><code>XcGm3dPosition</code> object representing the scaling center.</dd>
-
 </dl>
-<p>Set the matrix representing a non-uniform scaling.</p>
+Set the matrix representing a non-uniform scaling.
 
-<h2>setToScaling</h2>
-<p><code>setToScaling({scale, center})</code></p>
+<h3>setToScaling</h3>
+<code>setToScaling({scale, center})</code>
+
 <dl>
-
   <dt>scale</dt>
   <dd>A floating number representing the scaling factor.</dd>
-
-
   <dt>center</dt>
   <dd><code>XcGm3dPosition</code> object representing the scaling center.</dd>
-
 </dl>
-<p>Set the matrix representing a uniform scaling.</p>
+Set the matrix representing a uniform scaling.
 
-<h2>toThreeMatrix4</h2>
-<p><code>toThreeMatrix4()</code></p>
+<h3>toThreeMatrix4</h3>
+<code>toThreeMatrix4()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>A Three.js matrix4</dd>
-
 </dl>
-<p>Get the Three.js matrix representation of the object.</p>
+Get the Three.js matrix representation of the object.
 
-<h2>lerpTo</h2>
-<p><code>lerpTo({targetMatrix, scale})</code></p>
+<h3>lerpTo</h3>
+<code>lerpTo({targetMatrix, scale})</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>A linear interpolation of between the current matrix to the target matrix.</dd>
-
-
   <dt>targetMatrix</dt>
   <dd>target matrix</dd>
-
-
   <dt>scale</dt>
   <dd>the interpolation parameter, expected range from 0 to 1, the result is a weighted
-    average.<br>
-    If scale=0, the result is the current matrix;<br>
+    average.
+    If scale=0, the result is the current matrix;
     if scale=1, the result is targetMatrix
   </dd>
-
 </dl>
-<p>linear interpolation of position and orientation. The matrices are assumed to be rigid transform matrices, i.e.
-  rotation<br>
-  and translation only</p>
+linear interpolation of position and orientation. The matrices are assumed to be rigid transform matrices, i.e.
+rotation
+and translation only
 
-<h1>XcGm3dPoint</h1>
-<p><code>class XcGm3dPoint extends XcGmGeometry</code></p>
+<h2>XcGm3dPoint</h2>
+<code>class XcGm3dPoint extends XcGmGeometry</code>
 
-<h2>constructor()</h2>
-<p><code>constructor()</code></p>
+<h3>constructor()</h3>
+<code>constructor()</code>
 
-<h2>position</h2>
-<p><code>get position()</code></p>
+<h3>position</h3>
+<code>get position()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dPosition</code> object of the point object.</dd>
-
 </dl>
-<p>Get the position of the object.</p>
+Get the position of the object.
 
-<h2>part</h2>
-<p><code>get part()</code></p>
+<h3>part</h3>
+<code>get part()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGmPart</code> object of the point object.</dd>
-
 </dl>
-<p>This function returns the part which owns the given point, if there is one, otherwise null.</p>
-<p>The point may either be attached directly to a vertex of a body, or be construction geometry in a part.</p>
+This function returns the part which owns the given point, if there is one, otherwise null.
+The point may either be attached directly to a vertex of a body, or be construction geometry in a part.
 
-<h2>vertex</h2>
-<p><code>get vertex()</code></p>
+<h3>vertex</h3>
+<code>get vertex()</code>
 
-<h2>create</h2>
-<p><code>static create({position})</code></p>
+<h3>create</h3>
+<code>static create({position})</code>
 
-<h2>createMinimumBody</h2>
-<p><code>createMinimumBody()</code></p>
+<h3>createMinimumBody</h3>
+<code>createMinimumBody()</code>
 
-<h1>XcGm3dPosition</h1>
-<p><code>class XcGm3dPosition</code></p>
+<h2>XcGm3dPosition</h2>
+<code>class XcGm3dPosition</code>
 
-<h2>constructor</h2>
-<p><code>constructor({x = 0.0, y = 0.0, z = 0.0} = {})</code></p>
+<h3>constructor</h3>
+<code>constructor({x = 0.0, y = 0.0, z = 0.0} = {})</code>
+
 <dl>
-
   <dt>x</dt>
   <dd>A floating number representing X coordinate.</dd>
-
-
   <dt>y</dt>
   <dd>A floating number representing Y coordinate.</dd>
-
-
   <dt>z</dt>
   <dd>A floating number representing Z coordinate.</dd>
-
 </dl>
 
-<h2>origin</h2>
-<p><code>static get origin()</code></p>
-<dl>
+<h3>origin</h3>
+<code>static get origin()</code>
 
+<dl>
   <dt>return</dt>
   <dd>A new <code>XcGm3dPosition</code> object at the origin.</dd>
-
 </dl>
 
-<h2>fromArray</h2>
-<p><code>static fromArray({array})</code></p>
-<dl>
+<h3>fromArray</h3>
+<code>static fromArray({array})</code>
 
+<dl>
   <dt>array</dt>
   <dd>Array in the <code>[x, y, z]</code> form.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm3dPosition object.</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dPosition</code> object from an array.</p>
+Constructs a <code>XcGm3dPosition</code> object from an array.
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
+
 <dl>
-
   <dt>json</dt>
   <dd>json object in the <code>{x, y}</code> form.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dPosition</code> object from a json object.</p>
+Constructs a <code>XcGm3dPosition</code> object from a json object.
 
-<h2>add</h2>
-<p><code>static add({position, vector})</code></p>
+<h3>add</h3>
+<code>static add({position, vector})</code>
+
 <dl>
-
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>A <code>XcGm3dPosition</code> object representing the <code>position + vector</code>.</dd>
-
 </dl>
 
-<h2>subtract</h2>
-<p><code>static subtract({position, positionOrVector})</code></p>
-<dl>
+<h3>subtract</h3>
+<code>static subtract({position, positionOrVector})</code>
 
+<dl>
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>positionOrVector</dt>
   <dd><code>XcGm3dVector</code> or <code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>A <code>XcGm3dPosition</code> object representing the <code>position -
     positionOrVector</code>.
   </dd>
-
 </dl>
 
-<h2>multiply</h2>
-<p><code>static multiply({position, scale})</code></p>
-<dl>
+<h3>multiply</h3>
+<code>static multiply({position, scale})</code>
 
+<dl>
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
-
   <dt>return</dt>
   <dd>A <code>XcGm3dPosition</code> object representing the <code>position * scale</code>.</dd>
-
 </dl>
 
-<h2>divide</h2>
-<p><code>static divide({position, scale})</code></p>
-<dl>
+<h3>divide</h3>
+<code>static divide({position, scale})</code>
 
+<dl>
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
-
   <dt>return</dt>
   <dd>A <code>XcGm3dPosition</code> object representing the <code>position / scale</code>.</dd>
-
 </dl>
 
-<h2>fromThreeVector3</h2>
-<p><code>static fromThreeVector3({threeVector3})</code></p>
-<dl>
+<h3>fromThreeVector3</h3>
+<code>static fromThreeVector3({threeVector3})</code>
 
+<dl>
   <dt>threeVector3</dt>
   <dd>Three.js Vector3 object.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm3dPosition object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dPosition</code> object from a Three.js Vector3 object.</p>
+Constructs a <code>XcGm3dPosition</code> object from a Three.js Vector3 object.
 
-<h2>toThreeVector3</h2>
-<p><code>toThreeVector3()</code></p>
+<h3>toThreeVector3</h3>
+<code>toThreeVector3()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>Three.js Vector3 object.</dd>
-
 </dl>
-<p>Constructs a Three.js Vector3 object representing the object.</p>
+Constructs a Three.js Vector3 object representing the object.
 
-<h2>toString</h2>
-<p><code>toString()</code></p>
+<h3>toString</h3>
+<code>toString()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>String representation of the object.</dd>
-
 </dl>
 
-<h2>toArray</h2>
-<p><code>toArray()</code></p>
-<dl>
+<h3>toArray</h3>
+<code>toArray()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Array representation of the object.</dd>
-
 </dl>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
-<dl>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Json representation of the object.</dd>
-
 </dl>
 
-<h2>clone</h2>
-<p><code>clone()</code></p>
-<dl>
+<h3>clone</h3>
+<code>clone()</code>
 
+<dl>
   <dt>return</dt>
   <dd><code>XcGm3dPosition</code> object which is cloned from the object.</dd>
-
 </dl>
 
-<h2>copy</h2>
-<p><code>copy({position})</code></p>
-<dl>
+<h3>copy</h3>
+<code>copy({position})</code>
 
+<dl>
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
 </dl>
-<p>Set the object value from another <code>XcGm3dPosition</code> object.</p>
+Set the object value from another <code>XcGm3dPosition</code> object.
 
-<h2>add</h2>
-<p><code>add({vector})</code></p>
+<h3>add</h3>
+<code>add({vector})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Add the object to the given vector.</p>
+Add the object to the given vector.
 
-<h2>subtract</h2>
-<p><code>subtract({positionOrVector})</code></p>
+<h3>subtract</h3>
+<code>subtract({positionOrVector})</code>
+
 <dl>
-
   <dt>positionOrVector</dt>
   <dd><code>XcGm3dVector</code> or <code>XcGm3dPosition</code> object.</dd>
-
 </dl>
-<p>Subtract the object to the given position or vector.</p>
+Subtract the object to the given position or vector.
 
-<h2>multiply</h2>
-<p><code>multiply({scale})</code></p>
+<h3>multiply</h3>
+<code>multiply({scale})</code>
+
 <dl>
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
 </dl>
-<p>Multiply the object to the given scaling factor.</p>
+Multiply the object to the given scaling factor.
 
-<h2>divide</h2>
-<p><code>divide({scale})</code></p>
+<h3>divide</h3>
+<code>divide({scale})</code>
+
 <dl>
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
 </dl>
-<p>Divide the object to the given scaling factor.</p>
+Divide the object to the given scaling factor.
 
-<h2>toVector</h2>
-<p><code>toVector()</code></p>
+<h3>toVector</h3>
+<code>toVector()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object which has the same X/Y/Z values.</dd>
-
 </dl>
 
-<h2>set</h2>
-<p><code>set({x, y, z})</code></p>
-<dl>
+<h3>set</h3>
+<code>set({x, y, z})</code>
 
+<dl>
   <dt>x</dt>
   <dd>A floating number representing X coordinate.</dd>
-
-
   <dt>y</dt>
   <dd>A floating number representing Y coordinate.</dd>
-
-
   <dt>z</dt>
   <dd>A floating number representing Z coordinate.</dd>
-
 </dl>
-<p>Set the object value with the provided values.</p>
+Set the object value with the provided values.
 
-<h2>setToSum</h2>
-<p><code>setToSum({position, vector})</code></p>
+<h3>setToSum</h3>
+<code>setToSum({position, vector})</code>
+
 <dl>
-
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
 
-<h2>setToProduct</h2>
-<p><code>setToProduct({matrix, position})</code></p>
-<dl>
+<h3>setToProduct</h3>
+<code>setToProduct({matrix, position})</code>
 
+<dl>
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
-
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
 </dl>
-<p>Set the object value to the product of the provided matrix and position.</p>
+Set the object value to the product of the provided matrix and position.
 
-<h2>transformBy</h2>
-<p><code>transformBy({matrix})</code></p>
+<h3>transformBy</h3>
+<code>transformBy({matrix})</code>
+
 <dl>
-
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object</dd>
-
 </dl>
-<p>Transform the object with the provided matrix.</p>
+Transform the object with the provided matrix.
 
-<h2>distanceToPosition</h2>
-<p><code>distanceToPosition({position})</code></p>
+<h3>distanceToPosition</h3>
+<code>distanceToPosition({position})</code>
+
 <dl>
-
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-  *<em>return</em> A floating number representing the distance between the object and the provided position.</dd>
-
+  <dt>return</dt>
+  <dd>A floating number representing the distance between the object and the provided position.</dd>
 </dl>
 
-<h2>isEqualTo</h2>
-<p><code>isEqualTo({position})</code></p>
-<dl>
+<h3>isEqualTo</h3>
+<code>isEqualTo({position})</code>
 
+<dl>
   <dt>position</dt>
   <dd><code>XcGm3dPosition</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>Boolean value representing if the object is equal to the provided position.</dd>
-
 </dl>
 
-<h1>XcGm3dVector</h1>
-<p><code>class XcGm3dVector</code></p>
-<p>This class represents a 3D vector.</p>
+<h2>XcGm3dVector</h2>
+<code>class XcGm3dVector</code>
 
-<h2>constructor</h2>
-<p><code>constructor({x = 0.0, y = 0.0, z = 0.0} = {})</code></p>
+This class represents a 3D vector.
+
+<h3>constructor</h3>
+<code>constructor({x = 0.0, y = 0.0, z = 0.0} = {})</code>
+
 <dl>
-
   <dt>x</dt>
   <dd>A floating number representing X coordinate.</dd>
-
-
   <dt>y</dt>
   <dd>A floating number representing Y coordinate.</dd>
-
-
   <dt>z</dt>
   <dd>A floating number representing Z coordinate.</dd>
-
 </dl>
 
-<h2>identity</h2>
-<p><code>static get identity()</code></p>
-<dl>
+<h3>identity</h3>
+<code>static get identity()</code>
 
+<dl>
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> vector.</dd>
-
 </dl>
-<p>Return a new <code>XcGm3dVector({x: 0.0, y: 0.0, z: 0.0})</code>.</p>
+Return a new <code>XcGm3dVector({x: 0.0, y: 0.0, z: 0.0})</code>.
 
-<h2>xAxis</h2>
-<p><code>static get xAxis()</code></p>
+<h3>xAxis</h3>
+<code>static get xAxis()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> vector.</dd>
-
 </dl>
-<p>Return a new XcGm3dVector({x: 1.0, y: 0.0, z: 0.0})</p>
+Return a new XcGm3dVector({x: 1.0, y: 0.0, z: 0.0})
 
-<h2>yAxis</h2>
-<p><code>static get yAxis()</code></p>
+<h3>yAxis</h3>
+<code>static get yAxis()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> vector.</dd>
-
 </dl>
-<p>Return a new XcGm3dVector({x: 0.0, y: 1.0, z: 0.0})</p>
+Return a new XcGm3dVector({x: 0.0, y: 1.0, z: 0.0})
 
-<h2>zAxis</h2>
-<p><code>static get zAxis()</code></p>
+<h3>zAxis</h3>
+<code>static get zAxis()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> vector.</dd>
-
 </dl>
-<p>Return a new XcGm3dVector({x: 0.0, y: 0.0, z: 1.0})</p>
+Return a new XcGm3dVector({x: 0.0, y: 0.0, z: 1.0})
 
-<h2>fromArray</h2>
-<p><code>static fromArray({array})</code></p>
+<h3>fromArray</h3>
+<code>static fromArray({array})</code>
+
 <dl>
-
   <dt>array</dt>
   <dd>Array in the <code>[x, y, z]</code> form.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm#DVector object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dVector</code> object from an array.</p>
+Constructs a <code>XcGm3dVector</code> object from an array.
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
+
 <dl>
-
   <dt>json</dt>
   <dd>json object in the <code>{x, y, z}</code> form.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm3dVector object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dVector</code> object from a json object.</p>
+Constructs a <code>XcGm3dVector</code> object from a json object.
 
-<h2>fromThreeVector3</h2>
-<p><code>static fromThreeVector3({threeVector3})</code></p>
+<h3>fromThreeVector3</h3>
+<code>static fromThreeVector3({threeVector3})</code>
+
 <dl>
-
   <dt>threeVector3</dt>
   <dd>Three.js Vector3 object.</dd>
-
-
   <dt>return</dt>
   <dd>XcGm3dVector object</dd>
-
 </dl>
-<p>Constructs a <code>XcGm3dVector</code> object from a Three.js Vector3 object.</p>
+Constructs a <code>XcGm3dVector</code> object from a Three.js Vector3 object.
 
-<h2>toString</h2>
-<p><code>toString()</code></p>
+<h3>toString</h3>
+<code>toString()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>String representation of the object.</dd>
-
 </dl>
 
-<h2>toArray</h2>
-<p><code>toArray()</code></p>
-<dl>
+<h3>toArray</h3>
+<code>toArray()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Array representation of the object.</dd>
-
 </dl>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
-<dl>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Json representation of the object.</dd>
-
 </dl>
 
-<h2>clone</h2>
-<p><code>clone()</code></p>
-<dl>
+<h3>clone</h3>
+<code>clone()</code>
 
+<dl>
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object which is cloned from the object.</dd>
-
 </dl>
 
-<h2>copy</h2>
-<p><code>copy({vector})</code></p>
-<dl>
+<h3>copy</h3>
+<code>copy({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Set the object value from another <code>XcGm3dVector</code> object.</p>
+Set the object value from another <code>XcGm3dVector</code> object.
 
-<h2>add</h2>
-<p><code>static add({vector1, vector2})</code></p>
+<h3>add</h3>
+<code>static add({vector1, vector2})</code>
+
 <dl>
-
   <dt>vector1</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>vector2</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Get a <code>XcGm3dVector</code> object representing <code>vector1</code> + <code>vector2</code>.</p>
+Get a <code>XcGm3dVector</code> object representing <code>vector1</code> + <code>vector2</code>.
 
-<h2>subtract</h2>
-<p><code>static subtract({vector1, vector2})</code></p>
+<h3>subtract</h3>
+<code>static subtract({vector1, vector2})</code>
+
 <dl>
-
   <dt>vector1</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>vector2</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Get a <code>XcGm3dVector</code> object representing <code>vector1</code> - <code>vector2</code>.</p>
+Get a <code>XcGm3dVector</code> object representing <code>vector1</code> - <code>vector2</code>.
 
-<h2>multiply</h2>
-<p><code>static multiply({vector, scale})</code></p>
+<h3>multiply</h3>
+<code>static multiply({vector, scale})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Get a <code>XcGm3dVector</code> object representing <code>vector * scale</code>.</p>
+Get a <code>XcGm3dVector</code> object representing <code>vector * scale</code>.
 
-<h2>divide</h2>
-<p><code>static divide({vector, scale})</code></p>
+<h3>divide</h3>
+<code>static divide({vector, scale})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Get a <code>XcGm3dVector</code> object representing <code>vector / scale</code>.</p>
+Get a <code>XcGm3dVector</code> object representing <code>vector / scale</code>.
 
-<h2>add</h2>
-<p><code>add({vector})</code></p>
+<h3>add</h3>
+<code>add({vector})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Add the object to the given vector.</p>
+Add the object to the given vector.
 
-<h2>subtract</h2>
-<p><code>subtract({vector})</code></p>
+<h3>subtract</h3>
+<code>subtract({vector})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Subtract the object to the given vector.</p>
+Subtract the object to the given vector.
 
-<h2>multiply</h2>
-<p><code>multiply({scale})</code></p>
+<h3>multiply</h3>
+<code>multiply({scale})</code>
+
 <dl>
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
 </dl>
-<p>Multiply the object to the given scaling factor.</p>
+Multiply the object to the given scaling factor.
 
-<h2>divide</h2>
-<p><code>divide({scale})</code></p>
+<h3>divide</h3>
+<code>divide({scale})</code>
+
 <dl>
-
   <dt>scale</dt>
   <dd>A floating representing scaling factor.</dd>
-
 </dl>
-<p>Divide the object to the given scaling factor.</p>
+Divide the object to the given scaling factor.
 
-<h2>negate</h2>
-<p><code>negate()</code></p>
-<p>Negate the object.</p>
+<h3>negate</h3>
+<code>negate()</code>
 
-<h2>negation</h2>
-<p><code>negation()</code></p>
+Negate the object.
+
+<h3>negation</h3>
+<code>negation()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Get the negation of the object.</p>
+Get the negation of the object.
 
-<h2>lengthSquared</h2>
-<p><code>lengthSquared()</code></p>
+<h3>lengthSquared</h3>
+<code>lengthSquared()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>A floating number representing the length squared.</dd>
-
 </dl>
 
-<h2>dotProduct</h2>
-<p><code>dotProduct({vector})</code></p>
-<dl>
+<h3>dotProduct</h3>
+<code>dotProduct({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>A floating number representing dot product between this object and another vector.</dd>
-
 </dl>
 
-<h2>set</h2>
-<p><code>set({x, y, z})</code></p>
-<dl>
+<h3>set</h3>
+<code>set({x, y, z})</code>
 
+<dl>
   <dt>x</dt>
   <dd>A floating number representing X coordinate.</dd>
-
-
   <dt>y</dt>
   <dd>A floating number representing Y coordinate.</dd>
-
-
   <dt>z</dt>
   <dd>A floating number representing Z coordinate.</dd>
-
 </dl>
-<p>Set the object value with the provided values.</p>
+Set the object value with the provided values.
 
-<h2>setToProduct</h2>
-<p><code>setToProduct({matrix, vector})</code></p>
+<h3>setToProduct</h3>
+<code>setToProduct({matrix, vector})</code>
+
 <dl>
-
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object.</dd>
-
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Set the object value to the product of the provided matrix and vector.</p>
+Set the object value to the product of the provided matrix and vector.
 
-<h2>transformBy</h2>
-<p><code>transformBy({matrix})</code></p>
+<h3>transformBy</h3>
+<code>transformBy({matrix})</code>
+
 <dl>
-
   <dt>matrix</dt>
   <dd><code>XcGm3dMatrix</code> object</dd>
-
 </dl>
-<p>Transform the object with the provided matrix.</p>
+Transform the object with the provided matrix.
 
-<h2>perpendicularVector</h2>
-<p><code>get perpendicularVector()</code></p>
+<h3>perpendicularVector</h3>
+<code>get perpendicularVector()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
 </dl>
-<p>Calculate a perpendicular vector of the vector.</p>
+Calculate a perpendicular vector of the vector.
 
-<h2>angleTo</h2>
-<p><code>angleTo({vector})</code></p>
+<h3>angleTo</h3>
+<code>angleTo({vector})</code>
+
 <dl>
-
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>A floating number representing the angle to the provided vector.</dd>
-
 </dl>
 
-<h2>rotationAngleTo</h2>
-<p><code>rotationAngleTo({vector, axis})</code></p>
-<dl>
+<h3>rotationAngleTo</h3>
+<code>rotationAngleTo({vector, axis})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>axis</dt>
   <dd><code>XcGm3dAxis</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>A floating number representing the angle to the provided vector.</dd>
-
 </dl>
 
-<h2>normal</h2>
-<p><code>get normal()</code></p>
-<dl>
+<h3>normal</h3>
+<code>get normal()</code>
 
+<dl>
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object representing the normal vector of the object.</dd>
-
 </dl>
 
-<h2>normalize</h2>
-<p><code>normalize()</code></p>
-<p>Normalize the object.</p>
+<h3>normalize</h3>
+<code>normalize()</code>
 
-<h2>length</h2>
-<p><code>get length()</code></p>
+Normalize the object.
+
+<h3>length</h3>
+<code>get length()</code>
+
 <dl>
-
   <dt>return</dt>
   <dd>A floating number representing the length of the object.</dd>
-
 </dl>
 
-<h2>isUnitLength</h2>
-<p><code>isUnitLength()</code></p>
-<dl>
+<h3>isUnitLength</h3>
+<code>isUnitLength()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Boolean value to indicate if the object is unit length.</dd>
-
 </dl>
 
-<h2>isZeroLength</h2>
-<p><code>isZeroLength()</code></p>
-<dl>
+<h3>isZeroLength</h3>
+<code>isZeroLength()</code>
 
+<dl>
   <dt>return</dt>
   <dd>Boolean value to indicate if the object is zero length.</dd>
-
 </dl>
 
-<h2>isParallelTo</h2>
-<p><code>isParallelTo({vector})</code></p>
-<dl>
+<h3>isParallelTo</h3>
+<code>isParallelTo({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object to check.</dd>
-
-
   <dt>return</dt>
   <dd>Boolean value to indicate if the object is parallel to the given vector.</dd>
-
 </dl>
 
-<h2>isCodirectionalTo</h2>
-<p><code>isCodirectionalTo({vector})</code></p>
-<dl>
+<h3>isCodirectionalTo</h3>
+<code>isCodirectionalTo({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object to check.</dd>
-
-
   <dt>return</dt>
   <dd>Boolean value to indicate if the object is co-directional to the given vector.</dd>
-
 </dl>
 
-<h2>isPerpendicularTo</h2>
-<p><code>isPerpendicularTo({vector})</code></p>
-<dl>
+<h3>isPerpendicularTo</h3>
+<code>isPerpendicularTo({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object to check.</dd>
-
-
   <dt>return</dt>
   <dd>Boolean value to indicate if the object is perpendicular to the given vector.</dd>
-
 </dl>
 
-<h2>isEqualTo</h2>
-<p><code>isEqualTo({vector})</code></p>
-<dl>
+<h3>isEqualTo</h3>
+<code>isEqualTo({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object to check.</dd>
-
-
   <dt>return</dt>
   <dd>Boolean value to indicate if the object is equal to the given vector.</dd>
-
 </dl>
 
-<h2>crossProduct</h2>
-<p><code>crossProduct({vector})</code></p>
-<dl>
+<h3>crossProduct</h3>
+<code>crossProduct({vector})</code>
 
+<dl>
   <dt>vector</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
-
-
   <dt>return</dt>
   <dd>A <code>XcGm3dVector</code> object representing <code>this X vector</code>.</dd>
-
 </dl>
 
-<h2>toThreeVector3</h2>
-<p><code>toThreeVector3()</code></p>
-<dl>
+<h3>toThreeVector3</h3>
+<code>toThreeVector3()</code>
 
+<dl>
   <dt>return</dt>
   <dd>A Three.js vector3 representation.</dd>
-
 </dl>
 
-<h1>XcGmAssembly</h1>
-<p><code>class XcGmAssembly extends XcGmPart</code></p>
+<h2>XcGmAssembly</h2>
+<code>class XcGmAssembly extends XcGmPart</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>parts</h2>
-<p><code>get parts()</code></p>
+<h3>parts</h3>
+<code>get parts()</code>
 
-<h2>create</h2>
-<p><code>static create()</code></p>
+<h3>create</h3>
+<code>static create()</code>
 
-<h2>instances</h2>
-<p><code>instances()</code></p>
-<p>Return XcGmInstance objects</p>
+<h3>instances</h3>
+<code>instances()</code>
 
-<h2>partsAndTransfs</h2>
-<p><code>partsAndTransfs()</code></p>
+Return XcGmInstance objects
 
-<h2>transformBy</h2>
-<p><code>transformBy({matrix})</code></p>
+<h3>partsAndTransfs</h3>
+<code>partsAndTransfs()</code>
 
-<h2>makeLevelAssembly</h2>
-<p><code>makeLevelAssembly()</code></p>
+<h3>transformBy</h3>
+<code>transformBy({matrix})</code>
 
-<h1>XcGm3dAxis</h1>
-<p><code>class XcGm3dAxis</code></p>
+<h3>makeLevelAssembly</h3>
+<code>makeLevelAssembly()</code>
 
-<h2>position</h2>
-<p><code>position</code></p>
-<p>XcGm3dPosition object</p>
+<h2>XcGm3dAxis</h2>
+<code>class XcGm3dAxis</code>
 
-<h2>direction</h2>
-<p><code>direction</code></p>
-<p>XcGm3dVector object</p>
+<h3>position</h3>
+<code>position</code>
 
-<h2>constructor</h2>
+XcGm3dPosition object
+
+<h3>direction</h3>
+<code>direction</code>
+
+XcGm3dVector object
+
+<h3>constructor</h3>
 <pre><code>constructor({
                 position = new XcGm3dPosition(),
                 direction = new XcGm3dVector({x: 0, y: 0, z: 1})
               } = {})
 </code></pre>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>fromJSON({json})</code>
 
-<h1>XcGmBlendSurface</h1>
-<p><code>class XcGmBlendSurface extends XcGmSurface</code></p>
+<h2>XcGmBlendSurface</h2>
+<code>class XcGmBlendSurface extends XcGmSurface</code>
 
-<h2>constructor</h2>
-<p><code>constructor() { super(); }</code></p>
+<h3>constructor</h3>
+<code>constructor() { super(); }</code>
 
-<h1>XcGmBody</h1>
-<p><code>class XcGmBody extends XcGmPart</code></p>
+<h2>XcGmBody</h2>
+<code>class XcGmBody extends XcGmPart</code>
 
-<h2>BODY_TYPE</h2>
+<h3>BODY_TYPE</h3>
 <pre><code>  static BODY_TYPE = {
     MINIMUM: 5603,
     ACORN: 5606,
@@ -1679,7 +1445,7 @@
   };
 </code></pre>
 
-<h2>BooleanFunction</h2>
+<h3>BooleanFunction</h3>
 <pre><code>  static BooleanFunction = {
     Intersection: 15901, /* intersect */
     Subtraction: 15902, /* subtract */
@@ -1687,49 +1453,54 @@
   };
 </code></pre>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>faces</h2>
-<p><code>get faces()</code></p>
+<h3>faces</h3>
+<code>get faces()</code>
 
-<h2>edges</h2>
-<p><code>get edges()</code></p>
-<p>Return XcGmEdge</p>
+<h3>edges</h3>
+<code>get edges()</code>
 
-<h2>vertices</h2>
-<p><code>get vertices()</code></p>
-<p>Return XcGmVertex</p>
+Return XcGmEdge
 
-<h2>type</h2>
-<p><code>get type()</code></p>
-<p>Return XcGmBody.BODY_TYPE</p>
+<h3>vertices</h3>
+<code>get vertices()</code>
 
-<h2>createSolidBlock</h2>
-<p><code>static createSolidBlock({x, y, z, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
-<p>Return XcGmBody</p>
+Return XcGmVertex
 
-<h2>createSolidCone</h2>
-<p><code>static createSolidCone({radius, height, semiAngle, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
+<h3>type</h3>
+<code>get type()</code>
 
-<h2>createSolidCylinder</h2>
-<p><code>static createSolidCylinder({radius, height, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
+Return XcGmBody.BODY_TYPE
 
-<h2>createSolidPrism</h2>
-<p><code>static createSolidPrism({radius, height, sides, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
+<h3>createSolidBlock</h3>
+<code>static createSolidBlock({x, y, z, coordinateSystem = new XcGmCoordinateSystem()})</code>
 
-<h2>createSolidSphere</h2>
-<p><code>static createSolidSphere({radius, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
+Return XcGmBody
 
-<h2>createSolidTorus</h2>
-<p><code>static createSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
+<h3>createSolidCone</h3>
+<code>static createSolidCone({radius, height, semiAngle, coordinateSystem = new XcGmCoordinateSystem()})</code>
 
-<h2>createSheetCircle</h2>
-<p><code>static createSheetCircle({radius, coordinateSystem = new XcGmCoordinateSystem()})</code></p>
+<h3>createSolidCylinder</h3>
+<code>static createSolidCylinder({radius, height, coordinateSystem = new XcGmCoordinateSystem()})</code>
 
-<h2>extrudeAlong</h2>
-<p><code>extrudeAlong({direction, options})</code></p>
-<p>Example</p>
+<h3>createSolidPrism</h3>
+<code>static createSolidPrism({radius, height, sides, coordinateSystem = new XcGmCoordinateSystem()})</code>
+
+<h3>createSolidSphere</h3>
+<code>static createSolidSphere({radius, coordinateSystem = new XcGmCoordinateSystem()})</code>
+
+<h3>createSolidTorus</h3>
+<code>static createSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGmCoordinateSystem()})</code>
+
+<h3>createSheetCircle</h3>
+<code>static createSheetCircle({radius, coordinateSystem = new XcGmCoordinateSystem()})</code>
+
+<h3>extrudeAlong</h3>
+<code>extrudeAlong({direction, options})</code>
+
+Example
 <pre><code>        let myBody = ....;
         let direction = new XcGm3dVector({x: 0, y: 0, z: 1});
         let extrudedBody = myBody.extrudeAlong({
@@ -1740,280 +1511,306 @@
         });
 </code></pre>
 
-<h2>spin</h2>
-<p><code>spin({axis, angle})</code></p>
+<h3>spin</h3>
+<code>spin({axis, angle})</code>
+
 <dl>
   axis XcGm3dAxis object</dd>
 </dl>
-<p>Example:</p>
+Example:
 <pre><code>    let axis = ...;
     this.#profileBody.spin({axis, angle: Math.PI});
 </code></pre>
 
-<h2>transformBy</h2>
-<p><code>transformBy({matrix})</code></p>
+<h3>transformBy</h3>
+<code>transformBy({matrix})</code>
 
-<h2>boolean</h2>
-<p><code>boolean({tools, func})</code></p>
+<h3>boolean</h3>
+<code>boolean({tools, func})</code>
+
 <dl>
   tools: XcGmBody objects</dd>
   func XcGmBody.BooleanFunction</dd>
 </dl>
-<p>Return result bodies</p>
+Return result bodies
 
-<h2>fixBlends</h2>
-<p><code>fixBlends()</code></p>
+<h3>fixBlends</h3>
+<code>fixBlends()</code>
 
-<h2>hollowFaces</h2>
-<p><code>hollowFaces({faces, offset})</code></p>
+<h3>hollowFaces</h3>
+<code>hollowFaces({faces, offset})</code>
+
 <dl>
   faces: XcGmFace</dd>
   offset: A floating point number</dd>
 </dl>
 
-<h2>imprintCurve</h2>
-<p><code>imprintCurve({curve, bounds})</code></p>
+<h3>imprintCurve</h3>
+<code>imprintCurve({curve, bounds})</code>
 
-<h2>findVertexByPosition</h2>
-<p><code>findVertexByPosition({position})</code></p>
-<p>Return XcGmVertex</p>
+<h3>findVertexByPosition</h3>
+<code>findVertexByPosition({position})</code>
 
-<h2>findEdgeByPositions</h2>
-<p><code>findEdgeByPositions({positions})</code></p>
+Return XcGmVertex
 
-<h2>findEdgeByVertices</h2>
-<p><code>findEdgeByVertices({vertex1, vertex2})</code></p>
+<h3>findEdgeByPositions</h3>
+<code>findEdgeByPositions({positions})</code>
 
-<h2>findFaceByPositions</h2>
-<p><code>findFaceByPositions({positions})</code></p>
+<h3>findEdgeByVertices</h3>
+<code>findEdgeByVertices({vertex1, vertex2})</code>
 
-<h2>findFaceByEdges</h2>
-<p><code>findFaceByEdges({edges})</code></p>
+<h3>findFaceByPositions</h3>
+<code>findFaceByPositions({positions})</code>
 
-<h2>findFaceByVertices</h2>
-<p><code>findFaceByVertices({vertices})</code></p>
+<h3>findFaceByEdges</h3>
+<code>findFaceByEdges({edges})</code>
 
-<h2>findVertexWithFilter</h2>
-<p><code>findVertexWithFilter({callback})</code></p>
+<h3>findFaceByVertices</h3>
+<code>findFaceByVertices({vertices})</code>
 
-<h2>findEdgeWithFilter</h2>
-<p><code>findEdgeWithFilter({callback})</code></p>
+<h3>findVertexWithFilter</h3>
+<code>findVertexWithFilter({callback})</code>
 
-<h2>findFaceWithFilter</h2>
-<p><code>findFaceWithFilter({callback})</code></p>
+<h3>findEdgeWithFilter</h3>
+<code>findEdgeWithFilter({callback})</code>
 
-<h1>XcGm3dBox</h1>
-<p><code>class XcGm3dBox</code></p>
+<h3>findFaceWithFilter</h3>
+<code>findFaceWithFilter({callback})</code>
 
-<h2>constructor</h2>
-<p><code>constructor({minimumX, minimumY, minimumZ, maximumX, maximumY, maximumZ})</code></p>
+<h2>XcGm3dBox</h2>
+<code>class XcGm3dBox</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>constructor</h3>
+<code>constructor({minimumX, minimumY, minimumZ, maximumX, maximumY, maximumZ})</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h1>XcGmBSurface</h1>
-<p><code>class XcGmBSurface extends XcGmSurface</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h2>XcGmBSurface</h2>
+<code>class XcGmBSurface extends XcGmSurface</code>
 
-<h2>XcGmCone</h2>
-<p><code>class XcGmCone extends XcGmSurface</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>XcGmCone</h3>
+<code>class XcGmCone extends XcGmSurface</code>
 
-<h1>XcGmContext</h1>
-<p><code>class XcGmContext</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>gTol</h2>
-<p><code>static gTol = new XcGmPrecision();</code></p>
+<h2>XcGmContext</h2>
+<code>class XcGmContext</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>gTol</h3>
+<code>static gTol = new XcGmPrecision();</code>
 
-<h1>XcGmCoordinateSystem</h1>
-<p><code>class XcGmCoordinateSystem</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>origin</h2>
-<p><code>origin</code></p>
-<p>XcGm3dPosition</p>
+<h2>XcGmCoordinateSystem</h2>
+<code>class XcGmCoordinateSystem</code>
 
-<h2>zAxis</h2>
-<p><code>zAxis</code></p>
-<p>XcGm3dVector</p>
+<h3>origin</h3>
+<code>origin</code>
 
-<h2>xAxis</h2>
-<p><code>xAxis</code></p>
-<p>XcGm3dVector</p>
+XcGm3dPosition
 
-<h2>constructor</h2>
-<p><code>constructor({ origin = new XcGm3dPosition(), zAxis = new XcGm3dVector({x: 0, y: 0, z: 1}), xAxis = new
-  XcGm3dVector({x: 1, y: 0, z: 0}) } = {})</code></p>
+<h3>zAxis</h3>
+<code>zAxis</code>
 
-<h2>fromMatrix</h2>
-<p><code>static fromMatrix({matrix})</code></p>
+XcGm3dVector
 
-<h2>toMatrix</h2>
-<p><code>toMatrix()</code></p>
+<h3>xAxis</h3>
+<code>xAxis</code>
 
-<h2>transformToCoordinateSystem</h2>
-<p><code>transformToCoordinateSystem({coordinateSystem})</code></p>
+XcGm3dVector
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>constructor</h3>
+<code>constructor({ origin = new XcGm3dPosition(), zAxis = new XcGm3dVector({x: 0, y: 0, z: 1}), xAxis = new
+  XcGm3dVector({x: 1, y: 0, z: 0}) } = {})</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>fromMatrix</h3>
+<code>static fromMatrix({matrix})</code>
 
-<h2>XcGmCylinder</h2>
-<p><code>class XcGmCylinder extends XcGmSurface</code></p>
+<h3>toMatrix</h3>
+<code>toMatrix()</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>transformToCoordinateSystem</h3>
+<code>transformToCoordinateSystem({coordinateSystem})</code>
 
-<h2>XcGmEdge</h2>
-<p><code>class XcGmEdge extends XcGmTopology</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>body</h2>
-<p><code>get body()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>curve</h2>
-<p><code>get curve()</code></p>
+<h3>XcGmCylinder</h3>
+<code>class XcGmCylinder extends XcGmSurface</code>
 
-<h2>faces</h2>
-<p><code>get faces()</code></p>
-<p>Return XcGmFace array</p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>vertices</h2>
-<p><code>get vertices()</code></p>
-<p>Return {vertex1, vertex2} where vertex1 and vertex2 are XcGmVertex</p>
+<h3>XcGmEdge</h3>
+<code>class XcGmEdge extends XcGmTopology</code>
 
-<h2>makeFacesFrom</h2>
-<p><code>static makeFacesFrom({edges, senses, sharedLoop})</code></p>
+<h3>body</h3>
+<code>get body()</code>
+
+<h3>curve</h3>
+<code>get curve()</code>
+
+<h3>faces</h3>
+<code>get faces()</code>
+
+Return XcGmFace array
+
+<h3>vertices</h3>
+<code>get vertices()</code>
+
+Return {vertex1, vertex2} where vertex1 and vertex2 are XcGmVertex
+
+<h3>makeFacesFrom</h3>
+<code>static makeFacesFrom({edges, senses, sharedLoop})</code>
+
 <dl>
   Return XcGmFace array</dd>
 </dl>
-<p>Example</p>
-<pre><code>      let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-      let faces = XcGmEdge.makeFacesFrom({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+Example
+<pre><code>
+  let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
+  let faces = XcGmEdge.makeFacesFrom({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
 </code></pre>
 
-<h2>setBlendConstantFor</h2>
-<p><code>static setBlendConstantFor({edges, radius})</code></p>
+<h3>setBlendConstantFor</h3>
+<code>static setBlendConstantFor({edges, radius})</code>
+
 <dl>
   Return blend edges.</dd>
 </dl>
-<p>Example</p>
-<pre><code>    let edges = ...;
-    XcGmEdge.setBlendConstantFor({edges, radius: 0.01});
-    myBody.fixBlends();
+Example
+<pre><code>
+  let edges = ...;
+  XcGmEdge.setBlendConstantFor({edges, radius: 0.01});
+  myBody.fixBlends();
 </code></pre>
 
-<h2>findInterval</h2>
-<p><code>findInterval()</code></p>
+<h3>findInterval</h3>
+<code>findInterval()</code>
+
 <dl>
   Return XcGmInterval</dd>
 </dl>
 
-<h2>containsVector</h2>
-<p><code>containsVector({vector})</code></p>
+<h3>containsVector</h3>
+<code>containsVector({vector})</code>
+
 <dl>
   Return XcGmTopology</dd>
 </dl>
-<p>Example</p>
-<pre><code>          let topol = edge.containsVector({vector});
-          if (topol) {
-            // The edge contains the vector
-          }
+Example
+<pre><code>
+  let topol = edge.containsVector({vector});
+  if (topol) {
+    // The edge contains the vector
+  }
 </code></pre>
 
-<h2>findVertexByPosition</h2>
-<p><code>findVertexByPosition({position})</code></p>
+<h3>findVertexByPosition</h3>
+<code>findVertexByPosition({position})</code>
+
 <dl>
   Return null or XcGmVertex object found.</dd>
 </dl>
 
-<h2>findVertexWithFilter</h2>
-<p><code>findVertexWithFilter({callback})</code></p>
+<h3>findVertexWithFilter</h3>
+<code>findVertexWithFilter({callback})</code>
+
 <dl>
   callback filter function in the form of <code>callback(vertex[, index[, array]</code>])</dd>
   Return filtered array, which could be empty array.</dd>
 </dl>
 
-<h1>XcGmEntity</h1>
-<p><code>class XcGmEntity</code></p>
+<h2>XcGmEntity</h2>
+<code>class XcGmEntity</code>
 
-<h2>tag</h2>
-<p><code>tag</code></p>
-<p>A unique handle number</p>
+<h3>tag</h3>
+<code>tag</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+A unique handle number
 
-<h2>getObjFromTag</h2>
-<p><code>static getObjFromTag({entityTag})</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>PKDelete</h2>
-<p><code>static PKDelete({entity})</code></p>
+<h3>getObjFromTag</h3>
+<code>static getObjFromTag({entityTag})</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>PKDelete</h3>
+<code>static PKDelete({entity})</code>
 
-<h2>clone</h2>
-<p><code>clone()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h1>XcGmFace</h1>
-<p><code>class XcGmFace extends XcGmTopology</code></p>
+<h3>clone</h3>
+<code>clone()</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h2>XcGmFace</h2>
+<code>class XcGmFace extends XcGmTopology</code>
 
-<h2>surf</h2>
-<p><code>get surf()</code></p>
-<p>Return XcGmSurface</p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>UVBox</h2>
-<p><code>get UVBox()</code></p>
+<h3>surf</h3>
+<code>get surf()</code>
+
+Return XcGmSurface
+
+<h3>UVBox</h3>
+<code>get UVBox()</code>
+
 <dl>
   Return XcGmUVBox</dd>
 </dl>
 
-<h2>body</h2>
-<p><code>get body()</code></p>
+<h3>body</h3>
+<code>get body()</code>
+
 <dl>
   Return XcGmBody</dd>
 </dl>
 
-<h2>edges</h2>
-<p><code>get edges()</code></p>
+<h3>edges</h3>
+<code>get edges()</code>
+
 <dl>
   Return XcGmEdge array</dd>
 </dl>
 
-<h2>vertices</h2>
-<p><code>get vertices()</code></p>
+<h3>vertices</h3>
+<code>get vertices()</code>
+
 <dl>
   Return XcGmVertex array</dd>
 </dl>
 
-<h2>delete</h2>
-<p><code>static delete({faces})</code></p>
+<h3>delete</h3>
+<code>static delete({faces})</code>
+
 <dl>
   faces XcGmFace array</dd>
 </dl>
-<p>Delete faces from a body</p>
+Delete faces from a body
 
-<h2>transform</h2>
-<p><code>static transform({facesAndMatrices, tolerance})</code></p>
+<h3>transform</h3>
+<code>static transform({facesAndMatrices, tolerance})</code>
+
 <dl>
   facesAndMatrices Array of XcGmFace and XcGm3dMatrix</dd>
   tolerance floating number</dd>
 </dl>
-<p>Example</p>
+Example
 <pre><code>        let face = ....;
         let matrix = ....;
         XcGmFace.transform({
@@ -2022,12 +1819,13 @@
         });
 </code></pre>
 
-<h2>surfAndOrientation</h2>
-<p><code>surfAndOrientation()</code></p>
+<h3>surfAndOrientation</h3>
+<code>surfAndOrientation()</code>
+
 <dl>
   Return {surf, orientation}</dd>
 </dl>
-<p>Example</p>
+Example
 <pre><code>      let face = ...;
       let {surf, orientation} = face.surfAndOrientation();
       if (surf instanceof XcGmPlane) {
@@ -2039,12 +1837,13 @@
       }
 </code></pre>
 
-<h2>attachSurfFitting</h2>
-<p><code>attachSurfFitting({localCheck})</code></p>
+<h3>attachSurfFitting</h3>
+<code>attachSurfFitting({localCheck})</code>
+
 <dl>
   Return localCheckResult</dd>
 </dl>
-<p>Example</p>
+Example
 <pre><code>      let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
       let faces = XcGmEdge.makeFacesFrom({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
       XcSysAssert({
@@ -2056,550 +1855,607 @@
       let faceBody = face.body;
 </code></pre>
 
-<h2>findVertexByPosition</h2>
-<p><code>findVertexByPosition({position})</code></p>
+<h3>findVertexByPosition</h3>
+<code>findVertexByPosition({position})</code>
+
 <dl>
   position XcGm3dPosition</dd>
   Return XcGmVertex or null when not found</dd>
 </dl>
 
-<h2>findEdgeByVertex</h2>
-<p><code>findEdgeByVertex(vertex)</code></p>
+<h3>findEdgeByVertex</h3>
+<code>findEdgeByVertex(vertex)</code>
+
 <dl>
   vertex XcGmVertex</dd>
   Return XcGmEdge array</dd>
 </dl>
 
-<h2>findEdgeByTwoVertices</h2>
-<p><code>findEdgeByTwoVertices({vertex1, vertex2})</code></p>
+<h3>findEdgeByTwoVertices</h3>
+<code>findEdgeByTwoVertices({vertex1, vertex2})</code>
+
 <dl>
   vertex1 XcGmVertex</dd>
   vertex2 XcGmVertex</dd>
   Return XcGmEdge or null</dd>
 </dl>
 
-<h2>findVertexWithFilter</h2>
-<p><code>findVertexWithFilter({callback})</code></p>
+<h3>findVertexWithFilter</h3>
+<code>findVertexWithFilter({callback})</code>
+
 <dl>
   callback filter function in the form of <code>callback(vertex[, index[, array]</code>])</dd>
   Return filtered vertex array, which could be empty array.</dd>
 </dl>
 
-<h2>findEdgeWithFilter</h2>
-<p>`findEdgeWithFilter({callback})``</p>
+<h3>findEdgeWithFilter</h3>
+`findEdgeWithFilter({callback})``
 <dl>
   callback filter function in the form of <code>callback(edge[, index[, array]</code>])</dd>
   Return filtered edge array, which could be empty array.</dd>
 </dl>
 
-<h1>XcGmGeometry</h1>
-<p><code>class XcGmGeometry extends XcGmEntity</code></p>
+<h2>XcGmGeometry</h2>
+<code>class XcGmGeometry extends XcGmEntity</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h1>XcGmInstance</h1>
-<p><code>class XcGmInstance extends XcGmTopology</code></p>
+<h2>XcGmInstance</h2>
+<code>class XcGmInstance extends XcGmTopology</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>assembly</h2>
-<p><code>get assembly()</code></p>
+<h3>assembly</h3>
+<code>get assembly()</code>
+
 <dl>
   Return XcGmAssembly</dd>
 </dl>
 
-<h2>transform</h2>
-<p><code>get transform()</code></p>
+<h3>transform</h3>
+<code>get transform()</code>
+
 <dl>
   Return XcGm3dMatrix</dd>
 </dl>
 
-<h2>part</h2>
-<p><code>get part()</code></p>
+<h3>part</h3>
+<code>get part()</code>
+
 <dl>
   Return XcGmPart</dd>
 </dl>
 
-<h2>create</h2>
-<p><code>static create({assembly, part, matrix = null})</code></p>
+<h3>create</h3>
+<code>static create({assembly, part, matrix = null})</code>
+
 <dl>
   assembly XcGmAssembly</dd>
   part XcGmPart</dd>
   matrix null or XcGm3dMatrix</dd>
 </dl>
 
-<h2>changePart</h2>
-<p><code>changePart({part})</code></p>
+<h3>changePart</h3>
+<code>changePart({part})</code>
+
 <dl>
   part XcGmPart</dd>
 </dl>
 
-<h2>replaceTransf</h2>
-<p><code>replaceTransf({transf})</code></p>
+<h3>replaceTransf</h3>
+<code>replaceTransf({transf})</code>
+
 <dl>
   transf XcGmTransf</dd>
 </dl>
 
-<h2>transformBy</h2>
-<p><code>transformBy({matrix})</code></p>
+<h3>transformBy</h3>
+<code>transformBy({matrix})</code>
+
 <dl>
   matrix XcGm3dMatrix</dd>
 </dl>
 
-<h1>XcGmInterval</h1>
-<p><code>class XcGmInterval</code></p>
+<h2>XcGmInterval</h2>
+<code>class XcGmInterval</code>
 
-<h2>low</h2>
-<p><code>low</code></p>
+<h3>low</h3>
+<code>low</code>
 
-<h2>high</h2>
-<p><code>high</code></p>
+<h3>high</h3>
+<code>high</code>
 
-<h2>constructor</h2>
-<p><code>constructor({low, high})</code></p>
+<h3>constructor</h3>
+<code>constructor({low, high})</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h1>XcGmLoop</h1>
-<p><code>class XcGmLoop extends XcGmTopology</code></p>
+<h2>XcGmLoop</h2>
+<code>class XcGmLoop extends XcGmTopology</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h1>XcGmOffset</h1>
-<p><code>class XcGmOffset extends XcGmSurface</code></p>
+<h2>XcGmOffset</h2>
+<code>class XcGmOffset extends XcGmSurface</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h1>XcGmPart</h1>
-<p><code>class XcGmPart extends XcGmTopology</code></p>
+<h2>XcGmPart</h2>
+<code>class XcGmPart extends XcGmTopology</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>transmitToData</h2>
-<p><code>static transmitToData({parts})</code></p>
+<h3>transmitToData</h3>
+<code>static transmitToData({parts})</code>
 
-<h2>transmitToFile</h2>
-<p><code>static transmitToFile({parts, path})</code></p>
+<h3>transmitToFile</h3>
+<code>static transmitToFile({parts, path})</code>
 
-<h2>receiveFromData</h2>
-<p><code>static receiveFromData({data})</code></p>
+<h3>receiveFromData</h3>
+<code>static receiveFromData({data})</code>
 
-<h2>receiveFromFile</h2>
-<p><code>static receiveFromFile({fileName})</code></p>
+<h3>receiveFromFile</h3>
+<code>static receiveFromFile({fileName})</code>
 
-<h2>findEntityByIdent</h2>
-<p><code>findEntityByIdent({identifier, cls})</code></p>
+<h3>findEntityByIdent</h3>
+<code>findEntityByIdent({identifier, cls})</code>
 
-<h1>XcGmPK_CIRCLE_sf_t</h1>
-<p><code>class XcGmPK_CIRCLE_sf_t</code></p>
+<h2>XcGmPK_CIRCLE_sf_t</h2>
+<code>class XcGmPK_CIRCLE_sf_t</code>
 
-<h2>radius</h2>
-<p><code>radius</code></p>
+<h3>radius</h3>
+<code>radius</code>
 
-<h2>basisSet</h2>
-<p><code>basisSet</code></p>
-<p>XcGmPK_AXIS2_sf_t</p>
+<h3>basisSet</h3>
+<code>basisSet</code>
 
-<h2>constructor</h2>
-<p><code>constructor({ radius, basisSet = new XcGmPK_AXIS2_sf_t() })</code></p>
+XcGmPK_AXIS2_sf_t
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>constructor</h3>
+<code>constructor({ radius, basisSet = new XcGmPK_AXIS2_sf_t() })</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h1>XcGmPK_LINE_sf_t</h1>
-<p><code>class XcGmPK_LINE_sf_t</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>basisSet</h2>
-<p><code>basisSet</code></p>
-<p>XcGmPK_AXIS1_sf_t</p>
+<h2>XcGmPK_LINE_sf_t</h2>
+<code>class XcGmPK_LINE_sf_t</code>
 
-<h2>constructor</h2>
-<p><code>constructor(basisSet = new XcGmPK_AXIS1_sf_t())</code></p>
+<h3>basisSet</h3>
+<code>basisSet</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+XcGmPK_AXIS1_sf_t
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>constructor</h3>
+<code>constructor(basisSet = new XcGmPK_AXIS1_sf_t())</code>
 
-<h1>XcGmPK_POINT_sf_t</h1>
-<p><code>class XcGmPK_POINT_sf_t</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>position</h2>
-<p><code>position</code></p>
-<p>XcGm3dPosition</p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>constructor</h2>
-<p><code>constructor(position = new XcGm3dPosition())</code></p>
+<h2>XcGmPK_POINT_sf_t</h2>
+<code>class XcGmPK_POINT_sf_t</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>position</h3>
+<code>position</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+XcGm3dPosition
 
-<h1>XcGmPK_AXIS1_sf_t</h1>
-<p><code>class XcGmPK_AXIS1_sf_t</code></p>
+<h3>constructor</h3>
+<code>constructor(position = new XcGm3dPosition())</code>
 
-<h2>location</h2>
-<p><code>location</code></p>
-<p>XcGm3dPosition</p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>axis</h2>
-<p><code>axis</code></p>
-<p>XcGm3dVector</p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>constructor</h2>
+<h2>XcGmPK_AXIS1_sf_t</h2>
+<code>class XcGmPK_AXIS1_sf_t</code>
+
+<h3>location</h3>
+<code>location</code>
+
+XcGm3dPosition
+
+<h3>axis</h3>
+<code>axis</code>
+
+XcGm3dVector
+
+<h3>constructor</h3>
 <pre><code>  constructor({
                 location = new XcGm3dPosition(),
                 axis = new XcGm3dVector({x: 0, y: 0, z: 1})
               } = {})
 </code></pre>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h1>XcGmPK_AXIS2_sf_t</h1>
-<p><code>class XcGmPK_AXIS2_sf_t</code></p>
+<h2>XcGmPK_AXIS2_sf_t</h2>
+<code>class XcGmPK_AXIS2_sf_t</code>
 
-<h2>location</h2>
-<p><code>location</code></p>
-<p>XcGm3dPosition</p>
+<h3>location</h3>
+<code>location</code>
 
-<h2>axis</h2>
-<p><code>axis</code></p>
-<p>XcGm3dVector</p>
+XcGm3dPosition
 
-<h2>refDirection</h2>
-<p><code>refDirection</code></p>
-<p>XcGm3dVector</p>
+<h3>axis</h3>
+<code>axis</code>
 
-<h2>constructor</h2>
-<p><code>constructor({ location = new XcGm3dPosition(), axis = new XcGm3dVector({x: 0, y: 0, z: 1}), refDirection = new
-  XcGm3dVector({x: 1, y: 0, z: 0}) } = {})</code></p>
+XcGm3dVector
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>refDirection</h3>
+<code>refDirection</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+XcGm3dVector
 
-<h1>XcGmPK_INSTANCE_sf_t</h1>
-<p><code>class XcGmPK_INSTANCE_sf_t</code></p>
+<h3>constructor</h3>
+<code>constructor({ location = new XcGm3dPosition(), axis = new XcGm3dVector({x: 0, y: 0, z: 1}), refDirection = new
+  XcGm3dVector({x: 1, y: 0, z: 0}) } = {})</code>
 
-<h2>assembly</h2>
-<p><code>assembly</code></p>
-<p>XcGmAssembly</p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>transf</h2>
-<p><code>transf</code></p>
-<p>XcGmPKTransf</p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>part</h2>
-<p>XcGmPart</p>
+<h2>XcGmPK_INSTANCE_sf_t</h2>
+<code>class XcGmPK_INSTANCE_sf_t</code>
 
-<h2>constructor</h2>
-<p><code>constructor({ assembly = null, transf = null, part = null } = {})</code></p>
-<p><code>part</code></p>
+<h3>assembly</h3>
+<code>assembly</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+XcGmAssembly
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>transf</h3>
+<code>transf</code>
 
-<h1>XcGmPK_PLANE_sf_t</h1>
-<p><code>class XcGmPK_PLANE_sf_t</code></p>
+XcGmPKTransf
 
-<h2>basisSet</h2>
-<p><code>basisSet</code></p>
-<p>XcGmPK_AXIS2_sf_t</p>
+<h3>part</h3>
+XcGmPart
 
-<h2>constructor</h2>
-<p><code>constructor(basisSet = new XcGmPK_AXIS2_sf_t())</code></p>
+<h3>constructor</h3>
+<code>constructor({ assembly = null, transf = null, part = null } = {})</code>
+<code>part</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h1>XcGmPK_SPHERE_sf_t</h1>
-<p><code>class XcGmPK_SPHERE_sf_t</code></p>
+<h2>XcGmPK_PLANE_sf_t</h2>
+<code>class XcGmPK_PLANE_sf_t</code>
 
-<h2>radius</h2>
-<p><code>radius</code></p>
+<h3>basisSet</h3>
+<code>basisSet</code>
 
-<h2>basisSet</h2>
-<p><code>basisSet</code></p>
-<p>XcGmPK_AXIS2_sf_t</p>
+XcGmPK_AXIS2_sf_t
 
-<h2>constructor</h2>
+<h3>constructor</h3>
+<code>constructor(basisSet = new XcGmPK_AXIS2_sf_t())</code>
+
+<h3>toJSON</h3>
+<code>toJSON()</code>
+
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
+
+<h2>XcGmPK_SPHERE_sf_t</h2>
+<code>class XcGmPK_SPHERE_sf_t</code>
+
+<h3>radius</h3>
+<code>radius</code>
+
+<h3>basisSet</h3>
+<code>basisSet</code>
+
+XcGmPK_AXIS2_sf_t
+
+<h3>constructor</h3>
 <pre><code>  constructor({
                 radius,
                 basisSet = new XcGmPK_AXIS2_sf_t()
               })
 </code></pre>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h1>XcGmTransf</h1>
-<p><code>class XcGmTransf extends XcGmEntity</code></p>
+<h2>XcGmTransf</h2>
+<code>class XcGmTransf extends XcGmEntity</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>matrix</h2>
-<p><code>get matrix()</code></p>
-<p>Return XcGm3dMatrix</p>
+<h3>matrix</h3>
+<code>get matrix()</code>
 
-<h2>create</h2>
-<p><code>static create({transfSF})</code></p>
+Return XcGm3dMatrix
+
+<h3>create</h3>
+<code>static create({transfSF})</code>
+
 <dl>
   transfSF XcGmPK_TRANSF_sf_t</dd>
 </dl>
 
-<h1>XcGmPK_TRANSF_sf_t</h1>
-<p><code>class XcGmPK_TRANSF_sf_t</code></p>
+<h2>XcGmPK_TRANSF_sf_t</h2>
+<code>class XcGmPK_TRANSF_sf_t</code>
 
-<h2>matrix</h2>
-<p><code>matrix</code></p>
-<p>XcGm3dMatrix</p>
+<h3>matrix</h3>
+<code>matrix</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+XcGm3dMatrix
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h1>XcGmPlane</h1>
-<p><code>class XcGmPlane extends XcGmSurface</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h2>XcGmPlane</h2>
+<code>class XcGmPlane extends XcGmSurface</code>
 
-<h2>coordinateSystem</h2>
-<p><code>get coordinateSystem()</code></p>
-<p>Return XcGmCoordinateSystem</p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>create</h2>
-<p><code>static create({coordinateSystem})</code></p>
+<h3>coordinateSystem</h3>
+<code>get coordinateSystem()</code>
 
-<h1>XcGmPrecision</h1>
-<p><code>class XcGmPrecision</code></p>
+Return XcGmCoordinateSystem
 
-<h2>linearPrecision</h2>
-<p><code>linearPrecision</code></p>
+<h3>create</h3>
+<code>static create({coordinateSystem})</code>
 
-<h2>anglePrecision</h2>
-<p><code>anglePrecision</code></p>
+<h2>XcGmPrecision</h2>
+<code>class XcGmPrecision</code>
 
-<h2>constructor</h2>
-<p><code>constructor({linearPrecision = 1.0e-8, anglePrecision = 1.0e-11} = {})</code></p>
+<h3>linearPrecision</h3>
+<code>linearPrecision</code>
 
-<h1>XcGmSphere</h1>
-<p><code>class XcGmSphere extends XcGmSurface</code></p>
+<h3>anglePrecision</h3>
+<code>anglePrecision</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor({linearPrecision = 1.0e-8, anglePrecision = 1.0e-11} = {})</code>
 
-<h2>radius</h2>
-<p><code>get radius()</code></p>
+<h2>XcGmSphere</h2>
+<code>class XcGmSphere extends XcGmSurface</code>
 
-<h2>coordinateSystem</h2>
-<p><code>get coordinateSystem()</code></p>
-<p>Return XcGmCoordinateSystem</p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>create</h2>
-<p><code>static create({radius, coordinateSystem})</code></p>
+<h3>radius</h3>
+<code>get radius()</code>
 
-<h1>XcGmSpun</h1>
-<p><code>class XcGmSpun extends XcGmSurface</code></p>
+<h3>coordinateSystem</h3>
+<code>get coordinateSystem()</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+Return XcGmCoordinateSystem
 
-<h1>XcGmSurface</h1>
-<p><code>class XcGmSurface extends XcGmGeometry</code></p>
+<h3>create</h3>
+<code>static create({radius, coordinateSystem})</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h2>XcGmSpun</h2>
+<code>class XcGmSpun extends XcGmSurface</code>
 
-<h2>evaluate</h2>
-<p><code>evaluate({uv})</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
+
+<h2>XcGmSurface</h2>
+<code>class XcGmSurface extends XcGmGeometry</code>
+
+<h3>constructor</h3>
+<code>constructor()</code>
+
+<h3>evaluate</h3>
+<code>evaluate({uv})</code>
+
 <dl>
   uv XcGmUV</dd>
   Return XcGm3dPosition</dd>
 </dl>
 
-<h1>XcGmSwept</h1>
-<p><code>class XcGmSwept extends XcGmSurface</code></p>
+<h2>XcGmSwept</h2>
+<code>class XcGmSwept extends XcGmSurface</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h1>XcGmTorus</h1>
-<p><code>class XcGmTorus extends XcGmSurface</code></p>
+<h2>XcGmTorus</h2>
+<code>class XcGmTorus extends XcGmSurface</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h1>XcGmTopology</h1>
-<p><code>class XcGmTopology extends XcGmEntity</code></p>
+<h2>XcGmTopology</h2>
+<code>class XcGmTopology extends XcGmEntity</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>box</h2>
-<p><code>get box()</code></p>
-<p>Return XcGm3dBox</p>
+<h3>box</h3>
+<code>get box()</code>
 
-<h2>evalMassPropsFor</h2>
-<p><code>static evalMassPropsFor({topols, accuracy})</code></p>
+Return XcGm3dBox
+
+<h3>evalMassPropsFor</h3>
+<code>static evalMassPropsFor({topols, accuracy})</code>
+
 <dl>
   topols XcGmTopology object array</dd>
   accuracy Computational accuracy</dd>
   return {amount, mass, cog, mofi, periphery}</dd>
 </dl>
-<p>Example</p>
+Example
 <pre><code>      let {cog} = XcGmTopology.evalMassPropsFor({topols: [myTopol], accuracy: 1});
 </code></pre>
 
-<h2>render</h2>
-<p><code>render()</code></p>
+<h3>render</h3>
+<code>render()</code>
+
 <dl>
   return {allFaceRenderingData, allEdgeRenderingData, allVertexRenderingData}</dd>
 </dl>
 
-<h1>XcGmUV</h1>
+<h2>XcGmUV</h2>
 
-<h2>u</h2>
-<p><code>u</code></p>
+<h3>u</h3>
+<code>u</code>
 
-<h2>v</h2>
-<p><code>v</code></p>
+<h3>v</h3>
+<code>v</code>
 
-<h2>constructor</h2>
-<p><code>constructor({u, v})</code></p>
+<h3>constructor</h3>
+<code>constructor({u, v})</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h1>XcGmUVBox</h1>
-<p><code>class XcGmUVBox</code></p>
+<h2>XcGmUVBox</h2>
+<code>class XcGmUVBox</code>
 
-<h2>param</h2>
-<p><code>param</code></p>
+<h3>param</h3>
+<code>param</code>
 
-<h2>constructor</h2>
-<p><code>constructor({lowU, lowV, highU, highV})</code></p>
+<h3>constructor</h3>
+<code>constructor({lowU, lowV, highU, highV})</code>
 
-<h2>toJSON</h2>
-<p><code>toJSON()</code></p>
+<h3>toJSON</h3>
+<code>toJSON()</code>
 
-<h2>fromJSON</h2>
-<p><code>static fromJSON({json})</code></p>
+<h3>fromJSON</h3>
+<code>static fromJSON({json})</code>
 
-<h1>XcGmVertex</h1>
-<p><code>class XcGmVertex extends XcGmTopology</code></p>
+<h2>XcGmVertex</h2>
+<code>class XcGmVertex extends XcGmTopology</code>
 
-<h2>constructor</h2>
-<p><code>constructor()</code></p>
+<h3>constructor</h3>
+<code>constructor()</code>
 
-<h2>point</h2>
-<p><code>get point()</code></p>
-<p>Return XcGmPoint</p>
+<h3>point</h3>
+<code>get point()</code>
 
-<h2>body</h2>
-<p><code>get body()</code></p>
-<p>Return XcGmBody</p>
+Return XcGmPoint
 
-<h2>faces</h2>
-<p><code>get faces()</code></p>
-<p>Return XcGmFace array</p>
+<h3>body</h3>
+<code>get body()</code>
 
-<h1>XcGmQuaternion</h1>
-<p><code>class XcGmQuaternion</code></p>
+Return XcGmBody
+
+<h3>faces</h3>
+<code>get faces()</code>
+
+Return XcGmFace array
+
+
+<h2>XcGmQuaternion</h2>
+<code>class XcGmQuaternion</code>
+
 <dl>
   Construct a quaternion.</dd>
   </dd>
-  @param {*} the components of the quaternion to construct. The default is the unit.<br>
+  @param {*} the components of the quaternion to construct. The default is the unit.
   */
   </dd>
 </dl>
 
-<h2>constructor</h2>
-<p><code>constructor({w = 1, x = 0, y = 0, z = 0} = {})</code></p>
+<h3>constructor</h3>
+<code>constructor({w = 1, x = 0, y = 0, z = 0} = {})</code>
 
-<h2>fromRotationMatrix</h2>
-<p><code>static fromRotationMatrix({matrix})</code></p>
-<p>*matrix a rotation matrix<br>
-  Convert a rotation matrix to a unit quaternion<br>
-  Assuming the input matrix is a pure rotation matrix:<br>
-  any perspective factor or translation vector is ignored</p>
+<h3>fromRotationMatrix</h3>
 
-<h2>conjugate</h2>
-<p><code>conjugate()</code><br>
-  The inverse quaternion for a unit quaternion</p>
+<code>static fromRotationMatrix({matrix})</code>
+*matrix a rotation matrix
+Convert a rotation matrix to a unit quaternion
+Assuming the input matrix is a pure rotation matrix:
+any perspective factor or translation vector is ignored
 
-<h2>multiply</h2>
-<p><code>multiply({qRight})</code></p>
-<p>*qRight the quaternion on the right<br>
-  Hamliton product. The multiplication order puts the current quaternion on the left</p>
+<h3>conjugate</h3>
+<code>conjugate()</code>
 
-<h2>normalize</h2>
-<p><code>normalize()</code> {</p>
-<p>Normalize the current quaternion. If the normal is zero within tolerance, no-op.</p>
+The inverse quaternion for a unit quaternion
 
-<h2>normal</h2>
-<p><code>normal()</code></p>
-<p>A normalized quaternion from the current. The current is not changed</p>
+<h3>multiply</h3>
+<code>multiply({qRight})</code>
 
-<h2>lengthSquared</h2>
-<p><code>lengthSquared()</code></p>
-<p>The Squared length</p>
+<dl>
+  <dt>qRight</dt>
+  <dd>the quaternion on the right</dd>
+</dl>
 
-<h2>pow</h2>
-<p><code>pow({exponent})</code></p>
-<p>*exponent the exponent</p>
-<p>The power function, assuming unit quaternions</p>
+Hamliton product. The multiplication order puts the current quaternion on the left
 
-<h2>lerpTo</h2>
-<p><code>lerpTo({target, exponent})</code></p>
-<p>*target the target unit quaternion for linear interpolation from the current<br>
-  *exponent the interpolation parameter. If the parameter is 0, the interpolation result is the current quaterion.<br>
-  If the parameter is 1, the result is the target quaternion</p>
-<p>linear interpolation of two rotation quaterions:
+<h3>normalize</h3>
+<code>normalize()</code>
 
-  q0 to q1, with parameter t: q0 * (q0’ * q1)^t, q0’ being the conjugate: q0’ = 1/q0 for unit quaternions;</p>
-  t=0, the result is q0;
-  t=1, the result is q1;
-  otherwise, the result is a linear interpolation
+Normalize the current quaternion. If the normal is zero within tolerance, no-op.
 
-<h2>toRotationMatrix</h2>
-<p><code>toRotationMatrix()</code></p>
+<h3>normal</h3>
+<code>normal()</code>
+
+A normalized quaternion from the current. The current is not changed
+
+<h3>lengthSquared</h3>
+<code>lengthSquared()</code>
+
+The Squared length
+
+<h3>pow</h3>
+<code>pow({exponent})</code>
+
+<dl>
+  <dt>exponent</dt>
+  <dd>the exponent</dd>
+</dl>
+
+The power function, assuming unit quaternions
+
+<h3>lerpTo</h3>
+<code>lerpTo({target, exponent})</code>
+
+<dl>
+  <dt>target</dt>
+  <dd>the target unit quaternion for linear interpolation from the current</dd>
+  <dt>exponent</dt>
+  <dd>the interpolation parameter. If the parameter is 0, the interpolation result is the current quaterion.</dd>
+</dl>
+If the parameter is 1, the result is the target quaternion linear interpolation of two rotation quaterions: q0 to q1,
+with parameter t: q0 * (q0’ * q1)^t, q0’ being the conjugate: q0’ = 1/q0 for unit quaternions;
+<ul>
+  <li>t=0, the result is q0;</li>
+  <li>t=1, the result is q1;</li>
+  <li>otherwise, the result is a linear interpolation</li>
+</ul>
+
+<h3>toRotationMatrix</h3>
+<code>toRotationMatrix()</code>
 
 </body>
 </html>
