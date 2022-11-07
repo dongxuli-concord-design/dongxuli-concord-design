@@ -167,24 +167,93 @@ class XcGm3dVector {
     // TODO
   }
 
-  mirror({plane}) {
-    // TODO
-  }
-
-  get perpendicularVector() {
-    const newVector = new XcGm3dVector();
-    if (Math.abs(this.x) < XcGm3dVector.#MIN_LENGTH && Math.abs(this.y) < XcGm3dVector.#MIN_LENGTH) {
-      newVector.x = this.z;
-      newVector.y = 0.0;
-      newVector.z = -this.x;
-    } else {
-      newVector.x = -this.y;
-      newVector.y = this.x;
-      newVector.z = 0.0;
+  mirror({planeNormal}) {
+    if (planeNormal.isZeroLength()) {
+      return this.clone();
     }
 
-    newVector.normalize();
-    return newVector;
+    const normal = planeNormal.normal;
+    const aligned = XcGm3dVector.multiply({vector: normal, scale: -2 * this.dotProduct(normal)});
+    return XcGm3dVector.add({vector1: this, vector2: aligned});
+  }
+
+  /**
+   * @description find a perpendicular vector of the current vector. If the current vector is the zero vector, the zero vector is returned.
+   * The current vector is not changed.
+   * @returns {XcGm3dVector} a unit perpendicular vector, if the current vector is not the zero vector. Otherwise, the zero vector is returned
+   */
+  get perpendicularVector() {
+
+    // Find a perpendicular vector from the null space of QR decomposition
+    // Treating the current vector as a matrix of a single column.
+    // After QR decomposition, the 3rd column of the Q matrix is in the null space
+
+    // Find Householder reflection of the column vector
+
+    // Choose a sign to avoid rounding errors due to catastrophic cancellation
+    const sign = this.x > 0 ? 1 : -1;
+
+    // The normal direction of the mirror
+    const v = new XcGm3dVector({x: this.x + sign * this.length, y: this.y, z: this.z});
+
+    // The 3rd column of the Q-matrix. The vector is not unitized, with an extra factor of -tau = - |v|^2/2
+    const nullVector = new XcGm3dVector({x: v.x * v.z, y: v.y * v.z, z: v.z * v.z - v.lengthSquared() / 2});
+
+    return nullVector.normal;
+  }
+
+  /**
+   * @description find a common perpendicular vector of two given vectors. The zero vector is considered to perpendicular to any vector
+   * @param vector1 the first XcGm3dVector
+   * @param vector2 the second XcGm3dVector
+   * @returns a vector perpendicular to both vectors. If none of the input vector is zero, the returned vector is a unit vector.
+   * If the two input vectors are not strictly collinear, the returned perpendicular vector is in the same direction of the cross product.
+   */
+  static sharedPerpendicularVector({vector1, vector2})
+  {
+
+    // The first mirroring to place the first column i.e. vector1 to the x-axis direction
+    const sign = vector1.x > 0 ? 1 : -1;
+
+    // The normal direction of the mirror
+    const v = new XcGm3dVector({x: vector1.x + sign * vector1.length, y: vector1.y, z: vector1.z});
+
+    const tau = v.lengthSquared() / 2;
+
+    // The mirroring matrices are symmetric. Referring by rows
+    let row2 = XcGm3dVector.multiply({vector: v, scale: v.y});
+    row2.y -= tau;
+    let row3 = XcGm3dVector.multiply({vector: v, scale: v.z});
+    row3.z -= tau;
+
+    // The second column i.e. vector2 after the first mirroring
+    const col2 = new XcGm2dVector({
+      x: row2.dotProduct({vector: vector2}),
+      y: row3.dotProduct({vector: vector2})
+    });
+
+    // The two input vectors are collinear. The second mirroring is not necessary
+    // If the second column is already aligned, skip the second mirroring
+    if (col2.length < XcGmContext.gTol.linearPrecision) {
+      return row3;
+    }
+
+    let nullVector = row3;
+
+    // The second mirroring to place the second column in the xy-plane
+    const sign2 = col2.x > 0 ? 1 : -1;
+    const v2 = new XcGm2dVector({x: col2.x + sign2 * col2.length, y: col2.y});
+
+    // combine the two mirroring matrices
+    nullVector.multiply({scale: v2.y * v2.y - v2.lengthSquared() / 2});
+    nullVector.add({vector: XcGm3dVector.multiply({vector: row2, scale: v2.x * v2.y})});
+
+    const cross = vector1.crossProduct({vector: vector2});
+    if (nullVector.dotProduct({vector: cross}) < 0) {
+      nullVector.negate();
+    }
+
+    return nullVector.normal;
   }
 
   angleTo({vector}) {
@@ -199,7 +268,7 @@ class XcGm3dVector {
     // for vectors a,b: the length of the cross product is |a| |b| \sin \theta
     // the dotProduct is |a| |b| \cos \theta
     const crossLength = this.crossProduct({vector}).length;
-    const dotValue = this.dotProduct({value});
+    const dotValue = this.dotProduct({vector});
     return Math.atan2(crossLength, dotValue);
   }
 

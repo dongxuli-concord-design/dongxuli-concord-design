@@ -1251,7 +1251,7 @@ Transform the object with the provided matrix.
   <dt>return</dt>
   <dd><code>XcGm3dVector</code> object.</dd>
 </dl>
-Calculate a perpendicular vector of the vector.
+Calculate a perpendicular vector of the vector, if the current vector is not the zero vector. Otherwise, the zero vector is returned.
 
 <h3>angleTo</h3>
 <code>angleTo({vector})</code>
@@ -2454,8 +2454,20 @@ with parameter t: q0 * (q0’ * q1)^t, q0’ being the conjugate: q0’ = 1/q0 f
   <li>otherwise, the result is a linear interpolation</li>
 </ul>
 
-<h3>toRotationMatrix</h3>
-<code>toRotationMatrix()</code>
+<h3>matrix</h3>
+<code>get matrix()</code>
+Conversion from the current quaternion to its corresponding rotation matrix.
+
+<h3>fromTwoVectors</h3>
+<code>static fromTwoVectors({fromVector, toVector})</code>
+<dl>
+  <dt>fromVector</dt>
+  <dd>The XcGm3dVector to rotate from</dd>
+  <dt>toVector</dt>
+  <dd>The XcGm3dVector to rotate to</dd>
+</dl>
+Find the rotation to rotate a vector to another. If the two vectors are exactly on opposite directions or one vector is zero,
+the rotation axis is up to implementation. The rotation is well defined in all other cases.
 
 </body>
 </html>
