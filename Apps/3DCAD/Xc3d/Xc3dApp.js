@@ -66,7 +66,7 @@ class Xc3dApp extends XcSysApp {
     });
 
     const loadedEvent = Symbol('Loaded');
-    XcSysManager.loadJavascriptAsync({
+    XcSysManager.loadJavaScriptAsync({
       scriptSrc: 'Apps/3DCAD/res/config.js',
       asModule: false,
       doneCallback: () => {
@@ -89,7 +89,7 @@ class Xc3dApp extends XcSysApp {
 
     for (const lib of libs) {
       const loadedEvent = Symbol('Loaded');
-      XcSysManager.loadJavascriptAsync({
+      XcSysManager.loadJavaScriptAsync({
         scriptSrc: lib, asModule: false, doneCallback: () => {
           XcSysManager.dispatchEvent({event: loadedEvent});
         }
@@ -112,7 +112,7 @@ class Xc3dApp extends XcSysApp {
   static* #loadPlugins() {
     for (const plugin of Xc3dAppConfig.plugins) {
       const loadedEvent = Symbol('Loaded');
-      XcSysManager.loadJavascriptAsync({
+      XcSysManager.loadJavaScriptAsync({
         scriptSrc: plugin, asModule: false, doneCallback: () => {
           XcSysManager.dispatchEvent({event: loadedEvent});
         }

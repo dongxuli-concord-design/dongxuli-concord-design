@@ -19,7 +19,7 @@ class XcSysManager {
     }
   }
 
-  static loadJavascriptAsync({scriptSrc, doneCallback, asModule = true}) {
+  static loadJavaScriptAsync({scriptSrc, doneCallback, asModule = true}) {
     try {
       const {existsSync} = require('fs');
       if (scriptSrc.endsWith('.js')) {

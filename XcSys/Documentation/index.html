@@ -289,8 +289,8 @@ Example:
   }
 </code>
 
-<h2>loadJavascriptAsync</h2>
-<code> static loadJavascriptAsync({scriptSrc, doneCallback, asModule = true})</code>
+<h2>loadJavaScriptAsync</h2>
+<code> static loadJavaScriptAsync({scriptSrc, doneCallback, asModule = true})</code>
 <dl>
   <dt>scriptSrc</dt>
   <dd>Source of the script.</dd>
@@ -301,6 +301,17 @@ Example:
   <dt>asModule</dt>
   <dd>Boolean flag indicating if the script is loaded as module.</dd>
 </dl>
+
+Example:
+
+<p>
+We can run the following code in the DevTool's Console or Snippet window.
+</p>
+
+<p>
+<code>XcSysManager.loadJavascriptAsync({scriptSrc: 'file:///tmp/foo.js', doneCallback: ()=>{console.log('loaded')}});</code>
+</p>
+
 <h2>run</h2>
 <code>static run({customInitFunction = null, customInitFunctionArg = null} = {})</code>
 It starts the XcSysManager.
