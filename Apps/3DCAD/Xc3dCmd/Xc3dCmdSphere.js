@@ -92,7 +92,7 @@ class Xc3dCmdSphere {
 
       this.#body = XcGmBody.createSolidSphere({radius: this.#radius});
 
-      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body});
+      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body, color: new THREE.Color('lightblue')});
       this.#renderingObject.position.copy(this.#position.toThreeVector3());
 
       Xc3dUIManager.addCustomOverlayRenderingObject({renderingObject: this.#renderingObject});

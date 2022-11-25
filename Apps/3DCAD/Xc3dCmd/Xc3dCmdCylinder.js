@@ -104,7 +104,7 @@ class Xc3dCmdCylinder {
 
       this.#body = XcGmBody.createSolidCylinder({radius: this.#radius, height: this.#height});
 
-      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body});
+      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body, color: new THREE.Color('lightblue')});
       this.#renderingObject.position.copy(this.#position.toThreeVector3());
 
       Xc3dUIManager.addCustomOverlayRenderingObject({renderingObject: this.#renderingObject});

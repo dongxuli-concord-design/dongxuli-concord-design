@@ -118,7 +118,7 @@ class Xc3dCmdBlock {
 
       this.#body = XcGmBody.createSolidBlock({x: this.#length, y: this.#width, z: this.#height});
 
-      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body});
+      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body, color: new THREE.Color('lightblue')});
       this.#renderingObject.position.copy(this.#position.toThreeVector3());
 
       Xc3dUIManager.addCustomOverlayRenderingObject({renderingObject: this.#renderingObject});

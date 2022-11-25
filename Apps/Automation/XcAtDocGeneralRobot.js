@@ -182,7 +182,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       }
     } catch (error) {
       this.#error = error;
-      throw "The WRONG defination of the robot: " +`(${error})`;
+      XcSysAssert({assertion: false, message: `The WRONG defination of the robot: ${error}`});
     }
 
     this.#renderRobotBones = [];
@@ -199,7 +199,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
 
       const renderingObjectLink = Xc3dDocDocument.generateRenderingForBody({
         body: robotBone.link,
-        color: new THREE.Color( `lightgray` ),
+        color: new THREE.Color('lightgray'),
       });
       renderingObjectGroup.add(renderingObjectLink);
 

@@ -3,10 +3,6 @@ class Xc3dDocDocument {
 
   static #registeredDrawableObjectTypeClassMap = new Map();
 
-  static #defaultBodyColor = new THREE.Color('rgb(220, 220, 220)');
-  static #defaultSheetColor = new THREE.Color('rgb(100, 100, 100)');
-  static #defaultWireColor = new THREE.Color('rgb(50, 50, 50)');
-  static #defaultPointColor = new THREE.Color('rgb(0, 0, 0)');
   static #defaultRenderingResolution = 'high';
   static #drawableObjectToRenderingObjectMap = new WeakMap();
   static #renderingObjectToDrawableObjectMap = new WeakMap();
@@ -122,7 +118,7 @@ class Xc3dDocDocument {
 
   static generateRenderingForBody({
                                     body,
-                                    color = null,
+                                    color,
                                     map = null,
                                     opacity = 1.0,
                                     transparent = false,
@@ -130,19 +126,6 @@ class Xc3dDocDocument {
                                   }) {
 
     const bodyType = body.type;
-    if (!color) {
-      if (bodyType === XcGmBody.BODY_TYPE.SOLID) {
-        color = Xc3dDocDocument.#defaultBodyColor;
-      } else if (bodyType === XcGmBody.BODY_TYPE.SHEET) {
-        color = Xc3dDocDocument.#defaultSheetColor;
-      } else if (bodyType === XcGmBody.BODY_TYPE.WIRE) {
-        color = Xc3dDocDocument.#defaultWireColor;
-      } else if (bodyType === XcGmBody.BODY_TYPE.MINIMUM) {
-        color = Xc3dDocDocument.#defaultPointColor;
-      } else {
-        color = Xc3dDocDocument.#defaultBodyColor;
-      }
-    }
 
     let pointSize = 1;
     if (bodyType === XcGmBody.BODY_TYPE.SOLID) {

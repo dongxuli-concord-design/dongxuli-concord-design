@@ -106,7 +106,7 @@ class Xc3dCmdTorus {
 
       this.#body = XcGmBody.createSolidTorus({majorRadius: this.#majorRadius, minorRadius: this.#minorRadius});
 
-      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body});
+      this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body, color: new THREE.Color('lightblue')});
       this.#renderingObject.position.copy(this.#position.toThreeVector3());
 
       Xc3dUIManager.addCustomOverlayRenderingObject({renderingObject: this.#renderingObject});

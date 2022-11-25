@@ -141,7 +141,7 @@ class Xc3dCmdRevolve {
             this.#hints.remove(tmpRenderingObject);
           }
 
-          tmpRenderingObject = Xc3dDocDocument.generateRenderingForBody({body: newProfile});
+          tmpRenderingObject = Xc3dDocDocument.generateRenderingForBody({body: newProfile, color: new THREE.Color('lightblue')});
           this.#hints.add(tmpRenderingObject);
           Xc3dUIManager.redraw();
         }

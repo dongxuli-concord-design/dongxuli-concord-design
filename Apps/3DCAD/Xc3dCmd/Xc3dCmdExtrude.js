@@ -196,7 +196,7 @@ class Xc3dCmdExtrude {
           this.#hints.remove(tmpRenderingObject);
         }
 
-        tmpRenderingObject = Xc3dDocDocument.generateRenderingForBody({body: extrudedBody});
+        tmpRenderingObject = Xc3dDocDocument.generateRenderingForBody({body: extrudedBody, color: new THREE.Color('lightblue')});
         this.#hints.add(tmpRenderingObject);
         Xc3dUIManager.redraw();
       }

@@ -3,11 +3,12 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   color;
   texture;
 
-  constructor({name = 'model', body = null, color = null, texture = null} = {}) {
+  constructor({body, name = 'model', color = new THREE.Color('rgb(220, 220, 220)'), texture = null} = {}) {
     super({name});
+
+    this.body = body;
     this.color = color;
     this.texture = texture;
-    this.body = body;
   }
 
   static load({json, document}) {
@@ -43,7 +44,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
     const newBody = this.body.clone();
     const newModel = new Xc3dDocModel({
       name: this.name,
-      color: this.color ? this.color.clone() : null,
+      color: this.color.clone(),
       texture: this.texture,
       body: newBody,
     });
@@ -56,7 +57,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   copy({other}) {
     super.copy({other});
     this.texture = other.texture;
-    this.color = other.color ? other.color.clone() : null;
+    this.color = other.color.clone();
 
     const newBody = other.body.clone();
     this.body = newBody;
@@ -69,7 +70,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
       name: this.name,
       bodyData: bodyData,
       texture: textureData,
-      color: this.color ? `#${this.color.getHexString()}` : null,
+      color: `#${this.color.getHexString()}`,
     };
   }
 

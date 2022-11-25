@@ -115,7 +115,7 @@ class XcGmBody extends XcGmPart {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_cone', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const cone = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.tag});
+    const cone = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.body});
     return cone;
   }
 
