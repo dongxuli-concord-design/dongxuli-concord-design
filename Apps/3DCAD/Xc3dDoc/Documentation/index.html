@@ -114,7 +114,7 @@ Xc3dDocDocument.registerDrawableObjectType({
 <pre><code>
   static generateRenderingForBody({
                                     body,
-                                    color = null,
+                                    color,
                                     map = null,
                                     opacity = 1.0,
                                     transparent = false
@@ -265,7 +265,7 @@ Represent a document model which is built from the XcGm kernel.
 
 <h3>constructor</h3>
 
-<code>constructor({body = null, color = null, name = 'model', texture = null} = {})</code>
+<code>constructor({body, name = 'model', color = new THREE.Color('rgb(220, 220, 220)'), texture = null} = {}) </code>
 
 <dl>
 <dt>body</dt> <dd>XcGmBody object.</dd>
