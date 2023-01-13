@@ -167,11 +167,11 @@ let dialog = new XcUIDialog( {
 
 <h2>showElement</h2>
 
-<code>showElement(elem)</code>
+<code>showElement({element})</code>
 
 <ul>
   <li>
-    <dl>elem</dl>
+    <dl>element</dl>
     <dd>An HTML element</dd>
   </li>
 </ul>
@@ -179,11 +179,11 @@ let dialog = new XcUIDialog( {
 <pre>
     const outputDisplay = document.getElementById("test");
 
-    const p = document.createElement('p');
-    p.innerText = str;
-    p.style.cssText = 'margin: 0.5em; padding: 0em;';
+    const element = document.createElement('p');
+    element.innerText = str;
+    element.style.cssText = 'margin: 0.5em; padding: 0em;';
     
-    outputDisplay.showElement(p);
+    outputDisplay.showElement({element});
  </pre>
 
 </body>

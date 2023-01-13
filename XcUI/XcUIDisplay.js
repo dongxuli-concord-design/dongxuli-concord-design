@@ -42,7 +42,7 @@ class XcUIDisplay extends HTMLElement {
     const p = document.createElement('p');
     p.innerText = str;
     p.style.cssText = 'background-color: yellow; margin: 0.5em; padding: 0em;';
-    this.showElement(p);
+    this.showElement({element: p});
   }
 
   info(...args) {
@@ -52,7 +52,7 @@ class XcUIDisplay extends HTMLElement {
     const p = document.createElement('p');
     p.innerText = str;
     p.style.cssText = 'background-color: green; margin: 0.5em; padding: 0em;';
-    this.showElement(p);
+    this.showElement({element: p});
   }
 
   log(...args) {
@@ -62,7 +62,7 @@ class XcUIDisplay extends HTMLElement {
     const p = document.createElement('p');
     p.innerText = str;
     p.style.cssText = 'margin: 0.5em; padding: 0em;';
-    this.showElement(p);
+    this.showElement({element: p});
   }
 
   warn(...args) {
@@ -72,7 +72,7 @@ class XcUIDisplay extends HTMLElement {
     const p = document.createElement('p');
     p.innerText = str;
     p.style.cssText = 'background-color: orange; margin: 0.5em; padding: 0em;';
-    this.showElement(p);
+    this.showElement({element: p});
 
     this.beep();
   }
@@ -84,7 +84,7 @@ class XcUIDisplay extends HTMLElement {
     const p = document.createElement('p');
     p.innerText = str;
     p.style.cssText = 'background-color: red; margin: 0.5em; padding: 0em;';
-    this.showElement(p);
+    this.showElement({element: p});
 
     this.beep();
   }
@@ -96,15 +96,15 @@ class XcUIDisplay extends HTMLElement {
     const p = document.createElement('p');
     p.innerText = str;
     p.style.cssText = 'background-color: red; margin: 0.5em; padding: 0em;';
-    this.showElement(p);
+    this.showElement({element: p});
 
     this.beep();
 
     alert(...args);
   }
 
-  showElement(elem) {
-    this.appendChild(elem);
+  showElement({element}) {
+    this.appendChild(element);
     this.lastElementChild.scrollIntoView();
   }
 }
