@@ -53,8 +53,16 @@ class Xc3dDocDocument {
     return this.#renderingScene;
   }
 
+  set renderingScene(value) {
+    XcSysAssert({assertion: false, message: 'renderingScene cannot be reassigned.'});
+  }
+
   get userData() {
     return this.#userData;
+  }
+
+  set userData(value) {
+    XcSysAssert({assertion: false, message: 'userData cannot be reassigned.'});
   }
 
   get undoEnabled() {
