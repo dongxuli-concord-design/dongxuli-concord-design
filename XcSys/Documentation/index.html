@@ -374,7 +374,7 @@ Example:
   <dd>Time in milliseconds.</dd>
 
   <dt>expectedEventTypes</dt>
-  <dd>Array of expected event types.</dd>
+  <dd>Array of expected event types. </dd>
 
   <dt>return</dt>
   <dd>Array of apps.</dd>
@@ -382,8 +382,12 @@ Example:
 
 Pause the current generator function and wait for the event. <code>uiContext</code> is to set the current context of
 the moment of waiting events.
+
 If the <code>timeOut</code> is set, this function will return after the time is up.
-If<code>expectedEventTypes</code> is set, this function will return only the expected event types are caught.
+
+If<code>expectedEventTypes</code> is set, this function will return only the expected event types are caught. Each type in the  could be value or a callback function in the form of <code>(event) => {return true of false;}</code>. If the type is a value, then the system will check if the caught event is equal to the value using <code>===</code>; if the type is a callback function, then the callback function will be used as a check function.
+
+
 Example:
 <pre>
     <code>
@@ -394,7 +398,14 @@ Example:
     });
     let event = yield*
     XcSysManager.waitForEvent({
-    uiContext: uiContext
+    uiContext: uiContext,
+    expectedEventTypes:
+    [
+      'abc',
+      123,
+      (event) => { return event instanceof Xc3dUIMouseEvent; },
+      (event) => { return ((typeof event === 'number') && (event > 42) },
+    ],
     });
     // Dispatch event somewhere else
     // XcSysManager.dispatchEvent({event: 'my

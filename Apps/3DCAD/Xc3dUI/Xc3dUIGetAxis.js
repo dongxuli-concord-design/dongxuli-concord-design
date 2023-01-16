@@ -116,7 +116,12 @@ class Xc3dUIGetAxis {
   * onWaitForAxis() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dUIGetAxis.#Event.Cancel, Xc3dUIGetAxis.#Event.Done, Xc3dUIGetAxis.#Event.InputEnter, MouseEvent]
+      expectedEventTypes: [
+        Xc3dUIGetAxis.#Event.Cancel, 
+        Xc3dUIGetAxis.#Event.Done, 
+        Xc3dUIGetAxis.#Event.InputEnter,
+        (event) => { return event instanceof MouseEvent; },
+        ],
     });
 
     if (event === Xc3dUIGetAxis.#Event.Cancel) {

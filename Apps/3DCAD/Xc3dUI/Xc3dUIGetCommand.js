@@ -72,7 +72,11 @@ class Xc3dUIGetCommand {
   * onWaitForCommand() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uicontext,
-      expectedEventTypes: [Xc3dUIGetCommand.#Event.Cancel, Xc3dUIGetCommand.#Event.InputDone, MouseEvent]
+      expectedEventTypes: [
+        Xc3dUIGetCommand.#Event.Cancel, 
+        Xc3dUIGetCommand.#Event.InputDone, 
+        (event) => { return event instanceof MouseEvent; },
+      ],
     });
 
     if (event === Xc3dUIGetCommand.#Event.Cancel) {

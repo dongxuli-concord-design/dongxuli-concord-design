@@ -185,7 +185,11 @@ class Xc3dCmdView {
     this.#uiContext.prompt = this.#i18n.T`Click a position to start`;
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmdView.#Event.Quit, Xc3dCmdView.#Event.LooKAtUCS, Xc3dUIMouseEvent]
+      expectedEventTypes: [
+        Xc3dCmdView.#Event.Quit, 
+        Xc3dCmdView.#Event.LooKAtUCS, 
+        (event) => { return event instanceof Xc3dUIMouseEvent; },
+      ]
     });
     if (event === Xc3dCmdView.#Event.Quit) {
       return Xc3dCmdView.#CommandState.Quit;
@@ -204,7 +208,11 @@ class Xc3dCmdView {
 
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmdView.#Event.Quit, Xc3dCmdView.#Event.LooKAtUCS, Xc3dUIMouseEvent]
+      expectedEventTypes: [
+        Xc3dCmdView.#Event.Quit, 
+        Xc3dCmdView.#Event.LooKAtUCS, 
+        (event) => { return event instanceof Xc3dUIMouseEvent; },
+      ],
     });
     if (event === Xc3dCmdView.#Event.Quit) {
       return Xc3dCmdView.#CommandState.Quit;

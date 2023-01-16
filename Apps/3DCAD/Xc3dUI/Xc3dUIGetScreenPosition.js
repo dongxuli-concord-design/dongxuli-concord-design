@@ -107,7 +107,12 @@ class Xc3dUIGetScreenPosition {
   * onWaitForInput() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dUIGetScreenPosition.#Event.Cancel, Xc3dUIGetScreenPosition.#Event.Done, Xc3dUIMouseEvent, Xc3dUITouchEvent]
+      expectedEventTypes: [
+        Xc3dUIGetScreenPosition.#Event.Cancel, 
+        Xc3dUIGetScreenPosition.#Event.Done, 
+        (event) => { return event instanceof Xc3dUIMouseEvent; },
+        (event) => { return event instanceof Xc3dUITouchEvent; },
+      ],
     });
 
     if (event === Xc3dUIGetScreenPosition.#Event.Cancel) {

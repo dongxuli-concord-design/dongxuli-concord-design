@@ -61,7 +61,11 @@ class Xc3dUIGetDrawableObject {
   * onWaitForPickingPart() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dUIGetDrawableObject.#Event.Cancel, Xc3dUIGetDrawableObject.#Event.Done, Xc3dUIMouseEvent]
+      expectedEventTypes: [
+        Xc3dUIGetDrawableObject.#Event.Cancel, 
+        Xc3dUIGetDrawableObject.#Event.Done, 
+        (event) => { return event instanceof Xc3dUIMouseEvent; },
+      ],
     });
     if (event === Xc3dUIGetDrawableObject.#Event.Cancel) {
       this.inputState = Xc3dUIInputState.eInputCancel;

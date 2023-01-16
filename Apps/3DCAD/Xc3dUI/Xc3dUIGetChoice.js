@@ -69,7 +69,11 @@ class Xc3dUIGetChoice {
   * onWaitForChoice() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uicontext,
-      expectedEventTypes: [Xc3dUIGetChoice.#Event.Cancel, Xc3dUIGetChoice.#Event.Done, MouseEvent]
+      expectedEventTypes: [
+        Xc3dUIGetChoice.#Event.Cancel, 
+        Xc3dUIGetChoice.#Event.Done, 
+        (event) => { return event instanceof MouseEvent; },
+      ]
     });
 
     if (event === Xc3dUIGetChoice.#Event.Cancel) {

@@ -115,7 +115,7 @@ class Xc3dCmdInsert {
   * #onWaitForDocument() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmdInsert.#Event.Cancel, event === Xc3dCmdInsert.#Event.DocumentSelected]
+      expectedEventTypes: [Xc3dCmdInsert.#Event.Cancel, Xc3dCmdInsert.#Event.DocumentSelected]
     });
 
     if (event === Xc3dCmdInsert.#Event.Cancel) {

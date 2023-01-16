@@ -121,7 +121,9 @@ class XcSysMainCoroutine {
     try {
       const event = yield* XcSysManager.waitForEvent({
         uiContext: uiContextForWaitingCommands,
-        expectedEventTypes: [XcSysMainCoroutineOpenAppEvent],
+        expectedEventTypes: [
+          (event) => { return event instanceof XcSysMainCoroutineOpenAppEvent; },
+        ],
       });
 
       if (event === null) {

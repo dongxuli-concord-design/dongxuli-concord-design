@@ -182,27 +182,29 @@ class XcSysManager {
     expectedEventTypes = null} = {},
     ) {
 
-    function _isQualifedEvent(e) {
-      if (e === null) {
+    function _isQualifedEvent(event) {
+      if (event === null) {
         return true;
       }
 
       if (expectedEventTypes === null) {
         return true;
       } else {
+        let isQualified = false;
+
         for (const type of expectedEventTypes) {
           if (typeof type === 'function') {
-            if (e instanceof type) {
-              return true;
+            if (type(event)) {
+              isQualified = true;
             }
           } else {
-            if (type === e) {
-              return true;
+            if (type === event) {
+              isQualified = true;
             }
           }
         }
 
-        return false;
+        return isQualified;
       }
     }
 

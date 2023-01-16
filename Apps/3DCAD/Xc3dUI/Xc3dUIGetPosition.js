@@ -282,7 +282,16 @@ class Xc3dUIGetPosition {
   * onWaitForPosition() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContextForInput,
-      expectedEventTypes: [Xc3dUIGetPosition.#Event.Cancel, Xc3dUIGetPosition.#Event.Done, Xc3dUIGetPosition.#Event.Origin, Xc3dUIGetPosition.#Event.ObjectCenter, Xc3dUIGetPosition.#Event.TextBoxInputButtonClick, Xc3dUIGetPosition.#Event.CodeInputButtonClick, Xc3dUIMouseEvent, Xc3dUITouchEvent]
+      expectedEventTypes: [
+        Xc3dUIGetPosition.#Event.Cancel, 
+        Xc3dUIGetPosition.#Event.Done, 
+        Xc3dUIGetPosition.#Event.Origin, 
+        Xc3dUIGetPosition.#Event.ObjectCenter, 
+        Xc3dUIGetPosition.#Event.TextBoxInputButtonClick, 
+        Xc3dUIGetPosition.#Event.CodeInputButtonClick, 
+        (event) => { return event instanceof Xc3dUIMouseEvent; },
+        (event) => { return event instanceof Xc3dUITouchEvent; },
+      ],
     });
 
     if (event === Xc3dUIGetPosition.#Event.Cancel) {
