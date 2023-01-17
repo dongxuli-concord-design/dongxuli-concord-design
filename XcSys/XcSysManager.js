@@ -196,10 +196,18 @@ class XcSysManager {
           if (typeof type === 'function') {
             if (type(event)) {
               isQualified = true;
+              break;
+            } else {
+              isQualified = false;
+              continue;
             }
           } else {
             if (type === event) {
               isQualified = true;
+              break;
+            } else {
+              isQualified = false;
+              continue;
             }
           }
         }
