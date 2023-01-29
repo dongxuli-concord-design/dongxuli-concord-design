@@ -137,10 +137,12 @@ class Xc3dCmdSetupUCS {
 
     const event = yield* XcSysManager.waitForEvent({
       uiContext: uiContext,
-      expectedEventTypes: [Xc3dCmdSetupUCS.#Event.WCS, Xc3dCmdSetupUCS.#Event.ManualUCS, Xc3dCmdSetupUCS.#Event.TransformUCS],
+      expectedEventTypes: [Xc3dCmdSetupUCS.#Event.Cancel, Xc3dCmdSetupUCS.#Event.WCS, Xc3dCmdSetupUCS.#Event.ManualUCS, Xc3dCmdSetupUCS.#Event.TransformUCS],
     });
 
-    if (event === Xc3dCmdSetupUCS.#Event.WCS) {
+    if (event === Xc3dCmdSetupUCS.#Event.Cancel) {
+      return Xc3dCmdSetupUCS.#CommandState.Cancel;
+    } else if (event === Xc3dCmdSetupUCS.#Event.WCS) {
       Xc3dUIManager.resetUCS();
       return Xc3dCmdSetupUCS.#CommandState.Done;
     } else if (event === Xc3dCmdSetupUCS.#Event.ManualUCS) {
