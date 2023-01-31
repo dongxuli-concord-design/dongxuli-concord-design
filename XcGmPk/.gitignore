@@ -13,3 +13,4 @@ XcGmPkWin/XcGmPkWin.vcxproj.filters
 XcGmPkWin/XcGmPkWin.vcxproj.user
 XcGmPkWin/XcGmPkWin.VC.VC.opendb
 /binding.gyp
+/package-lock.json

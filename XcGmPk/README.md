@@ -1,7 +1,7 @@
 # Prepare
 
 * Make sure the Parasolid is X64
-* Make compiler is good
+* Make sure compiler is good
     * Mac: Xcode
     * Linux: Nothing to do.
     * Windows: 
@@ -19,6 +19,9 @@ Now we embedded it as source code.
 
 # Mac
 
+* Install xcode command line tools using `sudo xcode-select --install`
+* Download the correct version of Node installation package
+* Install `nw-gyp` using `sudo npm install -g nw-gyp`
 * Copy Parasolid/mac to XcGmPk
 * Rename `binding_darwin.gyp` to `binding.gyp`
 * Use nw-gyp to build (sometimes xcode commandline needs to be updated if there are any errors!!!)
@@ -27,6 +30,12 @@ Now we embedded it as source code.
 * Debug (If the Build/debug folder is available and binary is built with debug flag.)
     * (We can attach a nw.js (render) process. We can attach process using CLion or XCode.
     * We can use node command line and debug the node process instead of using nw.js.
+
+N.B.:
+
+If there is `Undefined variable standalone_static_library` error, please try to follow the steps in `https://github.com/nwjs/nw-gyp/issues/155` to fix the error.
+
+Specifically, you need to modify `/usr/local/lib/node_modules/nw-gyp/lib/configure.js`.
 
 # Linux
 
