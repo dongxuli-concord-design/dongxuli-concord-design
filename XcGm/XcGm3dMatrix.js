@@ -592,17 +592,17 @@ class XcGm3dMatrix {
     // The lerp of translation
     const sourceVector = this.translationVector();
     const targetVector = targetMatrix.translationVector();
-    let lerpVector = sourceVector.multiply({scale: 1 - scale});
-    lerpVector.add({vector: targetVector.multiply({scale})});
+    let lerpVector = XcGm3dVector.multiply({vector:sourceVector, scale: 1 - scale});
+    lerpVector.add({vector: XcGm3dVector.multiply({vector:targetVector,scale})});
 
     // The lerp of orientation
-    const sourceQuaternion = XcGmQuaternion.fromRotationMatrix(this);
-    const targetQuaternion = XcGmQuaternion.fromRotationMatrix(targetMatrix);
-    let lerpQuaternion = sourceQuaternion.lerpTo({target: targetQuaternion, scale});
+    const sourceQuaternion = XcGmQuaternion.fromRotationMatrix({matrix:this});
+    const targetQuaternion = XcGmQuaternion.fromRotationMatrix({matrix:targetMatrix});
+    let lerpQuaternion = sourceQuaternion.lerpTo({target: targetQuaternion, exponent:scale});
 
     // The lerp of orientation and translatioin
     let lerpMatrix = lerpQuaternion.matrix;
-    lerpMatrix.setToTranslation({lerpVector});
+    lerpMatrix.setToTranslation({vector:lerpVector});
     return lerpMatrix;
   }
 

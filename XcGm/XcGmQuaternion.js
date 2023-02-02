@@ -117,12 +117,12 @@ class XcGmQuaternion {
    * @returns {XcGmQuaternion} the Hamilton product
    */
   multiply({qRight}) {
-    return {
+    return new XcGmQuaternion({
       w: this.w * qRight.w - this.x * qRight.x - this.y * qRight.y - this.z * qRight.z,
       x: this.w * qRight.x + this.x * qRight.w + this.y * qRight.z - this.z * qRight.y,
       y: this.w * qRight.y + this.y * qRight.w + this.z * qRight.x - this.x * qRight.z,
       z: this.w * qRight.z + this.z * qRight.w + this.x * qRight.y - this.y * qRight.x
-    };
+    });
   }
 
   /**
