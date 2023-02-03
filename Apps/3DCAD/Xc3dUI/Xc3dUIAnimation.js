@@ -97,8 +97,7 @@ class Xc3dUIAnimation {
       Xc3dUIManager.orbitCamera({orbitVector: new THREE.Vector2(stepOrbitVector.x, stepOrbitVector.y)});
 
       Xc3dUIManager.redraw();
-
-      let event = yield;
+      yield;
     }
   }
 
@@ -114,8 +113,7 @@ class Xc3dUIAnimation {
       Xc3dUIManager.panCamera({panVector: new THREE.Vector2(stepOrbitVector.x, stepOrbitVector.y)});
 
       Xc3dUIManager.redraw();
-
-      let event = yield;
+      yield;
     }
   }
 
@@ -127,43 +125,45 @@ class Xc3dUIAnimation {
       Xc3dUIManager.zoomCamera({factor: stepZoomFactor});
 
       Xc3dUIManager.redraw();
-
-      let event = yield;
+      yield;
     }
   }
 
-  static* translate({drawableObject, distance, direction, duration}) {
+  static* translate({drawableObjects, distance, direction, duration}) {
     const steps = duration / Xc3dUIAnimation.animationDelay;
     const distanceStep = distance / steps;
 
     for (let i = 0; i < steps; ++i) {
-      const matrix = XcGm3dMatrix.translationMatrix({
-        vector: XcGm3dVector.multiply({
-          vector: direction,
-          scale: distanceStep
-        })
+      const translationMatrix = XcGm3dMatrix.translationMatrix({
+        vector: XcGm3dVector.multiply({vector: direction, scale: distanceStep})
       });
-      drawableObject.transform({matrix});
-      Xc3dUIManager.document.modifyDrawableObject({drawableObject});
-      Xc3dUIManager.redraw();
 
+      for (const item of drawableObjects) {
+        item.transform({matrix: translationMatrix});
+        Xc3dUIManager.document.modifyDrawableObject({drawableObject: item});
+      }
+
+      Xc3dUIManager.redraw();
       yield;
     }
-  }
+  };
 
-  static* rotate({drawableObject, angle, axis, duration}) {
+  static* rotate({drawableObjects, angle, axis, duration}) {
     const steps = duration / Xc3dUIAnimation.animationDelay;
-    const angeleStep = angle / steps;
+    const angeleStep = ((angle / steps) * Math.PI) / 180.0;
 
     for (let i = 0; i < steps; ++i) {
-      const matrix = XcGm3dMatrix.rotationMatrix({angle: angeleStep * i, axis});
-      drawableObject.transform({matrix});
-      Xc3dUIManager.document.modifyDrawableObject({drawableObject});
-      Xc3dUIManager.redraw();
+      const rotationMatrix = XcGm3dMatrix.rotationMatrix({angle: angeleStep, axis});
 
+      for (const item of drawableObjects) {
+        item.transform({matrix: rotationMatrix});
+        Xc3dUIManager.document.modifyDrawableObject({drawableObject: item});
+      }
+
+      Xc3dUIManager.redraw();
       yield;
     }
-  }
+  };
 
   static* transparentize({drawableObject, start, end, duration}) {
     const renderingObject = Xc3dDocDocument.getRenderingObjectFromDrawableObject({drawableObject});
@@ -183,16 +183,18 @@ class Xc3dUIAnimation {
   }
 
   static* runCustomAction({action}) {
-    let ret = null;
-    do {
-      ret = action.next();
-      if (ret.value) {
-        Xc3dUIManager.document.modifyDrawableObject({drawableObject: ret.value});
+    while (true) {
+      const ret = action.next();
+      if (ret.done) {
+        break;
+      } else {
+        const drawableObjects = ret.value;
+        XcSysAssert({assertion: Array.isArray(drawableObjects), message: 'Action value should be an array.'});
+        drawableObjects.forEach(drawableObject => Xc3dUIManager.document.modifyDrawableObject({drawableObject}));
         Xc3dUIManager.redraw();
+  
+        yield;
       }
-
-      yield;
     }
-    while (!ret.done);
-  }
+  }  
 }

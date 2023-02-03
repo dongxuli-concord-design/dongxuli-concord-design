@@ -18,6 +18,8 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
   #jointMatrixes;
   #robotRenderObject;
 
+  #attachment;
+
   #kinematics;
 
   constructor({
@@ -42,6 +44,8 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     this.#target = null;
     this.#error = null;
     this.#robotRenderObject = null;
+
+    this.#attachment = null;
 
     this.#generateDefinitionParameters();
     this.#generateBody();
@@ -87,15 +91,26 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     const matrix = coordinateSystemWorld.toMatrix();
     finalMatrix.preMultiply({matrix});
     this.#target = XcGmCoordinateSystem.fromMatrix({matrix: finalMatrix});
-    return this.#target;
+    return this.#target.clone();
   }
 
   set target(coordinateSystem) {
     const matrix = coordinateSystem.toMatrix();
-    const angles = this.#kinematics.IK({targetMatrix: matrix, currentAngles: this.#angles});
+    const invertMatrix = this.#matrix.inverse;
+    const localMatrix = XcGm3dMatrix.multiply({matrix1: invertMatrix, matrix2: matrix});
+
+    const angles = this.#kinematics.IK({targetMatrix:localMatrix, currentAngles:this.#angles});
     this.#angles = [...angles];
     const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
+  }
+
+  addAttachment({drawableObject}) {
+    this.#attachment = drawableObject;
+  }
+
+  removeAttachment() {
+    this.#attachment = null;
   }
 
   #generateDefinitionParameters() {
@@ -114,7 +129,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
             z: definition.location[2],
           }),
           zAxisDirection,
-          xAxisDirection: zAxisDirection.perpVector(),
+          xAxisDirection: zAxisDirection.perpendicularVector,
         });
         this.#jointCoordinateSystems.push(jointCoordinateSystems);
         this.#jointTypes.push(definition.type);
@@ -123,14 +138,14 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
         this.#angles.push(0.0);
     }
 
-    this.#kinematics = new XcAtGeneralKinematics(this.#geometryDefinition, this.#jointCoordinateSystems);
+    this.#kinematics = new XcAtGeneralKinematics({geometryDefinition:this.#geometryDefinition, jointCoordinateSystem:this.#jointCoordinateSystems});
     const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
   }
 
   #generateBody() {
     this.#error = null;
-    let linkRadius = 0.1;
+    let linkRadius = 0.05;
     let jointRadius = 0.8 * linkRadius;
 
     // Joint
@@ -151,12 +166,12 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     // Link
     const createLink = ({startLinkLocation, endLinkLocation}) => {
       const zAxisDirection = XcGm3dVector.subtract({vector1: endLinkLocation.origin,vector2: startLinkLocation.origin});
-      const height = zAxisDirection.length();
+      const height = zAxisDirection.length;
       zAxisDirection.normalize();
       const coordinateSystem = new XcGmCoordinateSystem({
         origin: startLinkLocation.origin,
         zAxisDirection,
-        xAxisDirection: zAxisDirection.perpVector(),
+        xAxisDirection: zAxisDirection.perpendicularVector,
       });
 
       const link = XcGmBody.createSolidCylinder({
@@ -262,49 +277,59 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     this.#matrix.multiply({matrix});
   }
 
-  *moveToOriginalPosition() {
+  reset() {
     for(let index = 0; index < this.#angles.length; ++index) {
       this.#angles[index] = 0.0;
     }
 
     const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     this.#jointMatrixes = [...arrayMatrix];
-    yield;
   }
 
-  * moveLine({targetCoordinateSystem}) {
-    const currentCoordinateSystem = this.target;
+  * moveToOriginalPosition() {
+    for(let index = 0; index < this.#angles.length; ++index) {
+      this.#angles[index] = 0.0;
+    }
+
+    const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
+    this.#jointMatrixes = [...arrayMatrix];
+
+    yield [this];
+  }
+
+  * moveLine({targetCoordinateSystem, drawableObject = null }) {
+    let currentCoordinateSystem = this.target;
     const currentPosition = currentCoordinateSystem.origin;
-    const sourceMatrix = currentCoordinateSystem.toMatrix();
-    const targetMatrix = targetCoordinateSystem.toMatrix();
+
+    const targetPostion = targetCoordinateSystem.origin;
+    const targetXDir = targetCoordinateSystem.xAxisDirection;
+    const targetZDir = targetCoordinateSystem.zAxisDirection;
 
     const detPosition = XcGm3dPosition.subtract({position: targetPostion, positionOrVector: currentPosition.toVector()});
-    const distance = detPosition.length();
+    const distance = detPosition.length;
     const steps = Math.ceil(distance / XcAtDocGeneralRobot.ROBOT_MOVE_DELT);
+    detPosition.divide({scale: steps});
+    const transformMatrix = XcGm3dMatrix.translationMatrix({vector:detPosition});
 
-    for (let i = 0; i <= steps; ++i) {
-      const ikTargetMatrix = sourceMatrix.lerpTo({targetMatrix, scale: i / steps});
+    const position = currentPosition.clone();
+    for (let i = 0; i < steps; ++i) {
+      const detCoordinateSystem = new XcGmCoordinateSystem();
+      position.add({vector: detPosition});
+      detCoordinateSystem.origin = position;
+      detCoordinateSystem.xAxisDirection = targetXDir;
+      detCoordinateSystem.zAxisDirection = targetZDir;
+      
+      this.target = detCoordinateSystem;
 
-      this.#angles = this.#kinematics.IK({targetMatrix: ikTargetMatrix, currentAngles: this.#angles});
-      const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
-      this.#jointMatrixes = [...arrayMatrix];
-
-      for (let index = 0; index < this.#renderRobotBones.length; ++index) {
-        this.#renderRobotBones[index].position.set(0, 0, 0);
-        this.#renderRobotBones[index].rotation.set(0, 0, 0);
-        this.#renderRobotBones[index].scale.set(1, 1, 1);
-        this.#renderRobotBones[index].applyMatrix4(this.#jointMatrixes[index].toThreeMatrix4());
-        this.#renderRobotBones[index].updateMatrix();
-        this.#renderRobotBones[index].updateMatrixWorld();
+      let ret = null;
+      if (drawableObject) {
+        drawableObject.transform({matrix: transformMatrix});
+        ret = [this, drawableObject];
+      } else {
+        ret = [this];
       }
 
-      this.#robotRenderObject.rotation.set(0, 0, 0);
-      this.#robotRenderObject.scale.set(1, 1, 1);
-      this.#robotRenderObject.applyMatrix4(this.#matrix.toThreeMatrix4());
-      this.#robotRenderObject.updateMatrix();
-      this.#robotRenderObject.updateMatrixWorld();
-
-      yield;
+      yield ret;
     }
   }
 }

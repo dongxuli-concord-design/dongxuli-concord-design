@@ -56,7 +56,7 @@ class XcAtGeneralKinematics {
       } else {
         const matrix1 = this.#jointCoordinateSystem[index - 1].toMatrix();
         const matrix2 = this.#jointCoordinateSystem[index].toMatrix();
-        const inverseMatrix1 = matrix1.inverse();
+        const inverseMatrix1 = matrix1.inverse;
         const jointMatrix = XcGm3dMatrix.multiply({matrix1: inverseMatrix1, matrix2: rotationMatrix});
         jointMatrix.multiply({matrix: matrix2});
         finalMatrix.multiply({matrix: jointMatrix});
@@ -111,7 +111,7 @@ class XcAtGeneralKinematics {
           if (oversteps[j] >= 1) {
             oversteps[j] = 0;
             //The error is larger in both directions: reduce the step size
-            steps[j] *= ANNEALING_FACTOR;
+            steps[j] *= XcAtGeneralKinematics.ANNEALING_FACTOR;
           } else {
             oversteps[j] += 1;
           }
@@ -145,7 +145,7 @@ class XcAtGeneralKinematics {
     const xVector = new THREE.Vector3();
     const yVector = new THREE.Vector3();
     const zVector = new THREE.Vector3();
-    mat4.extractBasis(xVector, yVector, zVector);
+    matrix.extractBasis(xVector, yVector, zVector);
 
     return {position, xVector, yVector, zVector};
   }

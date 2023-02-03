@@ -771,7 +771,7 @@ Xc3dUIGetObject.inputObject = function* () {
 
   yield* Xc3dUIAnimation.runParallelAnimations({
     actions: [
-      Xc3dUIAnimation.rotate({drawableObject: drawableObject2, angle: 720, axis: new XcGm3dAxis({position: new XcGm3dPosition(), direction: new XcGm3dVector({x: 0, y: 0, z: 1})}), duration: 2000}),
+      Xc3dUIAnimation.rotate({drawableObjects: [drawableObject1, drawableObject2], angle: 720, axis: new XcGm3dAxis({position: new XcGm3dPosition(), direction: new XcGm3dVector({x: 0, y: 0, z: 1})}), duration: 2000}),
       Xc3dUIAnimation.runCustomAction({action: drawableObject3.dance10times()}),
     ]
   });
@@ -816,11 +816,23 @@ By default, animations will be run at 24 fps.
 
 <h3>translate</h3>
 
-<code>static* translate({drawableObject, distance, direction, duration})</code>
+<code>static* translate({drawableObjects, distance, direction, duration})</code>
+<dl>
+  <dt>drawableObjects</dt> <dd>the drawable objects of translation.</dd>
+  <dt>distance</dt> <dd>the distance of translation.</dd>
+  <dt>direction</dt> <dd>the direction of translation.</dd>
+  <dt>duration</dt> <dd>the duration of translation.</dd>
+</dl>
 
 <h3>rotate</h3>
 
-<code>static* rotate({drawableObject, angle, axis, duration})</code>
+<code>static* rotate({drawableObjects, angle, axis, duration})</code>
+<dl>
+  <dt>drawableObjects</dt> <dd>the drawable objects of rotation.</dd>
+  <dt>angle</dt> <dd>the angle of rotation.</dd>
+  <dt>axis</dt> <dd>the axis direction of rotation.</dd>
+  <dt>duration</dt> <dd>the duration of rotation.</dd>
+</dl>
 
 <h3>transparentize</h3>
 
