@@ -13,7 +13,7 @@ class XcSysManager {
   static #currentUiContext = null;
   static #eventQueue = null;
 
-  static * apps() {
+  static* apps() {
     for (const app of XcSysManager.#apps) {
       yield app;
     }
@@ -177,60 +177,14 @@ class XcSysManager {
   }
 
   static* waitForEvent({
-    uiContext = new XcSysUIContext(), 
-    timeOut = null, 
-    expectedEventTypes = null} = {},
-    ) {
-
-    function _isQualifedEvent(event) {
-      if (event === null) {
-        return true;
-      }
-
-      if (expectedEventTypes === null) {
-        return true;
-      } else {
-        let isQualified = false;
-
-        for (const type of expectedEventTypes) {
-          if (typeof type === 'function') {
-            if (type(event)) {
-              isQualified = true;
-              break;
-            } else {
-              isQualified = false;
-              continue;
-            }
-          } else {
-            if (type === event) {
-              isQualified = true;
-              break;
-            } else {
-              isQualified = false;
-              continue;
-            }
-          }
-        }
-
-        return isQualified;
-      }
-    }
-
-    let event = null;
-    do {
-      event = yield* XcSysManager.#waitForEvent({uiContext, timeOut});
-    } while (!_isQualifedEvent(event));
-
-    return event;
-  }
-
-  // All generators are static functions
-  static* #waitForEvent({
-    uiContext, 
-    timeOut
-  }) {
+                         uiContext = new XcSysUIContext(),
+                         timeOut = null,
+                         expectedEventTypes = null,
+                         onloadCallback = null,
+                       } = {},
+  ) {
     // Setup channels
-    // The following 'if' is for the performance optimization purpose.
+    // The following IF statements are for the performance optimization purpose.
     if (XcSysManager.#currentUiContext.showCanvasElement !== uiContext.showCanvasElement) {
       if (uiContext.showCanvasElement) {
         XcSysManager.canvasDiv.style.visibility = 'visible';
@@ -302,7 +256,42 @@ class XcSysManager {
 
     XcSysManager.#currentUiContext = uiContext;
 
-    //TODO: disable something in the pump messages
+    if (onloadCallback) {
+      onloadCallback();
+    }
+
+    function _isQualifedEvent(event) {
+      if (event === null) {
+        return true;
+      }
+
+      if (expectedEventTypes === null) {
+        return true;
+      } else {
+        let isQualified = false;
+
+        for (const type of expectedEventTypes) {
+          if (typeof type === 'function') {
+            if (type(event)) {
+              isQualified = true;
+              break;
+            } else {
+              isQualified = false;
+            }
+          } else {
+            if (type === event) {
+              isQualified = true;
+              break;
+            } else {
+              isQualified = false;
+            }
+          }
+        }
+
+        return isQualified;
+      }
+    }
+
     let timer = null;
     if (timeOut !== null) {
       // Start timer
@@ -312,21 +301,19 @@ class XcSysManager {
     }
 
     let event = null;
-    if (XcSysManager.#eventQueue.length > 0) {
-      event = XcSysManager.#eventQueue.shift();
-    } else {
-      event = yield;
-    }
+    do {
+      if (XcSysManager.#eventQueue.length > 0) {
+        event = XcSysManager.#eventQueue.shift();
+      } else {
+        event = yield;
+      }
+    } while (!_isQualifedEvent(event) && (event !== timer));
 
     let returnValue = null;
-    // Awaken by somebody here ...
-
     if (event === timer) {
-      // Time is out! we return null!
       returnValue = null;
     } else {
       clearTimeout(timer);
-
       returnValue = event;
     }
 
