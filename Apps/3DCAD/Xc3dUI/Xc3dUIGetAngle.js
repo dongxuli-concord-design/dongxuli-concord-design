@@ -64,10 +64,10 @@ class Xc3dUIGetAngle {
 
     this.#angleInputWidget = document.createElement('input');
     this.#angleInputWidget.type = 'number';
-    this.#angleInputWidget.value="0";
-    this.#angleInputWidget.min="-360";
-    this.#angleInputWidget.max="360";
-    this.#angleInputWidget.step="10";
+    this.#angleInputWidget.value = '0';
+    this.#angleInputWidget.min = '-360';
+    this.#angleInputWidget.max = '360';
+    this.#angleInputWidget.step = '10';
 
     this.#angleInputWidget.placeholder = Xc3dUII18n.i18n.T`Angle`;
     this.#angleInputWidget.addEventListener('input', (event) => {

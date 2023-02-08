@@ -44,20 +44,20 @@ class Xc3dCmdImportXT {
     fileLocationDisplay.setAttribute('rows', '3');
     fileLocationDisplay.setAttribute('cols', '20');
     fileLocationDisplay.setAttribute('readonly', true);
-    fileLocationDisplay.style.resize = "none";
+    fileLocationDisplay.style.resize = 'none';
     fileLocationDisplay.innerHTML = this.#pathName;
     widgets.push(fileLocationDisplay);
 
     const fileChooser = document.createElement('input');
     fileChooser.setAttribute('type', 'file');
     fileChooser.setAttribute('data-id', 'filedialog');
-    fileChooser.style.display = "none";
+    fileChooser.style.display = 'none';
     widgets.push(fileChooser);
 
     const fileChooseButton = document.createElement('button');
     fileChooseButton.innerHTML = this.#i18n.T`Select file`;
     fileChooseButton.addEventListener('click', (event) => {
-      fileChooser.addEventListener("change", (event) => {
+      fileChooser.addEventListener('change', (event) => {
         if (event.target.value) {
           this.#pathName = event.target.value;
           fileLocationDisplay.innerHTML = this.#pathName;

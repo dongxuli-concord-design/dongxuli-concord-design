@@ -44,7 +44,7 @@ class Xc3dCmd3DPrint {
     fileLocationDisplay.setAttribute('rows', '3');
     fileLocationDisplay.setAttribute('cols', '20');
     fileLocationDisplay.setAttribute('readonly', true);
-    fileLocationDisplay.style.resize = "none";
+    fileLocationDisplay.style.resize = 'none';
     fileLocationDisplay.innerHTML = this.#pathName;
     widgets.push(fileLocationDisplay);
 
@@ -52,13 +52,13 @@ class Xc3dCmd3DPrint {
     fileChooser.setAttribute('type', 'file');
     fileChooser.setAttribute('data-id', 'filedialog');
     fileChooser.setAttribute('nwdirectory', '');
-    fileChooser.style.display = "none";
+    fileChooser.style.display ='none';
     widgets.push(fileChooser);
 
     const fileChooseButton = document.createElement('button');
     fileChooseButton.innerHTML = this.#i18n.T`Change export location`;
     fileChooseButton.addEventListener('click', (event) => {
-      fileChooser.addEventListener("change", (event) => {
+      fileChooser.addEventListener('change', (event) => {
         if (event.target.value) {
           this.#pathName = event.target.value;
           fileLocationDisplay.innerHTML = this.#pathName;

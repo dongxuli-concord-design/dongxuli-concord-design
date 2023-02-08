@@ -106,7 +106,7 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
         resolvedPath = path.resolve(joinedPath);
       }
 
-      const stlContent = fs.readFileSync(resolvedPath, "binary");
+      const stlContent = fs.readFileSync(resolvedPath, 'binary');
       const geometry = this.#parseSTL(stlContent);
       let material = null;
       if (geometry.hasColors) {
