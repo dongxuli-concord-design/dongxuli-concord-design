@@ -30,9 +30,7 @@ class Xc3dCmdInsert {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdInsert.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdInsert.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const fileChooser = document.createElement('input');

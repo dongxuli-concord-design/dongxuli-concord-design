@@ -30,24 +30,18 @@ class Xc3dUIGetInteger {
     const widgets = [];
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.Done}));
       widgets.push(doneButton);
     }
     this.#integerInputWidget = document.createElement('input');
     this.#integerInputWidget.type = 'number';
-    this.#integerInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.Input});
-    });
+    this.#integerInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.Input}));
     this.#integerInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.#Event.InputEnter});

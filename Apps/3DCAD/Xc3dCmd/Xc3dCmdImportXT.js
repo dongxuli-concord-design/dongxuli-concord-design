@@ -28,16 +28,12 @@ class Xc3dCmdImportXT {
 
     const doneButton = document.createElement('button');
     doneButton.innerHTML = this.#i18n.T`Ok`;
-    doneButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdImportXT.#Event.Done});
-    });
+    doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdImportXT.#Event.Done}));
     widgets.push(doneButton);
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdImportXT.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdImportXT.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const fileLocationDisplay = document.createElement('textarea');

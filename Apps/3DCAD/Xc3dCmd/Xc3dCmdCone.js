@@ -41,40 +41,30 @@ class Xc3dCmdCone {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.Cancel});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.Cancel}));
     widgets.push(quitButton);
 
     const nextButton = document.createElement('button');
     nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.Next});
-    });
+    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.Next}));
     widgets.push(nextButton);
 
     const radiusStr = this.#i18n.T`Radius`;
     this.#radiusInput = document.createElement('label');
     this.#radiusInput.innerHTML = `${radiusStr} <input name="radius" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius / 4})}">`;
-    this.#radiusInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.ParameterChange});
-    });
+    this.#radiusInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.ParameterChange}));
     widgets.push(this.#radiusInput);
 
     const heightStr = this.#i18n.T`Height`;
     this.heightInput = document.createElement('label');
     this.heightInput.innerHTML = `${heightStr} <input name="height" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 4})}">`;
-    this.heightInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.ParameterChange});
-    });
+    this.heightInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.ParameterChange}));
     widgets.push(this.heightInput);
 
     const semiAngleStr = this.#i18n.T`Semi Angle`;
     this.#semiAngleInput = document.createElement('label');
     this.#semiAngleInput.innerHTML = `${semiAngleStr} <input name="semiAngle" type="number" value="45" min="1" max="179" step="5">`;
-    this.#semiAngleInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.ParameterChange});
-    });
+    this.#semiAngleInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdCone.#Event.ParameterChange}));
     widgets.push(this.#semiAngleInput);
 
     this.#uiContext = new XcSysUIContext({

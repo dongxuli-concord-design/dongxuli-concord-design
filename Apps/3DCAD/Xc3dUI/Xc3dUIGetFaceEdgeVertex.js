@@ -53,17 +53,13 @@ class Xc3dUIGetFaceEdgeVertex {
     const widgets = [];
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetFaceEdgeVertex.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetFaceEdgeVertex.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetFaceEdgeVertex.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetFaceEdgeVertex.#Event.Done}));
       widgets.push(doneButton);
     }
     this.uiContext = new XcSysUIContext({

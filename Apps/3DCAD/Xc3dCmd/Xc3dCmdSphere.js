@@ -35,16 +35,12 @@ class Xc3dCmdSphere {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSphere.#Event.Cancel});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSphere.#Event.Cancel}));
     widgets.push(quitButton);
 
     const nextButton = document.createElement('button');
     nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSphere.#Event.Next});
-    });
+    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSphere.#Event.Next}));
     widgets.push(nextButton);
 
     const radiusStr = this.#i18n.T`Radius`;

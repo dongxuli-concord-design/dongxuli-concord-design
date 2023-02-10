@@ -99,9 +99,7 @@ class Xc3dCmdCut {
     // TODO: use GetBody!
     const {inputState, drawableObject} = yield* Xc3dUIManager.getDrawableObject({
       prompt: this.#i18n.T`Please specify main object`,
-      filter: (object) => {
-        return object instanceof Xc3dDocModel;
-      }
+      filter: (object) => object instanceof Xc3dDocModel,
     });
 
     if (inputState !== Xc3dUIInputState.eInputNormal) {

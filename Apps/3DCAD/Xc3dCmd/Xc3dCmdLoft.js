@@ -157,10 +157,7 @@ class Xc3dCmdLoft {
       }
 
       // Find the edge
-      const edgesWithStartVertex = lastProfile.body.findEdge({callback: (edge) => {
-        const {vertex1, vertex2} = edge.vertices;
-        return ((vertex1 === startVertex) || (vertex2 === startVertex));
-        }});
+      const edgesWithStartVertex = lastProfile.body.findEdge({callback: (edge) => ((edge.vertices.vertex1 === startVertex) || (edge.vertices.vertex2 === startVertex))});
       XcSysAssert({assertion: edgesWithStartVertex.length > 0});
       const edgeWithStartVertex = edgesWithStartVertex[0];
       if (startVertex !== edgeWithStartVertex.vertices.vertex1) {

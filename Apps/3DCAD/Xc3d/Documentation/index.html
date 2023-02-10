@@ -37,5 +37,29 @@ This module is to setup the 3D modeling app.
 <dt>commands</dt> <dd>Array containing the commands of the app.</dd>
 </dl>
 
+
+<h2>create a new plugin of 3DCAD app</h2>
+
+<ol>
+  <li>Create a new folder in `Apps` following the template of `Hello3DCADPlugin`.</li>
+  <li>Modify the code.</li>
+  <li>Copy the compiled binary code or source code, including any resource files, to `Apps/3DCAD/Plugins/`.</li>
+  <li>Modify the `config.js` in the `Apps/3DCAD/res/` to load the plugin.</li>  
+</ol>
+
+<p>An example of `config.js` in the `Apps/3DCAD/res/` is shown in the following:</p>
+
+<pre>
+  <code>
+    Xc3dAppConfig.plugins = [
+    'Apps/3DCAD/Plugins/Foo1', // This will load 'Foo1.bin' (if available) or 'Foo1.js' in 'XcMain/Apps/3DCAD/Plugins/' folder.
+    'file:///YourFileFolder/Foo2', // This will load 'Foo2.bin' (if available) or 'Foo2.js' in '/YourFileFolder/' folder.
+  ];
+  Xc3dAppConfig.debug = false;  
+  </code>
+</pre>
+
+
+
 </body>
 </html>

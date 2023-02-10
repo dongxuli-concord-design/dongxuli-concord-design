@@ -17,22 +17,10 @@ class XcUIDialog extends HTMLDialogElement {
     this.contentElement.innerHTML = this.#content;
 
     // Interested events
-    this.titleElement.addEventListener('mousedown', (event) => {
-        this.processor.next(event)
-      },
-      false);
-    this.titleElement.addEventListener('mouseup', (event) => {
-        this.processor.next(event)
-      },
-      false);
-    this.titleElement.addEventListener('mousemove', (event) => {
-        this.processor.next(event)
-      },
-      false);
-    this.titleElement.addEventListener('mouseout', (event) => {
-        this.processor.next(event)
-      },
-      false);
+    this.titleElement.addEventListener('mousedown', (event) => this.processor.next(event), false);
+    this.titleElement.addEventListener('mouseup', (event) => this.processor.next(event), false);
+    this.titleElement.addEventListener('mousemove', (event) => this.processor.next(event), false);
+    this.titleElement.addEventListener('mouseout', (event) => this.processor.next(event), false);
 
     // TODO: Native dialog is not mature yet.
 

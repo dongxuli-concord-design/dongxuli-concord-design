@@ -133,30 +133,24 @@ class Xc3dUIGetTransform {
     const widgets = [];
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetTransform.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetTransform.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const doneButton = document.createElement('button');
     doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-    doneButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetTransform.#Event.Done});
-    });
+    doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetTransform.#Event.Done}));
     widgets.push(doneButton);
 
     if (this.#needTranslation) {
       const moveToButton = document.createElement('button');
       moveToButton.innerHTML = Xc3dUII18n.i18n.T`Move to`;
-      moveToButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetTransform.#Event.MoveTo});
-      });
+      moveToButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetTransform.#Event.MoveTo}));
       widgets.push(moveToButton);
 
       const xTranslationStr = Xc3dUII18n.i18n.T`Translation along X`;
       const xTranslationInput = document.createElement('label');
       xTranslationInput.innerHTML = `${xTranslationStr} <input name="xtranslate" type="number" value="${this.#translationX}" step="0.1">`;
-      xTranslationInput.querySelector('input').addEventListener('input', (event) => {
+      xTranslationInput.querySelector('input').addEventListener('input', () => {
         this.#translationX = xTranslationInput.querySelector('input').valueAsNumber;
         this.#updateMatrix();
       });
@@ -165,7 +159,7 @@ class Xc3dUIGetTransform {
       const yTranslationStr = Xc3dUII18n.i18n.T`Translation along Y`;
       const yTranslationInput = document.createElement('label');
       yTranslationInput.innerHTML = `${yTranslationStr} <input name="ytranslate" type="number" value="${this.#translationY}" step="0.1">`;
-      yTranslationInput.querySelector('input').addEventListener('input', (event) => {
+      yTranslationInput.querySelector('input').addEventListener('input', () => {
         this.#translationY = yTranslationInput.querySelector('input').valueAsNumber;
         this.#updateMatrix();
       });
@@ -174,7 +168,7 @@ class Xc3dUIGetTransform {
       const zTranslationStr = Xc3dUII18n.i18n.T`Translation along Z`;
       const zTranslationInput = document.createElement('label');
       zTranslationInput.innerHTML = `${zTranslationStr} <input name="ztranslate" type="number" value="${this.#translationZ}" step="0.1">`;
-      zTranslationInput.querySelector('input').addEventListener('input', (event) => {
+      zTranslationInput.querySelector('input').addEventListener('input', () => {
         this.#translationZ = zTranslationInput.querySelector('input').valueAsNumber;
         this.#updateMatrix();
       });
@@ -185,7 +179,7 @@ class Xc3dUIGetTransform {
       const xAngleStr = Xc3dUII18n.i18n.T`Rotation around X`;
       const xAngleInput = document.createElement('label');
       xAngleInput.innerHTML = `${xAngleStr} <input name="xangle" type="number" value="0" min="-360" max="360" step="10">`;
-      xAngleInput.querySelector('input').addEventListener('input', (event) => {
+      xAngleInput.querySelector('input').addEventListener('input', () => {
         this.#rotationAngleX = xAngleInput.querySelector('input').valueAsNumber * Math.PI / 180.0;
         this.#updateMatrix();
       });
@@ -194,7 +188,7 @@ class Xc3dUIGetTransform {
       const yAngleStr = Xc3dUII18n.i18n.T`Rotation around Y`;
       const yAngleInput = document.createElement('label');
       yAngleInput.innerHTML = `${yAngleStr} <input name="yangle" type="number" value="0" min="-360" max="360" step="10">`;
-      yAngleInput.querySelector('input').addEventListener('input', (event) => {
+      yAngleInput.querySelector('input').addEventListener('input', () => {
         this.#rotationAngleY = yAngleInput.querySelector('input').valueAsNumber * Math.PI / 180.0;
         this.#updateMatrix();
       });
@@ -203,7 +197,7 @@ class Xc3dUIGetTransform {
       const zAngleStr = Xc3dUII18n.i18n.T`Rotation around Z`;
       const zAngleInput = document.createElement('label');
       zAngleInput.innerHTML = `${zAngleStr} <input name="zangle" type="number" value="0" min="-360" max="360" step="10">`;
-      zAngleInput.querySelector('input').addEventListener('input', (event) => {
+      zAngleInput.querySelector('input').addEventListener('input', () => {
         this.#rotationAngleZ = zAngleInput.querySelector('input').valueAsNumber * Math.PI / 180.0;
         this.#updateMatrix();
       });
@@ -214,7 +208,7 @@ class Xc3dUIGetTransform {
       const scaleStr = Xc3dUII18n.i18n.T`Scale factor`;
       const scaleInput = document.createElement('label');
       scaleInput.innerHTML = `${scaleStr} <input name="scale" type="number" value="1" min="0.001" max="1000" step="0.5">`;
-      scaleInput.querySelector('input').addEventListener('input', (event) => {
+      scaleInput.querySelector('input').addEventListener('input', () => {
         this.#scale = scaleInput.querySelector('input').valueAsNumber;
         this.#updateMatrix();
       });

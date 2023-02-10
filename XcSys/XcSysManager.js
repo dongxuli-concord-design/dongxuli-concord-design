@@ -349,13 +349,4 @@ class XcSysManager {
     template.innerHTML = htmlString;
     return template.content.firstChild;
   }
-
-  static htmlToElements({htmlStringArray}) {
-    const elements = [];
-    for (const htmlString of htmlStringArray) {
-      elements.push(XcSysManager.htmlToElement({htmlString}));
-    }
-
-    return elements;
-  }
 }

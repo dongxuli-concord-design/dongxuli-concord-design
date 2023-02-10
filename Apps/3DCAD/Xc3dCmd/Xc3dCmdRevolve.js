@@ -86,9 +86,7 @@ class Xc3dCmdRevolve {
   * #onWaitForProfile() {
     const {inputState, drawableObject} = yield* Xc3dUIManager.getDrawableObject({
       prompt: this.#i18n.T`Select an object to revolve`,
-      filter: (object) => {
-        return object instanceof Xc3dDocModel;
-      }
+      filter: (object) => object instanceof Xc3dDocModel,
     });
 
     if (inputState !== Xc3dUIInputState.eInputNormal) {

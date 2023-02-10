@@ -31,25 +31,19 @@ class Xc3dUIGetDialog {
 
     const okButton = document.createElement('button');
     okButton.innerHTML = Xc3dUII18n.i18n.T`Ok`;
-    okButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetDialog.#Event.Ok});
-    });
+    okButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDialog.#Event.Ok}));
     widgets.push(okButton);
 
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetDialog.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDialog.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDialog.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDialog.#Event.Done}));
       widgets.push(doneButton);
     }
 

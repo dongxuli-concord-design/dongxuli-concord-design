@@ -38,32 +38,24 @@ class Xc3dCmdTorus {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.Cancel});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.Cancel}));
     widgets.push(quitButton);
 
     const nextButton = document.createElement('button');
     nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.Next});
-    });
+    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.Next}));
     widgets.push(nextButton);
 
     const majorRadiusStr = this.#i18n.T`Major radius`;
     this.majorRadiusInput = document.createElement('label');
     this.majorRadiusInput.innerHTML = `${majorRadiusStr} <input name="majorradius" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#majorRadius})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#majorRadius / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#majorRadius * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#majorRadius / 4})}">`;
-    this.majorRadiusInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.ParameterChange});
-    });
+    this.majorRadiusInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.ParameterChange}));
     widgets.push(this.majorRadiusInput);
 
     const minorRadiusStr = this.#i18n.T`Minor radius`;
     this.minorRadiusInput = document.createElement('label');
     this.minorRadiusInput.innerHTML = `${minorRadiusStr} <input name="minorradius" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#minorRadius})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#minorRadius / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#minorRadius * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#minorRadius / 8})}">`;
-    this.minorRadiusInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.ParameterChange});
-    });
+    this.minorRadiusInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdTorus.#Event.ParameterChange}));
     widgets.push(this.minorRadiusInput);
 
     this.#uiContext = new XcSysUIContext({

@@ -102,16 +102,12 @@ class Xc3dCmdProperty {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdProperty.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdProperty.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const doneButton = document.createElement('button');
     doneButton.innerHTML = this.#i18n.T`Done`;
-    doneButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdProperty.#Event.Done});
-    });
+    doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdProperty.#Event.Done}));
     widgets.push(doneButton);
 
     this.nameInput = document.createElement('label');

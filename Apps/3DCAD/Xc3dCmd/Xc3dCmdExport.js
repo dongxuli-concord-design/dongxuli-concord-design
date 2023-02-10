@@ -78,9 +78,7 @@ class Xc3dCmdExport {
 
     const nextButton = document.createElement('button');
     nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdExport.#Event.Next});
-    });
+    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdExport.#Event.Next}));
     widgets.push(nextButton);
 
     const path = this.#i18n.T`Path`;
@@ -113,9 +111,7 @@ class Xc3dCmdExport {
   * #onWaitForObject() {
     const {inputState, drawableObject} = yield* Xc3dUIManager.getDrawableObject({
       prompt: this.#i18n.T`Select object to export`,
-      filter: (object) => {
-        return object instanceof Xc3dDocModel;
-      }
+      filter: (object) => object instanceof Xc3dDocModel,
     });
     if (inputState === Xc3dUIInputState.eInputNormal) {
       const body = drawableObject.body;

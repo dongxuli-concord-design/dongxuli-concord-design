@@ -70,53 +70,39 @@ class Xc3dUIGetPosition {
 
       const cancelButton = document.createElement('button');
       cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-      cancelButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Cancel});
-      });
+      cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Cancel}));
       widgets.push(cancelButton);
 
       if (this.#allowReturnNull) {
         const doneButton = document.createElement('button');
         doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-        doneButton.addEventListener('click', (event) => {
-          XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Done});
-        });
+        doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Done}));
         widgets.push(doneButton);
       }
 
       const objectSnapModeInput = document.createElement('label');
       objectSnapModeInput.innerHTML = 'Object Snap Mode <input type="checkbox" checked>';
-      objectSnapModeInput.querySelector('input').addEventListener('input', (event) => {
-        this.#objectSnapMode = objectSnapModeInput.querySelector('input').checked;
-      });
+      objectSnapModeInput.querySelector('input').addEventListener('input', () => this.#objectSnapMode = objectSnapModeInput.querySelector('input').checked);
       widgets.push(objectSnapModeInput);
 
       const originButton = document.createElement('button');
       originButton.innerHTML = Xc3dUII18n.i18n.T`Origin`;
-      originButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Origin});
-      });
+      originButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Origin}));
       widgets.push(originButton);
 
       const objectCenterButton = document.createElement('button');
       objectCenterButton.innerHTML = Xc3dUII18n.i18n.T`Object center`;
-      objectCenterButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.ObjectCenter});
-      });
+      objectCenterButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.ObjectCenter}));
       widgets.push(objectCenterButton);
 
       const textBoxInputButton = document.createElement('button');
       textBoxInputButton.innerHTML = Xc3dUII18n.i18n.T`Coordinate Input`;
-      textBoxInputButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.TextBoxInputButtonClick});
-      });
+      textBoxInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.TextBoxInputButtonClick}));
       widgets.push(textBoxInputButton);
 
       const codeInputButton = document.createElement('button');
       codeInputButton.innerHTML = Xc3dUII18n.i18n.T`Code`;
-      codeInputButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.CodeInputButtonClick});
-      });
+      codeInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.CodeInputButtonClick}));
       widgets.push(codeInputButton);
 
       this.snappingMarkGroup = new THREE.Group();
@@ -177,26 +163,20 @@ class Xc3dUIGetPosition {
 
       const cancelButton = document.createElement('button');
       cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-      cancelButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Cancel});
-      });
+      cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Cancel}));
       widgets.push(cancelButton);
 
       if (this.#allowReturnNull) {
         const doneButton = document.createElement('button');
         doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-        doneButton.addEventListener('click', (event) => {
-          XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Done});
-        });
+        doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Done}));
         widgets.push(doneButton);
       }
 
       this.#positionInputWidget = document.createElement('input');
       this.#positionInputWidget.type = 'text';
       this.#positionInputWidget.placeholder = Xc3dUII18n.i18n.T`Position coordinate`;
-      this.#positionInputWidget.addEventListener('input', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.TextBoxInput});
-      });
+      this.#positionInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.TextBoxInput}));
       this.#positionInputWidget.addEventListener('keydown', (event) => {
         if (event.code === 'Enter') {
           XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.TextBoxInputEnter});
@@ -289,8 +269,8 @@ class Xc3dUIGetPosition {
         Xc3dUIGetPosition.#Event.ObjectCenter, 
         Xc3dUIGetPosition.#Event.TextBoxInputButtonClick, 
         Xc3dUIGetPosition.#Event.CodeInputButtonClick, 
-        (event) => { return event instanceof Xc3dUIMouseEvent; },
-        (event) => { return event instanceof Xc3dUITouchEvent; },
+        (event) => event instanceof Xc3dUIMouseEvent,
+        (event) => event instanceof Xc3dUITouchEvent,
       ],
     });
 
@@ -310,9 +290,7 @@ class Xc3dUIGetPosition {
     } else if (event === Xc3dUIGetPosition.#Event.ObjectCenter) {
       const {inputState, drawableObject} = yield* Xc3dUIManager.getDrawableObject({
         prompt: Xc3dUII18n.i18n.T`Please select an object`,
-        filter: (object) => {
-          return object instanceof Xc3dDocModel;
-        }
+        filter: (object) => object instanceof Xc3dDocModel,
       });
       if (inputState === Xc3dUIInputState.eInputNormal) {
         let box = null;

@@ -33,43 +33,33 @@ class Xc3dCmdView {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Quit`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdView.#Event.Quit});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdView.#Event.Quit}));
     widgets.push(quitButton);
 
     const orbitStr = this.#i18n.T`Orbit`;
     const orbitDiv = document.createElement('div');
     orbitDiv.classList.add('radio');
     orbitDiv.innerHTML = '<label><input type="radio" name="mode" checked> ' + `${orbitStr}` + '</label>';
-    orbitDiv.querySelector('input').addEventListener('click', (event) => {
-      this.#model = Xc3dCmdView.Model.Orbit;
-    });
+    orbitDiv.querySelector('input').addEventListener('click', () => this.#model = Xc3dCmdView.Model.Orbit);
     widgets.push(orbitDiv);
 
     const panStr = this.#i18n.T`Pan`;
     const panDiv = document.createElement('div');
     panDiv.classList.add('radio');
     panDiv.innerHTML = '<label><input type="radio" name="mode"> ' + `${panStr}` + '</label>';
-    panDiv.querySelector('input').addEventListener('click', (event) => {
-      this.#model = Xc3dCmdView.Model.Pan;
-    });
+    panDiv.querySelector('input').addEventListener('click', () => this.#model = Xc3dCmdView.Model.Pan);
     widgets.push(panDiv);
 
     const zoomStr = this.#i18n.T`Zoom`;
     const zoomDiv = document.createElement('div');
     zoomDiv.classList.add('radio');
     zoomDiv.innerHTML = '<label><input type="radio" name="mode"> ' + `${zoomStr}` + '</label>';
-    zoomDiv.querySelector('input').addEventListener('click', (event) => {
-      this.#model = Xc3dCmdView.Model.Zoom;
-    });
+    zoomDiv.querySelector('input').addEventListener('click', () => this.#model = Xc3dCmdView.Model.Zoom);
     widgets.push(zoomDiv);
 
     const lookAtUCSButton = document.createElement('button');
     lookAtUCSButton.innerHTML = this.#i18n.T`Look at UCS`;
-    lookAtUCSButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdView.#Event.LooKAtUCS});
-    });
+    lookAtUCSButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdView.#Event.LooKAtUCS}));
     widgets.push(lookAtUCSButton);
 
     const saveButton = document.createElement('button');
@@ -131,15 +121,13 @@ class Xc3dCmdView {
     for (const [name, viewJSONData] of Xc3dUIManager.namedViews.entries()) {
       const setViewButton = document.createElement('button');
       setViewButton.innerHTML = name;
-      setViewButton.addEventListener('click', (event) => {
-        Xc3dUIManager.setCurrentView({name});
-      });
+      setViewButton.addEventListener('click', () => Xc3dUIManager.setCurrentView({name}));
       setViewButton.classList.add('btn', 'btn-outline-secondary');
       setViewButton.style.margin = '2px';
 
       const deleteViewButton = document.createElement('button');
       deleteViewButton.innerHTML = this.#i18n.T`Delete`;
-      deleteViewButton.addEventListener('click', (event) => {
+      deleteViewButton.addEventListener('click', () => {
         Xc3dUIManager.deleteNamedView({name});
         this.#updateViewManagementDiv();
       });
@@ -188,7 +176,7 @@ class Xc3dCmdView {
       expectedEventTypes: [
         Xc3dCmdView.#Event.Quit, 
         Xc3dCmdView.#Event.LooKAtUCS, 
-        (event) => { return event instanceof Xc3dUIMouseEvent; },
+        (event) => event instanceof Xc3dUIMouseEvent,
       ]
     });
     if (event === Xc3dCmdView.#Event.Quit) {
@@ -211,7 +199,7 @@ class Xc3dCmdView {
       expectedEventTypes: [
         Xc3dCmdView.#Event.Quit, 
         Xc3dCmdView.#Event.LooKAtUCS, 
-        (event) => { return event instanceof Xc3dUIMouseEvent; },
+        (event) => event instanceof Xc3dUIMouseEvent,
       ],
     });
     if (event === Xc3dCmdView.#Event.Quit) {

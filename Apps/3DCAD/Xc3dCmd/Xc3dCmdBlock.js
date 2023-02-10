@@ -39,40 +39,30 @@ class Xc3dCmdBlock {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.Cancel});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.Cancel}));
     widgets.push(quitButton);
 
     const nextButton = document.createElement('button');
     nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.Next});
-    });
+    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.Next}));
     widgets.push(nextButton);
 
     const lengthStr = this.#i18n.T`Length`;
     this.lengthInput = document.createElement('label');
     this.lengthInput.innerHTML = `${lengthStr} <input name="length" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#length})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#length / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#length * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#length / 4})}">`;
-    this.lengthInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.ParameterChange});
-    });
+    this.lengthInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.ParameterChange}));
     widgets.push(this.lengthInput);
 
     const widthStr = this.#i18n.T`Width`;
     this.widthInput = document.createElement('label');
     this.widthInput.innerHTML = `${widthStr} <input name="#width" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#width})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#width / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#width * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#width / 4})}">`;
-    this.widthInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.ParameterChange});
-    });
+    this.widthInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.ParameterChange}));
     widgets.push(this.widthInput);
 
     const heightStr = this.#i18n.T`Height`;
     this.heightInput = document.createElement('label');
     this.heightInput.innerHTML = `${heightStr} <input name="#height" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 4})}">`;
-    this.heightInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.ParameterChange});
-    });
+    this.heightInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdBlock.#Event.ParameterChange}));
     widgets.push(this.heightInput);
 
     this.#uiContext = new XcSysUIContext({

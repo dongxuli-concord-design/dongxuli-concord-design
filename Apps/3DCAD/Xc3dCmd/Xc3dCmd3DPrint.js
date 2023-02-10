@@ -28,16 +28,12 @@ class Xc3dCmd3DPrint {
 
     const doneButton = document.createElement('button');
     doneButton.innerHTML = this.#i18n.T`Ok`;
-    doneButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmd3DPrint.#Event.Done});
-    });
+    doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmd3DPrint.#Event.Done}));
     widgets.push(doneButton);
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmd3DPrint.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmd3DPrint.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const fileLocationDisplay = document.createElement('textarea');

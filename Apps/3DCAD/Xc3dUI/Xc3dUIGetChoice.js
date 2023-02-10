@@ -34,17 +34,13 @@ class Xc3dUIGetChoice {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetChoice.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetChoice.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetChoice.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetChoice.#Event.Done}));
       widgets.push(doneButton);
     }
 
@@ -52,9 +48,7 @@ class Xc3dUIGetChoice {
       const button = document.createElement('button');
       button.innerHTML = choice;
       button.dataset.index = index;
-      button.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: event});
-      });
+      button.addEventListener('click', (event) =>XcSysManager.dispatchEvent({event}));
       widgets.push(button);
     }
 
@@ -72,7 +66,7 @@ class Xc3dUIGetChoice {
       expectedEventTypes: [
         Xc3dUIGetChoice.#Event.Cancel, 
         Xc3dUIGetChoice.#Event.Done, 
-        (event) => { return event instanceof MouseEvent; },
+        (event) => event instanceof MouseEvent,
       ]
     });
 

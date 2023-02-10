@@ -157,10 +157,8 @@ class Xc3dUIManager {
     }
     requestAnimationFrame(repaint);
 
-    setInterval(() => {
-      // Flush anyway after a while
-      Xc3dUIManager.#needRedraw = true;
-    }, 10 * 1000);
+    // Flush anyway after a while
+    setInterval(() => Xc3dUIManager.#needRedraw = true, 10 * 1000);
 
     Xc3dUICameraController.run();
     Xc3dUIManager.xcPadCoroutine = Xc3dUIXcPadCoroutine.run();

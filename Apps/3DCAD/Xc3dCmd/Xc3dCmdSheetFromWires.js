@@ -104,11 +104,12 @@ class Xc3dCmdSheetFromWires {
       prompt: this.#i18n.T`Select wire bodies`,
       allowReturnNull: this.#wireBodies.length > 0,
       filter: (object) => {
-        if (!(object instanceof Xc3dDocModel)) {
-          return false;
-        }
-        if (object.body.type === XcGmBody.BODY_TYPE.WIRE) {
-          return true;
+        if (object instanceof Xc3dDocModel) {
+          if (object.body.type === XcGmBody.BODY_TYPE.WIRE) {
+            return true;
+          } else {
+            return false;
+          }
         } else {
           return false;
         }

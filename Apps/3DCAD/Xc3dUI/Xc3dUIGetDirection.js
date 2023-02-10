@@ -61,17 +61,13 @@ class Xc3dUIGetDirection {
 
       const cancelButton = document.createElement('button');
       cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-      cancelButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Cancel});
-      });
+      cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Cancel}));
       widgets.push(cancelButton);
 
       if (this.#allowReturnNull) {
         const doneButton = document.createElement('button');
         doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-        doneButton.addEventListener('click', (event) => {
-          XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Done});
-        });
+        doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Done}));
         widgets.push(doneButton);
       }
 
@@ -80,24 +76,18 @@ class Xc3dUIGetDirection {
         const button = document.createElement('button');
         button.innerHTML = item;
         button.dataset.direction = item;
-        button.addEventListener('click', (event) => {
-          XcSysManager.dispatchEvent({event: event});
-        });
+        button.addEventListener('click', (event) => XcSysManager.dispatchEvent({event}));
         widgets.push(button);
       }
 
       const textBoxInputButton = document.createElement('button');
       textBoxInputButton.innerHTML = Xc3dUII18n.i18n.T`Vector Input`;
-      textBoxInputButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.TextBoxInputButtonClick});
-      });
+      textBoxInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.TextBoxInputButtonClick}));
       widgets.push(textBoxInputButton);
 
       const codeInputButton = document.createElement('button');
       codeInputButton.innerHTML = Xc3dUII18n.i18n.T`Code`;
-      codeInputButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.CodeInputButtonClick});
-      });
+      codeInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.CodeInputButtonClick}));
       widgets.push(codeInputButton);
       
       this.#uiContextForInitialInput = new XcSysUIContext({
@@ -114,17 +104,13 @@ class Xc3dUIGetDirection {
 
       const cancelButton = document.createElement('button');
       cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-      cancelButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Cancel});
-      });
+      cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Cancel}));
       widgets.push(cancelButton);
 
       if (this.#allowReturnNull) {
         const doneButton = document.createElement('button');
         doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-        doneButton.addEventListener('click', (event) => {
-          XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Done});
-        });
+        doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Done}));
         widgets.push(doneButton);
       }
 

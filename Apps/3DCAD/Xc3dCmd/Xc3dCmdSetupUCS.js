@@ -102,30 +102,22 @@ class Xc3dCmdSetupUCS {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const setWCS = document.createElement('button');
     setWCS.innerHTML = 'Set World Coordinate System';
-    setWCS.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.WCS});
-    });
+    setWCS.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.WCS}));
     widgets.push(setWCS);
 
     const setUCSManually = document.createElement('button');
     setUCSManually.innerHTML = 'Set UCS Manually';
-    setUCSManually.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.ManualUCS});
-    });
+    setUCSManually.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.ManualUCS}));
     widgets.push(setUCSManually);
 
     const setUCSByTransform = document.createElement('button');
     setUCSByTransform.innerHTML = 'Set UCS By Transform';
-    setUCSByTransform.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.TransformUCS});
-    });
+    setUCSByTransform.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.TransformUCS}));
     widgets.push(setUCSByTransform);
 
     const uiContext = new XcSysUIContext({
@@ -229,30 +221,22 @@ class Xc3dCmdSetupUCS {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const xyButton = document.createElement('button');
     xyButton.innerHTML = 'XY';
-    xyButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.XY});
-    });
+    xyButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.XY}));
     widgets.push(xyButton);
 
     const zxButton = document.createElement('button');
     zxButton.innerHTML = 'ZX';
-    zxButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.ZX});
-    });
+    zxButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.ZX}));
     widgets.push(zxButton);
 
     const yzButton = document.createElement('button');
     yzButton.innerHTML = 'YZ';
-    yzButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.YZ});
-    });
+    yzButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.YZ}));
     widgets.push(yzButton);
 
     const uiContext = new XcSysUIContext({

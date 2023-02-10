@@ -405,8 +405,8 @@ Example:
     [
       'abc',
       123,
-      (event) => { return event instanceof Xc3dUIMouseEvent; },
-      (event) => { return ((typeof event === 'number') && (event > 42) },
+      (event) => event instanceof Xc3dUIMouseEvent,
+      (event) => ((typeof event === 'number') && (event > 42),
     ],
     });
     // Dispatch event somewhere else
@@ -437,15 +437,6 @@ Example:
 
 <code>let 零件编号输入 = XcSysManager.htmlToElement(`&lt;label&gt;待检验零件编号&lt;input type="text"
   value=${Vim生成零件编号()} data-id="零件编号"&gt;&lt;/label&gt;`);</code>
-<h2>htmlToElements</h2>
-<code>static htmlToElements({htmlStringArray})</code>
-<dl>
-  <dt>htmlStringArray</dt>
-  <dd>An array of HTML element strings.</dd>
-  <dt>return</dt>
-  <dd>Array of HTML elements.</dd>
-</dl>
-Generate HTML elements from an array of HTML element strings. Example:
-<code> let 等待轮廓界面 = XcSysManager.htmlToElements(['&lt;button&gt;button1&lt;/button&gt;', '&lt;button&gt;button2&lt;/button&gt;']);</code>
+
 </body>
 </html>

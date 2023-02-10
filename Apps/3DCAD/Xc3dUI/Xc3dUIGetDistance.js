@@ -40,26 +40,20 @@ class Xc3dUIGetDistance {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Done}));
       widgets.push(doneButton);
     }
 
     this.#distanceInputWidget = document.createElement('input');
     this.#distanceInputWidget.type = 'number';
     this.#distanceInputWidget.placeholder = 'Distance';
-    this.#distanceInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Input});
-    });
+    this.#distanceInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Input}));
     this.#distanceInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.InputEnter});
@@ -69,9 +63,7 @@ class Xc3dUIGetDistance {
 
     const button = document.createElement('button');
     button.innerHTML = 'Measure';
-    button.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Measure});
-    });
+    button.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Measure}));
     widgets.push(button);
 
     this.#uiContextForWaitForDistanceOrMeasurement = new XcSysUIContext({

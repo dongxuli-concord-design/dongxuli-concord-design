@@ -39,9 +39,7 @@ class Xc3dCmdCylinder {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCylinder.#Event.Cancel});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdCylinder.#Event.Cancel}));
     widgets.push(quitButton);
 
     const nextButton = document.createElement('button');
@@ -54,17 +52,13 @@ class Xc3dCmdCylinder {
     const radiusStr = this.#i18n.T`Radius`;
     this.#radiusInput = document.createElement('label');
     this.#radiusInput.innerHTML = `${radiusStr} <input name="radius" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius / 4})}">`;
-    this.#radiusInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCylinder.#Event.ParameterChange});
-    });
+    this.#radiusInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdCylinder.#Event.ParameterChange}));
     widgets.push(this.#radiusInput);
 
     const heightStr = this.#i18n.T`Height`;
     this.#heightInput = document.createElement('label');
     this.#heightInput.innerHTML = `${heightStr} <input name="height" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 4})}">`;
-    this.#heightInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdCylinder.#Event.ParameterChange});
-    });
+    this.#heightInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdCylinder.#Event.ParameterChange}));
     widgets.push(this.#heightInput);
 
     this.#uiContext = new XcSysUIContext({

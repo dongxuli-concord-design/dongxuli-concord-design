@@ -53,26 +53,20 @@ class Xc3dUIGetAxis {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Done});
-      });
+      doneButton.addEventListener('click', () =>XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Done}));
       widgets.push(doneButton);
     }
 
     this.#firstPositionInputWidget = document.createElement('input');
     this.#firstPositionInputWidget.type = 'text';
     this.#firstPositionInputWidget.placeholder = 'Axis start position';
-    this.#firstPositionInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Input});
-    });
+    this.#firstPositionInputWidget.addEventListener('input', () =>XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Input}));
     this.#firstPositionInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.InputEnter});
@@ -83,9 +77,7 @@ class Xc3dUIGetAxis {
     this.#secondPositionInputWidget = document.createElement('input');
     this.#secondPositionInputWidget.type = 'text';
     this.#secondPositionInputWidget.placeholder = Xc3dUII18n.i18n.T`Axis end position`;
-    this.#secondPositionInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Input});
-    });
+    this.#secondPositionInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.Input}));
     this.#secondPositionInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetAxis.#Event.InputEnter});
@@ -99,9 +91,7 @@ class Xc3dUIGetAxis {
       const button = document.createElement('button');
       button.innerHTML = item;
       button.dataset.axis = item;
-      button.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event});
-      });
+      button.addEventListener('click', (event) => XcSysManager.dispatchEvent({event}));
       widgets.push(button);
     }
 
@@ -120,7 +110,7 @@ class Xc3dUIGetAxis {
         Xc3dUIGetAxis.#Event.Cancel, 
         Xc3dUIGetAxis.#Event.Done, 
         Xc3dUIGetAxis.#Event.InputEnter,
-        (event) => { return event instanceof MouseEvent; },
+        (event) => event instanceof MouseEvent,
         ],
     });
 

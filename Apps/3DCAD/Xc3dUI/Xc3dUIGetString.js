@@ -29,26 +29,20 @@ class Xc3dUIGetString {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.Done}));
       widgets.push(doneButton);
     }
 
 
     this.#stringInputWidget = document.createElement('input');
     this.#stringInputWidget.type = 'text';
-    this.#stringInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.Event.Input});
-    });
+    this.#stringInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.Event.Input}));
     this.#stringInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.InputEnter});

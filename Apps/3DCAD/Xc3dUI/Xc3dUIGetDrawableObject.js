@@ -38,17 +38,13 @@ class Xc3dUIGetDrawableObject {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetDrawableObject.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDrawableObject.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetDrawableObject.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDrawableObject.#Event.Done}));
       widgets.push(doneButton);
     }
     this.#uiContext = new XcSysUIContext({
@@ -64,7 +60,7 @@ class Xc3dUIGetDrawableObject {
       expectedEventTypes: [
         Xc3dUIGetDrawableObject.#Event.Cancel, 
         Xc3dUIGetDrawableObject.#Event.Done, 
-        (event) => { return event instanceof Xc3dUIMouseEvent; },
+        (event) => event instanceof Xc3dUIMouseEvent,
       ],
     });
     if (event === Xc3dUIGetDrawableObject.#Event.Cancel) {

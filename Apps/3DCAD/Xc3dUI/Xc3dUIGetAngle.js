@@ -48,17 +48,13 @@ class Xc3dUIGetAngle {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Done}));
       widgets.push(doneButton);
     }
 
@@ -70,9 +66,7 @@ class Xc3dUIGetAngle {
     this.#angleInputWidget.step = '10';
 
     this.#angleInputWidget.placeholder = Xc3dUII18n.i18n.T`Angle`;
-    this.#angleInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Input});
-    });
+    this.#angleInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Input}));
     this.#angleInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.InputEnter});
@@ -82,9 +76,7 @@ class Xc3dUIGetAngle {
 
     const measureButton = document.createElement('button');
     measureButton.innerHTML = Xc3dUII18n.i18n.T`Measure`;
-    measureButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Measure});
-    });
+    measureButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetAngle.#Event.Measure}));
     widgets.push(measureButton);
 
     this.#uicontextForWaitForAngleOrMeasurement = new XcSysUIContext({

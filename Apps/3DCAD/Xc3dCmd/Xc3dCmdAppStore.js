@@ -24,9 +24,7 @@ class Xc3dCmdAppStore {
     const cancelButton = document.createElement('input');
     cancelButton.type = 'button';
     cancelButton.value = this.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdAppStore.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdAppStore.#Event.Cancel}));
     widgets.push(cancelButton);
 
     this.#uiContext = new XcSysUIContext({

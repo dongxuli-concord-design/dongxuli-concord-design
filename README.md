@@ -1,6 +1,5 @@
 # CAD
 
-
 ## Basic Development guide
 
 * Prerequisite
@@ -56,20 +55,3 @@
 2. Install `nw-gyp` using `npm install -g nw-gyp`.
 3. Update the node and nwjs files on `XcExternal` following the `README.md` in `XcExternal`. Please right-click and open all executable files (such as node/nwjc etc.) on macOS for permission control reasons.
 4. Delete all node_modules folder and run `npm install` in XcMain.
-   
-### How to create an app
-
-Steps to create a new app
-
-1. Create a new folder in `Apps` following the template of `Hello`.
-2. Modify the code.
-3. Copy the compiled binary code or source code, including any resource files, to `XcMain`.
-4. Modify the `config.js` in the XcMain to load the app.
-5. Check `Hello App` for an example.
-
-Steps to create a new plugin of 3DCAD app
-
-1. Create a new folder in `Apps` following the template of `Hello3DCADPlugin`.
-2. Modify the code.
-3. Copy the compiled binary code or source code, including any resource files, to `Apps/3DCAD/Plugins/`.
-4. Modify the `config.js` in the `Apps/3DCAD/res/` to load the plugin.

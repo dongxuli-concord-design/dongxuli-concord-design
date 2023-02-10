@@ -39,40 +39,30 @@ class Xc3dCmdPrism {
 
     const quitButton = document.createElement('button');
     quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.Cancel});
-    });
+    quitButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.Cancel}));
     widgets.push(quitButton);
 
     const nextButton = document.createElement('button');
     nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.Next});
-    });
+    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.Next}));
     widgets.push(nextButton);
 
     const radiusStr = this.#i18n.T`Radius`;
     this.radiusInput = document.createElement('label');
     this.radiusInput.innerHTML = `${radiusStr}  <input name="radius" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#radius / 4})}">`;
-    this.radiusInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.ParameterChange});
-    });
+    this.radiusInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.ParameterChange}));
     widgets.push(this.radiusInput);
 
     const heightStr = this.#i18n.T`Height`;
     this.heightInput = document.createElement('label');
     this.heightInput.innerHTML = `${heightStr} <input name="height" type="number" value="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height})}" min="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 100})}" max="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height * 100})}" step="${Xc3dUIManager.computeValueWithUnitFromStandardValue({value: this.#height / 4})}">`;
-    this.heightInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.ParameterChange});
-    });
+    this.heightInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.ParameterChange}));
     widgets.push(this.heightInput);
 
     const sidesStr = this.#i18n.T`Sides`;
     this.sidesInput = document.createElement('label');
     this.sidesInput.innerHTML = `${sidesStr} <input name="sides" type="number" value="3" min="3" max="16" step="1">`;
-    this.sidesInput.querySelector('input').addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.ParameterChange});
-    });
+    this.sidesInput.querySelector('input').addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dCmdPrism.#Event.ParameterChange}));
     widgets.push(this.sidesInput);
 
     this.#uiContext = new XcSysUIContext({

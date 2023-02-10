@@ -555,9 +555,7 @@ class Xc3dDocDocument {
     // Set maps
     Xc3dDocDocument.#drawableObjectToRenderingObjectMap.set(drawableObject, renderingObject);
 
-    renderingObject.traverse((obj) => {
-      Xc3dDocDocument.#renderingObjectToDrawableObjectMap.set(obj, drawableObject);
-    });
+    renderingObject.traverse((obj) => Xc3dDocDocument.#renderingObjectToDrawableObjectMap.set(obj, drawableObject));
   }
 
   #disposeRendering (renderingObject) {

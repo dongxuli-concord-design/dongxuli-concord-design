@@ -148,9 +148,7 @@ class Xc3dCmdBoolean {
   * #onWaitForSecondBody() {
     const {inputState, drawableObject} = yield* Xc3dUIManager.getDrawableObject({
       prompt: this.#i18n.T`Please specify tool object`,
-      filter: (object) => {
-        return object instanceof Xc3dDocModel;
-      }
+      filter: (object) => object instanceof Xc3dDocModel,
     });
     if (inputState !== Xc3dUIInputState.eInputNormal) {
       if (inputState === Xc3dUIInputState.eInputNone) {

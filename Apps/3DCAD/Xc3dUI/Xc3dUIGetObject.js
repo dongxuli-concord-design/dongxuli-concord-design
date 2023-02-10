@@ -32,32 +32,24 @@ class Xc3dUIGetObject {
     const widgets = [];
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', (event) => XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Done}));
       widgets.push(doneButton);
     }
 
     const inputButton = document.createElement('button');
     inputButton.innerHTML = Xc3dUII18n.i18n.T`Input`;
-    inputButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Input});
-    });
+    inputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Input}));
     widgets.push(inputButton);
 
     const okButton = document.createElement('button');
     okButton.innerHTML = Xc3dUII18n.i18n.T`Ok`;
-    okButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Ok});
-    });
+    okButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetObject.#Event.Ok}));
     widgets.push(okButton);
 
     this.#uiContext = new XcSysUIContext({

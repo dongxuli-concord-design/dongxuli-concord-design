@@ -6,6 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     </head>
     <body style = "margin: 10px;">
-        <p>Getting started!</p>
+        <h1>How to create an app</h1>
+
+        <ol>
+            <li>Create a new folder in <code>Apps</code> following the template of <code>Hello</code>.</li>
+            <li>Modify the code.</li>
+            <li>Copy the compiled binary code or source code, including resource files, to <code>XcMain</code>.</li>
+            <li>Modify <code>XcSysConfig.apps</code> array in the <code>config.js</code> in the <code>XcMain</code> to load the app.</li>
+            <li>Check <code>Hello App</code> for an example.</li>
+        </ol>
+
+        <p>An example of <code>config.js</code> is shown in the following:</p>
+
+        <pre>
+        <code>
+            XcSysConfig.title = '协和 Concord';
+            XcSysConfig.server = 'http://concord.design';
+            XcSysConfig.locale = 'zh';
+            XcSysConfig.debug = true;
+            XcSysConfig.apps = [
+            'Apps/Foo1', // This will load 'Foo1.bin' (if available) or 'Foo1.js' in 'XcMain/Apps/' folder.
+            'file:///YourFileFolder/Foo2', // This will load 'Foo2.bin' (if available) or 'Foo2.js' in '/YourFileFolder/'' folder.
+            ];
+        </code>
+        </pre>
+
     </body>
 </html>

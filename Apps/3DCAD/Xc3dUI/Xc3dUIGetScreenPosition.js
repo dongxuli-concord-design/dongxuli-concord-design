@@ -43,26 +43,20 @@ class Xc3dUIGetScreenPosition {
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.Done}));
       widgets.push(doneButton);
     }
 
     this.#positionInputWidget = document.createElement('input');
     this.#positionInputWidget.type = 'text';
     this.#positionInputWidget.placeholder = 'Position coordinate';
-    this.#positionInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.Input});
-    });
+    this.#positionInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.Input}));
     this.#positionInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetScreenPosition.#Event.InputEnter});
@@ -110,8 +104,8 @@ class Xc3dUIGetScreenPosition {
       expectedEventTypes: [
         Xc3dUIGetScreenPosition.#Event.Cancel, 
         Xc3dUIGetScreenPosition.#Event.Done, 
-        (event) => { return event instanceof Xc3dUIMouseEvent; },
-        (event) => { return event instanceof Xc3dUITouchEvent; },
+        (event) => event instanceof Xc3dUIMouseEvent,
+        (event) => event instanceof Xc3dUITouchEvent,
       ],
     });
 

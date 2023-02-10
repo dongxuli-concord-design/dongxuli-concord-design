@@ -30,24 +30,18 @@ class Xc3dUIGetFloat {
     const widgets = [];
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-    cancelButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetFloat.#Event.Cancel});
-    });
+    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetFloat.#Event.Cancel}));
     widgets.push(cancelButton);
 
     if (this.#allowReturnNull) {
       const doneButton = document.createElement('button');
       doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-      doneButton.addEventListener('click', (event) => {
-        XcSysManager.dispatchEvent({event: Xc3dUIGetFloat.#Event.Done});
-      });
+      doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetFloat.#Event.Done}));
       widgets.push(doneButton);
     }
     this.#floatInputWidget = document.createElement('input');
     this.#floatInputWidget.type = 'number';
-    this.#floatInputWidget.addEventListener('input', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.Event.Input});
-    });
+    this.#floatInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.Event.Input}));
     this.#floatInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetFloat.#Event.InputEnter});

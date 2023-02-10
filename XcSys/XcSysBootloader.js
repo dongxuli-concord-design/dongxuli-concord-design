@@ -86,17 +86,13 @@ class XcSysBootloader {
   }
 
   static #dispatchEvent({event}) {
-    setTimeout(() => {
-      XcSysBootloader.#coroutine.next(event);
-    }, 0);
+    setTimeout(() => XcSysBootloader.#coroutine.next(event), 0);
   }
 
   static* #run() {
     const loadedEvent = Symbol('Loaded');
     XcSysManager.loadJavaScriptAsync({
-      scriptSrc: './config', asModule: false, doneCallback: () => {
-        XcSysBootloader.#dispatchEvent({event: loadedEvent});
-      }
+      scriptSrc: './config', asModule: false, doneCallback: () => XcSysBootloader.#dispatchEvent({event: loadedEvent})
     });
 
     const event = yield;
@@ -106,9 +102,7 @@ class XcSysBootloader {
     for (const app of XcSysConfig.apps) {
       const loadedEvent = Symbol('Loaded');
       XcSysManager.loadJavaScriptAsync({
-        scriptSrc: app, asModule: false, doneCallback: () => {
-          XcSysBootloader.#dispatchEvent({event: loadedEvent});
-        }
+        scriptSrc: app, asModule: false, doneCallback: () => XcSysBootloader.#dispatchEvent({event: loadedEvent})
       });      
       const event = yield;
       XcSysAssert({assertion: event === loadedEvent});

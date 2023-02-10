@@ -56,7 +56,7 @@ class Xc3dUIGetCommand {
       button.dataset.index = index;
       button.addEventListener('click', (event) => {
         Xc3dUIGetCommand.lastCommandName = command.name;
-        XcSysManager.dispatchEvent({event: event});
+        XcSysManager.dispatchEvent({event});
       });
       widgets.push(button);
     }
@@ -75,7 +75,7 @@ class Xc3dUIGetCommand {
       expectedEventTypes: [
         Xc3dUIGetCommand.#Event.Cancel, 
         Xc3dUIGetCommand.#Event.InputDone, 
-        (event) => { return event instanceof MouseEvent; },
+        (event) => event instanceof MouseEvent,
       ],
     });
 
@@ -85,9 +85,7 @@ class Xc3dUIGetCommand {
     } else if (event === Xc3dUIGetCommand.#Event.InputDone) {
       const commandName = this.commandInputWidget.value;
       if (commandName && commandName.length > 0) {
-        const command = this.#commands.find((element) => {
-          return element.name.toUpperCase() === commandName.toUpperCase();
-        });
+        const command = this.#commands.find((element) => element.name.toUpperCase() === commandName.toUpperCase());
         if (command) {
           this.command = command;
           return Xc3dUIGetCommand.CommandState.Ok;
