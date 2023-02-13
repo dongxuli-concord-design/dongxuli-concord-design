@@ -75,7 +75,7 @@ class Xc3dCmdLine {
 
       const {wire} = XcGm3dCurve.makeWireBodyFromCurves({curves: [line], bounds: [bound]});
 
-      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: wire})});
+      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: wire, color: new THREE.Color('rgb(50, 50, 50)')})});
       Xc3dUIManager.redraw();
     }
 

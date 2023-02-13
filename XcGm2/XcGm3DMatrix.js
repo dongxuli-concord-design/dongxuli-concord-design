@@ -24,7 +24,7 @@ class XcGm3DMatrix {
     to[2][3] = src[2][3];
   }
 
-  static #matrixMuliply({A, B, i, j}) {
+  static #matrixMultiply({A, B, i, j}) {
     return A[i][0] * B[0][j] + A[i][1] * B[1][j] + A[i][2] * B[2][j] + A[i][3] * B[3][j];
   }
 
@@ -64,25 +64,25 @@ class XcGm3DMatrix {
   static multiplication({matrix1, matrix2}) {
     let newMatrix = new XcGm3DMatrix();
 
-    newMatrix.entry[0][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 0});
-    newMatrix.entry[0][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 1});
-    newMatrix.entry[0][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 2});
-    newMatrix.entry[0][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 3});
+    newMatrix.entry[0][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 0});
+    newMatrix.entry[0][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 1});
+    newMatrix.entry[0][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 2});
+    newMatrix.entry[0][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 3});
 
-    newMatrix.entry[1][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 0});
-    newMatrix.entry[1][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 1});
-    newMatrix.entry[1][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 2});
-    newMatrix.entry[1][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 3});
+    newMatrix.entry[1][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 0});
+    newMatrix.entry[1][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 1});
+    newMatrix.entry[1][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 2});
+    newMatrix.entry[1][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 3});
 
-    newMatrix.entry[2][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 0});
-    newMatrix.entry[2][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 1});
-    newMatrix.entry[2][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 2});
-    newMatrix.entry[2][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 3});
+    newMatrix.entry[2][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 0});
+    newMatrix.entry[2][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 1});
+    newMatrix.entry[2][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 2});
+    newMatrix.entry[2][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 3});
 
-    newMatrix.entry[3][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 0});
-    newMatrix.entry[3][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 1});
-    newMatrix.entry[3][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 2});
-    newMatrix.entry[3][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 3});
+    newMatrix.entry[3][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 0});
+    newMatrix.entry[3][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 1});
+    newMatrix.entry[3][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 2});
+    newMatrix.entry[3][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 3});
 
     return newMatrix;
   }
@@ -193,25 +193,25 @@ class XcGm3DMatrix {
       []
     ];
 
-    newMatrix[0][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 0});
-    newMatrix[0][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 1});
-    newMatrix[0][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 2});
-    newMatrix[0][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 3});
+    newMatrix[0][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 0});
+    newMatrix[0][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 1});
+    newMatrix[0][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 2});
+    newMatrix[0][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 3});
 
-    newMatrix[1][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 0});
-    newMatrix[1][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 1});
-    newMatrix[1][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 2});
-    newMatrix[1][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 3});
+    newMatrix[1][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 0});
+    newMatrix[1][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 1});
+    newMatrix[1][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 2});
+    newMatrix[1][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 3});
 
-    newMatrix[2][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 0});
-    newMatrix[2][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 1});
-    newMatrix[2][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 2});
-    newMatrix[2][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 3});
+    newMatrix[2][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 0});
+    newMatrix[2][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 1});
+    newMatrix[2][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 2});
+    newMatrix[2][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 3});
 
-    newMatrix[3][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 0});
-    newMatrix[3][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 1});
-    newMatrix[3][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 2});
-    newMatrix[3][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 3});
+    newMatrix[3][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 0});
+    newMatrix[3][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 1});
+    newMatrix[3][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 2});
+    newMatrix[3][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 3});
 
     XcGm3DMatrix.#copyEntry({to: this.entry, src: newMatrix});
 
@@ -226,25 +226,25 @@ class XcGm3DMatrix {
       []
     ];
 
-    newMatrix[0][0] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 0, j: 0});
-    newMatrix[0][1] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 0, j: 1});
-    newMatrix[0][2] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 0, j: 2});
-    newMatrix[0][3] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 0, j: 3});
+    newMatrix[0][0] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 0, j: 0});
+    newMatrix[0][1] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 0, j: 1});
+    newMatrix[0][2] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 0, j: 2});
+    newMatrix[0][3] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 0, j: 3});
 
-    newMatrix[1][0] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 1, j: 0});
-    newMatrix[1][1] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 1, j: 1});
-    newMatrix[1][2] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 1, j: 2});
-    newMatrix[1][3] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 1, j: 3});
+    newMatrix[1][0] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 1, j: 0});
+    newMatrix[1][1] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 1, j: 1});
+    newMatrix[1][2] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 1, j: 2});
+    newMatrix[1][3] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 1, j: 3});
 
-    newMatrix[2][0] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 2, j: 0});
-    newMatrix[2][1] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 2, j: 1});
-    newMatrix[2][2] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 2, j: 2});
-    newMatrix[2][3] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 2, j: 3});
+    newMatrix[2][0] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 2, j: 0});
+    newMatrix[2][1] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 2, j: 1});
+    newMatrix[2][2] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 2, j: 2});
+    newMatrix[2][3] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 2, j: 3});
 
-    newMatrix[3][0] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 3, j: 0});
-    newMatrix[3][1] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 3, j: 1});
-    newMatrix[3][2] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 3, j: 2});
-    newMatrix[3][3] = XcGm3DMatrix.#matrixMuliply({A: matrix.entry, B: this.entry, i: 3, j: 3});
+    newMatrix[3][0] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 3, j: 0});
+    newMatrix[3][1] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 3, j: 1});
+    newMatrix[3][2] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 3, j: 2});
+    newMatrix[3][3] = XcGm3DMatrix.#matrixMultiply({A: matrix.entry, B: this.entry, i: 3, j: 3});
 
     XcGm3DMatrix.#copyEntry({to: this.entry, src: newMatrix});
 
@@ -259,50 +259,50 @@ class XcGm3DMatrix {
       []
     ];
 
-    newMatrix[0][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 0});
-    newMatrix[0][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 1});
-    newMatrix[0][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 2});
-    newMatrix[0][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 0, j: 3});
+    newMatrix[0][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 0});
+    newMatrix[0][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 1});
+    newMatrix[0][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 2});
+    newMatrix[0][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 0, j: 3});
 
-    newMatrix[1][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 0});
-    newMatrix[1][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 1});
-    newMatrix[1][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 2});
-    newMatrix[1][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 1, j: 3});
+    newMatrix[1][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 0});
+    newMatrix[1][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 1});
+    newMatrix[1][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 2});
+    newMatrix[1][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 1, j: 3});
 
-    newMatrix[2][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 0});
-    newMatrix[2][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 1});
-    newMatrix[2][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 2});
-    newMatrix[2][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 2, j: 3});
+    newMatrix[2][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 0});
+    newMatrix[2][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 1});
+    newMatrix[2][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 2});
+    newMatrix[2][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 2, j: 3});
 
-    newMatrix[3][0] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 0});
-    newMatrix[3][1] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 1});
-    newMatrix[3][2] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 2});
-    newMatrix[3][3] = XcGm3DMatrix.#matrixMuliply({A: this.entry, B: matrix.entry, i: 3, j: 3});
+    newMatrix[3][0] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 0});
+    newMatrix[3][1] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 1});
+    newMatrix[3][2] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 2});
+    newMatrix[3][3] = XcGm3DMatrix.#matrixMultiply({A: this.entry, B: matrix.entry, i: 3, j: 3});
 
     XcGm3DMatrix.#copyEntry({to: this.entry, src: newMatrix});
     return this;
   }
 
   setToProduct({matrix1, matrix2}) {
-    this.entry[0][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 0});
-    this.entry[0][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 1});
-    this.entry[0][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 2});
-    this.entry[0][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 3});
+    this.entry[0][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 0});
+    this.entry[0][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 1});
+    this.entry[0][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 2});
+    this.entry[0][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 0, j: 3});
 
-    this.entry[1][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 0});
-    this.entry[1][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 1});
-    this.entry[1][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 2});
-    this.entry[1][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 3});
+    this.entry[1][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 0});
+    this.entry[1][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 1});
+    this.entry[1][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 2});
+    this.entry[1][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 1, j: 3});
 
-    this.entry[2][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 0});
-    this.entry[2][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 1});
-    this.entry[2][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 2});
-    this.entry[2][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 3});
+    this.entry[2][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 0});
+    this.entry[2][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 1});
+    this.entry[2][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 2});
+    this.entry[2][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 3});
 
-    this.entry[3][0] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 0});
-    this.entry[3][1] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 1});
-    this.entry[3][2] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 2});
-    this.entry[3][3] = XcGm3DMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 3});
+    this.entry[3][0] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 0});
+    this.entry[3][1] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 1});
+    this.entry[3][2] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 2});
+    this.entry[3][3] = XcGm3DMatrix.#matrixMultiply({A: matrix1.entry, B: matrix2.entry, i: 3, j: 3});
 
     return this;
   }

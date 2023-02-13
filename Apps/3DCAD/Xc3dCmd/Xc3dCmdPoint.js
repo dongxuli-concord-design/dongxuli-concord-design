@@ -55,7 +55,7 @@ class Xc3dCmdPoint {
       const point = XcGm3dPoint.create({position: this.#position});
       const body = point.createMinimumBody();
 
-      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: body})});
+      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body, color: new THREE.Color('rgb(50, 50, 50)')})});
       Xc3dUIManager.redraw();
     }
 

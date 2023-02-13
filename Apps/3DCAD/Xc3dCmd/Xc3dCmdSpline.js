@@ -65,7 +65,7 @@ class Xc3dCmdSpline {
         bounds.push(bound);
       }
       const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: wire})});
+      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: wire, color: new THREE.Color('rgb(50, 50, 50)')})});
       Xc3dUIManager.redraw();
     }
 

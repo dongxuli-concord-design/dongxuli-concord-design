@@ -168,7 +168,7 @@ class Xc3dCmdCylinder {
       // Add the cylinder to the document
       const matrix = XcGm3dMatrix.translationMatrix({vector: this.#position.toVector()});
       this.#body.transform({matrix});
-      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: this.#body})});
+      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: this.#body, color: new THREE.Color('rgb(220, 220, 220)')})});
       Xc3dUIManager.redraw();
 
       return Xc3dCmdCylinder.#CommandState.Done;

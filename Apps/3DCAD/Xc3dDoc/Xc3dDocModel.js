@@ -22,7 +22,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
 
     const texture = null;
     if (json.texture) {
-      texture = Xc3dDocTexture.load({json: json.texture, document});
+      this.texture = Xc3dDocTexture.load({json: json.texture, document});
     }
 
     const model = new Xc3dDocModel({

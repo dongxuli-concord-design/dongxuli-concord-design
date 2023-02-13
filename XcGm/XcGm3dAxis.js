@@ -8,6 +8,7 @@ class XcGm3dAxis {
               } = {}) {
     this.position = position;
     this.direction = direction;
+    this.direction.normalize();
   }
 
   static fromJSON({json}) {

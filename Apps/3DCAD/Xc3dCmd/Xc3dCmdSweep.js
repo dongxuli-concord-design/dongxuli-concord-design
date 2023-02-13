@@ -75,7 +75,7 @@ class Xc3dCmdSweep {
       const pathBody = this.#path.body;
       const pathVertices = [this.#startVertex];
       const body = XcGmBody.sweep({profiles: profileBodies, path: pathBody, pathVertices});
-      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body})});
+      Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body, color: new THREE.Color('rgb(220, 220, 220)')})});
       Xc3dUIManager.redraw();
     }
 
