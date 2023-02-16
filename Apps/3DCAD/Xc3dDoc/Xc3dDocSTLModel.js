@@ -97,9 +97,11 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
 
     try {
       const fs = require('fs');
-      let resolvedPath = this.filePath;
+      let resolvedPath = null;
 
-      if (!this.isStaticPath) {
+      if (this.isStaticPath) {
+        resolvedPath = this.filePath;
+      } else  {
         const path = require('path');
         const documentFileFolder = path.dirname(this.document.filePath);
         const joinedPath = path.join(documentFileFolder, this.filePath);

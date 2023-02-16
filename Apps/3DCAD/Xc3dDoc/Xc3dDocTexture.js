@@ -66,9 +66,12 @@ class Xc3dDocTexture {
 
   #loadImage() {
     try {
-      let resolvedPath = this.filePath;
+      let resolvedPath = null;
       const fs = require('fs');
-      if (!this.isStaticPath) {
+
+      if (this.isStaticPath) {
+        resolvedPath = this.filePath;
+      } else {
         // Get the absolute path from the relative path
         const path = require('path');
         const documentFileFolder = path.dirname(this.document.filePath);
