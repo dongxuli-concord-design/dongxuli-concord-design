@@ -186,6 +186,6 @@ class Xc3dUICameraController {
   }
 
   static computeCameraChangeDelta() {
-    return Math.ceil(XcSysManager.canvasDiv.clientHeight * 0.05);
+    return Math.ceil(XcSysManager.canvasDiv.clientHeight * 0.01);
   }
 }
