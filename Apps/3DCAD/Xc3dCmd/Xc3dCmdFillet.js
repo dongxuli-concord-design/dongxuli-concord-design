@@ -67,9 +67,9 @@ class Xc3dCmdFillet {
     }
 
     // Unhighlight everything
-    for (const renderingObject of this.#highlightingRenderingObjects) {
+    this.#highlightingRenderingObjects.forEach((renderingObject) => {
       Xc3dUIManager.removeCustomRenderingObject({renderingObject});
-    }
+    });
     this.#highlightingRenderingObjects.length = 0;
     Xc3dUIManager.redraw();
 

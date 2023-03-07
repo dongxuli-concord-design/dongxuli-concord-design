@@ -11,7 +11,7 @@ const os = require('os');
 const platform = os.platform();
 const buildTargetName = `${moduleName}_${platform}.bin`;
 
-function concat(opts) {
+function concat({opts}) {
   const FILE_ENCODING = 'utf-8';
   const EOL = '\n';
 
@@ -25,8 +25,10 @@ function concat(opts) {
 }
 
 concat({
-  src: scripts,
-  dest: `./build/${buildSourceName}`
+  opts: {
+    src: scripts,
+    dest: `./build/${buildSourceName}`
+  }
 });
 
 // Build binary file

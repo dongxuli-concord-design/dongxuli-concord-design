@@ -92,6 +92,7 @@ class Xc3dCmd3DPrint {
       'Internal error: cannot write to file.': '内部错误：写入文件失败。',
       'Exported STL to {0}.': '输出STL到{0}目录中。',
       'Please specify export location': '请指定导出目录',
+      'Skip unsupported model': '忽略不支持的模型',
     };
 
     if (XcSysConfig.locale === 'zh') {
@@ -143,14 +144,18 @@ class Xc3dCmd3DPrint {
     }
 
     if (this.#state === Xc3dCmd3DPrint.#CommandState.Done) {
-      for (let [index, drawableObject] of Xc3dUIManager.document.drawableObjects.entries()) {
+      Xc3dUIManager.document.drawableObjects.forEach((drawableObject, index) => {
         if (drawableObject instanceof Xc3dDocModel) {
           const type = drawableObject.body.type;
           if ((type === XcGmBody.BODY_TYPE.SOLID) || (type === XcGmBody.BODY_TYPE.SHEET)) {
             this.#exportToSTL(drawableObject, this.#pathName, index);
+          } else {
+            XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);
           }
+        } else {
+          XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);
         }
-      }
+      });
 
       XcSysManager.outputDisplay.info(this.#i18n.T`Exported STL to ${this.#pathName}.`);
     }

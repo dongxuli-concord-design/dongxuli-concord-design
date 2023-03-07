@@ -4,7 +4,7 @@ const scripts = [
   'Hello.js',
 ];
 
-function concat(opts) {
+function concat({opts}) {
   const FILE_ENCODING = 'utf-8';
   const EOL = '\n';
 
@@ -18,6 +18,8 @@ function concat(opts) {
 }
 
 concat({
-  src: scripts,
-  dest: './build/Hello.js'
+  opts: {
+    src: scripts,
+    dest: './build/Hello.js'
+  }
 });

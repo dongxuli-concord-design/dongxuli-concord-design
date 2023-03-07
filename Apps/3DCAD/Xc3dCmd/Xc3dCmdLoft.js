@@ -68,10 +68,7 @@ class Xc3dCmdLoft {
 
     if (this.#state === Xc3dCmdLoft.#CommandState.Done) {
       const profileBodies = [];
-      for (const profile of this.#profiles) {
-        const profileBody = profile.body;
-        profileBodies.push(profileBody);
-      }
+      this.#profiles.forEach((profile) => profileBodies.push(profile.body));
       const guideWires = [];
       const body = XcGmBody.loft({profiles: profileBodies, startVertices: this.#startVertices, guideWires});
 
@@ -108,7 +105,7 @@ class Xc3dCmdLoft {
       const highlightingRenderingObject = Xc3dUIManager.generateHighlightingRenderingObject({renderingObject: renderingObjectOfDrawable});
       this.#hints.add(highlightingRenderingObject);
 
-      for (const [i, vertex] of drawableObject.body.vertices.entries()) {
+      drawableObject.body.vertices.forEach((vertex, index) => {
         const position = vertex.point.position;
         const geometry = new THREE.BufferGeometry();
         const vertices = new Float32Array([...position.toArray()]);
@@ -119,11 +116,12 @@ class Xc3dCmdLoft {
           sizeAttenuation: false
         });
         const renderingObject = new THREE.Points(geometry, material);
-        renderingObject.userData.vertexID = i;
+        renderingObject.userData.vertexID = index;
         renderingObject.userData.vertex = vertex;
         renderingObject.userData.section = drawableObject;
         this.#vertexPositionRenderingObjects.add(renderingObject);
-      }
+      });
+
       this.#hints.add(this.#vertexPositionRenderingObjects);
       Xc3dUIManager.redraw();
       
@@ -149,12 +147,8 @@ class Xc3dCmdLoft {
 
       this.#hints.remove(this.#vertexPositionRenderingObjects);
 
-      for (let i = this.#vertexPositionRenderingObjects.children.length - 1; i >= 0; i -= 1) {
-        if (this.#vertexPositionRenderingObjects.children[i].userData.vertex === startVertex) {
-          this.#hints.add(this.#vertexPositionRenderingObjects.children[i]);
-          break;
-        }
-      }
+      const hint = this.#vertexPositionRenderingObjects.children.find( child => child.userData.vertex === startVertex);
+      this.#hints.add(hint);
 
       // Find the edge
       const edgesWithStartVertex = lastProfile.body.findEdge({callback: (edge) => ((edge.vertices.vertex1 === startVertex) || (edge.vertices.vertex2 === startVertex))});

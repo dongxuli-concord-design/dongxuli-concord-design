@@ -78,9 +78,9 @@ class Xc3dCmdBoolean {
     }
 
     // Unhighlight everything
-    for (const renderingObject of this.#highlightingRenderingObjects) {
+    this.#highlightingRenderingObjects.forEach((renderingObject) => {
       Xc3dUIManager.removeCustomRenderingObject({renderingObject});
-    }
+    });
     this.#highlightingRenderingObjects.length = 0;
 
     Xc3dUIManager.redraw();
@@ -95,13 +95,11 @@ class Xc3dCmdBoolean {
 
       try {
         const resultBodies = targetBody.boolean({tools: [toolBody], func: this.#booleanType});
-
-        for (let i = 0; i < resultBodies.length; i += 1) {
-          const newModel = new Xc3dDocModel({body: resultBodies[i]});
-          newModel.setAttributesFrom({model: this.#firstModel});
-
-          Xc3dUIManager.document.addDrawableObject({drawableObject: newModel});
-        }
+        resultBodies.forEach((body) => {
+          const drawableObject = new Xc3dDocModel({body});
+          drawableObject.setAttributesFrom({model: this.#firstModel});
+          Xc3dUIManager.document.addDrawableObject({drawableObject});
+        });
 
         Xc3dUIManager.redraw();
       } catch (error) {

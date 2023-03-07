@@ -98,9 +98,9 @@ class Xc3dCmdImportXT {
 
   #importXT(fileName) {
     const parts = XcGmPart.receiveFromFile({fileName});
-    for (const body of parts) {
+    parts.forEach((body) => {
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body, color: new THREE.Color('rgb(220, 220, 220)')})});
-    }
+    });
     Xc3dUIManager.redraw();
   }
 

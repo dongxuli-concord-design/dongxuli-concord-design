@@ -61,9 +61,10 @@ class Xc3dCmdDeleteFace {
     }
 
     // Unhighlight everything
-    for (const highlightingRenderingObjects of this.#highlightingRenderingObjects) {
-      Xc3dUIManager.unHighlight({object: highlightingRenderingObjects});
-    }
+    this.#highlightingRenderingObjects.forEach((renderingObject) => {
+      Xc3dUIManager.removeCustomRenderingObject({renderingObject});
+    });
+    this.#highlightingRenderingObjects.length = 0;
     Xc3dUIManager.redraw();
 
     if (this.#state === Xc3dCmdDeleteFace.#CommandState.Done) {

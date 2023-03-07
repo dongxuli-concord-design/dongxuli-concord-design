@@ -57,33 +57,33 @@ class Xc3dCmdMergeWires {
     if (this.#state === Xc3dCmdMergeWires.#CommandState.Done) {
       const curves = [];
       const bounds = [];
-      for (const wireBody of this.#wireBodies) {
-        const edges = wireBody.edges;
-        for (const edge of edges) {
+
+      this.#wireBodies.forEach((wireBody) => {
+        wireBody.edges.forEach((edge) => {
           const curve = edge.curve;
           curves.push(curve);
-
+          
           const bound = edge.findInterval();
           bounds.push(bound);
-        }
-      }
+        });
+      });
 
       // Make a new wire body from all curves and bounds
       const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
 
       // Delete all selected wire bodies and add the one
-      for (const wireBody of this.#wireBodies) {
+      this.#wireBodies.forEach((wireBody) => {
         const drawableObject = Xc3dDocDocument.getDrawableObjectFromKernelEntity({kernelEntity: wireBody});
         Xc3dUIManager.document.removeDrawableObject({drawableObject});
-      }
+      });
       const newModel = new Xc3dDocModel({body: wire});
       Xc3dUIManager.document.addDrawableObject({drawableObject: newModel});
     }
 
     // Unhighlight everything
-    for (const renderingObject of this.#highlightingRenderingObjects) {
+    this.#highlightingRenderingObjects.forEach((renderingObject) => {
       Xc3dUIManager.removeCustomRenderingObject({renderingObject});
-    }
+    });
     this.#highlightingRenderingObjects.length = 0;
     Xc3dUIManager.redraw();
 

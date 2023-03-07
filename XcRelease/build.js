@@ -20,13 +20,18 @@ const commonFiles = [
   `config.js`,
   'XcVersion.js',
   'index.html',
-  'main.css',
   'main.js',
   '3rd',
   'node_modules',
 ];
 
 function buildDarwinRelease() {
+  const os = require('os');
+  const platform = os.platform();
+  if (platform !== 'darwin') {
+    throw 'This script has to be run on Mac or Linux to use shell commands.';
+  }
+
   // Remove old folders
   _runCommands([
     `rm -rf Concord.darwin`,
@@ -46,9 +51,6 @@ function buildDarwinRelease() {
   _runCommands([
     // CAD
     `mkdir -p ./Concord.darwin/Concord.app/Contents/Resources/app.nw/Apps/3DCAD`,
-
-    // MIS
-    `mkdir -p ./Concord.darwin/Concord.app/Contents/Resources/app.nw/Apps/MIS`,
   ]);
 
   // Copy files
@@ -60,29 +62,20 @@ function buildDarwinRelease() {
     'libpskernel.dylib',
   ];
 
-  const os = require('os');
-  const platform = os.platform();
-  if (platform !== 'darwin') {
-    throw 'This script has to be run on Mac or Linux to use shell commands.';
-  }
-
   // Common files
-  for (const item of commonFiles) {
-    _runCommand(`cp -R ../XcMain/${item} ./Concord.darwin/Concord.app/Contents/Resources/app.nw/`);
+  for (const file of commonFiles) {
+    _runCommand(`cp -R ../XcMain/${file} ./Concord.darwin/Concord.app/Contents/Resources/app.nw/`);
   }
 
   // Mac: Libs
-  for (const item of darwinFiles) {
-    _runCommand(`cp -R ../XcMain/${item} ./Concord.darwin/Concord.app/Contents/Resources/app.nw/`);
+  for (const file of darwinFiles) {
+    _runCommand(`cp -R ../XcMain/${file} ./Concord.darwin/Concord.app/Contents/Resources/app.nw/`);
   }
 
   // Mac: Apps
   _runCommands([
     // Xc3d
     `cp -R ../XcMain/Apps/3DCAD/* ./Concord.darwin/Concord.app/Contents/Resources/app.nw/Apps/3DCAD/`, 
-
-    // MIS
-    `cp -R ../XcMain/Apps/MIS/* ./Concord.darwin/Concord.app/Contents/Resources/app.nw/Apps/MIS/`, 
   ]);
 
   // Copy version file
@@ -92,6 +85,12 @@ function buildDarwinRelease() {
 }
 
 function buildWin32Release() {
+  const os = require('os');
+  const platform = os.platform();
+  if (platform !== 'darwin') {
+    throw 'This script has to be run on Mac or Linux to use shell commands.';
+  }
+
   // Remove old folders
   _runCommands([
     `rm -rf Concord.win32`,
@@ -111,9 +110,6 @@ function buildWin32Release() {
   _runCommands([
     // 3DCAD
     `mkdir -p ./Concord.win32/Apps/3DCAD`,
-
-    // 3DCAD
-    `mkdir -p ./Concord.win32/Apps/MIS`,
   ]);
 
   // Copy files
@@ -125,29 +121,20 @@ function buildWin32Release() {
     'pskernel.dll',
   ];
 
-  const os = require('os');
-  const platform = os.platform();
-  if (platform !== 'darwin') {
-    throw 'This script has to be run on Mac or Linux to use shell commands.';
-  }
-
   // Common files
-  for (const item of commonFiles) {
-    _runCommand(`cp -R ../XcMain/${item} ./Concord.win32/`);
+  for (const file of commonFiles) {
+    _runCommand(`cp -R ../XcMain/${file} ./Concord.win32/`);
   }
 
   // Win: Libs
-  for (const item of win32Files) {
-    _runCommand(`cp -R ../XcMain/${item} ./Concord.win32/`);
+  for (const file of win32Files) {
+    _runCommand(`cp -R ../XcMain/${file} ./Concord.win32/`);
   }
 
   // Win: Apps
   _runCommands([
     // 3DCAD
     `cp -R ../XcMain/Apps/3DCAD/* ./Concord.win32/Apps/3DCAD/`,
-
-    // MIS
-    `cp -R ../XcMain/Apps/MIS/* ./Concord.win32/Apps/MIS/`, 
   ]);
 
   // Copy version file

@@ -1,3 +1,5 @@
+//Usage: node build_win32.js
+
 const {execSync} = require('child_process');
 const path = require('path');
 
@@ -31,6 +33,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+       'copy build\\* ..\\XcDebug\\',
+       'copy build\\*.bin ..\\XcMain\\',
     ]);
   }
 
@@ -41,6 +45,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\XcDebug\\',
+      'copy build\\*.bin ..\\XcMain\\',      
     ]);
   }
 
@@ -51,6 +57,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\XcDebug\\',
+      'copy build\\*.bin ..\\XcMain\\',      
     ]);
   }
 
@@ -61,6 +69,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\XcDebug\\',
+      'copy build\\*.bin ..\\XcMain\\',      
     ]);
   }
 
@@ -71,6 +81,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\XcDebug\\',
+      'copy build\\*.bin ..\\XcMain\\',      
     ]);
   }
 
@@ -81,6 +93,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\XcDebug\\',
+      'copy build\\*.bin ..\\XcMain\\',      
     ]);
   }
 
@@ -91,6 +105,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\..\\..\\XcDebug\\Apps\\3DCAD',
+      'copy build\\*.bin ..\\..\\..\\XcMain\\Apps\\3DCAD',          
     ]);
   }
 
@@ -101,6 +117,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\..\\..\\XcDebug\\Apps\\3DCAD',
+      'copy build\\*.bin ..\\..\\..\\XcMain\\Apps\\3DCAD',           
     ]);
   }
 
@@ -111,6 +129,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\..\\..\\XcDebug\\Apps\\3DCAD',
+      'copy build\\*.bin ..\\..\\..\\XcMain\\Apps\\3DCAD',           
     ]);
   }
 
@@ -121,6 +141,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\..\\..\\XcDebug\\Apps\\3DCAD',
+      'copy build\\*.bin ..\\..\\..\\XcMain\\Apps\\3DCAD',           
     ]);
   }
 
@@ -131,6 +153,8 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\..\\XcDebug\\Apps\\Hello',
+      'copy build\\*.bin ..\\..\\XcMain\\Apps\\Hello',         
     ]);
   }
 
@@ -141,10 +165,10 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\..\\XcDebug\\Apps\\3DCAD\\Plugins\\Automation\\',
+      'copy build\\*.bin ..\\..\\XcMain\\Apps\\3DCAD\\Plugins\\Automation\\',          
     ]);
   }
 }
 
 build({baseFolderPath: path.join(__dirname, '..')});
-
-//Usage: node build_win32.js

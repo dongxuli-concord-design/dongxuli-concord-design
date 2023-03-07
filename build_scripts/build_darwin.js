@@ -1,3 +1,5 @@
+//Usage: node build_darwin.js
+
 const {execSync} = require('child_process');
 const path = require('path');
 
@@ -193,11 +195,9 @@ function build({baseFolderPath}) {
 
     _runCommands([
       `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/ && cp -r Documentation/* ../..//XcDebug/Documentation/Apps/Automation && cp -r Documentation/* ../..//XcMain/Documentation/Apps/Automation`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*.bin  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/ && cp -r Documentation/* ../..//XcDebug/Documentation/Apps/Automation && cp -r Documentation/* ../..//XcMain/Documentation/Apps/Automation`,
     ]);
   }
 }
 
 build({baseFolderPath: path.join(__dirname, '..')});
-
-//Usage: node build_darwin.js

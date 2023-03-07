@@ -63,9 +63,9 @@ class Xc3dCmdCombine {
     }
 
     // Unhighlight everything
-    for (const renderingObject of this.#highlightingRenderingObjects) {
+    this.#highlightingRenderingObjects.forEach((renderingObject) => {
       Xc3dUIManager.removeCustomRenderingObject({renderingObject});
-    }
+    });
     this.#highlightingRenderingObjects.length = 0;
 
     if (this.#state === Xc3dCmdCombine.#CommandState.Done) {
@@ -78,12 +78,10 @@ class Xc3dCmdCombine {
 
       try {
         const resultBodies = targetBody.unite({tools: [toolBody]});
-
-        for (let i = 0; i < resultBodies.length; i += 1) {
-          const newModel = new Xc3dDocModel({body: resultBodies[i]});
-          Xc3dUIManager.document.addDrawableObject({drawableObject: newModel});
-        }
-
+        resultBodies.forEach((body) => {
+          const drawableObject = new Xc3dDocModel({body});
+          Xc3dUIManager.document.addDrawableObject({drawableObject});
+        });
         Xc3dUIManager.redraw();
       } catch (error) {
         XcSysManager.outputDisplay.warn(this.#i18n.T`Boolean operation cannot be accomplished.`);
