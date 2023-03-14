@@ -3,7 +3,11 @@ class Xc3dDocDocument {
 
   static #registeredDrawableObjectTypeClassMap = new Map();
 
-  static #defaultRenderingResolution = 'high';
+  static RenderingResolution = {
+    High: 'High',
+    Low: 'Low',
+  };
+
   static #drawableObjectToRenderingObjectMap = new WeakMap();
   static #renderingObjectToDrawableObjectMap = new WeakMap();
   static #modelingKernelEntityToRenderingObjectMap = new WeakMap();
@@ -108,34 +112,19 @@ class Xc3dDocDocument {
     return kernelEntity;
   }
 
-  static #getDefaultCurveRenderResolution() {
-    if (Xc3dDocDocument.#defaultRenderingResolution === 'low') {
-      return 0.0001;
-    } else {
-      return 0.00001;
-    }
-  }
-
-  static #getDefaultFacetRenderResolution() {
-    if (Xc3dDocDocument.#defaultRenderingResolution === 'low') {
-      return 'low';
-    } else {
-      return 'high';
-    }
-  }
-
   static generateRenderingForBody({
                                     body,
                                     color,
                                     map = null,
                                     opacity = 1.0,
                                     transparent = false,
-                                    resolution = Xc3dDocDocument.#getDefaultFacetRenderResolution(),
+                                    showFace = true,
+                                    showEdge = true,
+                                    showVertex = true,
+                                    renderingResolution = Xc3dDocDocument.RenderingResolution.High,
                                   }) {
-
     const bodyType = body.type;
-
-    let pointSize = 1;
+    let pointSize = null;
     if (bodyType === XcGmBody.BODY_TYPE.SOLID) {
       pointSize = 1;
     } else if (bodyType === XcGmBody.BODY_TYPE.SHEET) {
@@ -156,7 +145,9 @@ class Xc3dDocDocument {
 
     // Faces
     for (const face of body.faces) {
-      const renderingMesh = Xc3dDocDocument.generateMeshForFace({face, color, map, opacity, transparent, resolution});
+      const renderingMesh = Xc3dDocDocument.generateMeshForFace({face, color, map, opacity, transparent, renderingResolution});
+
+      renderingMesh.visible = showFace;
 
       // Set maps
       Xc3dDocDocument.#renderingObjectToModelingKernelObjectMap.set(renderingMesh, face);
@@ -167,7 +158,9 @@ class Xc3dDocDocument {
 
     // Edges
     for (const edge of body.edges) {
-      const renderingLine = Xc3dDocDocument.generateLineForEdge({edge, color, resolution});
+      const renderingLine = Xc3dDocDocument.generateLineForEdge({edge, color, renderingResolution});
+
+      renderingLine.visible = showEdge;
 
       // Set maps
       Xc3dDocDocument.#renderingObjectToModelingKernelObjectMap.set(renderingLine, edge);
@@ -180,6 +173,8 @@ class Xc3dDocDocument {
     for (const vertex of body.vertices) {
       const renderingPoint = Xc3dDocDocument.generatePointForVertex({vertex, color, size: pointSize});
 
+      renderingPoint.visible = showVertex;
+
       // Set maps
       Xc3dDocDocument.#renderingObjectToModelingKernelObjectMap.set(renderingPoint, vertex);
       Xc3dDocDocument.#modelingKernelEntityToRenderingObjectMap.set(vertex, renderingPoint);
@@ -190,7 +185,17 @@ class Xc3dDocDocument {
     return renderingBody;
   }
 
-  static generateMeshForFace({face, color, map, opacity, transparent, resolution = Xc3dDocDocument.#getDefaultFacetRenderResolution()}) {
+  static generateMeshForFace({face, color, map, opacity, transparent, renderingResolution = Xc3dDocDocument.RenderingResolution.High}) {
+    let resolution = null;
+    if (renderingResolution === Xc3dDocDocument.RenderingResolution.Low) {
+      resolution = 'low';
+    } else if (renderingResolution === Xc3dDocDocument.RenderingResolution.High) {
+      resolution = 'high';
+    } else {
+      XcSysAssert({assertion: false, message: 'Unexpected facet type.'});
+      resolution = 'high';
+    }
+
     const _normalizeParameter = (uvBOX, parameter) => {
       parameter.x = (parameter.x - uvBOX.lowU) / (uvBOX.highU - uvBOX.lowU);
       parameter.y = (parameter.y - uvBOX.lowV) / (uvBOX.highV - uvBOX.lowV);
@@ -252,7 +257,7 @@ class Xc3dDocDocument {
 
         indexOffset += renderingFacetData.facets.length;
       } else {
-        XcSysAssert({assertion: 'Unexpected facet type.'});
+        XcSysAssert({assertion: false, message: 'Unexpected facet type.'});
       }
     }
 
@@ -268,9 +273,9 @@ class Xc3dDocDocument {
     const material = new THREE.MeshStandardMaterial({
       color,
       side: THREE.DoubleSide,
-      map: map,
-      opacity: opacity,
-      transparent: transparent,
+      map,
+      opacity,
+      transparent,
       polygonOffset: true,
       polygonOffsetFactor: 0,
       polygonOffsetUnits: 1.0
@@ -280,7 +285,16 @@ class Xc3dDocDocument {
     return renderingMesh;
   }
 
-  static generateLineForEdge({edge, color, resolution = Xc3dDocDocument.#getDefaultFacetRenderResolution()}) {
+  static generateLineForEdge({edge, color, renderingResolution = Xc3dDocDocument.RenderingResolution.High}) {
+    let resolution = null;
+    if (renderingResolution === Xc3dDocDocument.RenderingResolution.Low) {
+      resolution = 0.0001;
+    } else if (renderingResolution === Xc3dDocDocument.RenderingResolution.High) {
+      resolution = 0.00001;
+    } else {
+      XcSysAssert({assertion: false, message: 'Invalid rendering resolution'});
+      resolution = 0.00001;        
+    }
 
     const allRenderingLineData = edge.render_line({resolution});
     const geometry = new THREE.BufferGeometry();
@@ -327,8 +341,7 @@ class Xc3dDocDocument {
       const yDir = axisDir.crossProduct({vector: xDir}).normal;
 
       const vertices = [];
-      const curveRenderingResolution = Xc3dDocDocument.#getDefaultCurveRenderResolution();
-      for (let param = 0; param <= (Math.PI * 2); param += curveRenderingResolution) {
+      for (let param = 0; param <= (Math.PI * 2); param += resolution) {
         const x = centerPosition.x + radius * (Math.cos(param) * xDir.x + Math.sin(param) * yDir.x);
         const y = centerPosition.y + radius * (Math.cos(param) * xDir.y + Math.sin(param) * yDir.y);
         const z = centerPosition.z + radius * (Math.cos(param) * xDir.z + Math.sin(param) * yDir.z);
@@ -359,8 +372,7 @@ class Xc3dDocDocument {
       const rotationAngle = xDir.rotationAngleTo({vector: endVec, axis: axisDir});
 
       const vertices = [];
-      const curveRenderingResolution = Xc3dDocDocument.#getDefaultCurveRenderResolution();
-      for (let param = 0; param <= rotationAngle; param += curveRenderingResolution) {
+      for (let param = 0; param <= rotationAngle; param += resolution) {
         const x = centerPosition.x + radius * (Math.cos(param) * xDir.x + Math.sin(param) * yDir.x);
         const y = centerPosition.y + radius * (Math.cos(param) * xDir.y + Math.sin(param) * yDir.y);
         const z = centerPosition.z + radius * (Math.cos(param) * xDir.z + Math.sin(param) * yDir.z);
@@ -378,8 +390,7 @@ class Xc3dDocDocument {
       const minorAxisDir = XcGm3dVector.fromArray({array: renderingLineData.data.minorAxisDir});
 
       const vertices = [];
-      const curveRenderingResolution = Xc3dDocDocument.#getDefaultCurveRenderResolution();
-      for (let param = 0; param <= (Math.PI * 2); param += curveRenderingResolution) {
+      for (let param = 0; param <= (Math.PI * 2); param += resolution) {
         const x = centerPoint.x + majorRadius * Math.cos(param) * majorAxisDir.x + minorRadius * Math.sin(param) * minorAxisDir.x;
         const y = centerPoint.y + majorRadius * Math.cos(param) * majorAxisDir.y + minorRadius * Math.sin(param) * minorAxisDir.y;
         const z = centerPoint.z + majorRadius * Math.cos(param) * majorAxisDir.z + minorRadius * Math.sin(param) * minorAxisDir.z;
@@ -432,9 +443,8 @@ class Xc3dDocDocument {
         endAngle = Math.PI * 2 - startAngle;
       }
 
-      const curveRenderingResolution = Xc3dDocDocument.#getDefaultCurveRenderResolution();
       const vertices = [];
-      for (let param = startAngle; param <= endAngle; param += curveRenderingResolution) {
+      for (let param = startAngle; param <= endAngle; param += resolution) {
         const x = centerPosition.x + majorRadius * Math.cos(param) * majorAxisDir.x + minorRadius * Math.sin(param) * minorAxisDir.x;
         const y = centerPosition.y + majorRadius * Math.cos(param) * majorAxisDir.y + minorRadius * Math.sin(param) * minorAxisDir.y;
         const z = centerPosition.z + majorRadius * Math.cos(param) * majorAxisDir.z + minorRadius * Math.sin(param) * minorAxisDir.z;

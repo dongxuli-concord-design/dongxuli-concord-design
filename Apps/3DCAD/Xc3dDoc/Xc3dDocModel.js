@@ -2,13 +2,30 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   body;
   color;
   texture;
+  showFace;
+  showEdge;
+  showVertex;
+  renderingResolution;
 
-  constructor({body, name = 'model', color = new THREE.Color('rgb(220, 220, 220)'), texture = null} = {}) {
+  constructor({
+                body,
+                name = 'model',
+                color = new THREE.Color('rgb(220, 220, 220)'),
+                showFace = true,
+                showEdge = true,
+                showVertex = true,
+                texture = null,
+                renderingResolution = Xc3dDocDocument.RenderingResolution.High,
+              } = {}) {
     super({name});
 
     this.body = body;
     this.color = color;
     this.texture = texture;
+    this.showFace = showFace;
+    this.showEdge = showEdge;
+    this.showVertex = showVertex;
+    this.renderingResolution = renderingResolution;
   }
 
   static load({json, document}) {
@@ -25,11 +42,20 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
       this.texture = Xc3dDocTexture.load({json: json.texture, document});
     }
 
+    const showFace = json.showFace;
+    const showEdge = json.showEdge;
+    const showVertex = json.showVertex;
+    const renderingResolution = json.renderingResolution;
+
     const model = new Xc3dDocModel({
       name,
       body,
       color,
-      texture
+      texture,
+      showFace,
+      showEdge,
+      showVertex,
+      renderingResolution,
     });
 
     return model;
@@ -47,6 +73,10 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
       color: this.color.clone(),
       texture: this.texture,
       body: newBody,
+      showFace: this.showFace,
+      showEdge: this.showEdge,
+      showVertex: this.showVertex,
+      renderingResolution: this.renderingResolution,
     });
 
     newModel.userData = {...this.userData};
@@ -61,6 +91,11 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
 
     const newBody = other.body.clone();
     this.body = newBody;
+
+    this.showFace = other.showFace;
+    this.showEdge = other.showEdge;
+    this.showVertex = other.showVertex;
+    this.renderingResolution = other.renderingResolution;
   }
 
   save({document}) {
@@ -71,6 +106,10 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
       bodyData: bodyData,
       texture: textureData,
       color: `#${this.color.getHexString()}`,
+      showFace: this.showFace,
+      showEdge: this.showEdge,
+      showVertex: this.showVertex,
+      renderingResolution: this.renderingResolution,
     };
   }
 
@@ -78,7 +117,11 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
     return Xc3dDocDocument.generateRenderingForBody({
       body: this.body,
       map: this.texture ? this.texture.map : null,
-      color: this.color
+      color: this.color,
+      showFace: this.showFace,
+      showEdge: this.showEdge,
+      showVertex: this.showVertex,
+      renderingResolution: this.renderingResolution,
     });
   }
 
