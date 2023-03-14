@@ -6,11 +6,12 @@ class XcSysManager {
   static standardWidgetDiv = null;
   static standardDialog = null;
 
+  static currentUiContext = null;
+
   static #platform = require('os').platform();
   static #appClasses = [];
   static #apps = [];
   static #mainCoroutine = null;
-  static #currentUiContext = null;
   static #eventQueue = null;
 
   static* apps() {
@@ -131,7 +132,7 @@ class XcSysManager {
     XcSysManager.standardDialog = document.body.children[3].children[1];
 
     // Init with the initial context
-    XcSysManager.#currentUiContext = new XcSysUIContext();
+    XcSysManager.currentUiContext = new XcSysUIContext();
 
     XcSysManager.canvasDiv.style.visibility = 'hidden';
     XcSysManager.promptDiv.style.display = 'none';
@@ -185,7 +186,7 @@ class XcSysManager {
   ) {
     // Setup channels
     // The following IF statements are for the performance optimization purpose.
-    if (XcSysManager.#currentUiContext.showCanvasElement !== uiContext.showCanvasElement) {
+    if (XcSysManager.currentUiContext.showCanvasElement !== uiContext.showCanvasElement) {
       if (uiContext.showCanvasElement) {
         XcSysManager.canvasDiv.style.visibility = 'visible';
       } else {
@@ -193,7 +194,7 @@ class XcSysManager {
       }
     }
 
-    if (XcSysManager.#currentUiContext.prompt !== uiContext.prompt) {
+    if (XcSysManager.currentUiContext.prompt !== uiContext.prompt) {
       XcSysManager.promptDiv.innerHTML = uiContext.prompt;
       if (uiContext.prompt) {
         XcSysManager.promptDiv.style.display = 'block';
@@ -202,7 +203,7 @@ class XcSysManager {
       }
     }
 
-    if (XcSysManager.#currentUiContext.standardWidgets !== uiContext.standardWidgets) {
+    if (XcSysManager.currentUiContext.standardWidgets !== uiContext.standardWidgets) {
       if (uiContext.standardWidgets) {
         XcSysManager.standardWidgetDiv.style.display = 'flex';
       } else {
@@ -229,7 +230,7 @@ class XcSysManager {
       }
     }
 
-    if (XcSysManager.#currentUiContext.standardDialog !== uiContext.standardDialog) {
+    if (XcSysManager.currentUiContext.standardDialog !== uiContext.standardDialog) {
       XcSysManager.standardDialog.innerHTML = null;
 
       if (uiContext.standardDialog) {
@@ -240,9 +241,9 @@ class XcSysManager {
       }
     }
 
-    if (XcSysManager.#currentUiContext.customDiv !== uiContext.customDiv) {
-      if (XcSysManager.#currentUiContext.customDiv) {
-        document.body.removeChild(XcSysManager.#currentUiContext.customDiv);
+    if (XcSysManager.currentUiContext.customDiv !== uiContext.customDiv) {
+      if (XcSysManager.currentUiContext.customDiv) {
+        document.body.removeChild(XcSysManager.currentUiContext.customDiv);
       }
 
       if (uiContext.customDiv) {
@@ -250,11 +251,11 @@ class XcSysManager {
       }
     }
 
-    if (XcSysManager.#currentUiContext.cursor !== uiContext.cursor) {
+    if (XcSysManager.currentUiContext.cursor !== uiContext.cursor) {
       XcSysManager.canvasDiv.style.cursor = uiContext.cursor;
     }
 
-    XcSysManager.#currentUiContext = uiContext;
+    XcSysManager.currentUiContext = uiContext;
 
     if (onloadCallback) {
       onloadCallback();

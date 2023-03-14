@@ -251,6 +251,7 @@ This class provides i18n functionalities. Example:
 <h2>T</h2>
 <code>T(strings, ...values)</code>
 Get translated string from template keys.
+
 <h1>XcSysManager</h1>
 
 The fundamental class to manage the system, which provides many basic
@@ -260,20 +261,30 @@ functionalities.
 <code>static canvasDiv</code>
 The HTML div element which contains an HTML canvas. This div covers the
 whole viewport.
+
 <h2>outputDisplay</h2>
 <code>static outputDisplay</code>
 The HTML element (<code>XcUIDisplay</code>) which is for outputting messages. This element is located on the left top
 of the viewport.
+
 <h2>promptDiv</h2>
 <code>static promptDiv</code>
 The HTML element which is for displaying prompt message. The element is located just below
 the<code>outputDisplay</code> element.
+
 <h2>standardWidgetDiv</h2>
 <code>static standardWidgetDiv</code>
 The HTML div container for the standard HTML widgets, which is located at the left side of the viewport.
+
 <h2>standardDialog</h2>
 <code>static standardDialog</code>
 The HTML div container for the standard HTML dialog, which is located at the center of the viewport.
+
+<h2>currentUiContext</h2>
+<code>static currentUiContext</code>
+The current XcSysUIContext object.
+
+
 <h2>apps</h2>
 <code>static * apps()</code>
 <dl>
