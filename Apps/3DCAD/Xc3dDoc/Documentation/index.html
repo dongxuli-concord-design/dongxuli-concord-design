@@ -21,6 +21,15 @@ Document and key object model classes for 3D modeling.
 <dt>fileVersion</dt> <dd>Integer number representing the document file version.</dd>
 </dl>
 
+<h3>RenderingResolution</h3>
+
+<code>static RenderingResolution</code>
+
+<dl>
+<dt>RenderingResolution.High</dt> <dd>High rendering resoution.</dd>
+<dt>RenderingResolution.Low</dt> <dd>Low rendering resoution.</dd>
+</dl>
+
 <h3>constructor</h3>
 
 <code>constructor({filePath})</code>
@@ -113,21 +122,25 @@ Xc3dDocDocument.registerDrawableObjectType({
 
 <pre><code>
   static generateRenderingForBody({
-                                    body,
-                                    color,
-                                    map = null,
-                                    opacity = 1.0,
-                                    transparent = false
-                                  })
+    body,
+    color,
+    map = null,
+    opacity = 1.0,
+    transparent = false,
+    showFace = true,
+    showEdge = true,
+    showVertex = true,
+    renderingResolution = Xc3dDocDocument.RenderingResolution.High,
+  })
 </code></pre>
 
 <h3>generateMeshForFace</h3>
 
-<code>static generateMeshForFace({face, color, map, opacity, transparent})</code>
+<code>  static generateMeshForFace({face, color, map, opacity, transparent, renderingResolution = Xc3dDocDocument.RenderingResolution.High})</code>
 
 <h3>generateLineForEdge</h3>
 
-<code>static generateLineForEdge({edge, color})</code>
+<code>static generateLineForEdge({edge, color, renderingResolution = Xc3dDocDocument.RenderingResolution.High})</code>
 
 <h3>generatePointForVertex</h3>
 
@@ -265,13 +278,26 @@ Represent a document model which is built from the XcGm kernel.
 
 <h3>constructor</h3>
 
-<code>constructor({body, name = 'model', color = new THREE.Color('rgb(220, 220, 220)'), texture = null} = {}) </code>
+<code>  constructor({
+                body,
+                name = 'model',
+                color = new THREE.Color('rgb(220, 220, 220)'),
+                showFace = true,
+                showEdge = true,
+                showVertex = true,
+                texture = null,
+                renderingResolution = Xc3dDocDocument.RenderingResolution.High,
+              } = {})</code>
 
 <dl>
 <dt>body</dt> <dd>XcGmBody object.</dd>
 <dt>color</dt> <dd>Three.js color object.</dd>
 <dt>name</dt> <dd>String representing name.</dd>
 <dt>texture</dt> <dd>Xc3dDocTexture object.</dd>
+<dt>showFace</dt> <dd>If render faces.</dd>
+<dt>showEdge</dt> <dd>If render edges.</dd>
+<dt>showVertex</dt> <dd>If render vertices.</dd>
+<dt>renderingResolution</dt> <dd>The rendering resolution.</dd>
 </dl>
 
 <h3>body (getter)</h3>
