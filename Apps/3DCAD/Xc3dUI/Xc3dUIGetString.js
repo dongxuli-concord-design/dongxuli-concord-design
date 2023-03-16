@@ -42,7 +42,7 @@ class Xc3dUIGetString {
 
     this.#stringInputWidget = document.createElement('input');
     this.#stringInputWidget.type = 'text';
-    this.#stringInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetInteger.Event.Input}));
+    this.#stringInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.Input}));
     this.#stringInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
         XcSysManager.dispatchEvent({event: Xc3dUIGetString.#Event.InputEnter});
