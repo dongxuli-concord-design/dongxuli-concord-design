@@ -160,13 +160,7 @@ class XcSysManager {
     }, delay);
 
     while (true) {
-      let event = null;
-      if (XcSysManager.#eventQueue.length > 0) {
-        event = XcSysManager.#eventQueue.shift();
-      } else {
-        event = yield;
-      }
-
+      const event = yield;
       if (event === timer) {
         return null;
       } else {
@@ -303,11 +297,7 @@ class XcSysManager {
 
     let event = null;
     do {
-      if (XcSysManager.#eventQueue.length > 0) {
-        event = XcSysManager.#eventQueue.shift();
-      } else {
-        event = yield;
-      }
+      event = yield;
     } while (!_isQualifedEvent(event) && (event !== timer));
 
     let returnValue = null;
@@ -328,13 +318,7 @@ class XcSysManager {
     }, delay);
 
     while (true) {
-      let event = null;
-      if (XcSysManager.#eventQueue.length > 0) {
-        event = XcSysManager.#eventQueue.shift();
-      } else {
-        event = yield;
-      }
-
+      const event = yield;
       if (event === timer) {
         return null;
       } else if (interruptors.includes(event)) {
