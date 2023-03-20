@@ -62,10 +62,8 @@ class Xc3dCmdManager {
     }
   }
 
-  static init() {
-    Xc3dCmdManager.initI18n();
-
-    Xc3dApp.commands.push(
+  static get defaultCommands() {
+    return [
       new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`View`,
         entry: Xc3dCmdView.command
@@ -224,7 +222,6 @@ class Xc3dCmdManager {
         entry: Xc3dCmdSew.command
       }),
 
-
       new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`Export 3D printing`,
         entry: Xc3dCmd3DPrint.command
@@ -255,6 +252,15 @@ class Xc3dCmdManager {
         name: Xc3dCmdManager.#i18n.T`Code`,
         entry: Xc3dCmdCode.command
       }),
-    )
+    ];
+  }
+
+  static init() {
+    Xc3dCmdManager.initI18n();
+    if (Xc3dAppConfig.debug) {
+      Xc3dApp.commands.push(...Xc3dCmdManager.defaultCommands);
+    } else {
+      // Do nothing
+    }
   }
 }
