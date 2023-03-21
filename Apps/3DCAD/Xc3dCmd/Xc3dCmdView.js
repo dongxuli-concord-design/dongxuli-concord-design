@@ -101,6 +101,8 @@ class Xc3dCmdView {
       'Zoom': '缩放',
       'Click a position to start': '单击一个位置开始',
       'Hold and drag': '按住并拖动',
+      'Look at UCS': '局部坐标系对正',
+      'Save current view': '保存当前视角',
     };
 
     if (XcSysConfig.locale === 'zh') {
