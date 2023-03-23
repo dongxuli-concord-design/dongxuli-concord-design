@@ -81,7 +81,7 @@ class Xc3dUIGetPosition {
       }
 
       const objectSnapModeInput = document.createElement('label');
-      objectSnapModeInput.innerHTML = 'Object Snap Mode <input type="checkbox" checked>';
+      objectSnapModeInput.innerHTML = Xc3dUII18n.i18n.T`Object Snap Mode` + ' <input type="checkbox" checked>';
       objectSnapModeInput.querySelector('input').addEventListener('input', () => this.#objectSnapMode = objectSnapModeInput.querySelector('input').checked);
       widgets.push(objectSnapModeInput);
 
@@ -96,12 +96,12 @@ class Xc3dUIGetPosition {
       widgets.push(objectCenterButton);
 
       const textBoxInputButton = document.createElement('button');
-      textBoxInputButton.innerHTML = Xc3dUII18n.i18n.T`Coordinate Input`;
+      textBoxInputButton.innerHTML = Xc3dUII18n.i18n.T`Input Coordinate`;
       textBoxInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.TextBoxInputButtonClick}));
       widgets.push(textBoxInputButton);
 
       const codeInputButton = document.createElement('button');
-      codeInputButton.innerHTML = Xc3dUII18n.i18n.T`Code`;
+      codeInputButton.innerHTML = Xc3dUII18n.i18n.T`Input Coordinate Object`;
       codeInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.CodeInputButtonClick}));
       widgets.push(codeInputButton);
 

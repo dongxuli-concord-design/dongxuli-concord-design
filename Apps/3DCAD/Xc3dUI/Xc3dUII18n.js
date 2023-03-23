@@ -60,6 +60,9 @@ class Xc3dUII18n {
       'Please select an object': '请选择一个物体',
       'There is no base point specified. Please input absolute coordinates.': '没有指定基点。请输入绝对坐标。',
       'Base position expected for relative coordinates': '相对坐标需要提供基点',
+      'Input Coordinate': '输入坐标',
+      'Input Coordinate Object': '输入代码对象',
+      'Object Snap Mode': '启用对象捕捉',
 
       // Xc3dUIGetTransform.js
       'Click a position to start': '点击一个位置开始',
