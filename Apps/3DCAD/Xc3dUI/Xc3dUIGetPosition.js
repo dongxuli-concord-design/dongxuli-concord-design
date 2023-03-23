@@ -43,7 +43,6 @@ class Xc3dUIGetPosition {
   #uiContextForTextBoxInput;
   #positionSnapper;
   #touchFingerIdentifier;
-  #objectSnapMode;
 
   constructor({
                 prompt,
@@ -53,7 +52,6 @@ class Xc3dUIGetPosition {
                 touchIndicator,
                 draggingCallback,
                 draggingIntensity,
-                objectSnapMode,
               }) {
     this.#prompt = prompt;
     this.#allowReturnNull = allowReturnNull;
@@ -62,7 +60,6 @@ class Xc3dUIGetPosition {
     this.#touchIndicator = touchIndicator;
     this.#draggingCallback = draggingCallback;
     this.#draggingIntensity = draggingIntensity;
-    this.#objectSnapMode = objectSnapMode;
 
     // Initial input context
     {
@@ -79,11 +76,6 @@ class Xc3dUIGetPosition {
         doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetPosition.#Event.Done}));
         widgets.push(doneButton);
       }
-
-      const objectSnapModeInput = document.createElement('label');
-      objectSnapModeInput.innerHTML = Xc3dUII18n.i18n.T`Object Snap Mode` + ' <input type="checkbox" checked>';
-      objectSnapModeInput.querySelector('input').addEventListener('input', () => this.#objectSnapMode = objectSnapModeInput.querySelector('input').checked);
-      widgets.push(objectSnapModeInput);
 
       const originButton = document.createElement('button');
       originButton.innerHTML = Xc3dUII18n.i18n.T`Origin`;
@@ -196,7 +188,6 @@ class Xc3dUIGetPosition {
     const positionAndMark = this.#positionSnapper.snapAt({
       currentScreenPosition: positionInScreen,
       basePosition: this.#basePosition,
-      objectSnapMode: this.#objectSnapMode,
     });
 
     if (!positionAndMark) {
@@ -493,7 +484,6 @@ Xc3dUIManager.getPosition = function* ({
                                                  touchIndicator = Xc3dUITouchEvent.TYPE.END,
                                                  draggingCallback = null,
                                                  draggingIntensity = Xc3dUIManager.DraggingIntensity.MEDIUM,
-                                                 objectSnapMode = true,
                                                }) {
   const positionGetter = new Xc3dUIGetPosition({
     prompt,
@@ -503,7 +493,6 @@ Xc3dUIManager.getPosition = function* ({
     touchIndicator,
     draggingCallback,
     draggingIntensity,
-    objectSnapMode,
   });
   while ((positionGetter.state !== Xc3dUIGetPosition.CommandState.Ok) &&
   (positionGetter.state !== Xc3dUIGetPosition.CommandState.Cancel) &&

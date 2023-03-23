@@ -12,7 +12,7 @@ class Xc3dUII18n {
       'Done': '完成',
       'Invalid input.': '无效输入',
 
-      // _XcUICamera.js
+      // XcUICamera.js
       'Home': '初始',
       'Ortho': '对正',
       'Pan': '平移',
@@ -26,7 +26,7 @@ class Xc3dUII18n {
       'Specify the first position of the angle': '指定角度起始点',
       'Specify the second position of the angle': '指定角度终点',
 
-      // _XcUIGetAxis.js
+      // XcUIGetAxis.js
       'Axis end position': '轴的终点',
       'Specify the first position of the axis': '输入轴的起点',
       'Specify the second position of the axis': '输入轴的终点',
@@ -62,7 +62,6 @@ class Xc3dUII18n {
       'Base position expected for relative coordinates': '相对坐标需要提供基点',
       'Input Coordinate': '输入坐标',
       'Input Coordinate Object': '输入代码对象',
-      'Object Snap Mode': '启用对象捕捉',
 
       // Xc3dUIGetTransform.js
       'Click a position to start': '点击一个位置开始',
@@ -77,6 +76,9 @@ class Xc3dUII18n {
 
       // XcUIGetCommand.js
       'Command name': '命令名',
+
+      // Xc3dUIGetObject.js
+      'Input': '输入',
 
       // XcUIInitCmd.js
       'Please select an app': '请选择一个应用',
