@@ -128,27 +128,6 @@ class Xc3dUIGetPosition {
         Xc3dUIManager.addCustomRenderingObject({renderingObject: this.draggingRubberLine});
       }
 
-      const positionCursorGeometry = new THREE.BufferGeometry();
-      if (this.#basePosition) {
-        const vertices = new Float32Array([
-          ...this.#basePosition.toArray(),
-        ]);
-        positionCursorGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-      } else {
-        const vertices = new Float32Array([
-          0, 0, 0,
-        ]);
-        positionCursorGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-      }
-
-      const positionCursorMaterial = new THREE.PointsMaterial({
-        color: new THREE.Color('rgb(0, 255, 0)'),
-        size: Xc3dUIConfig.pickingPrecisionInPixels,
-        sizeAttenuation: false
-      });
-      this.positionCursor = new THREE.Points(positionCursorGeometry, positionCursorMaterial);
-      Xc3dUIManager.addCustomRenderingObject({renderingObject: this.positionCursor});
-
       this.#uiContextForInput = new XcSysUIContext({
         prompt: this.#prompt,
         showCanvasElement: true,
@@ -228,12 +207,6 @@ class Xc3dUIGetPosition {
     if (positionAndMark.mark) {
       this.snappingMarkGroup.add(positionAndMark.mark);
     }
-
-    const positions = this.positionCursor.geometry.attributes.position.array;
-    positions[0] = this.position.x;
-    positions[1] = this.position.y;
-    positions[2] = this.position.z;
-    this.positionCursor.geometry.attributes.position.needsUpdate = true;
 
     if (this.#basePosition) {
       const positions = this.draggingRubberLine.geometry.attributes.position.array;
@@ -423,12 +396,6 @@ class Xc3dUIGetPosition {
           this.position = position;
         }
 
-        const positions = this.positionCursor.geometry.attributes.position.array;
-        positions[0] = this.position.x;
-        positions[1] = this.position.y;
-        positions[2] = this.position.z;
-        this.positionCursor.geometry.attributes.position.needsUpdate = true;
-
         if (this.#basePosition) {
           const positions = this.rubberLineGeometry.geometry.attributes.position.array;
           positions[3] = this.position.x;
@@ -487,12 +454,6 @@ class Xc3dUIGetPosition {
 
         if (inputState === Xc3dUIInputState.eInputTest) {
           this.position.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
-
-          const positions = this.positionCursor.geometry.attributes.position.array;
-          positions[0] = this.position.x;
-          positions[1] = this.position.y;
-          positions[2] = this.position.z;
-          this.positionCursor.geometry.attributes.position.needsUpdate = true;
 
           if (this.#basePosition) {
             const positions = this.rubberLineGeometry.geometry.attributes.position.array;
@@ -567,7 +528,6 @@ Xc3dUIManager.getPosition = function* ({
     Xc3dUIManager.removeCustomRenderingObject({renderingObject: positionGetter.draggingRubberLine});
   }
   Xc3dUIManager.removeCustomOverlayRenderingObject({renderingObject: positionGetter.snappingMarkGroup});
-  Xc3dUIManager.removeCustomRenderingObject({renderingObject: positionGetter.positionCursor});
   Xc3dUIManager.redraw();``
 
   return {inputState: positionGetter.inputState, position: positionGetter.position};

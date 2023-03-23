@@ -842,29 +842,28 @@ class Xc3dUIManager {
       return renderingObjectWeight;
     };
 
-    intersects.sort(function (a, b) {
-      const weightA = getPickingWeight(a.object);
-      const weightB = getPickingWeight(b.object);
+    intersects.sort(function (intersectA, intersectB) {
+      const weightA = getPickingWeight(intersectA.object);
+      const weightB = getPickingWeight(intersectB.object);
       if (weightA === weightB) {
-        if (Math.abs(a.distance - b.distance) === 0) {
+        if (Math.abs(intersectA.distance - intersectB.distance) === 0) {
           const random = Math.random();
           return random - 0.5;
         } else {
-          return a.distance - b.distance;
+          return intersectA.distance - intersectB.distance;
         }
       } else {
         return weightA - weightB;
       }
     });
 
-    const returnValue = [];
-
-    for (const intersect of intersects) {
-      returnValue.push({
+    const returnValue = intersects.map(intersect => {
+      return {
         renderingObject: intersect.object,
         position: XcGm3dPosition.fromThreeVector3({threeVector3: intersect.point})
-      });
-    }
+      };
+    });
+
 
     return returnValue;
   }
