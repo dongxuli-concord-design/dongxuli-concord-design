@@ -77,11 +77,6 @@ function buildDarwinRelease() {
     // Xc3d
     `cp -R ../XcMain/Apps/3DCAD/* ./Concord.darwin/Concord.app/Contents/Resources/app.nw/Apps/3DCAD/`, 
   ]);
-
-  // Copy version file
-  _runCommands([
-    `cp ./version.txt ./Concord.darwin/Concord.app/Contents/Resources/app.nw/`,
-  ]);
 }
 
 function buildWin32Release() {
@@ -135,11 +130,6 @@ function buildWin32Release() {
   _runCommands([
     // 3DCAD
     `cp -R ../XcMain/Apps/3DCAD/* ./Concord.win32/Apps/3DCAD/`,
-  ]);
-
-  // Copy version file
-  _runCommands([
-    `cp ./version.txt ./Concord.win32/`,
   ]);
 }
 
