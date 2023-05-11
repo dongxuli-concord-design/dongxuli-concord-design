@@ -59,17 +59,14 @@ class Xc3dCmdProgrammableModel {
         this.#renderingObjectGroup.remove(...this.#renderingObjectGroup.children);
 
         if (inputState === Xc3dUIInputState.eInputNormal) {
-          for (const drawableObject of drawableObjects) {
-            Xc3dUIManager.document.addDrawableObject({drawableObject});
-          }
-
+          drawableObjects.forEach(drawableObject => Xc3dUIManager.document.addDrawableObject({drawableObject}));
           Xc3dUIManager.redraw();
           return Xc3dCmdProgrammableModel.#CommandState.Quit;
         } else {
-          for (const drawableObject of drawableObjects) {
+          drawableObjects.forEach(drawableObject => {
             const renderingObject = drawableObject.generateRenderingObject();
-            this.#renderingObjectGroup.add(renderingObject);
-          }
+            this.#renderingObjectGroup.add(renderingObject);            
+          });
 
           Xc3dUIManager.redraw();
           return Xc3dCmdProgrammableModel.#CommandState.WaitForCode;

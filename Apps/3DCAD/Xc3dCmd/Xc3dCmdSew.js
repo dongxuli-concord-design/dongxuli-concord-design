@@ -63,9 +63,7 @@ class Xc3dCmdSew {
     }
 
     // Unhighlight everything
-    for (const renderingObject of this.#highlightingRenderingObjects) {
-      Xc3dUIManager.removeCustomRenderingObject({renderingObject});
-    }
+    this.#highlightingRenderingObjects.forEach(renderingObject => Xc3dUIManager.removeCustomRenderingObject({renderingObject}));
     this.#highlightingRenderingObjects.length = 0;
 
     if (this.#state === Xc3dCmdSew.#CommandState.Done) {
