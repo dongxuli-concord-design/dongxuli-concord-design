@@ -14,10 +14,8 @@ class XcSysManager {
   static #mainCoroutine = null;
   static #eventQueue = null;
 
-  static* apps() {
-    for (const app of XcSysManager.#apps) {
-      yield app;
-    }
+  static get apps() {
+    return [...XcSysManager.#apps]
   }
 
   static loadJavaScriptAsync({scriptSrc, doneCallback, asModule = true}) {
@@ -66,10 +64,10 @@ class XcSysManager {
 
   static run({customInitFunction = null, customInitFunctionArg = null} = {}) {
     // Init apps
-    for (const appClass of XcSysManager.#appClasses) {
+    XcSysManager.#appClasses.forEach(appClass => {
       const app = new appClass();
       XcSysManager.#apps.push(app);
-    }
+    });
 
     XcSysManager.#init({customInitFunction, customInitFunctionArg});
   }
@@ -207,7 +205,7 @@ class XcSysManager {
       XcSysManager.standardWidgetDiv.innerHTML = '';
 
       if (uiContext.standardWidgets) {
-        for (const [index, widget] of uiContext.standardWidgets.entries()) {
+        uiContext.standardWidgets.forEach((widget, index) => {
           if (widget instanceof HTMLButtonElement) {
             widget.classList.add('btn', 'btn-outline-primary');
           } else if (widget instanceof HTMLInputElement) {
@@ -220,7 +218,7 @@ class XcSysManager {
           widget.style.tabIndex = index;
 
           XcSysManager.standardWidgetDiv.appendChild(widget);
-        }
+        });
       }
     }
 
@@ -256,34 +254,16 @@ class XcSysManager {
     }
 
     function _isQualifedEvent(event) {
-      if (event === null) {
-        return true;
-      }
-
-      if (expectedEventTypes === null) {
-        return true;
-      } else {
-        let isQualified = false;
-
-        for (const type of expectedEventTypes) {
+      if ((event !== null) && (expectedEventTypes !== null)) {
+        return expectedEventTypes.some(type => {
           if (typeof type === 'function') {
-            if (type(event)) {
-              isQualified = true;
-              break;
-            } else {
-              isQualified = false;
-            }
+            return type(event);
           } else {
-            if (type === event) {
-              isQualified = true;
-              break;
-            } else {
-              isQualified = false;
-            }
+            return type === event;
           }
-        }
-
-        return isQualified;
+        });
+      } else {
+        return true;
       }
     }
 

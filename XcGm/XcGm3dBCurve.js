@@ -14,11 +14,7 @@ class XcGm3dBCurve extends XcGm3dCurve {
   }
 
   static createBspline({positions}) {
-    const pkVectors = [];
-    for (const position of positions) {
-      const pkVector = new XcGmPK_VECTOR_t({coord: position.toArray()});
-      pkVectors.push(pkVector);
-    }
+    const pkVectors = positions.map(position => new XcGmPK_VECTOR_t({coord: position.toArray()}));
     const params = {
       n_positions: pkVectors.length,
       positions: pkVectors,
@@ -26,11 +22,7 @@ class XcGm3dBCurve extends XcGm3dCurve {
 
     const {error, pkReturnValue} = XcGmCallPkApi('BCURVE_create_spline_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const curves = [];
-    for (const curveTag of pkReturnValue.bcurves) {
-      const curve = XcGmEntity.getObjFromTag({entityTag: curveTag});
-      curves.push(curve);
-    }
+    const curves = pkReturnValue.bcurves.map(curveTag => XcGmEntity.getObjFromTag({entityTag: curveTag}));
     return curves;
   }
 

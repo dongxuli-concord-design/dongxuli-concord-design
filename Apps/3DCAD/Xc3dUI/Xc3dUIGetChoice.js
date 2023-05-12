@@ -44,13 +44,14 @@ class Xc3dUIGetChoice {
       widgets.push(doneButton);
     }
 
-    for (const [index, choice] of choices.entries()) {
+    const choiceButtons = choices.map((choice, index) => {
       const button = document.createElement('button');
       button.innerHTML = choice;
       button.dataset.index = index;
       button.addEventListener('click', (event) =>XcSysManager.dispatchEvent({event}));
-      widgets.push(button);
-    }
+      return button;
+    });
+    widgets.push(...choiceButtons);
 
     this.#uicontext = new XcSysUIContext({
       prompt,

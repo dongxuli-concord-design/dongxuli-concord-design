@@ -80,13 +80,8 @@ class Xc3dUIGetDrawableObject {
         this.highlightingRenderingObject = null;
       }
 
-      const targetRenderingObjects = [];
-      for (const drawableObject of Xc3dUIManager.document.drawableObjects) {
-        if (this.#filter(drawableObject)) {
-          const renderingObject = Xc3dDocDocument.getRenderingObjectFromDrawableObject({drawableObject});
-          targetRenderingObjects.push(renderingObject);
-        }
-      }
+      const filteredDrawableObjects = Xc3dUIManager.document.drawableObjects.filter(this.#filter);
+      const targetRenderingObjects = filteredDrawableObjects.map(drawableObject => Xc3dDocDocument.getRenderingObjectFromDrawableObject({drawableObject}));
 
       const intersects = Xc3dUIManager.pick({
         screenPosition: event.position,

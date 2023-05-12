@@ -4,10 +4,7 @@ class XcGmPart extends XcGmTopology {
   }
 
   static transmitToData({parts}) {
-    const partTags = [];
-    for (const part of parts) {
-      partTags.push(part.tag);
-    }
+    const partTags = parts.map(part => part.tag);
     const params = {
       parts: partTags
     };
@@ -18,10 +15,7 @@ class XcGmPart extends XcGmTopology {
   }
 
   static transmitToFile({parts, path}) {
-    const partTags = [];
-    for (const part of parts) {
-      partTags.push(part.tag);
-    }
+    const partTags = parts.map(part => part.tag);
     const params = {
       parts: partTags,
       key: path
@@ -39,11 +33,7 @@ class XcGmPart extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('PART_receive_b', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const parts = [];
-    for (const partTag of pkReturnValue.parts) {
-      const part = XcGmEntity.getObjFromTag({entityTag: partTag});
-      parts.push(part);
-    }
+    const parts = pkReturnValue.parts.map(partTag => XcGmEntity.getObjFromTag({entityTag: partTag}));
     return parts;
   }
 
@@ -54,11 +44,7 @@ class XcGmPart extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('PART_receive', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const parts = [];
-    for (const partTag of pkReturnValue.parts) {
-      const part = XcGmEntity.getObjFromTag({entityTag: partTag});
-      parts.push(part);
-    }
+    const parts = pkReturnValue.parts.map(partTag => XcGmEntity.getObjFromTag({entityTag: partTag}));
     return parts;
   }
 

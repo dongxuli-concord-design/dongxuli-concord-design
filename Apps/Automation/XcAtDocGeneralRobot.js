@@ -115,28 +115,28 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
 
   #generateDefinitionParameters() {
     this.#error = null;
-    for (const definition of this.#geometryDefinition) {
-        const zAxisDirection = new XcGm3dVector({
-          x: definition.direction[0],
-          y: definition.direction[1],
-          z: definition.direction[2],
-        });
+    this.#geometryDefinition.forEach(definition => {
+      const zAxisDirection = new XcGm3dVector({
+        x: definition.direction[0],
+        y: definition.direction[1],
+        z: definition.direction[2],
+      });
 
-        const jointCoordinateSystems = new XcGmCoordinateSystem({
-          origin: new XcGm3dPosition({
-            x: definition.location[0],
-            y: definition.location[1],
-            z: definition.location[2],
-          }),
-          zAxisDirection,
-          xAxisDirection: zAxisDirection.perpendicularVector,
-        });
-        this.#jointCoordinateSystems.push(jointCoordinateSystems);
-        this.#jointTypes.push(definition.type);
-        this.#jointMinValues.push(definition.minValue);
-        this.#jointMaxValues.push(definition.maxValue);
-        this.#angles.push(0.0);
-    }
+      const jointCoordinateSystems = new XcGmCoordinateSystem({
+        origin: new XcGm3dPosition({
+          x: definition.location[0],
+          y: definition.location[1],
+          z: definition.location[2],
+        }),
+        zAxisDirection,
+        xAxisDirection: zAxisDirection.perpendicularVector,
+      });
+      this.#jointCoordinateSystems.push(jointCoordinateSystems);
+      this.#jointTypes.push(definition.type);
+      this.#jointMinValues.push(definition.minValue);
+      this.#jointMaxValues.push(definition.maxValue);
+      this.#angles.push(0.0);
+    });
 
     this.#kinematics = new XcAtGeneralKinematics({geometryDefinition:this.#geometryDefinition, jointCoordinateSystem:this.#jointCoordinateSystems});
     const {arrayMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
@@ -200,9 +200,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       XcSysAssert({assertion: false, message: `The WRONG defination of the robot: ${error}`});
     }
 
-    this.#renderRobotBones = [];
-    this.#renderRobotBonesOriginal = [];
-    for (const robotBone of this.#robotBones) {
+    this.#renderRobotBonesOriginal = this.#robotBones.map(robotBone => {
       const renderingObjectGroup = new THREE.Group();
       const renderingObjectJoint = Xc3dDocDocument.generateRenderingForBody({
         body: robotBone.joint,
@@ -217,10 +215,10 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
         color: new THREE.Color('lightgray'),
       });
       renderingObjectGroup.add(renderingObjectLink);
+      return renderingObjectGroup;
+    });
 
-      this.#renderRobotBonesOriginal.push(renderingObjectGroup);
-      this.#renderRobotBones.push(renderingObjectGroup.clone());
-    }
+    this.#renderRobotBones = this.#renderRobotBonesOriginal.map(renderingObjectGroup => renderingObjectGroup.clone());
   }
 
   clone() {

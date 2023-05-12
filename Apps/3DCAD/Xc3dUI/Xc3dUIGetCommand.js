@@ -46,7 +46,7 @@ class Xc3dUIGetCommand {
     });
     widgets.push(this.commandInputWidget);
 
-    for (const [index, command] of commands.entries()) {
+    const commandButtons = commands.map((command, index) => {
       const button = document.createElement('button');
       if (command.icon) {
         button.innerHTML = `<img src="${command.icon}" style="width:32px;height:32px;"> ${command.name}`;
@@ -58,8 +58,9 @@ class Xc3dUIGetCommand {
         Xc3dUIGetCommand.lastCommandName = command.name;
         XcSysManager.dispatchEvent({event});
       });
-      widgets.push(button);
-    }
+      return button;
+    });
+    widgets.push(...commandButtons);
 
     this.#uicontext = new XcSysUIContext({
       prompt,

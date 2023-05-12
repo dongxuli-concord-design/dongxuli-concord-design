@@ -282,7 +282,7 @@ class Xc3dUIManager {
       webSocketMessageQueue.push(JSON.parse(event.data));
     });
 
-    function simplifyTouchEventQueue(queue) {
+    function simplifyTouchEventQueue({queue}) {
       const newQueue = [];
       let lastType = null;
       for (const item of queue) {
@@ -300,7 +300,7 @@ class Xc3dUIManager {
 
     setInterval(function () {
       if (webSocketMessageQueue.length > 0) {
-        const simplifiedQueue = simplifyTouchEventQueue(webSocketMessageQueue);
+        const simplifiedQueue = simplifyTouchEventQueue({queue: webSocketMessageQueue});
         webSocketMessageQueue.length = 0;
         setTimeout(() => {
           Xc3dUIManager.xcPadCoroutine.next(new Xc3dUIXcPadTouchEventQueue({events: simplifiedQueue}));

@@ -9,14 +9,10 @@ class XcGmAssembly extends XcGmPart {
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('ASSEMBLY_ask_parts', {params});
-
-    const parts = [];
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    for (const partTag of pkReturnValue.parts) {
-      const part = XcGmEntity.getObjFromTag({entityTag: partTag});
-      parts.push(part);
-    }
+    const parts = pkReturnValue.parts.map(partTag => XcGmEntity.getObjFromTag({entityTag: partTag}));
+
     return parts;
   }
 
@@ -36,14 +32,9 @@ class XcGmAssembly extends XcGmPart {
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('ASSEMBLY_ask_instances', {params});
-
-    const instances = [];
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    for (const instanceTag of pkReturnValue.instances) {
-      const instance = XcGmEntity.getObjFromTag({entityTag: instanceTag});
-      instances.push(instance);
-    }
+    const instances = pkReturnValue.instances.map(instanceTag => XcGmEntity.getObjFromTag({entityTag: instanceTag}));
     return instances;
   }
 
@@ -55,22 +46,10 @@ class XcGmAssembly extends XcGmPart {
     const {error, pkReturnValue} = XcGmCallPkApi('ASSEMBLY_ask_parts_transfs', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const parts = [];
-    for (const partTag of pkReturnValue.parts) {
-      const part = XcGmEntity.getObjFromTag({entityTag: partTag});
-      parts.push(part);
-    }
+    const parts = pkReturnValue.parts.map(partTag => XcGmEntity.getObjFromTag({entityTag: partTag}));
+    const transfs = pkReturnValue.transfs.map(transfTag => XcGmEntity.getObjFromTag({entityTag: transfTag}));
 
-    const transfs = [];
-    for (const transfTag of pkReturnValue.transfs) {
-      const transf = XcGmEntity.getObjFromTag({entityTag: transfTag});
-      transfs.push(transf);
-    }
-
-    return {
-      parts,
-      transfs,
-    };
+    return {parts, transfs};
   }
 
   transform({matrix}) {

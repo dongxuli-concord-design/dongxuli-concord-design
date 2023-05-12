@@ -87,13 +87,14 @@ class Xc3dUIGetAxis {
 
 
     const toolbarItems = ['Measure', 'X', '-X', 'Y', '-Y', 'Z', '-Z'];
-    for (const item of toolbarItems) {
+    const toolbarItemButtons = toolbarItems.map(item => {
       const button = document.createElement('button');
       button.innerHTML = item;
       button.dataset.axis = item;
       button.addEventListener('click', (event) => XcSysManager.dispatchEvent({event}));
-      widgets.push(button);
-    }
+      return button;
+    });
+    widgets.push(...toolbarItemButtons);
 
     this.#uiContext = new XcSysUIContext({
       prompt,

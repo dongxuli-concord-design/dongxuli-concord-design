@@ -31,11 +31,7 @@ class XcGmEdge extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_faces', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const faces = [];
-    for (const faceTag of pkReturnValue.faces) {
-      const face = XcGmEntity.getObjFromTag({entityTag: faceTag});
-      faces.push(face);
-    }
+    const faces = pkReturnValue.faces.map(faceTag => XcGmEntity.getObjFromTag({entityTag: faceTag}));
     return faces;
   }
 
@@ -52,10 +48,7 @@ class XcGmEdge extends XcGmTopology {
   }
 
   static reverse({edges}) {
-    const edgeTags = [];
-    for (const edge of edges) {
-      edgeTags.push(edge.tag);
-    }
+    const edgeTags = edges.map(edge => edge.tag);
     const params = {
       edges: edgeTags,
     };
@@ -64,10 +57,7 @@ class XcGmEdge extends XcGmTopology {
   }
 
   static makeFacesFrom({edges, senses, sharedLoop}) {
-    const edgeTags = [];
-    for (const edge of edges) {
-      edgeTags.push(edge.tag);
-    }
+    const edgeTags = edges.map(edge => edge.tag);
     const params = {
       edges: edgeTags,
       senses: senses,
@@ -76,22 +66,12 @@ class XcGmEdge extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_make_faces_from_wire', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const newFaces = [];
-
-    for (const faceTag of pkReturnValue.new_faces) {
-      const newFaceObj = XcGmEntity.getObjFromTag({entityTag: faceTag});
-      XcGmAssert({assertion: newFaceObj});
-      newFaces.push(newFaceObj);
-    }
-
+    const newFaces = pkReturnValue.new_faces.map(faceTag => XcGmEntity.getObjFromTag({entityTag: faceTag}));
     return newFaces;
   }
 
   static setBlendConstantFor({edges, radius}) {
-    const edgeTags = [];
-    for (const edge of edges) {
-      edgeTags.push(edge.tag);
-    }
+    const edgeTags = edges.map(edge => edge.tag);
     const params = {
       edges: edgeTags,
       radius: radius
@@ -99,12 +79,7 @@ class XcGmEdge extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_set_blend_constant', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const blendEdges = [];
-    for (const blendEdgeTag of pkReturnValue.blend_edges) {
-      const bendEdge = XcGmEntity.getObjFromTag({entityTag: blendEdgeTag});
-      XcGmAssert({assertion: bendEdge});
-      blendEdges.push(bendEdge);
-    }
+    const blendEdges = pkReturnValue.blend_edges.map(blendEdgeTag => XcGmEntity.getObjFromTag({entityTag: blendEdgeTag}));
     return blendEdges;
   }
 
@@ -145,14 +120,8 @@ class XcGmEdge extends XcGmTopology {
     const {vertex1, vertex2} = this.vertices;
     const vertices = [vertex1, vertex2];
 
-    for (const vertex of vertices) {
-      const point = vertex.point;
-      if (position.isEqualTo({position: point.position})) {
-        return vertex;
-      }
-    }
-
-    return null;
+    const vertexFound = vertices.find(vertex => position.isEqualTo({position: vertex.point.position}));
+    return vertexFound? vertexFound: null;
   }
 
   findVertex({callback}) {

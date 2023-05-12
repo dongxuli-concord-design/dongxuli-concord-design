@@ -113,7 +113,7 @@ class Xc3dCmdSweep {
       const highlightingRenderingObject = Xc3dUIManager.generateHighlightingRenderingObject({renderingObject: renderingObjectOfDrawable});
       this.#hints.add(highlightingRenderingObject);
 
-      for (const [i, vertex] of drawableObject.body.vertices.entries()) {
+      const makeHintRenderingObject = ({vertex, index}) => {
         const position = vertex.point.position;
         const geometry = new THREE.BufferGeometry();
         const vertices = new Float32Array([...position.toArray()]);
@@ -124,11 +124,17 @@ class Xc3dCmdSweep {
           sizeAttenuation: false
         });
         const renderingObject = new THREE.Points(geometry, material);
-        renderingObject.userData.vertexID = i;
+        renderingObject.userData.vertexID = index;
         renderingObject.userData.vertex = vertex;
         renderingObject.userData.section = drawableObject;
-        this.#vertexPositionRenderingObjects.add(renderingObject);
+
+        return renderingObject;
       }
+      const hintRenderingObjects = drawableObject.body.vertices.map((vertex, index) => {
+        return makeHintRenderingObject({vertex, index});
+      });
+      this.#vertexPositionRenderingObjects.push(...hintRenderingObjects);
+
       this.#hints.add(this.#vertexPositionRenderingObjects);
       Xc3dUIManager.redraw();
 

@@ -48,11 +48,7 @@ class XcGmFace extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_edges', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const edges = [];
-    for (const edgeTag of pkReturnValue.edges) {
-      const edge = XcGmEntity.getObjFromTag({entityTag: edgeTag});
-      edges.push(edge);
-    }
+    const edges = pkReturnValue.edges.map(edgeTag => XcGmEntity.getObjFromTag({entityTag: edgeTag}));
     return edges;
   }
 
@@ -63,20 +59,12 @@ class XcGmFace extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_vertices', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const vertices = [];
-    for (const vertexTag of pkReturnValue.vertices) {
-      const vertex = XcGmEntity.getObjFromTag({entityTag: vertexTag});
-      vertices.push(vertex);
-    }
+    const vertices = pkReturnValue.vertices.map(vertexTag => XcGmEntity.getObjFromTag({entityTag: vertexTag}));
     return vertices;
   }
 
   static delete({faces}) {
-    const faceTags = [];
-    for (const face of faces) {
-      faceTags.push(face.tag);
-    }
-
+    const faceTags = faces.map(face => face.tag);
     const params = {
       faces: faceTags
     };
@@ -86,18 +74,12 @@ class XcGmFace extends XcGmTopology {
   }
 
   static transform({facesAndMatrices, tolerance}) {
-    const faceTags = [];
-    for (const faceAndMatrix of facesAndMatrices) {
-      faceTags.push(faceAndMatrix.face.tag);
-    }
-
-    const transfTags = [];
-    for (const faceAndMatrix of facesAndMatrices) {
+    const faceTags = facesAndMatrices.map(faceAndMatrix => faceAndMatrix.face.tag);
+    const transfTags = facesAndMatrices.map(faceAndMatrix => {
       const transfSF = XcGmPK_TRANSF_sf_t.fromXcGm3dMatrix({matrix: faceAndMatrix.matrix});
       const transf = XcGmTransf.create({transfSF});
-
-      transfTags.push(transf.tag);
-    }
+      return transf.tag;
+    });
 
     const params = {
       faces: faceTags,
@@ -119,16 +101,8 @@ class XcGmFace extends XcGmTopology {
       PK_boolean_param = PK_boolean_unite_c;
     }
 
-    const targetTags = [];
-    for (const tool of targets) {
-      targetTags.push(tool.tag);
-    }
-
-    const toolTags = [];
-    for (const tool of tools) {
-      toolTags.push(tool.tag);
-    }
-
+    const targetTags = targets.map(target => target.tag);
+    const toolTags = tools.map(tool => tool.tag);
     const params = {
       target: targetTags,
       tools: toolTags,
@@ -138,12 +112,7 @@ class XcGmFace extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_boolean_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const resultBodies = [];
-    for (const bodyTag of pkReturnValue.bodies) {
-      const body = XcGmEntity.getObjFromTag({entityTag: bodyTag});
-      resultBodies.push(body);
-    }
-
+    const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity.getObjFromTag({entityTag: bodyTag}));
     return resultBodies;
   }
 
@@ -168,22 +137,13 @@ class XcGmFace extends XcGmTopology {
   }
 
   imprintCurve({curves, intervals}) {
-    const params = {
-      face: this.tag,
-      curves: [],
-      intervals: [],
-    };
-
     XcGmAssert({assertion: curves.length === intervals.length, message: `curves and intervals should have equal length.`});
 
-    for (const curve of curves) {
-      params.curves.push(curve.tag);
-    }
-
-    for (const interval of intervals) {
-      const pkInterval = XcGmPK_INTERVAL_t.fromXcGmInterval({interval});
-      params.intervals.push(pkInterval.toJSON());
-    }
+    const params = {
+      face: this.tag,
+      curves: curves.map(curve => curve.tag),
+      intervals: intervals.map(interval => XcGmPK_INTERVAL_t.fromXcGmInterval({interval}).toJSON()),
+    };
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_imprint_curves_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -191,15 +151,8 @@ class XcGmFace extends XcGmTopology {
   }
 
   findVertexByPosition({position}) {
-    const vertices = this.vertices;
-    for (const vertex of vertices) {
-      const point = vertex.point;
-      if (position.isEqualTo({position: point.position})) {
-        return vertex;
-      }
-    }
-
-    return null;
+    const vertexFound = this.vertices.find(vertex => position.isEqualTo({position: vertex.point.position}));
+    return vertexFound? vertexFound: null;
   }
 
   findEdgeByPositions({positions}) {
@@ -208,28 +161,20 @@ class XcGmFace extends XcGmTopology {
   }
 
   findEdgeByVertex(vertex) {
-    const foundEdges = [];
-    const edges = this.edges;
-    for (const edge of edges) {
+    const foundEdges = this.edges.filter(edge => {
       const {v1, v2} = edge.vertices;
-      if ((v1 === vertex1) || (v2 === vertex2)) {
-        foundEdges.push(edge);
-      }
-    }
-
+      return (v1 === vertex) || (v2 === vertex);
+    });
     return foundEdges;
   }
 
   findEdgeByTwoVertices({vertex1, vertex2}) {
-    const edges = this.edges;
-    for (const edge of edges) {
+    const edgeFound = this.edges.find(edge => {
       const {v1, v2} = edge.vertices;
-      if ((v1 === vertex1) && (v2 === vertex2)) {
-        return edge;
-      }
-    }
+      return (v1 === vertex1) && (v2 === vertex2);
+    });
 
-    return null;
+    return edgeFound? edgeFound: null;
   }
 
   findVertex({callback}) {

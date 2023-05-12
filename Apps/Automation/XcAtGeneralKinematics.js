@@ -158,10 +158,11 @@ class XcAtGeneralKinematics {
 
     // TODO: weights for position and orientation differences
     let error = 0.;
-    for (const vector in target) {
+    target.forEach(vector => {
       poses[vector].sub(target[vector]);
       error += poses[vector].lengthSq();
-    }
+    });
+
     return error;
   }
 

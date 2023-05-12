@@ -80,7 +80,7 @@ class XcSysMainCoroutine {
 
     const startupAppStr = XcSysMainCoroutine.#i18n.T`Startup app`;
     // For commands
-    for (const app of XcSysManager.apps()) {
+    XcSysManager.apps.forEach(app => {
       const appDiv = XcSysManager.htmlToElement({
         htmlString: `
       <div class="card text-center" style="width: fit-content; height: fit-content; margin: 5em;">
@@ -108,7 +108,7 @@ class XcSysMainCoroutine {
       });
 
       appsDiv.appendChild(appDiv);
-    }
+    });
 
     const uiContextForWaitingCommands = new XcSysUIContext({
       prompt: XcSysMainCoroutine.#i18n.T`Please select an app`,

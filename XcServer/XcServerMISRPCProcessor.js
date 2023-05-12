@@ -111,30 +111,23 @@ class XcEnterpriseGroup {
     XcEnterpriseGroup.IdToGroupMap.set(this.id, this);
     this.collaborators = json.collaborators;
     this.isArchived = json.isArchived;
-    for (const postJson of json.posts) {
+    json.posts.forEach(postJson => {
       const post = new XcEnterpriseGroupPost();
       post.fromJSON({json: postJson});
       this.posts.push(post);
-    }
+    });
 
-    for (const childJson of json.children) {
+    json.children.forEach(childJson => {
       const child = new XcEnterpriseGroup();
       child.fromJSON({json: childJson});
       child.parentGroup = this;
       this.children.push(child);
-    }
+    });
   }
 
   toJSON() {
-    const postsJson = [];
-    for (const post of this.posts) {
-      postsJson.push(post.toJSON());
-    }
-
-    const childrenJson = [];
-    for (const child of this.children) {
-      childrenJson.push(child.toJSON());
-    }
+    const postsJson = this.posts.map(post => post.toJSON());
+    const childrenJson = this.children.map(child => child.toJSON());
 
     return {
       name: this.name,
@@ -219,18 +212,13 @@ class XcServerMISRPCProcessor extends XcServerHttpRPCProcessor {
 
       }
 
-      const postsJson = [];
-      for (const post of group.posts) {
-        postsJson.push(post.toJSON());
-      }
-
-      const childrenJson = [];
-      for (const child of group.children) {
-        childrenJson.push({
+      const postsJson = group.posts.map(post => post.toJSON());
+      const childrenJson = group.children.map(child => {
+        return {
           name: child.name,
           id: child.id,
-        });
-      }
+        };
+      });
 
       const groupData = {
         name: group.name,
@@ -253,13 +241,12 @@ class XcServerMISRPCProcessor extends XcServerHttpRPCProcessor {
   //return: {error, favoriteGroups: [{groupId, groupName}, ...]}
   * getFavoriteGroups() {
     try {
-      const favoriteGroupsJson = [];
-      for (const group of XcEnterpriseGroup.FavoriteGroups) {
-        favoriteGroupsJson.push({
+      const favoriteGroupsJson = XcEnterpriseGroup.FavoriteGroups.map(group => {
+        return {
           groupId: group.id,
           groupName: group.name,
-        });
-      }
+        };
+      });
 
       this.returnValue = {error: null, favoriteGroups: favoriteGroupsJson};
       return this.returnValue;

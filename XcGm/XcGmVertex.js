@@ -31,11 +31,7 @@ class XcGmVertex extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('VERTEX_ask_faces', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const faces = [];
-    for (const faceTag of pkReturnValue.faces) {
-      const face = XcGmEntity.getObjFromTag({entityTag: faceTag});
-      faces.push(face);
-    }
+    const faces = pkReturnValue.faces.map(faceTag =>XcGmEntity.getObjFromTag({entityTag: faceTag}));
     return faces;
   }
 }

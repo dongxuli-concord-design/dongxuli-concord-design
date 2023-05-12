@@ -138,10 +138,10 @@ class Xc3dUIAnimation {
         vector: XcGm3dVector.multiply({vector: direction, scale: distanceStep})
       });
 
-      for (const item of drawableObjects) {
-        item.transform({matrix: translationMatrix});
-        Xc3dUIManager.document.modifyDrawableObject({drawableObject: item});
-      }
+      drawableObjects.forEach(drawableObject => {
+        drawableObject.transform({matrix: translationMatrix});
+        Xc3dUIManager.document.modifyDrawableObject({drawableObject});
+      });
 
       Xc3dUIManager.redraw();
       yield;
@@ -155,10 +155,10 @@ class Xc3dUIAnimation {
     for (let i = 0; i < steps; ++i) {
       const rotationMatrix = XcGm3dMatrix.rotationMatrix({angle: angeleStep, axis});
 
-      for (const item of drawableObjects) {
-        item.transform({matrix: rotationMatrix});
-        Xc3dUIManager.document.modifyDrawableObject({drawableObject: item});
-      }
+      drawableObjects.forEach(drawableObject => {
+        drawableObject.transform({matrix: rotationMatrix});
+        Xc3dUIManager.document.modifyDrawableObject({drawableObject});
+      });
 
       Xc3dUIManager.redraw();
       yield;

@@ -34,10 +34,7 @@ class XcServerDatabase {
 
       const newDatabaseContent = this.onSaveCallback();
       fs.writeFile(this.databaseFileName, newDatabaseContent, { flag: 'w' }, (error) => {
-        for (const saveNotificationCallback of this.#saveNotificationCallbacks) {
-          saveNotificationCallback({error});
-        }
-
+        this.#saveNotificationCallbacks.forEach(saveNotificationCallback => saveNotificationCallback({error}));
         this.#saveNotificationCallbacks.length = 0;
       });
     }, this.saveDelay);

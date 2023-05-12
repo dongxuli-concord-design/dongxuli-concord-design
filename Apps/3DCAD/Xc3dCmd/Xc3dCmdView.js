@@ -120,7 +120,9 @@ class Xc3dCmdView {
 
   #updateViewManagementDiv() {
     this.#viewManagementDiv.innerHTML = '';
-    for (const [name, viewJSONData] of Xc3dUIManager.namedViews.entries()) {
+
+    const viewNames = [...Xc3dUIManager.namedViews.keys()];
+    viewNames.forEach(name => {
       const setViewButton = document.createElement('button');
       setViewButton.innerHTML = name;
       setViewButton.addEventListener('click', () => Xc3dUIManager.setCurrentView({name}));
@@ -144,7 +146,7 @@ class Xc3dCmdView {
       viewDiv.style.margin = '3px';
 
       this.#viewManagementDiv.appendChild(viewDiv);
-    }
+    });
   }
 
   * run() {

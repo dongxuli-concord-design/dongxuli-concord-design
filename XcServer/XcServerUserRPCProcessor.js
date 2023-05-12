@@ -9,9 +9,8 @@ class XcServerUserRPCProcessor extends XcServerHttpRPCProcessor {
     loadCallBack: (loadedDatabaseContent) => {
       XcServerUserRPCProcessor.#users.clear();
       const entries = JSON.parse(loadedDatabaseContent);
-      for (const entry of entries) {
-        XcServerUserRPCProcessor.#users.set(entry[0], entry[1]);
-      }
+
+      entries.forEach(entry =>  XcServerUserRPCProcessor.#users.set(entry[0], entry[1]));
     },
     saveCallback: () => {
       return JSON.stringify(Array.from(XcServerUserRPCProcessor.#users.entries()), null, '\t');

@@ -144,9 +144,8 @@ class Xc3dDocDocument {
     Xc3dDocDocument.#modelingKernelEntityToRenderingObjectMap.set(body, renderingBody);
 
     // Faces
-    for (const face of body.faces) {
+    body.faces.forEach(face => {
       const renderingMesh = Xc3dDocDocument.generateMeshForFace({face, color, map, opacity, transparent, renderingResolution});
-
       renderingMesh.visible = showFace;
 
       // Set maps
@@ -154,12 +153,11 @@ class Xc3dDocDocument {
       Xc3dDocDocument.#modelingKernelEntityToRenderingObjectMap.set(face, renderingMesh);
 
       renderingBody.add(renderingMesh);
-    }
+    });
 
     // Edges
-    for (const edge of body.edges) {
+    body.edges.forEach(edge => {
       const renderingLine = Xc3dDocDocument.generateLineForEdge({edge, color, renderingResolution});
-
       renderingLine.visible = showEdge;
 
       // Set maps
@@ -167,12 +165,11 @@ class Xc3dDocDocument {
       Xc3dDocDocument.#modelingKernelEntityToRenderingObjectMap.set(edge, renderingLine);
 
       renderingBody.add(renderingLine);
-    }
+    });
 
     // Vertices
-    for (const vertex of body.vertices) {
+    body.vertices.forEach(vertex => {
       const renderingPoint = Xc3dDocDocument.generatePointForVertex({vertex, color, size: pointSize});
-
       renderingPoint.visible = showVertex;
 
       // Set maps
@@ -180,7 +177,7 @@ class Xc3dDocDocument {
       Xc3dDocDocument.#modelingKernelEntityToRenderingObjectMap.set(vertex, renderingPoint);
 
       renderingBody.add(renderingPoint);
-    }
+    });
 
     return renderingBody;
   }
@@ -210,7 +207,7 @@ class Xc3dDocDocument {
     const indices = [];
     let indexOffset = 0;
 
-    for (const renderingFacetData of allRenderingFacetData) {
+    allRenderingFacetData.forEach(renderingFacetData => {
       if (renderingFacetData.type === 'L3TPFI') {
         // Facet plus normals plus parameters
         for (let i = 0; i < renderingFacetData.facets.length; i += 1) {
@@ -259,7 +256,7 @@ class Xc3dDocDocument {
       } else {
         XcSysAssert({assertion: false, message: 'Unexpected facet type.'});
       }
-    }
+    });
 
     geometry.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
     geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
@@ -498,16 +495,16 @@ class Xc3dDocDocument {
     });
 
     // Load textures first
-    for (const textureData of json.textures) {
+    json.textures.forEach(textureData => {
       const texture = Xc3dDocTexture.load({json: textureData.textureJSON, document});
       document.#textures.add(texture);
 
       const objectID = textureData.objectID;
       document.#idToObjectMap.set(objectID, texture);
       document.#objectToIDMap.set(texture, objectID);
-    }
+    });
 
-    for (const drawableObjectData of json.drawableObjects) {
+    json.drawableObjects.forEach(drawableObjectData => {
       const className = drawableObjectData.drawableObjectClassName;
       const json = drawableObjectData.drawableObjectJSON;
       const drawableObjectCls = Xc3dDocDocument.getDrawableObjectClassByType({className});
@@ -529,7 +526,7 @@ class Xc3dDocDocument {
       const objectID = drawableObjectData.objectID;
       document.#idToObjectMap.set(objectID, drawableObject);
       document.#objectToIDMap.set(drawableObject, objectID);
-    }
+    });
 
     document.#userData = json.userData;
 
@@ -831,7 +828,7 @@ class Xc3dDocDocument {
       userData: this.userData
     };
 
-    for (const drawableObject of this.#drawableObjects) {
+    this.#drawableObjects.forEach(drawableObject => {
       const drawableObjectClassName = drawableObject.constructor.name;
       const drawableObjectJSON = drawableObject.save({document: this});
       const objectID = this.getObjectID({object: drawableObject});
@@ -840,16 +837,17 @@ class Xc3dDocDocument {
         drawableObjectJSON,
         objectID,
       });
-    }
+    });
 
-    for (const texture of this.#textures) {
+    this.#textures.forEach(texture => {
       const textureJSON = texture.toJSON();
       const objectID = this.getObjectID({object: texture});
       documentJSON.textures.push({
         textureJSON,
         objectID,
       });
-    }
+
+    });
 
     return documentJSON;
   }

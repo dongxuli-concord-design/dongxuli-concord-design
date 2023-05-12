@@ -18,11 +18,7 @@ class XcGmTopology extends XcGmEntity {
   static evalMassPropsFor({topols, accuracy}) {
     //TODO:
     //FIXME: this API may not be right.
-    const topolTags = [];
-    for (const topol of topols) {
-      topolTags.push(topol.tag);
-    }
-
+    const topolTags = topols.map(topol => topol.tag);
     const params = {
       topols: topolTags,
       accuracy: accuracy
