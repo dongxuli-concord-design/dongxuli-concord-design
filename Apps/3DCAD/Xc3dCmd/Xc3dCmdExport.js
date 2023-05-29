@@ -1,23 +1,17 @@
 class Xc3dCmdExport {
-  static #Event = {
-    Quit: Symbol('Quit'),
-    Next: Symbol('Next')
-  };
-
   static #CommandState = {
     Done: Symbol('Done'),
     Cancel: Symbol('Cancel'),
-    WaitForPath: Symbol('WaitForPath'),
+    WaitForFile: Symbol('WaitForFile'),
     WaitForObject: Symbol('WaitForObject')
   };
 
   #i18n;
   #state;
   #path;
-  #uiContext;
 
   constructor() {
-    this.#state = Xc3dCmdExport.#CommandState.WaitForPath;
+    this.#state = Xc3dCmdExport.#CommandState.WaitForFile;
     this.#path = '/tmp/model';
 
     this.#initI18n();
@@ -51,8 +45,8 @@ class Xc3dCmdExport {
   * run() {
     while ((this.#state !== Xc3dCmdExport.#CommandState.Done) && (this.#state !== Xc3dCmdExport.#CommandState.Cancel)) {
       switch (this.#state) {
-        case Xc3dCmdExport.#CommandState.WaitForPath:
-          this.#state = yield* this.#onWaitForPath();
+        case Xc3dCmdExport.#CommandState.WaitForFile:
+          this.#state = yield* this.#onWaitForFile();
           break;
         case Xc3dCmdExport.#CommandState.WaitForObject:
           this.#state = yield* this.#onWaitForObject();
@@ -66,45 +60,20 @@ class Xc3dCmdExport {
     return this.#state;
   }
 
-  * #onWaitForPath() {
-    const widgets = [];
+  * #onWaitForFile() {
+    const path = require('path');
+    const workingFolder = path.dirname(Xc3dApp.filePath);
 
-    const quitButton = document.createElement('button');
-    quitButton.innerHTML = this.#i18n.T`Cancel`;
-    quitButton.addEventListener('click', (event) => {
-      XcSysManager.dispatchEvent({event: Xc3dCmdExport.#Event.Quit});
-    });
-    widgets.push(quitButton);
-
-    const nextButton = document.createElement('button');
-    nextButton.innerHTML = this.#i18n.T`Next`;
-    nextButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdExport.#Event.Next}));
-    widgets.push(nextButton);
-
-    const path = this.#i18n.T`Path`;
-    const pathInput = document.createElement('label');
-    pathInput.innerHTML = `${path} <input type="text" value="${this.#path}">`;
-    widgets.push(pathInput);
-
-    this.#uiContext = new XcSysUIContext({
+    const {inputState, files} = yield* Xc3dUIManager.getFile({
       prompt: this.#i18n.T`Please input path`,
-      showCanvasElement: true,
-      standardWidgets: widgets,
-      cursor: 'pointer',
+      nwsaveas: 'export.x_t',
+      nwworkingdir: workingFolder,
     });
-
-    const event = yield* XcSysManager.waitForEvent({
-      uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmdExport.#Event.Next, Xc3dCmdExport.#Event.Quit]
-    });
-
-    if (event === Xc3dCmdExport.#Event.Next) {
-      this.#path = pathInput.querySelector('input').value;
+    if (inputState === Xc3dUIInputState.eInputNormal) {
+      this.#path = files[0].path;
       return Xc3dCmdExport.#CommandState.WaitForObject;
-    } else if (event === Xc3dCmdExport.#Event.Quit) {
-      return Xc3dCmdExport.#CommandState.Cancel;
     } else {
-      XcSysAssert({assertion: false, message: this.#i18n.T`Internal command state error`});
+      return Xc3dCmdExport.#CommandState.Cancel;
     }
   }
 

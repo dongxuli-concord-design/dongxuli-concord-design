@@ -2,62 +2,21 @@ class Xc3dCmdInsert {
   static #CommandState = {
     Done: Symbol('Done'),
     Cancel: Symbol('Cancel'),
-    WaitForDocument: Symbol('WaitForDocument'),
+    WaitForFile: Symbol('WaitForFile'),
     WaitForPosition: Symbol('WaitForPosition')
-  };
-
-  static #Event = {
-    Cancel: Symbol('Cancel'),
-    DocumentSelected: Symbol('DocumentSelected')
   };
 
   #i18n;
   #state;
-  #pathName;
   #externalDocument;
   #position;
-  #uiContext;
 
   constructor() {
-    this.#state = Xc3dCmdInsert.#CommandState.WaitForDocument;
-    this.#pathName = null;
+    this.#state = Xc3dCmdInsert.#CommandState.WaitForFile;
     this.#externalDocument = null;
     this.#position = Xc3dUIManager.getWorldPositionFromUCSPosition({ucsPosition: new XcGm3dPosition()});
 
     this.#initI18n();
-
-    const widgets = [];
-
-    const cancelButton = document.createElement('button');
-    cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdInsert.#Event.Cancel}));
-    widgets.push(cancelButton);
-
-    const fileChooser = document.createElement('input');
-    fileChooser.setAttribute('type', 'file');
-    fileChooser.setAttribute('data-id', 'filedialog');
-    fileChooser.style.display = 'none';
-    widgets.push(fileChooser);
-    const fileChooseButton = document.createElement('button');
-    fileChooseButton.innerHTML = this.#i18n.T`Select file`;
-    fileChooseButton.addEventListener('click', (event) => {
-      fileChooser.addEventListener('change', (event) => {
-        if (event.target.value) {
-          this.#pathName = event.target.value;
-          XcSysManager.dispatchEvent({event: Xc3dCmdInsert.#Event.DocumentSelected});
-        }
-      }, false);
-
-      fileChooser.click();
-    });
-    widgets.push(fileChooseButton);
-
-    this.#uiContext = new XcSysUIContext({
-      prompt: this.#i18n.T`Please select file`,
-      showCanvasElement: true,
-      standardWidgets: widgets,
-      cursor: 'pointer',
-    });
   }
 
   #initI18n() {
@@ -67,8 +26,6 @@ class Xc3dCmdInsert {
       'Cancel': '取消',
       'Next': '下一步',
       'Quit': '退出',
-
-
     };
 
     if (XcSysConfig.locale === 'zh') {
@@ -87,8 +44,8 @@ class Xc3dCmdInsert {
   * run() {
     while ((this.#state !== Xc3dCmdInsert.#CommandState.Done) && (this.#state !== Xc3dCmdInsert.#CommandState.Cancel)) {
       switch (this.#state) {
-        case Xc3dCmdInsert.#CommandState.WaitForDocument:
-          this.#state = yield* this.#onWaitForDocument();
+        case Xc3dCmdInsert.#CommandState.WaitForFile:
+          this.#state = yield* this.#onWaitForFile();
           break;
         case Xc3dCmdInsert.#CommandState.WaitForPosition:
           this.#state = yield* this.#onWaitForPosition();
@@ -110,19 +67,17 @@ class Xc3dCmdInsert {
     return this.#state;
   }
 
-  * #onWaitForDocument() {
-    const event = yield* XcSysManager.waitForEvent({
-      uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmdInsert.#Event.Cancel, Xc3dCmdInsert.#Event.DocumentSelected]
+  * #onWaitForFile() {
+    const {inputState, files} = yield* Xc3dUIManager.getFile({
+      prompt: this.#i18n.T`Please select file`,
+      accept: '.xc3d',
     });
-
-    if (event === Xc3dCmdInsert.#Event.Cancel) {
-      return Xc3dCmdInsert.#CommandState.Cancel;
-    } else if (event === Xc3dCmdInsert.#Event.DocumentSelected) {
-      this.#externalDocument = new Xc3dDocExternalDocument({filePath: this.#pathName, document: Xc3dUIManager.document});
+    if (inputState === Xc3dUIInputState.eInputNormal) {
+      const filePath = files[0].path;
+      this.#externalDocument = new Xc3dDocExternalDocument({filePath, document: Xc3dUIManager.document});
       return Xc3dCmdInsert.#CommandState.WaitForPosition;
     } else {
-      return Xc3dCmdInsert.#CommandState.WaitForDocument;
+      return Xc3dCmdInsert.#CommandState.Cancel;
     }
   }
 

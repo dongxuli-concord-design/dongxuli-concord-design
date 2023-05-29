@@ -80,6 +80,10 @@ class Xc3dUII18n {
       // Xc3dUIGetObject.js
       'Input': '输入',
 
+
+      // Xc3dUIGetFile.js
+      'No file specified': '未指定文件',
+
       // XcUIInitCmd.js
       'Please select an app': '请选择一个应用',
       'Do not forget to logout if you have finished your tasks.': '任务完成后，别忘了退出登录',

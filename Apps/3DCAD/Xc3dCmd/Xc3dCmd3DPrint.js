@@ -2,75 +2,15 @@ class Xc3dCmd3DPrint {
   static #CommandState = {
     Done: Symbol('Done'),
     Cancel: Symbol('Cancel'), 
-    WaitForLocation: Symbol('WaitForLocation')
+    WaitForDirectory: Symbol('WaitForDirectory')
   };
 
-  static #Event = {
-    Done: Symbol('Done'),
-    Cancel: Symbol('Cancel'),
-  };
-
-  #pathName;
   #state;
   #i18n;
-  #uiContext;
 
   constructor() {
-    const fs = require('fs');
-    const path = require('path');
-    this.#pathName = path.dirname(Xc3dApp.filePath);
-
-    this.#state = Xc3dCmd3DPrint.#CommandState.WaitForLocation;
-
+    this.#state = Xc3dCmd3DPrint.#CommandState.WaitForDirectory;
     this.#initI18n();
-
-    const widgets = [];
-
-    const doneButton = document.createElement('button');
-    doneButton.innerHTML = this.#i18n.T`Ok`;
-    doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmd3DPrint.#Event.Done}));
-    widgets.push(doneButton);
-
-    const cancelButton = document.createElement('button');
-    cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmd3DPrint.#Event.Cancel}));
-    widgets.push(cancelButton);
-
-    const fileLocationDisplay = document.createElement('textarea');
-    fileLocationDisplay.setAttribute('rows', '3');
-    fileLocationDisplay.setAttribute('cols', '20');
-    fileLocationDisplay.setAttribute('readonly', true);
-    fileLocationDisplay.style.resize = 'none';
-    fileLocationDisplay.innerHTML = this.#pathName;
-    widgets.push(fileLocationDisplay);
-
-    const fileChooser = document.createElement('input');
-    fileChooser.setAttribute('type', 'file');
-    fileChooser.setAttribute('data-id', 'filedialog');
-    fileChooser.setAttribute('nwdirectory', '');
-    fileChooser.style.display ='none';
-    widgets.push(fileChooser);
-
-    const fileChooseButton = document.createElement('button');
-    fileChooseButton.innerHTML = this.#i18n.T`Change export location`;
-    fileChooseButton.addEventListener('click', (event) => {
-      fileChooser.addEventListener('change', (event) => {
-        if (event.target.value) {
-          this.#pathName = event.target.value;
-          fileLocationDisplay.innerHTML = this.#pathName;
-        }
-      }, false);
-
-      fileChooser.click();
-    });
-    widgets.push(fileChooseButton);
-
-    this.#uiContext = new XcSysUIContext({
-      prompt: this.#i18n.T`Please specify export location`,
-      showCanvasElement: true,
-      standardWidgets: widgets,
-      cursor: 'pointer',
-    });
   }
 
   static *command() {
@@ -104,60 +44,64 @@ class Xc3dCmd3DPrint {
 
   // http://www.fabbers.com/tech/STL_Format
   // https://all3dp.com/what-is-stl-file-format-extension-3d-printing/
-  #exportToSTL(model, folder, index) {
+  #exportDrawableObjectToSTL({drawableObject, directory, index}) {
     const fs = require('fs');
     const path = require('path');
 
-    const stlFileString = model.body.toSTL();
+    const stlFileString = drawableObject.body.toSTL();
 
-    fs.writeFile(`${folder}${path.sep}${index}-${model.name}.stl`, stlFileString, function (error) {
+    fs.writeFile(`${directory}${path.sep}${index}-${drawableObject.name}.stl`, stlFileString, function (error) {
       if (error) {
         XcSysManager.outputDisplay.error(this.#i18n.T`Internal error: cannot write to file.`);
       }
     });
   }
-
-  * #onWaitForLocation() {
-    const event = yield* XcSysManager.waitForEvent({
-      uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmd3DPrint.#Event.Cancel, Xc3dCmd3DPrint.#Event.Done],
+  
+  #exportDrawableObjects({directory}) {
+    Xc3dUIManager.document.drawableObjects.forEach((drawableObject, index) => {
+      if (drawableObject instanceof Xc3dDocModel) {
+        const type = drawableObject.body.type;
+        if ((type === XcGmBody.BODY_TYPE.SOLID) || (type === XcGmBody.BODY_TYPE.SHEET)) {
+          this.#exportDrawableObjectToSTL({drawableObject, directory, index});
+        } else {
+          XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);
+        }
+      } else {
+        XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);
+      }
     });
-    if (event === Xc3dCmd3DPrint.#Event.Cancel) {
-      return Xc3dCmd3DPrint.#CommandState.Cancel;
-    } else if (event === Xc3dCmd3DPrint.#Event.Done) {
+
+    XcSysManager.outputDisplay.info(this.#i18n.T`Exported STL to ${directory}.`);
+  }
+
+  * #onWaitForDirectory() {
+    const path = require('path');
+    const workingFolder = path.dirname(Xc3dApp.filePath);
+
+    const {inputState, files} = yield* Xc3dUIManager.getFile({
+      prompt: this.#i18n.T`Please specify export location`,
+      nwdirectory: true,
+      nwworkingdir: workingFolder,
+    });
+    if (inputState === Xc3dUIInputState.eInputNormal) {
+      const directory = files[0].path;
+      this.#exportDrawableObjects({directory});
       return Xc3dCmd3DPrint.#CommandState.Done;
     } else {
-      return Xc3dCmd3DPrint.#CommandState.WaitForLocation;
+      return Xc3dCmd3DPrint.#CommandState.Cancel;
     }
   }
 
   * run() {
     while ((this.#state !== Xc3dCmd3DPrint.#CommandState.Done) && (this.#state !== Xc3dCmd3DPrint.#CommandState.Cancel)) {
       switch (this.#state) {
-        case Xc3dCmd3DPrint.#CommandState.WaitForLocation:
-          this.#state = yield* this.#onWaitForLocation();
+        case Xc3dCmd3DPrint.#CommandState.WaitForDirectory:
+          this.#state = yield* this.#onWaitForDirectory();
           break;
         default:
           XcSysAssert({assertion: false, message: this.#i18n.T`Internal command state error`});
           break;
       }
-    }
-
-    if (this.#state === Xc3dCmd3DPrint.#CommandState.Done) {
-      Xc3dUIManager.document.drawableObjects.forEach((drawableObject, index) => {
-        if (drawableObject instanceof Xc3dDocModel) {
-          const type = drawableObject.body.type;
-          if ((type === XcGmBody.BODY_TYPE.SOLID) || (type === XcGmBody.BODY_TYPE.SHEET)) {
-            this.#exportToSTL(drawableObject, this.#pathName, index);
-          } else {
-            XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);
-          }
-        } else {
-          XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);
-        }
-      });
-
-      XcSysManager.outputDisplay.info(this.#i18n.T`Exported STL to ${this.#pathName}.`);
     }
   }
 }

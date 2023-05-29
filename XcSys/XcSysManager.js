@@ -115,7 +115,7 @@ class XcSysManager {
       <!-- GUI div -->
       <div style="display: flex; flex-direction: row; position: fixed; left: 0px; top: 12em; width: fit-content; height: fit-content; margin: 0em; padding: 0em; overflow: hidden;">
         <!-- Standard widgets -->
-        <div style = "display:flex; flex-grow: 0; flex-shrink: 0; flex-direction: column; width: fit-content; min-width:15em; max-width: 40em; height: fit-content; max-height: calc(100vh - 12em); margin: 0.5em; padding-top: 0em; padding-bottom: 1em; padding-left: 0em; padding-right: 1em; overflow: auto; overflow-wrap: break-word; word-wrap:break-word; word-break:break-word;"></div>       
+        <div style = "display:flex; flex-grow: 0; flex-shrink: 0; flex-direction: column; width:15em; height: fit-content; max-height: calc(100vh - 12em); margin: 0.5em; padding-top: 0em; padding-bottom: 1em; padding-left: 0em; padding-right: 1em; overflow: auto; overflow-wrap: break-word; word-wrap:break-word; word-break:break-word;"></div>       
         <!-- Standard Dialog -->
         <div style="flex-grow: 1; flex-shrink: 1; background-color: white; border-style: solid; width: fit-content; height: fit-content; max-height: calc(100vh - 12em); margin: 05em; overflow: auto;"></div>
       </div>

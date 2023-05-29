@@ -30,6 +30,7 @@ const scripts = [
   'Xc3dUIGetChoice.js',
   'Xc3dUIGetCommand.js',
   'Xc3dUIGetObject.js',
+  'Xc3dUIGetFile.js',
 
   'Xc3dUIAnimation.js',
 ];

@@ -2,74 +2,16 @@ class Xc3dCmdImportXT {
   static #CommandState = {
     Done: Symbol('Done'),
     Cancel: Symbol('Cancel'),
-    WaitForLocation: Symbol('WaitForLocation')
-  };
-
-  static #Event = {
-    Done: Symbol('Done'),
-    Cancel: Symbol('Cancel'),
+    WaitForFile: Symbol('WaitForFile')
   };
 
   #i18n;
-  #pathName;
   #state;
-  #uiContext;
 
   constructor() {
-    const fs = require('fs');
-    const path = require('path');
-    this.#pathName = path.dirname(Xc3dApp.filePath);
-
-    this.#state = Xc3dCmdImportXT.#CommandState.WaitForLocation;
+    this.#state = Xc3dCmdImportXT.#CommandState.WaitForFile;
 
     this.#initI18n();
-
-    const widgets = [];
-
-    const doneButton = document.createElement('button');
-    doneButton.innerHTML = this.#i18n.T`Ok`;
-    doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdImportXT.#Event.Done}));
-    widgets.push(doneButton);
-
-    const cancelButton = document.createElement('button');
-    cancelButton.innerHTML = this.#i18n.T`Cancel`;
-    cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdImportXT.#Event.Cancel}));
-    widgets.push(cancelButton);
-
-    const fileLocationDisplay = document.createElement('textarea');
-    fileLocationDisplay.setAttribute('rows', '3');
-    fileLocationDisplay.setAttribute('cols', '20');
-    fileLocationDisplay.setAttribute('readonly', true);
-    fileLocationDisplay.style.resize = 'none';
-    fileLocationDisplay.innerHTML = this.#pathName;
-    widgets.push(fileLocationDisplay);
-
-    const fileChooser = document.createElement('input');
-    fileChooser.setAttribute('type', 'file');
-    fileChooser.setAttribute('data-id', 'filedialog');
-    fileChooser.style.display = 'none';
-    widgets.push(fileChooser);
-
-    const fileChooseButton = document.createElement('button');
-    fileChooseButton.innerHTML = this.#i18n.T`Select file`;
-    fileChooseButton.addEventListener('click', (event) => {
-      fileChooser.addEventListener('change', (event) => {
-        if (event.target.value) {
-          this.#pathName = event.target.value;
-          fileLocationDisplay.innerHTML = this.#pathName;
-        }
-      }, false);
-
-      fileChooser.click();
-    });
-    widgets.push(fileChooseButton);
-
-    this.#uiContext = new XcSysUIContext({
-      prompt: this.#i18n.T`Please specify file to import`,
-      showCanvasElement: true,
-      standardWidgets: widgets,
-      cursor: 'pointer',
-    });
   }
 
   #initI18n() {
@@ -79,8 +21,6 @@ class Xc3dCmdImportXT {
       'Cancel': '取消',
       'Next': '下一步',
       'Quit': '退出',
-
-
     };
 
     if (XcSysConfig.locale === 'zh') {
@@ -96,43 +36,39 @@ class Xc3dCmdImportXT {
     return ret;
   }
 
-  #importXT(fileName) {
-    const parts = XcGmPart.receiveFromFile({fileName});
+  #importXT({filePath}) {
+    const parts = XcGmPart.receiveFromFile({filePath});
     parts.forEach((body) => {
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body, color: new THREE.Color('rgb(220, 220, 220)')})});
     });
     Xc3dUIManager.redraw();
   }
 
-  * #onWaitForLocation() {
-    const event = yield* XcSysManager.waitForEvent({
-      uiContext: this.#uiContext,
-      expectedEventTypes: [Xc3dCmdImportXT.#Event.Cancel, Xc3dCmdImportXT.#Event.Done]
+  * #onWaitForFile() {
+    const {inputState, files} = yield* Xc3dUIManager.getFile({
+      prompt: this.#i18n.T`Please specify file to import`,
+      accept: '.x_t',
     });
-    if (event === Xc3dCmdImportXT.#Event.Cancel) {
-      return Xc3dCmdImportXT.#CommandState.Cancel;
-    } else if (event === Xc3dCmdImportXT.#Event.Done) {
-      return Xc3dCmdImportXT.#CommandState.Done;
+    if (inputState === Xc3dUIInputState.eInputNormal) {
+      const filePath = files[0].path;
+      this.#importXT({filePath});
+      XcSysManager.outputDisplay.info(this.#i18n.T`Imported ${filePath}.`);
+      return Xc3dCmdImportXT.#CommandState.WaitForFile;
     } else {
-      return Xc3dCmdImportXT.#CommandState.WaitForLocation;
+      return Xc3dCmdImportXT.#CommandState.Cancel;
     }
   }
 
   * run() {
     while ((this.#state !== Xc3dCmdImportXT.#CommandState.Done) && (this.#state !== Xc3dCmdImportXT.#CommandState.Cancel)) {
       switch (this.#state) {
-        case Xc3dCmdImportXT.#CommandState.WaitForLocation:
-          this.#state = yield* this.#onWaitForLocation();
+        case Xc3dCmdImportXT.#CommandState.WaitForFile:
+          this.#state = yield* this.#onWaitForFile();
           break;
         default:
           XcSysAssert({assertion: false, message: this.#i18n.T`Internal command state error`});
           break;
       }
-    }
-
-    if (this.#state === Xc3dCmdImportXT.#CommandState.Done) {
-      this.#importXT(this.#pathName);
-      XcSysManager.outputDisplay.info(this.#i18n.T`Imported ${this.#pathName}.`);
     }
   }
 }

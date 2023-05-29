@@ -729,6 +729,46 @@ Xc3dUIManager.getTransform = function* ({
   })
 </code></pre>
 
+<h3>getFile</h3>
+
+<pre><code>
+
+Xc3dUIManager.getFile = function* ({
+                                     prompt,
+                                     allowReturnNull = false,
+                                     accept = undefined,
+                                     multiple = undefined,
+                                     nwdirectory = undefined,
+                                     nwdirectorydesc = undefined,
+                                     nwsaveas = undefined,
+                                     nwworkingdir = undefined,
+                                   })
+</code></pre>
+<dl>
+  <dt>prompt</dt>
+  <dd>prompt message.</dd>
+
+  <dt>allowReturnNull</dt>
+  <dd>If allow to return null.</dd>
+
+  <dt>accept</dt>
+  <dd>Accepted filetypes, such as ".doc,.docx,application/msword", "audio/*", "video/*", "image/*". </dd>
+
+  <dt>multiple</dt>
+  <dd>If allow multiple files. Should be true or false.</dd>
+
+  <dt>nwdirectory</dt>
+  <dd>If directory should be specifed. Should be true or false.</dd>
+
+  <dt>nwdirectorydesc</dt>
+  <dd>The description message for directory selection, which will be shown in directory selection dialog title.</dd>
+
+  <dt>nwsaveas</dt>
+  <dd>If save as a new file. Should be true or false.</dd>
+
+  <dt>nwworkingdir</dt>
+  <dd>The current working directory.</dd>
+</dl>
 
 <h2>Xc3dUIAnimation</h2>
 
