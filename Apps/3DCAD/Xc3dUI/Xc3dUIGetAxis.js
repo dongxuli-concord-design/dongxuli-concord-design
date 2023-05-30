@@ -20,7 +20,6 @@ class Xc3dUIGetAxis {
   firstPosition;
   state;
 
-  #prompt;
   #allowReturnNull;
   #draggingCallback;
   #draggingIntensity;

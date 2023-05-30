@@ -17,7 +17,6 @@ class Xc3dUIGetFloat {
   inputState;
   state;
 
-  #prompt;
   #allowReturnNull;
   #floatInputWidget;
   #uiContext;

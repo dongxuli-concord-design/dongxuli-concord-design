@@ -15,7 +15,6 @@ class Xc3dUIGetCommand {
   command;
   state;
 
-  #prompt;
   #commands;
   #showCanvasElement;
   #uicontext;

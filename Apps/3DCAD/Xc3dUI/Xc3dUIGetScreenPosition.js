@@ -13,7 +13,6 @@ class Xc3dUIGetScreenPosition {
     Cancel: Symbol('Cancel')
   };
 
-  #prompt;
   #allowReturnNull;
   #mouseIndicator;
   #touchIndicator;

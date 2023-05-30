@@ -16,7 +16,6 @@ class Xc3dUIGetDialog {
   inputState;
   state;
 
-  #prompt;
   #allowReturnNull;
   #dialog;
   #uiContext;

@@ -13,7 +13,6 @@ class Xc3dUIGetString {
     Cancel: Symbol('Cancel')
   };
 
-  #prompt;
   #allowReturnNull;
   #stringInputWidget;
   #uiContext;

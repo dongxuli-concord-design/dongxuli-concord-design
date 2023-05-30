@@ -17,7 +17,6 @@ class Xc3dUIGetInteger {
   inputState;
   state;
 
-  #prompt;
   #allowReturnNull;
   #integerInputWidget;
   #uiContext;

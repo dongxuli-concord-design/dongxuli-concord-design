@@ -21,20 +21,20 @@ class Xc3dUIGetFile {
 
   #accept;
   #multiple;
-  #nwdirectory;
-  #nwdirectorydesc;
-  #nwsaveas;
-  #nwworkingdir;
+  #directory;
+  #directorydesc;
+  #saveas;
+  #workingdir;
 
   constructor({
                 prompt,
                 allowReturnNull,
                 accept = undefined,
                 multiple = undefined,
-                nwdirectory = undefined,
-                nwdirectorydesc = undefined,
-                nwsaveas = undefined,
-                nwworkingdir = undefined,
+                directory = undefined,
+                directorydesc = undefined,
+                saveas = undefined,
+                workingdir = undefined,
               }) {
     this.#prompt = prompt;
     this.#allowReturnNull = allowReturnNull;
@@ -45,10 +45,10 @@ class Xc3dUIGetFile {
 
     this.#accept = accept;
     this.#multiple = multiple;
-    this.#nwdirectory = nwdirectory;
-    this.#nwdirectorydesc = nwdirectorydesc;
-    this.#nwsaveas = nwsaveas;
-    this.#nwworkingdir = nwworkingdir;
+    this.#directory = directory;
+    this.#directorydesc = directorydesc;
+    this.#saveas = saveas;
+    this.#workingdir = workingdir;
   }
 
   * onWaitForInput() {
@@ -78,19 +78,19 @@ class Xc3dUIGetFile {
       fileChooser.setAttribute('accept', this.#accept);
     }
     if (this.#multiple !== undefined) {
-      fileChooser.setAttribute('multiple', this.#multiple);
+      fileChooser.setAttribute('multiple', "");
     }
-    if (this.#nwdirectory !== undefined) {
-      fileChooser.setAttribute('nwdirectory', this.#nwdirectory);
+    if (this.#directory !== undefined) {
+      fileChooser.setAttribute('directory', "");
     }
-    if (this.#nwdirectorydesc !== undefined) {
-      fileChooser.setAttribute('nwdirectorydesc', this.#nwdirectorydesc);
+    if (this.#directorydesc !== undefined) {
+      fileChooser.setAttribute('directorydesc', this.#directorydesc);
     }
-    if (this.#nwsaveas !== undefined) {
-      fileChooser.setAttribute('nwsaveas', this.#nwsaveas);
+    if (this.#saveas !== undefined) {
+      fileChooser.setAttribute('saveas', "");
     }
-    if (this.#nwworkingdir !== undefined) {
-      fileChooser.setAttribute('nwworkingdir', this.#nwworkingdir);
+    if (this.#workingdir !== undefined) {
+      fileChooser.setAttribute('workingdir', this.#workingdir);
     }
 
     fileChooser.addEventListener('change', (event) => {
@@ -140,20 +140,20 @@ Xc3dUIManager.getFile = function* ({
                                      allowReturnNull = false,
                                      accept = undefined,
                                      multiple = undefined,
-                                     nwdirectory = undefined,
-                                     nwdirectorydesc = undefined,
-                                     nwsaveas = undefined,
-                                     nwworkingdir = undefined,
+                                     directory = undefined,
+                                     directorydesc = undefined,
+                                     saveas = undefined,
+                                     workingdir = undefined,
                                    }) {
   const fileGetter = new Xc3dUIGetFile({
     prompt,
     allowReturnNull,
     accept,
     multiple,
-    nwdirectory,
-    nwdirectorydesc,
-    nwsaveas,
-    nwworkingdir,
+    directory,
+    directorydesc,
+    saveas,
+    workingdir,
   });
 
   while ((fileGetter.state !== Xc3dUIGetFile.CommandState.Ok) &&

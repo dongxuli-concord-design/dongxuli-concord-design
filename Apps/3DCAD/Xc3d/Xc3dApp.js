@@ -168,7 +168,7 @@ class Xc3dApp extends XcSysApp {
     const divContent = `
     <div style="height:fit-content;">
             <input data-id="openfiledialoginput" style="display:none;" id="fileDialog" type="file" accept=".xc3d"/>
-            <input data-id="createfiledialoginput" nwsaveas="Untitled" style="display:none;" id="fileDialog" type="file" accept=".xc3d"/>
+            <input data-id="createfiledialoginput" saveas="Untitled" style="display:none;" id="fileDialog" type="file" accept=".xc3d"/>
             <button data-id="open" class="btn btn-primary btn-lg" style="display:block; margin:  auto; height:10vh;">${openStr}</button>
             <div  style="display:block; margin:  auto; height:10vh; "></div>
             <button data-id="create" class="btn btn-primary btn-lg" style="display:block; margin:  auto; height:10vh; ">${createStr}</button>

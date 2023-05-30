@@ -66,8 +66,8 @@ class Xc3dCmdExport {
 
     const {inputState, files} = yield* Xc3dUIManager.getFile({
       prompt: this.#i18n.T`Please input path`,
-      nwsaveas: 'export.x_t',
-      nwworkingdir: workingFolder,
+      saveas: 'export.x_t',
+      workingdir: workingFolder,
     });
     if (inputState === Xc3dUIInputState.eInputNormal) {
       this.#path = files[0].path;

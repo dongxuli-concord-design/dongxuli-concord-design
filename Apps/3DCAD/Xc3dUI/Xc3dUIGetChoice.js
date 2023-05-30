@@ -15,7 +15,6 @@ class Xc3dUIGetChoice {
   choice;
   state;
 
-  #prompt;
   #allowReturnNull;
   #uicontext;
 

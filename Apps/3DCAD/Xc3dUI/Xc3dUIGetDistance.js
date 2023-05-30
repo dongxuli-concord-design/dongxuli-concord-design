@@ -20,7 +20,6 @@ class Xc3dUIGetDistance {
   distance;
   state;
 
-  #prompt;
   #allowReturnNull;
   #distanceInputWidget;
   #uiContextForWaitForDistanceOrMeasurement;
@@ -30,8 +29,6 @@ class Xc3dUIGetDistance {
   constructor({
                 prompt,
                 allowReturnNull,
-                draggingCallback,
-                draggingIntensity
               }) {
     this.#allowReturnNull = allowReturnNull;
 
@@ -120,8 +117,8 @@ class Xc3dUIGetDistance {
     return Xc3dUIGetDistance.CommandState.WaitForDistanceOrMeasurement;
   }
 
-  * onWaitForFirstPosition() {
-    const {inputState, position} = yield* Xc3dUIManager.getPosition({prompt: Xc3dUII18n.i18n.T`Start position of distance`});
+  * onWaitForFirstPosition({draggingCallback, draggingIntensity}) {
+    const {inputState, position} = yield* Xc3dUIManager.getPosition({prompt: Xc3dUII18n.i18n.T`Start position of distance`, draggingCallback, draggingIntensity});
 
     if (inputState !== Xc3dUIInputState.eInputNormal) {
       this.inputState = Xc3dUIInputState.eInputCancel;

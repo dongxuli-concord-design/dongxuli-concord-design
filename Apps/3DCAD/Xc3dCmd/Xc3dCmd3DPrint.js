@@ -80,8 +80,8 @@ class Xc3dCmd3DPrint {
 
     const {inputState, files} = yield* Xc3dUIManager.getFile({
       prompt: this.#i18n.T`Please specify export location`,
-      nwdirectory: true,
-      nwworkingdir: workingFolder,
+      directory: true,
+      workingdir: workingFolder,
     });
     if (inputState === Xc3dUIInputState.eInputNormal) {
       const directory = files[0].path;
