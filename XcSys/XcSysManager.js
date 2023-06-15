@@ -40,7 +40,13 @@ class XcSysManager {
           if (false /*asModule*/) {
             script.setAttribute('type', 'module');
           }
-          script.setAttribute('src', `${scriptSrc}.js`);
+
+          const path = require('path');
+          if (path.isAbsolute(`${scriptSrc}.js`)) {
+            script.setAttribute('src', `file://${scriptSrc}.js`);
+          } else {
+            script.setAttribute('src', `${scriptSrc}.js`);
+          }
           script.setAttribute('async', false);
           document.head.appendChild(script);
           script.onload = function () {
