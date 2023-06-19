@@ -55,6 +55,16 @@ class Xc3dUIManager {
 
   static document = null;
 
+  static #userData = {};
+
+  static set userData(data) {
+    XcSysAssert({assertion: false, message: 'Cannot overwrite userData object.'});
+  }
+
+  static get userData() {
+    return Xc3dUIManager.#userData;
+  }
+
   static #namedViews = new Map();
 
   static DraggingIntensity = {
