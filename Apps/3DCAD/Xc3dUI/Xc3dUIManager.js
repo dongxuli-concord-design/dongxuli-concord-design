@@ -147,7 +147,7 @@ class Xc3dUIManager {
     Xc3dUIManager.renderingCamera = new THREE.OrthographicCamera(-10, 10, 10, -10, 1, 2000);
 
     // Camera light
-    Xc3dUIManager.renderingCamera.add(new THREE.PointLight(0xffffff, 0.5));
+    Xc3dUIManager.renderingCamera.add(new THREE.PointLight(0xffffff));
     Xc3dUIManager.mainScene.add(Xc3dUIManager.renderingCamera);
 
     Xc3dUIManager.resetCamera();
