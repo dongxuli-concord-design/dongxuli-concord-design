@@ -9,7 +9,5 @@
     "position": "center"
   },
   "dependencies": {
-    "request": "^2.88.0",
-    "ws": "^6.0.0"
   }
 }

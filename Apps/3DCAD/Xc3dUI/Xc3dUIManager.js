@@ -254,69 +254,70 @@ class Xc3dUIManager {
     });
 
     // XcPad loop
+    if (false) {
+      // Show local IP address
+      // https://stackoverflow.com/questions/10750303/how-can-i-get-the-local-ip-address-in-node-js
+      function showIPAddress() {
+        const os = require('os');
 
-    // Show local IP address
-    // https://stackoverflow.com/questions/10750303/how-can-i-get-the-local-ip-address-in-node-js
-    function showIPAddress() {
-      const os = require('os');
-
-      const interfaces = os.networkInterfaces();
-      const addresses = [];
-      for (const k in interfaces) {
-        for (const k2 in interfaces[k]) {
-          const address = interfaces[k][k2];
-          if (address.family === 'IPv4' && !address.internal) {
-            addresses.push(address.address);
+        const interfaces = os.networkInterfaces();
+        const addresses = [];
+        for (const k in interfaces) {
+          for (const k2 in interfaces[k]) {
+            const address = interfaces[k][k2];
+            if (address.family === 'IPv4' && !address.internal) {
+              addresses.push(address.address);
+            }
           }
         }
+
+        // TODO: Should keep this message visible in somewhere.
+        XcSysManager.outputDisplay.info(`Viewpad server address: ${addresses.toString()}:8080`);
       }
 
-      // TODO: Should keep this message visible in somewhere.
-      XcSysManager.outputDisplay.info(`Viewpad server address: ${addresses.toString()}:8080`);
-    }
+      showIPAddress();
 
-    showIPAddress();
+      // 60 ms is a good frequency to send the data to keep the browser smooth.
+      // Value determined by experiments.
+      // Also check https://github.com/leapmotion/leapjs/blob/master/leap-0.6.4.js for comments.
+      const webSocketMessageQueue = [];
+      const socketServerURL = 'ws://localhost:8081';
+      const socket = new WebSocket(socketServerURL);
+      socket.addEventListener('error', function () {
+        XcSysManager.outputDisplay.warn(`Cannot connect to ${socketServerURL}`);
+      });
+      const socketMessageSpan = 70;
+      // Listen for messages
+      socket.addEventListener('message', function (event) {
+        webSocketMessageQueue.push(JSON.parse(event.data));
+      });
 
-    // 60 ms is a good frequency to send the data to keep the browser smooth.
-    // Value determined by experiments.
-    // Also check https://github.com/leapmotion/leapjs/blob/master/leap-0.6.4.js for comments.
-    const webSocketMessageQueue = [];
-    const socketServerURL = 'ws://localhost:8081';
-    const socket = new WebSocket(socketServerURL);
-    socket.addEventListener('error', function () {
-      XcSysManager.outputDisplay.warn(`Cannot connect to ${socketServerURL}`);
-    });
-    const socketMessageSpan = 70;
-    // Listen for messages
-    socket.addEventListener('message', function (event) {
-      webSocketMessageQueue.push(JSON.parse(event.data));
-    });
+      function simplifyTouchEventQueue({queue}) {
+        const newQueue = [];
+        let lastType = null;
+        for (const item of queue) {
+          if ((item.type === 'touchmove') && (lastType === 'touchmove')) {
+            // Skip
 
-    function simplifyTouchEventQueue({queue}) {
-      const newQueue = [];
-      let lastType = null;
-      for (const item of queue) {
-        if ((item.type === 'touchmove') && (lastType === 'touchmove')) {
-          // Skip
-
-        } else {
-          newQueue.push(item);
-          lastType = item.type;
+          } else {
+            newQueue.push(item);
+            lastType = item.type;
+          }
         }
+
+        return newQueue;
       }
 
-      return newQueue;
+      setInterval(function () {
+        if (webSocketMessageQueue.length > 0) {
+          const simplifiedQueue = simplifyTouchEventQueue({queue: webSocketMessageQueue});
+          webSocketMessageQueue.length = 0;
+          setTimeout(() => {
+            Xc3dUIManager.xcPadCoroutine.next(new Xc3dUIXcPadTouchEventQueue({events: simplifiedQueue}));
+          }, 0);
+        }
+      }, socketMessageSpan);
     }
-
-    setInterval(function () {
-      if (webSocketMessageQueue.length > 0) {
-        const simplifiedQueue = simplifyTouchEventQueue({queue: webSocketMessageQueue});
-        webSocketMessageQueue.length = 0;
-        setTimeout(() => {
-          Xc3dUIManager.xcPadCoroutine.next(new Xc3dUIXcPadTouchEventQueue({events: simplifiedQueue}));
-        }, 0);
-      }
-    }, socketMessageSpan);
   }
 
   static resetCamera() {

@@ -12,7 +12,7 @@ const scripts = [
   'XcSysUIContext.js',
   'XcSysMainCoroutine.js',
   'XcSysManager.js',
-  'server.js',
+  //'server.js',
   'XcSysBootloader.js',
 ];
 
