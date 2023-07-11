@@ -12,12 +12,14 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
                 isStaticPath = false,
                 matrix = new XcGm3dMatrix(),
                 color = new THREE.Color('lightslategray'),
+                tryGeometryColor = false,
               }) {
     super({name});
     this.matrix = matrix.clone();
     this.document = document;
     this.isStaticPath = isStaticPath;
     this.color = color;
+    this.tryGeometryColor = tryGeometryColor;
 
     const path = require('path');
     if (filePath && path.isAbsolute(filePath)) {
@@ -63,6 +65,7 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       filePath: this.filePath,
       matrix: this.matrix.clone(),
       color: this.color ? this.color.clone() : null,
+      tryGeometryColor: this.tryGeometryColor,
     });
 
     newModel.userData = {...this.userData};
@@ -76,6 +79,7 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
     this.filePath = other.filePath;
     this.matrix = other.matrix.clone();
     this.color = other.color ? other.color.clone() : null;
+    this.tryGeometryColor = other.tryGeometryColor;
   }
 
   save({document}) {
@@ -86,6 +90,7 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       isStaticPath: this.isStaticPath,
       matrix: this.matrix.toJSON(),
       color: this.color ? `#${this.color.getHexString()}` : null,
+      tryGeometryColor: this.tryGeometryColor,
     }
   }
 
@@ -111,7 +116,7 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       const stlContent = fs.readFileSync(resolvedPath, 'binary');
       const geometry = this.#parseSTL(stlContent);
       let material = null;
-      if (geometry.hasColors) {
+      if (geometry.hasColors && this.tryGeometryColor) {
         material = new THREE.MeshStandardMaterial({opacity: geometry.alpha, vertexColors: true});
       } else {
         material = new THREE.MeshStandardMaterial({color: this.color});
