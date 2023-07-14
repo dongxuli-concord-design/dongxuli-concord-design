@@ -6,8 +6,8 @@
     * Linux: Nothing to do.
     * Windows: 
       * Install Windows 10 English version on VMWare.
-      * Install VS2015 package. Remember to use custom instllation so to install ALL Visual C++ and SDK components.
-      * Install Python 2.7 is installed and set to the system path for python exe.
+      * Install correct Node version with C/C++ tools.
+      * Install Python 2.7 is installed and set to the system path for python2.7 exe.
 
 # JSONCpp
 
@@ -35,7 +35,9 @@ N.B.:
 
 If there is `Undefined variable standalone_static_library` error, please try to follow the steps in `https://github.com/nwjs/nw-gyp/issues/155` to fix the error.
 
-Specifically, you need to modify `/usr/local/lib/node_modules/nw-gyp/lib/configure.js`.
+Specifically, you need to modify `/usr/local/lib/node_modules/nw-gyp/lib/configure.js` (macOS) or `C:\Users\{username}\AppData\Roaming\npm\node_modules\nw-gyp\lib\configure.js` (Windows):
+  * Find `var config = process.config || {}`
+  * Change it to `var config = JSON.parse(JSON.stringify(process.config)) || {}`
 
 # Linux
 

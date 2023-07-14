@@ -20,7 +20,6 @@
         "api.h",
         "api.cpp",
         "init.cpp"],
-        "cflags": [ "-std=c++11" ],
         "libraries": [ "<(module_root_dir)/darwin/libpskernel.dylib" ],
         'conditions': [
         ],

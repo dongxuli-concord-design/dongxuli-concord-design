@@ -22,7 +22,6 @@ const commonFiles = [
   'index.html',
   'main.js',
   '3rd',
-  'node_modules',
 ];
 
 function buildDarwinRelease() {

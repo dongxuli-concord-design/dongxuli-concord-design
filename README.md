@@ -5,6 +5,12 @@
 * Prerequisite
   * MacOS
   * VMWare/Windows 10 (No space allowed in username.)
+    * Install in "more isolated model" and share the source code folder using VMWare
+    * Install the right Node windows installer
+      * Make sure to install C/C++ tools.
+    * Install python2.7 (nw-gyp need python 2.7) and set PATH for python2.7 to override python3.x.
+    * pm install -g nw-gyp
+    * Check https://github.com/nodejs/node-gyp and https://docs.nwjs.io/en/latest/For%20Users/Advanced/Use%20Native%20Node%20Modules/ if having problems.
   * HTML 5
   * Node.js
   * NW.js
@@ -53,3 +59,5 @@
 1. Install the right version of Node required by the NW.js.
 2. Install `nw-gyp` using `npm install -g nw-gyp`.
 3. Update the node and nwjs files on `XcExternal` following the `README.md` in `XcExternal`. Please right-click and open all executable files (such as node/nwjc etc.) on macOS for permission control reasons.
+4. Update the XcGmPk (check the README for more information). 
+5. Rebuild all packages.
