@@ -1947,7 +1947,6 @@ Json::Value CURVE_convert_parm_to_pk(const Json::Value &params) {
 }
 
 Json::Value CURVE_embed_in_surf_2(const Json::Value &params) {
-  return Json::nullValue;
 }
 
 Json::Value CURVE_eval(const Json::Value &params) {
@@ -1971,7 +1970,32 @@ Json::Value CURVE_eval_with_tan_handed(const Json::Value &params) {
 }
 
 Json::Value CURVE_eval_with_tangent(const Json::Value &params) {
-  return Json::nullValue;
+  assertParam(curve);
+  assertParam(t);
+  assertParam(n_derivs);
+
+  PK_CURVE_t curve = params["curve"].asInt();       //--- curve
+  double t = params["t"].asDouble();        //--- curve parameter
+  int n_derivs = params["n_derivs"].asInt(); //--- number of derivatives
+
+  PK_VECTOR_t *p  = new PK_VECTOR_t[n_derivs + 1];
+  PK_VECTOR_t tangent;
+
+  PK_ERROR_code_t error = PK_CURVE_eval_with_tangent(curve, t, n_derivs, p, &tangent);
+
+  assertModelingError;
+
+  Json::Value returnValue;
+  Json::Value pointAndDerivatives;
+  for (int i = 0; i < n_derivs + 1; ++i) {
+    Json::Value v = PK_VECTOR_t_to_JSON(&p[i]);
+    pointAndDerivatives.append(v);
+  }
+  returnValue["pointAndDerivatives"] = pointAndDerivatives;
+  returnValue["tangent"] = PK_VECTOR_t_to_JSON(&tangent);
+  
+  delete[] p;
+  return returnValue;
 }
 
 Json::Value CURVE_find_degens(const Json::Value &params) {

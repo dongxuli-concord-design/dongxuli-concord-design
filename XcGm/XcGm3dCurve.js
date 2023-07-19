@@ -3,6 +3,27 @@ class XcGm3dCurve extends XcGmGeometry {
     super();
   }
 
+  evalWithTangent({t, nDerivs}) {
+    const params = {
+      curve: this.tag,
+      t,
+      n_derivs: nDerivs,
+    };
+
+    const {error, pkReturnValue} = XcGmCallPkApi('CURVE_eval_with_tangent', {params});
+    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
+
+    const pointAndDerivatives = pkReturnValue.pointAndDerivatives.map(p => {
+      const pkVector = XcGmPK_VECTOR_t.fromJSON({json: p});
+      return pkVector.toXcGm3dPosition();
+    });
+    
+    const pkVector = XcGmPK_VECTOR_t.fromJSON({json: pkReturnValue.tangent});
+    const tangent = pkVector.toXcGm3dVector();
+
+    return {pointAndDerivatives, tangent};
+  }
+
   static makeWireBodyFromCurves({curves, bounds}) {
     const params = {
       curves: curves.map(curve => curve.tag),
