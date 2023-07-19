@@ -4,6 +4,11 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
   matrix;
   document;
   color;
+  tryGeometryColor;
+  transparent;
+  opacity;  
+  transparent;
+  opacity;
 
   constructor({
                 name = 'stl model',
@@ -13,6 +18,8 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
                 matrix = new XcGm3dMatrix(),
                 color = new THREE.Color('lightslategray'),
                 tryGeometryColor = false,
+                transparent = false,
+                opacity = 1.0,
               }) {
     super({name});
     this.matrix = matrix.clone();
@@ -20,6 +27,8 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
     this.isStaticPath = isStaticPath;
     this.color = color;
     this.tryGeometryColor = tryGeometryColor;
+    this.transparent = transparent;
+    this.opacity = opacity;
 
     const path = require('path');
     if (filePath && path.isAbsolute(filePath)) {
@@ -43,6 +52,9 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
     const isStaticPath = json.isStaticPath;
     const matrix = XcGm3dMatrix.fromJSON({json: json.matrix});
     const color = new THREE.Color(json.color);
+    const tryGeometryColor = json.tryGeometryColor;
+    const transparent = json.transparent;
+    const opacity = json.opacity;
 
     const model = new Xc3dDocSTLModel({
       name,
@@ -51,6 +63,9 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       matrix,
       document,
       color,
+      tryGeometryColor,
+      transparent,
+      opacity,      
     });
 
     const userData = json.userData;
@@ -66,6 +81,8 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       matrix: this.matrix.clone(),
       color: this.color ? this.color.clone() : null,
       tryGeometryColor: this.tryGeometryColor,
+      transparent: this.transparent,
+      opacity: this.opacity,
     });
 
     newModel.userData = {...this.userData};
@@ -80,6 +97,8 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
     this.matrix = other.matrix.clone();
     this.color = other.color ? other.color.clone() : null;
     this.tryGeometryColor = other.tryGeometryColor;
+    this.transparent = other.transparent;
+    this.opacity = other.opacity;    
   }
 
   save({document}) {
@@ -91,6 +110,8 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       matrix: this.matrix.toJSON(),
       color: this.color ? `#${this.color.getHexString()}` : null,
       tryGeometryColor: this.tryGeometryColor,
+      transparent: this.transparent,
+      opacity: this.opacity,      
     }
   }
 
@@ -117,9 +138,9 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       const geometry = this.#parseSTL(stlContent);
       let material = null;
       if (geometry.hasColors && this.tryGeometryColor) {
-        material = new THREE.MeshStandardMaterial({opacity: geometry.alpha, vertexColors: true});
+        material = new THREE.MeshStandardMaterial({opacity: geometry.alpha, vertexColors: true, opacity: this.opacity, transparent: this.transparent});
       } else {
-        material = new THREE.MeshStandardMaterial({color: this.color});
+        material = new THREE.MeshStandardMaterial({color: this.color, opacity: this.opacity, transparent: this.transparent});
       }
       renderingObject = new THREE.Mesh(geometry, material);
       renderingObject.applyMatrix4(this.matrix.toThreeMatrix4());

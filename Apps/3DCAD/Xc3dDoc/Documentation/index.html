@@ -125,8 +125,8 @@ Xc3dDocDocument.registerDrawableObjectType({
     body,
     color,
     map = null,
-    opacity = 1.0,
     transparent = false,
+    opacity = 1.0,
     showFace = true,
     showEdge = true,
     showVertex = true,
@@ -278,20 +278,25 @@ Represent a document model which is built from the XcGm kernel.
 
 <h3>constructor</h3>
 
-<code>  constructor({
-                body,
-                name = 'model',
-                color = new THREE.Color('rgb(220, 220, 220)'),
-                showFace = true,
-                showEdge = true,
-                showVertex = true,
-                texture = null,
-                renderingResolution = Xc3dDocDocument.RenderingResolution.High,
-              } = {})</code>
+<code>
+constructor({
+  body,
+  name = 'model',
+  color = new THREE.Color('rgb(220, 220, 220)'),
+  transparent = false,
+  opacity = 1.0,
+  showFace = true,
+  showEdge = true,
+  showVertex = true,
+  texture = null,
+  renderingResolution = Xc3dDocDocument.RenderingResolution.High,
+} = {})</code>
 
 <dl>
 <dt>body</dt> <dd>XcGmBody object.</dd>
 <dt>color</dt> <dd>Three.js color object.</dd>
+<dt>transparent</dt> <dd>If the object is transparent, then the opacity property will be used.</dd>
+<dt>opacity</dt> <dd>The value to control the transparency.</dd>
 <dt>name</dt> <dd>String representing name.</dd>
 <dt>texture</dt> <dd>Xc3dDocTexture object.</dd>
 <dt>showFace</dt> <dd>If render faces.</dd>
@@ -743,14 +748,17 @@ Transform the object using the provided matrix.
 <h3>constructor</h3>
 
 <pre><code>
-constructor({
-                name = 'stl model',
-                filePath,
-                document,
-                isStaticPath = false,
-                matrix = new XcGm3dMatrix(),
-                color = new THREE.Color('lightslategray'),  
-              })
+  constructor({
+    name = 'stl model',
+    filePath,
+    document,
+    isStaticPath = false,
+    matrix = new XcGm3dMatrix(),
+    color = new THREE.Color('lightslategray'),
+    tryGeometryColor = false,
+    transparent = false,
+    opacity = 1.0,
+  })
 </code></pre>
 
 <dl>
@@ -760,6 +768,9 @@ constructor({
 <dt>isStaticPath</dt> <dd>Boolean representing the path whether static or not.</dd>
 <dt>matrix</dt> <dd>XcGm3dMatrix object representing the position and direction of Xc3dDocSTLModel object.</dd>
 <dt>color</dt> <dd>THREE.Color object representing object color, the default color is <code>lightslategray</code>.</dd>
+<dt>tryGeometryColor</dt> <dd>If we need to try to use the geometry color stored in the STL file.</dd>
+<dt>transparent</dt> <dd>If the object is transparent, then the opacity property will be used.</dd>
+<dt>opacity</dt> <dd>The value to control the transparency.</dd>
 </dl>
 
 <h3>clone</h3>
