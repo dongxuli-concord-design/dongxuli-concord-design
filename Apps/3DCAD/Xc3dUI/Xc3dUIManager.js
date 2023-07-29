@@ -122,12 +122,12 @@ class Xc3dUIManager {
     Xc3dUIManager.overlayScene = new THREE.Scene();
     Xc3dUIManager.ucsScene = new THREE.Scene();
 
-    // ambient lights
-    Xc3dUIManager.mainScene.add(new THREE.AmbientLight(0x404040));
-    Xc3dUIManager.overlayScene.add(new THREE.AmbientLight(0x404040));
+    // Lights
+    Xc3dUIManager.mainScene.add(new THREE.AmbientLight(0xffffff, 1));
+    Xc3dUIManager.mainScene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1));
 
-    // Hemisphere light
-    Xc3dUIManager.overlayScene.add(new THREE.HemisphereLight(0xffffff, 0x080820, 0.8));
+    Xc3dUIManager.overlayScene.add(new THREE.AmbientLight(0xffffff, 1));
+    Xc3dUIManager.overlayScene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1));
 
     Xc3dUIManager.webGLRenderer = new THREE.WebGLRenderer({
       antialias: true,
