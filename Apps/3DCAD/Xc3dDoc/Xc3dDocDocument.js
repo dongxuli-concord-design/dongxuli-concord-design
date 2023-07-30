@@ -267,7 +267,7 @@ class Xc3dDocDocument {
     geometry.computeBoundingSphere();
 
     // Polygon offset: https://sites.google.com/site/threejstuts/home/polygon_offset
-    const material = new THREE.MeshPhysicalMaterial({
+    const material = new THREE.MeshStandardMaterial({
       color,
       side: THREE.DoubleSide,
       map,
