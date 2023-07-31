@@ -44,6 +44,7 @@ class HelloApp extends XcSysApp {
 
     let event = yield* XcSysManager.waitForEvent({
       uiContext: helloContext,
+      expectedEventTypes: [event => true,],
     });
 
     return HelloApp.#CommandState.SayHello;

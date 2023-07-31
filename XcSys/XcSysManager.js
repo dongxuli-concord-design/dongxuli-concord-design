@@ -176,9 +176,9 @@ class XcSysManager {
   }
 
   static* waitForEvent({
-                         uiContext = new XcSysUIContext(),
+                         uiContext,
+                         expectedEventTypes,
                          timeOut = null,
-                         expectedEventTypes = null,
                          onloadCallback = null,
                        } = {},
   ) {

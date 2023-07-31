@@ -103,8 +103,8 @@ class Xc3dUIGetScreenPosition {
       expectedEventTypes: [
         Xc3dUIGetScreenPosition.#Event.Cancel, 
         Xc3dUIGetScreenPosition.#Event.Done, 
-        (event) => event instanceof Xc3dUIMouseEvent,
-        (event) => event instanceof Xc3dUITouchEvent,
+        event => event instanceof Xc3dUIMouseEvent,
+        event => event instanceof Xc3dUITouchEvent,
       ],
     });
 

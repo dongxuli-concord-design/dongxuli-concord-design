@@ -60,7 +60,7 @@ class Xc3dUIGetDrawableObject {
       expectedEventTypes: [
         Xc3dUIGetDrawableObject.#Event.Cancel, 
         Xc3dUIGetDrawableObject.#Event.Done, 
-        (event) => event instanceof Xc3dUIMouseEvent,
+        event => event instanceof Xc3dUIMouseEvent,
       ],
     });
     if (event === Xc3dUIGetDrawableObject.#Event.Cancel) {

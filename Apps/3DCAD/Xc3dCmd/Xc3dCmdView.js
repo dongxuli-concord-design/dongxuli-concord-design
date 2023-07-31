@@ -180,7 +180,7 @@ class Xc3dCmdView {
       expectedEventTypes: [
         Xc3dCmdView.#Event.Quit, 
         Xc3dCmdView.#Event.LooKAtUCS, 
-        (event) => event instanceof Xc3dUIMouseEvent,
+        event => event instanceof Xc3dUIMouseEvent,
       ]
     });
     if (event === Xc3dCmdView.#Event.Quit) {
@@ -203,7 +203,7 @@ class Xc3dCmdView {
       expectedEventTypes: [
         Xc3dCmdView.#Event.Quit, 
         Xc3dCmdView.#Event.LooKAtUCS, 
-        (event) => event instanceof Xc3dUIMouseEvent,
+        event => event instanceof Xc3dUIMouseEvent,
       ],
     });
     if (event === Xc3dCmdView.#Event.Quit) {

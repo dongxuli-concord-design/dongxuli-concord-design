@@ -375,7 +375,13 @@ Example:
 </code>
 <h2>waitForEvent</h2>
 <code>
-  static* waitForEvent({uiContext = new XcSysUIContext(), timeOut = null, expectedEventTypes = null, onloadCallback = null} = {})
+  static* waitForEvent({
+    uiContext,
+    expectedEventTypes,
+    timeOut = null,
+    onloadCallback = null,
+  } = {},
+)
 </code>
 <dl>
   <dt>uiContext</dt>
@@ -416,8 +422,8 @@ Example:
     [
       'abc',
       123,
-      (event) => event instanceof Xc3dUIMouseEvent,
-      (event) => ((typeof event === 'number') && (event > 42),
+      event => event instanceof Xc3dUIMouseEvent,
+      event => (typeof event === 'number') && (event > 42),
     ],
     });
     // Dispatch event somewhere else

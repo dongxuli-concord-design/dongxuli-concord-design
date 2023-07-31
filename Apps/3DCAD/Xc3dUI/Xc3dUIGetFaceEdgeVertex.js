@@ -72,6 +72,11 @@ class Xc3dUIGetFaceEdgeVertex {
   * onWaitForPickingFaceEdgeVertex() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.uiContext,
+      expectedEventTypes: [
+        Xc3dUIGetFaceEdgeVertex.#Event.Cancel,
+        Xc3dUIGetFaceEdgeVertex.#Event.Done,
+        event => event instanceof Xc3dUIMouseEvent,
+      ],
     });
     if (event === Xc3dUIGetFaceEdgeVertex.#Event.Cancel) {
       this.inputState = Xc3dUIInputState.eInputCancel;

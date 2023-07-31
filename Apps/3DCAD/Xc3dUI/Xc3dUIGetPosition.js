@@ -233,8 +233,8 @@ class Xc3dUIGetPosition {
         Xc3dUIGetPosition.#Event.ObjectCenter, 
         Xc3dUIGetPosition.#Event.TextBoxInputButtonClick, 
         Xc3dUIGetPosition.#Event.CodeInputButtonClick, 
-        (event) => event instanceof Xc3dUIMouseEvent,
-        (event) => event instanceof Xc3dUITouchEvent,
+        event => event instanceof Xc3dUIMouseEvent,
+        event => event instanceof Xc3dUITouchEvent,
       ],
     });
 

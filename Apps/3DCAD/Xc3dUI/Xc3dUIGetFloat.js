@@ -63,6 +63,11 @@ class Xc3dUIGetFloat {
   * onWaitForInput() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uiContext,
+      expectedEventTypes: [
+        Xc3dUIGetFloat.#Event.Cancel,
+        Xc3dUIGetFloat.#Event.Done,
+        Xc3dUIGetFloat.#Event.InputEnter,
+      ],
     });
 
     if (event === Xc3dUIGetFloat.#Event.Cancel) {
