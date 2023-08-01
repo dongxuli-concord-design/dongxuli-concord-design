@@ -29,7 +29,7 @@ class XcSysManager {
         }
         script.setAttribute('src', scriptSrc);
         script.setAttribute('async', false);
-        document.head.appendChild(script);
+        document.head.append(script);
         script.onload = function () {
           doneCallback();
         }
@@ -48,7 +48,7 @@ class XcSysManager {
             script.setAttribute('src', `${scriptSrc}.js`);
           }
           script.setAttribute('async', false);
-          document.head.appendChild(script);
+          document.head.append(script);
           script.onload = function () {
             doneCallback();
           }
@@ -223,7 +223,7 @@ class XcSysManager {
           widget.style.margin = '3px';
           widget.style.tabIndex = index;
 
-          XcSysManager.standardWidgetDiv.appendChild(widget);
+          XcSysManager.standardWidgetDiv.append(widget);
         });
       }
     }
@@ -233,7 +233,7 @@ class XcSysManager {
 
       if (uiContext.standardDialog) {
         XcSysManager.standardDialog.style.display = 'block';
-        XcSysManager.standardDialog.appendChild(uiContext.standardDialog);
+        XcSysManager.standardDialog.append(uiContext.standardDialog);
       } else {
         XcSysManager.standardDialog.style.display = 'none';
       }
@@ -245,7 +245,7 @@ class XcSysManager {
       }
 
       if (uiContext.customDiv) {
-        document.body.appendChild(uiContext.customDiv);
+        document.body.append(uiContext.customDiv);
       }
     }
 

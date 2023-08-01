@@ -101,7 +101,7 @@ class XcUIDisplay extends HTMLElement {
   }
 
   showElement({element}) {
-    this.appendChild(element);
+    this.append(element);
     this.lastElementChild.scrollIntoView();
   }
 }

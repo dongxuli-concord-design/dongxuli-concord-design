@@ -107,7 +107,7 @@ class XcSysMainCoroutine {
         });
       });
 
-      appsDiv.appendChild(appDiv);
+      appsDiv.append(appDiv);
     });
 
     const uiContextForWaitingCommands = new XcSysUIContext({

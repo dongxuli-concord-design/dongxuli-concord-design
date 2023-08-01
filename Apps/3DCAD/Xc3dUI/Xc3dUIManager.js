@@ -115,7 +115,7 @@ class Xc3dUIManager {
     Xc3dUII18n.init();
 
     Xc3dUIManager.unitSpanElement = XcSysManager.htmlToElement({htmlString: ' <p class="text-info" style = "position: absolute; right: 0px; bottom: 0px; width: fit-content; height: fit-content; text-align: center; margin: 1em; padding: 5px; user-select: none; user-drag: none; ">${unitStr} ${Xc3dUIConfig.unit}<span></span></p> '});
-    XcSysManager.canvasDiv.appendChild(Xc3dUIManager.unitSpanElement);
+    XcSysManager.canvasDiv.append(Xc3dUIManager.unitSpanElement);
 
     // WebGL
     Xc3dUIManager.mainScene = new THREE.Scene();
@@ -141,7 +141,7 @@ class Xc3dUIManager {
     Xc3dUIManager.webGLRenderer.setPixelRatio(window.devicePixelRatio);
 
     Xc3dUIManager.webGLRenderer.setClearColor(0xf1f1f1, 1);
-    XcSysManager.canvasDiv.appendChild(Xc3dUIManager.webGLRenderer.domElement);
+    XcSysManager.canvasDiv.append(Xc3dUIManager.webGLRenderer.domElement);
     Xc3dUIManager.canvas = Xc3dUIManager.webGLRenderer.domElement;
 
     Xc3dUIManager.renderingCamera = new THREE.OrthographicCamera(-10, 10, 10, -10, 1, 2000);

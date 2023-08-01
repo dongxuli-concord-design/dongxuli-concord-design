@@ -139,13 +139,13 @@ class Xc3dCmdView {
       deleteViewButton.style.margin = '2px';
       
       const viewDiv = document.createElement('div');
-      viewDiv.appendChild(setViewButton);
-      viewDiv.appendChild(deleteViewButton);
+      viewDiv.append(setViewButton);
+      viewDiv.append(deleteViewButton);
       viewDiv.classList.add('border-top');
       viewDiv.classList.add('border-bottom');
       viewDiv.style.margin = '3px';
 
-      this.#viewManagementDiv.appendChild(viewDiv);
+      this.#viewManagementDiv.append(viewDiv);
     });
   }
 

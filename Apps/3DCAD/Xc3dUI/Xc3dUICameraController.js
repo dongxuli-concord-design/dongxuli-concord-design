@@ -182,7 +182,7 @@ class Xc3dUICameraController {
       Xc3dUIManager.redraw();
     });
 
-    XcSysManager.canvasDiv.appendChild(Xc3dUICameraController.cameraDiv);
+    XcSysManager.canvasDiv.append(Xc3dUICameraController.cameraDiv);
   }
 
   static computeCameraChangeDelta() {
