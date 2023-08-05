@@ -113,7 +113,7 @@ class XcSysManager {
       </div>
 
       <!-- Display -->
-      <xcui-display style="position: fixed; left: 0em; top: 0em; width: fit-content; height: 5em; max-width: 50em; margin: 0.5em; overflow: auto; overflow-wrap: break-word; word-wrap: break-word; word-break:break-word;"></xcui-display>
+      <xcui-display autoscroll style="position: fixed; left: 0em; top: 0em; width: fit-content; height: 5em; max-width: 50em; margin: 0.5em; overflow: auto; overflow-wrap: break-word; word-wrap: break-word; word-break:break-word;"></xcui-display>
 
       <!-- Prompt -->
       <div style="position: fixed; left: 0em; top: 7em; width: fit-content; height: fit-content; max-width: 30em; max-height: 3em; margin: 0.5em; overflow: auto;"></div>

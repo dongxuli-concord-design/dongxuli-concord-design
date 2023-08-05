@@ -1,7 +1,9 @@
 class XcUIDisplay extends HTMLElement {
+  #autoScroll;
 
   constructor() {
     super();
+    this.#autoScroll = true;
   }
 
   connectedCallback() {
@@ -15,6 +17,18 @@ class XcUIDisplay extends HTMLElement {
 
   attributeChangedCallback(attrName, oldVal, newVal) {
     // ...
+  }
+
+  get autoScroll() {
+    return this.getAttribute('autoscroll');
+  }
+  
+  set autoScroll(val) {
+    if(val) {
+      this.setAttribute('autoscroll', val);
+    } else {
+      this.removeAttribute('autoscroll');
+    }
   }
 
   clear() {
@@ -102,7 +116,10 @@ class XcUIDisplay extends HTMLElement {
 
   showElement({element}) {
     this.append(element);
-    this.lastElementChild.scrollIntoView();
+
+    if (this.#autoScroll) {
+      this.lastElementChild.scrollIntoView();
+    }
   }
 }
 
