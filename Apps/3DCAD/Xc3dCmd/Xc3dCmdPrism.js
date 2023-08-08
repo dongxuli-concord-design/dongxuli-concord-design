@@ -82,6 +82,9 @@ class Xc3dCmdPrism {
       'Quit': '退出',
 
       'Sides': '边数',
+      'Radius': '半径',
+      'Height': '高度',
+      'Please input dimensions': '请输入尺寸',
     };
 
     if (XcSysConfig.locale === 'zh') {

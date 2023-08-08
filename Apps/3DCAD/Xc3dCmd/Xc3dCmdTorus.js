@@ -74,6 +74,7 @@ class Xc3dCmdTorus {
       'Next': '下一步',
       'Quit': '退出',
 
+      'Please input dimensions': '请输入尺寸',
       'Major radius': '大圆半径',
       'Minor radius': '小圆半径',
     };

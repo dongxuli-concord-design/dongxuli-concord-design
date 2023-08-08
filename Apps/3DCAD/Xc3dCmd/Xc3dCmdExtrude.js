@@ -42,7 +42,7 @@ class Xc3dCmdExtrude {
       'Next': '下一步',
       'Quit': '退出',
 
-      'Select object to extrude (point, wire or sheet)': '选择要拉伸的物体（点体，线体，或者薄面体）',
+      'Select a profile (point, wire or sheet)': '选择要拉伸的物体（点体，线体，或者薄面体）',
       'Please select a point, a wire or a sheet body.': '请选择一个点体，线体，或者薄面体。',
       'Specify the extrusion direction': '指定拉伸方向',
       'Extrusion length': '拉伸长度',

@@ -30,6 +30,7 @@ class Xc3dCmdImprintCurve {
       'Next': '下一步',
       'Done': '退出',
 
+      'Select a planar face': '选择一个平面',
       'Select object to transform': '选择要变换的物体',
       'Please specify base position': '请选择锚点',
       'Please input rotation, scale or translation': '请输入旋转，缩放或平移',

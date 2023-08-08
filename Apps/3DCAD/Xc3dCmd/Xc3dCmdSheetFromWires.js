@@ -33,7 +33,7 @@ class Xc3dCmdSheetFromWires {
       'Quit': '退出',
 
       'Cannot generate sheet body. Single loop supported only': '不能正确生成薄板体，目前只支持一个环。',
-      'Select wire bodies': '',
+      'Select wire bodies': '请指定线框对象',
     };
 
     if (XcSysConfig.locale === 'zh') {

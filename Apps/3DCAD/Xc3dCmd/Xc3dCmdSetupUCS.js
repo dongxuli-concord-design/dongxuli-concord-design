@@ -41,6 +41,10 @@ class Xc3dCmdSetupUCS {
       'Next': '下一步',
       'Quit': '退出',
 
+      'Specify the following options': '请指定选项',
+      'Reset': '复位',
+      'Set UCS Manually': '手动设置坐标系',
+      'Set UCS By Transform': '通过移动设置坐标系',
       'Please specify new coordinate system': '请设置新的坐标系',
     };
 
@@ -101,27 +105,27 @@ class Xc3dCmdSetupUCS {
     const widgets = [];
 
     const cancelButton = document.createElement('button');
-    cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
+    cancelButton.innerHTML = this.#i18n.T`Cancel`;
     cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.Cancel}));
     widgets.push(cancelButton);
 
     const setWCS = document.createElement('button');
-    setWCS.innerHTML = 'Set World Coordinate System';
+    setWCS.innerHTML = this.#i18n.T`Reset`;
     setWCS.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.WCS}));
     widgets.push(setWCS);
 
     const setUCSManually = document.createElement('button');
-    setUCSManually.innerHTML = 'Set UCS Manually';
+    setUCSManually.innerHTML = this.#i18n.T`Set UCS Manually`;
     setUCSManually.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.ManualUCS}));
     widgets.push(setUCSManually);
 
     const setUCSByTransform = document.createElement('button');
-    setUCSByTransform.innerHTML = 'Set UCS By Transform';
+    setUCSByTransform.innerHTML = this.#i18n.T`Set UCS By Transform`;
     setUCSByTransform.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.TransformUCS}));
     widgets.push(setUCSByTransform);
 
     const uiContext = new XcSysUIContext({
-      prompt: Xc3dUII18n.i18n.T`Please specify which axes to set`,
+      prompt: this.#i18n.T`Specify the following options`,
       showCanvasElement: true,
       standardWidgets: widgets,
       cursor: 'crosshair'
@@ -220,7 +224,7 @@ class Xc3dCmdSetupUCS {
     const widgets = [];
 
     const cancelButton = document.createElement('button');
-    cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
+    cancelButton.innerHTML = this.#i18n.T`Cancel`;
     cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dCmdSetupUCS.#Event.Cancel}));
     widgets.push(cancelButton);
 
@@ -240,7 +244,7 @@ class Xc3dCmdSetupUCS {
     widgets.push(yzButton);
 
     const uiContext = new XcSysUIContext({
-      prompt: Xc3dUII18n.i18n.T`Please specify which axes to set`,
+      prompt: this.#i18n.T`Please specify which axes to set`,
       showCanvasElement: true,
       standardWidgets: widgets,
       cursor: 'crosshair'

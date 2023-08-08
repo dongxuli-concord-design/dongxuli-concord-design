@@ -26,6 +26,7 @@ class Xc3dCmdProgrammableModel {
     const messageBundle_zh = {
       'Internal command state error': '内部命令状态错误',
       'OK': '确定',
+      'Please update code and run': '请输入代码并运行',
     };
 
     if (XcSysConfig.locale === 'zh') {

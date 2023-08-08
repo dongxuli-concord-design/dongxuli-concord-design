@@ -26,6 +26,7 @@ class Xc3dCmdInsert {
       'Cancel': '取消',
       'Next': '下一步',
       'Quit': '退出',
+      'Please select file': '请选择文件',
     };
 
     if (XcSysConfig.locale === 'zh') {

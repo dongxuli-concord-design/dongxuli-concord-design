@@ -66,7 +66,7 @@ class Xc3dUIGetChoice {
       expectedEventTypes: [
         Xc3dUIGetChoice.#Event.Cancel, 
         Xc3dUIGetChoice.#Event.Done, 
-        (event) => event instanceof MouseEvent,
+        (event) => (event instanceof MouseEvent) && (event.target.dataset.index !== undefined),
       ]
     });
 

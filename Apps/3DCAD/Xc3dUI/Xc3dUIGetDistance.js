@@ -49,7 +49,7 @@ class Xc3dUIGetDistance {
 
     this.#distanceInputWidget = document.createElement('input');
     this.#distanceInputWidget.type = 'number';
-    this.#distanceInputWidget.placeholder = 'Distance';
+    this.#distanceInputWidget.placeholder = Xc3dUII18n.i18n.T`Distance`;
     this.#distanceInputWidget.addEventListener('input', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Input}));
     this.#distanceInputWidget.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
@@ -59,7 +59,7 @@ class Xc3dUIGetDistance {
     widgets.push(this.#distanceInputWidget);
 
     const button = document.createElement('button');
-    button.innerHTML = 'Measure';
+    button.innerHTML = Xc3dUII18n.i18n.T`Measure`;
     button.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDistance.#Event.Measure}));
     widgets.push(button);
 

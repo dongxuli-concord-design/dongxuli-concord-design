@@ -33,7 +33,6 @@ class Xc3dUIGetDirection {
   #secondPosition;
   #arrowHelper;
   #directionInputWidget;
-  #uiContextForInitialInput;
   #uiContextForTextBoxInput;
 
   constructor({
@@ -54,50 +53,6 @@ class Xc3dUIGetDirection {
     this.#arrowHelper = null;
 
     this.state = Xc3dUIGetDirection.CommandState.WaitForDirection;
-
-    // Initial input
-    {
-      const widgets = [];
-
-      const cancelButton = document.createElement('button');
-      cancelButton.innerHTML = Xc3dUII18n.i18n.T`Cancel`;
-      cancelButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Cancel}));
-      widgets.push(cancelButton);
-
-      if (this.#allowReturnNull) {
-        const doneButton = document.createElement('button');
-        doneButton.innerHTML = Xc3dUII18n.i18n.T`Done`;
-        doneButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.Done}));
-        widgets.push(doneButton);
-      }
-
-      const toolbarItems = ['Measure', 'Face', 'X', '-X', 'Y', '-Y', 'Z', '-Z'];
-      const toolbarItemButtons = toolbarItems.map(item => {
-        const button = document.createElement('button');
-        button.innerHTML = item;
-        button.dataset.direction = item;
-        button.addEventListener('click', (event) => XcSysManager.dispatchEvent({event}));
-        return button;
-      });
-      widgets.push(...toolbarItemButtons);
-
-      const textBoxInputButton = document.createElement('button');
-      textBoxInputButton.innerHTML = Xc3dUII18n.i18n.T`Vector Input`;
-      textBoxInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.TextBoxInputButtonClick}));
-      widgets.push(textBoxInputButton);
-
-      const codeInputButton = document.createElement('button');
-      codeInputButton.innerHTML = Xc3dUII18n.i18n.T`Code`;
-      codeInputButton.addEventListener('click', () => XcSysManager.dispatchEvent({event: Xc3dUIGetDirection.#Event.CodeInputButtonClick}));
-      widgets.push(codeInputButton);
-      
-      this.#uiContextForInitialInput = new XcSysUIContext({
-        prompt: this.#prompt,
-        showCanvasElement: true,
-        standardWidgets: widgets,
-        cursor: 'crosshair'
-      });
-    }
 
     // Text box input
     {
@@ -135,57 +90,52 @@ class Xc3dUIGetDirection {
   }
 
   * onWaitForDirection() {
-    const event = yield* XcSysManager.waitForEvent({
-      uiContext: this.#uiContextForInitialInput,
-      expectedEventTypes: [Xc3dUIGetDirection.#Event.Cancel, Xc3dUIGetDirection.#Event.Done, Xc3dUIGetDirection.#Event.InputEnter, MouseEvent, Xc3dUIGetDirection.#Event.TextBoxInputButtonClick, Xc3dUIGetDirection.#Event.CodeInputButtonClick]
+    const {inputState, choice} = yield* Xc3dUIManager.getChoice({
+      prompt: this.#prompt,
+      choices: [Xc3dUII18n.i18n.T`Measure`, Xc3dUII18n.i18n.T`Face`, 'X', '-X', 'Y', '-Y', 'Z', '-Z'],
     });
 
-    if (event === Xc3dUIGetDirection.#Event.Cancel) {
-      this.inputState = Xc3dUIInputState.eInputCancel;
-      return Xc3dUIGetDirection.CommandState.Cancel;
-    } else if (event === Xc3dUIGetDirection.#Event.Done) {
-      this.inputState = Xc3dUIInputState.eInputNone;
-      return Xc3dUIGetDirection.CommandState.Done;
-    } else if (event instanceof MouseEvent) {
-      const direction = event.target.dataset.direction;
-      if (direction === 'Measure') {
+    if (inputState === Xc3dUIInputState.eInputNormal) {
+      if (choice === 0) { // Measure
         return Xc3dUIGetDirection.CommandState.WaitForFirstPosition;
-      } else if (direction === 'Face') {
+      } else if (choice === 1) { // Face
         return Xc3dUIGetDirection.CommandState.WaitForPlanarFace;
-      } else if (direction === 'X') {
+      } else if (choice === 2) { // X
         this.direction = new XcGm3dVector({x: 1, y: 0, z: 0});
         this.direction.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
+
         return Xc3dUIGetDirection.CommandState.Ok;
-      } else if (direction === '-X') {
+      } else if (choice === 3) { // -X
         this.direction = new XcGm3dVector({x: -1, y: 0, z: 0});
         this.direction.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
+
         return Xc3dUIGetDirection.CommandState.Ok;
-      } else if (direction === 'Y') {
+      } else if (choice === 4) { // Y
         this.direction = new XcGm3dVector({x: 0, y: 1, z: 0});
         this.direction.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
+
         return Xc3dUIGetDirection.CommandState.Ok;
-      } else if (direction === '-Y') {
+      } else if (choice === 5) { // -Y
         this.direction = new XcGm3dVector({x: 0, y: -1, z: 0});
         this.direction.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
+
         return Xc3dUIGetDirection.CommandState.Ok;
-      } else if (direction === 'Z') {
+      } else if (choice === 6) { // Z
         this.direction = new XcGm3dVector({x: 0, y: 0, z: 1});
         this.direction.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
+
         return Xc3dUIGetDirection.CommandState.Ok;
-      } else if (direction === '-Z') {
+      } else if (choice === 7) { // -Z
         this.direction = new XcGm3dVector({x: 0, y: 0, z: -1});
         this.direction.transform({matrix: Xc3dUIManager.ucs.toMatrix()});
+
         return Xc3dUIGetDirection.CommandState.Ok;
       } else {
-        XcSysAssert({assertion: false});
+        XcSysAssert({assertion: false, message: Xc3dUII18n.i18n.T`Internal command state error`});
       }
-    } else if (event === Xc3dUIGetDirection.#Event.TextBoxInputButtonClick) {
-      return Xc3dUIGetDirection.CommandState.WaitForTextBoxInput;
-    } else if (event === Xc3dUIGetDirection.#Event.CodeInputButtonClick) {
-      return Xc3dUIGetDirection.CommandState.WaitForCodeInput;
+    } else {
+      return Xc3dUIGetDirection.CommandState.Cancel;
     }
-
-    return Xc3dUIGetDirection.CommandState.WaitForDirection;
   }
 
   * #getDirectionFromPlanarFace(face) {

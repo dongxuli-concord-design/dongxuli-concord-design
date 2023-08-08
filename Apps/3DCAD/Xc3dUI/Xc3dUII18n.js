@@ -38,6 +38,7 @@ class Xc3dUII18n {
       'Reverse the direction?': '要反转方向吗？',
 
       // Xc3dUIGetDistance.js
+      'Distance': '距离',
       'Get distance from measurement.': '通过测量获取距离',
       'Start position of distance': '距离的起点',
       'End position of distance': '距离的终点',
@@ -67,6 +68,9 @@ class Xc3dUII18n {
       'Click a position to start': '点击一个位置开始',
       'Move to': '移动至',
       'Please drag': '请拖动',
+      'Translation along X': '沿X轴移动',
+      'Translation along Y': '沿Y轴移动',
+      'Translation along Z': '沿Z轴移动',
       'Rotation around X': '绕X轴旋转角度',
       'Rotation around Y': '绕Y轴旋转角度',
       'Rotation around Z': '绕Z轴旋转角度',

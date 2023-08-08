@@ -39,6 +39,9 @@ class Xc3dCmdCut {
       'Next': '下一步',
       'Quit': '退出',
 
+      'Please specify main object': '请指定主物体',
+      'Please specify tool object': '请指定工具物体',
+      'Please select a body which is different with the first one.': '请选择与第一个不同的体',
     };
 
     if (XcSysConfig.locale === 'zh') {

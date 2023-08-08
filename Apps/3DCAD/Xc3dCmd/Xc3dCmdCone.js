@@ -84,7 +84,10 @@ class Xc3dCmdCone {
       'Quit': '退出',
 
       'Radius': '半径',
+      'Height': '高度',
       'Semi Angle': '半锥角',
+
+      'Please input dimensions': '请输入尺寸',
     };
 
     if (XcSysConfig.locale === 'zh') {

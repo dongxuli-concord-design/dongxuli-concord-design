@@ -31,7 +31,7 @@ class Xc3dCmdExport {
       'Next': '下一步',
       'Quit': '退出',
 
-      'Path': '目标文件名',
+      'Please input path': '请输入路径',
       'Select object to export': '选择要导出的物体',
     };
 

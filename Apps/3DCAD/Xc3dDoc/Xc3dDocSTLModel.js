@@ -138,7 +138,7 @@ class Xc3dDocSTLModel extends Xc3dDocDrawableObject {
       const geometry = this.#parseSTL(stlContent);
       let material = null;
       if (geometry.hasColors && this.tryGeometryColor) {
-        material = new THREE.MeshStandardMaterial({opacity: geometry.alpha, vertexColors: true, opacity: this.opacity, transparent: this.transparent});
+        material = new THREE.MeshStandardMaterial({opacity: geometry.alpha, vertexColors: true, transparent: this.transparent});
       } else {
         material = new THREE.MeshStandardMaterial({color: this.color, opacity: this.opacity, transparent: this.transparent});
       }

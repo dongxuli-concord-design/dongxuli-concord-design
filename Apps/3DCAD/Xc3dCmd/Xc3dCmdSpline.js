@@ -25,6 +25,8 @@ class Xc3dCmdSpline {
       'Cancel': '取消',
       'Next': '下一步',
       'Quit': '退出',
+
+      'Please specify position': '请指定位置',
     };
 
     if (XcSysConfig.locale === 'zh') {
