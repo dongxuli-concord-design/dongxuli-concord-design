@@ -104,7 +104,7 @@ class Xc3dUIGetAngle {
   * onWaitForAngleOrMeasurement() {
     const event = yield* XcSysManager.waitForEvent({
       uiContext: this.#uicontextForWaitForAngleOrMeasurement,
-      expectedEventTypes: [Xc3dUIGetAngle.#Event.Cancel, Xc3dUIGetAngle.#Event.Done, Xc3dUIGetAngle.#Event.InputEnter, Xc3dUIGetAngle.#Event.Measure]
+      expectedEventTypes: [Xc3dUIGetAngle.#Event.Cancel, Xc3dUIGetAngle.#Event.Done, Xc3dUIGetAngle.#Event.Input, Xc3dUIGetAngle.#Event.InputEnter, Xc3dUIGetAngle.#Event.Measure]
     });
 
     if (event === Xc3dUIGetAngle.#Event.Cancel) {

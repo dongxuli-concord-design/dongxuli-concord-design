@@ -27,7 +27,6 @@ class Xc3dUII18n {
       'Specify the second position of the angle': '指定角度终点',
 
       // XcUIGetAxis.js
-      'Axis end position': '轴的终点',
       'Specify the first position of the axis': '输入轴的起点',
       'Specify the second position of the axis': '输入轴的终点',
 
