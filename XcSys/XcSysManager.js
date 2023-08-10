@@ -286,30 +286,43 @@ class XcSysManager {
       event = yield;
     } while (!_isQualifedEvent(event) && (event !== timer));
 
-    let returnValue = null;
     if (event === timer) {
-      returnValue = null;
+      return null;
     } else {
       clearTimeout(timer);
-      returnValue = event;
+      return event;
     }
-
-    return returnValue;
   }
 
-//TODO: set the interruptors as an array or a callback function
   static* sleep({delay, interruptors = []} = {}) {
     const timer = setTimeout(function () {
       XcSysManager.dispatchEvent({event: timer});
     }, delay);
 
-    while (true) {
-      const event = yield;
-      if (event === timer) {
-        return null;
-      } else if (interruptors.includes(event)) {
-        return event;
+    function _isQualifedEvent(event) {
+      if ((event !== null) && (interruptors !== null)) {
+        return interruptors.some(type => {
+          if (typeof type === 'function') {
+            return type(event);
+          } else {
+            return type === event;
+          }
+        });
+      } else {
+        return true;
       }
+    }
+
+    let event = null;
+    do {
+      event = yield;
+    } while (!_isQualifedEvent(event) && (event !== timer));
+
+    if (event === timer) {
+      return null;
+    } else {
+      clearTimeout(timer);
+      return event;
     }
   }
 
