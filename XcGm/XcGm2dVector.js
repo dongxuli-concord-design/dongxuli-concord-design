@@ -1,7 +1,7 @@
 class XcGm2dVector {
   x;
   y;
-  
+
   static #MIN_LENGTH = 1 / 64;
 
   constructor({x = 0.0, y = 0.0} = {}) {
@@ -148,8 +148,9 @@ class XcGm2dVector {
     this.y = vecReturn.y;
   }
 
-  rotateBy({angle, axis}) {
-    // TODO
+  rotate({angle}) {
+    const matrix = XcGm2dMatrix.rotationMatrix({angle});
+    this.transform({matrix});
   }
 
   mirror({plane}) {
@@ -157,37 +158,24 @@ class XcGm2dVector {
   }
 
   get perpendicularVector() {
-    // TODO
+    new XcGm2dVector({x: -this.y, y: this.x});
   }
 
   angleTo({vector}) {
-    if (this.length < XcGmContext.gTol.linearPrecision) {
+    if ((this.length < XcGmContext.gTol.linearPrecision) || (vector.length < XcGmContext.gTol.linearPrecision)) {
       return Math.PI;
+    } else {
+      const dot = this.dotProduct({vector});
+      const cross = this.x * vector.y - this.y * vector.x;
+      return Math.atan2(cross, dot);
     }
-
-    if (vector.length < XcGmContext.gTol.linearPrecision) {
-      return Math.PI;
-    }
-
-    let angle = this.dotProduct({vector}) / (this.length * vector.length);
-    // clamp, to handle numerical problems
-    if (angle < -1.0) {
-      angle = -1.0;
-    }
-    if (angle > 1.0) {
-      angle = 1.0;
-    }
-    return Math.acos(angle);
   }
 
   rotationAngleTo({vector, axis}) {
-    let angle = this.angleTo({vector});
+    const angle = this.angleTo({vector});
     const tmpVec = this.crossProduct({vector});
     const dotProduct = tmpVec.dotProduct({vector: axis});
-    if (dotProduct < 0) {
-      angle = (Math.PI * 2) - angle;
-    }
-    return angle;
+    return  (dotProduct >= 0) ? angle : 2 * Math.PI - angle;
   }
 
   get normal() {
@@ -195,17 +183,19 @@ class XcGm2dVector {
     normalizedVector.x = this.x;
     normalizedVector.y = this.y;
 
-    const vecLength = Math.sqrt(this.x * this.x + this.y * this.y);
+    const vecLength = this.length;
     if (vecLength >= XcGmContext.gTol.anglePrecision) {
       normalizedVector.x /= vecLength;
       normalizedVector.y /= vecLength;
-    }
 
-    return normalizedVector;
+      return normalizedVector;
+    } else {
+      return normalizedVector;
+    }
   }
 
   normalize() {
-    const vecLength = Math.sqrt(this.x * this.x + this.y * this.y);
+    const vecLength = this.length;
 
     if (vecLength >= XcGmContext.gTol.anglePrecision) {
       this.x /= vecLength;
@@ -219,36 +209,22 @@ class XcGm2dVector {
   }
 
   isUnitLength() {
-    if (Math.abs(this.length - 1) < XcGmContext.gTol.anglePrecision) {
-      return true;
-    } else {
-      return false;
-    }
+    return Math.abs(this.length - 1) < XcGmContext.gTol.anglePrecision;
   }
 
   isZeroLength() {
     const threshold = XcGmContext.gTol.linearPrecision;
 
-    if (this.lengthSquared() < threshold * threshold) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.lengthSquared() < threshold * threshold;
   }
 
-  isParallelTo() {
-    const len1 = this.length;
-    const len2 = vector.length;
+  isParallelTo({vector}) {
+    const threshold = XcGmContext.gTol.linearPrecision;
+    const notZero = a => a.length >= threshold;
 
-    if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
-      return false;
-    }
-
-    if (Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < XcGmContext.gTol.anglePrecision) {
-      return true;
-    } else {
-      return false;
-    }
+    return notZero(this)
+    && notZero(vector)
+    && Math.abs(Math.remainder(this.angleTo({vector}), Math.PI)) < XcGmContext.gTol.anglePrecision;
   }
 
   isCodirectionalTo({vector}) {
@@ -260,12 +236,8 @@ class XcGm2dVector {
   }
 
   isEqualTo({vector}) {
-    if ((Math.abs(this.x - vector.x) < XcGmContext.gTol.anglePrecision)
-      && (Math.abs(this.y - vector.y) < XcGmContext.gTol.anglePrecision)) {
-      return true;
-    } else {
-      return false;
-    }
+    return Math.abs(this.x - vector.x) < XcGmContext.gTol.anglePrecision
+        && Math.abs(this.y - vector.y) < XcGmContext.gTol.anglePrecision;
   }
 
   crossProduct({vector}) {

@@ -128,8 +128,9 @@ class XcGm2dPosition {
     this.y = newPosition.y;
   }
 
-  rotateBy({angle, axis}) {
-    // TODO
+  rotateBy({angle, center}) {
+    const matrix = XcGm2dMatrix.rotationMatrix({angle, center});
+    this.transform({matrix});
   }
 
   mirror({plane}) {

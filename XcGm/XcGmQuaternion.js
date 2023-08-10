@@ -30,23 +30,23 @@ class XcGmQuaternion {
    * @returns {number} the skew values to indicate the sign of quaternion components
    */
   static #sarabandiSkew({matrixEntry, index}) {
-    switch (index) {
-      case 1:
-        return matrixEntry[2][1] - matrixEntry[1][2];
-      case 2:
-        return matrixEntry[0][2] - matrixEntry[2][0];
-      case 3:
-        return matrixEntry[1][0] - matrixEntry[0][1];
-      default:
-        throw "Invalid index";
+    if (index === 1) {
+      return matrixEntry[2][1] - matrixEntry[1][2];
+    } else if (index === 2) {
+      return matrixEntry[0][2] - matrixEntry[2][0];
+    } else if (index === 3) {
+      return matrixEntry[1][0] - matrixEntry[0][1];
+    } else {
+      XcGmAssert({assertion: false, message: 'Invalid index'});
     }
   }
 
   static #sarabandiSign({matrixEntry, index}) {
-    if (index == 0) {
+    if (index === 0) {
       return 1;
+    } else {
+      return Math.sign(this.#sarabandiSkew({matrixEntry, index}));
     }
-    return Math.sign(this.#sarabandiSkew({matrixEntry, index}));
   }
 
   /**
@@ -66,14 +66,14 @@ class XcGmQuaternion {
 
     if (trace > 0) {
       return (1 + trace) / 4;
+    } else {
+      const skew = new XcGm3dVector({
+        x: matrixEntry[1][2] - sign[0] * matrixEntry[2][1],
+        y: matrixEntry[0][2] - sign[1] * matrixEntry[2][0],
+        z: matrixEntry[0][1] - sign[2] * matrixEntry[1][0],
+      });
+      return skew.lengthSquared() / (4 * (3 - trace));
     }
-
-    const skew = new XcGm3dVector({
-      x: matrixEntry[1][2] - sign[0] * matrixEntry[2][1],
-      y: matrixEntry[0][2] - sign[1] * matrixEntry[2][0],
-      z: matrixEntry[0][1] - sign[2] * matrixEntry[1][0],
-    });
-    return skew.lengthSquared() / (4 * (3 - trace));
   }
 
   // Internal usage for stable calculation of quaternion components from a pure rotation matrix
@@ -100,6 +100,16 @@ class XcGmQuaternion {
     const y = this.#sarabandi({matrixEntry, index: 2});
     const z = this.#sarabandi({matrixEntry, index: 3});
     return new XcGmQuaternion({w, x, y, z});
+  }
+
+  clone() {
+    //TODO
+    XcGmAssert({assertion: false, message: 'TODO'});
+  }
+
+  copy({quaternion}) {
+    //TODO
+    XcGmAssert({assertion: false, message: 'TODO'});
   }
 
   /**
@@ -133,14 +143,14 @@ class XcGmQuaternion {
     const normal = Math.sqrt(this.lengthSquared);
     if (normal < new XcGmPrecision().linearPrecision) {
       return this;
+    } else {
+      this.w /= normal;
+      this.x /= normal;
+      this.y /= normal;
+      this.z /= normal;
+
+      return this;
     }
-
-    this.w /= normal;
-    this.x /= normal;
-    this.y /= normal;
-    this.z /= normal;
-
-    return this;
   }
 
   /**
@@ -148,7 +158,7 @@ class XcGmQuaternion {
    * @returns {XcGmQuaternion} the normalized quaternion of the current quaternion
    */
   get normal() {
-    const unitQ = new XcGmQuaternion({...this});
+    const unitQ = new XcGmQuaternion({w: this.w, x: this.x, y: this.y, z: this.z});
     unitQ.normalize();
     return unitQ;
   }
@@ -170,13 +180,14 @@ class XcGmQuaternion {
     // assuming to be unit, lengthSquared=1.
     const n = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     // TODO: handle floating point tolerance
-    if (n < XcGmContext.gTol.linearPrecision)
-      return {...this};
-
-    const oldAngle = Math.atan2(n, this.w);
-    const newAngle = exponent * oldAngle;
-    const axisFactor = Math.sin(newAngle) / n;
-    return new XcGmQuaternion({w: Math.cos(newAngle), x: this.x * axisFactor, y: this.y * axisFactor, z: this.z * axisFactor});
+    if (n < XcGmContext.gTol.linearPrecision) {
+      return new XcGmQuaternion({w: this.w, x: this.x, y: this.y, z: this.z});
+    } else {
+      const oldAngle = Math.atan2(n, this.w);
+      const newAngle = exponent * oldAngle;
+      const axisFactor = Math.sin(newAngle) / n;
+      return new XcGmQuaternion({w: Math.cos(newAngle), x: this.x * axisFactor, y: this.y * axisFactor, z: this.z * axisFactor});
+    }
   }
 
   /**
@@ -224,6 +235,13 @@ class XcGmQuaternion {
     return XcGm3dMatrix.fromArray({array});
   }
 
+  static fromAxisAngle({axisVector, angle}) {
+    const v = {...axisVector};
+    v.normalize();
+    v.multiply({scale: Math.sin(angle/2)});
+    return new XcGmQuaternion({w: Math.cos(angle/2), x: v.x, y: v.y, z: v.z});
+  }
+
   /**
    * @description find the rotation to rotate a vector to another. If the two vectors are exactly on opposite directions or one vector is zero, the rotation axis
    * is up to implementation. The rotation is well defined in all other cases.
@@ -238,45 +256,49 @@ class XcGmQuaternion {
     const vector1 = toVector.normal;
 
     // zero rotation, if one input vector is zero
-    if (vector0.isZeroLength() || vector1.isZeroLength())
+    if (vector0.isZeroLength() || vector1.isZeroLength()) {
       return rotation;
-
-    const innerProduct = vector0.dotProduct({vector: vector1});
-
-    if (innerProduct < (-1 + XcGmContext.gTol.linearPrecision)) {
-      // if the two input vectors are approximately opposite of each other, find the rotation axis as
-      // a common perpendicular direction.
-
-      // Protection against rounding errors
-      innerProduct = Math.max(innerProduct, -1);
-
-      const axis = XcGm3dVector.sharedPerpendicularVector({vector0, vector1});
-
-      // \cos^2(\theta/2)
-      const w2 = (1 + innerProduct) / 2;
-      rotation.w = Math.sqrt(w2);
-      // s= \sin(\theta/2)
-
-      const s = Math.sqrt(1 - w2);
-      rotation.x = axis.x * s;
-      rotation.y = axis.y * s;
-      rotation.z = axis.z * s;
     } else {
-      // otherwise, find the rotation axis by cross product.
-      // cross= \sin(\theta) \vec{A}, with \vec{A} the unit vector of the rotation axis
-      const cross = vector0.crossProduct({vector: vector1});
+      let innerProduct = vector0.dotProduct({vector: vector1});
 
-      // s= 2 \cos(\theta/2)
-      const s = Math.sqrt(2 * (1 + innerProduct));
-      rotation.w = s / 2;
+      if (innerProduct < (-1 + XcGmContext.gTol.linearPrecision)) {
+        // if the two input vectors are approximately opposite of each other, find the rotation axis as
+        // a common perpendicular direction.
 
-      // \sin(\theta)/(2\cos(\theta/2)) = \sin(\theta/2)
-      rotation.x = cross.x / s;
-      rotation.y = cross.y / s;
-      rotation.z = cross.z / s;
+        // Protection against rounding errors
+        innerProduct = Math.max(innerProduct, -1);
+
+        const axis = XcGm3dVector.sharedPerpendicularVector({vector0, vector1});
+
+        // \cos^2(\theta/2)
+        const w2 = (1 + innerProduct) / 2;
+        rotation.w = Math.sqrt(w2);
+        // s= \sin(\theta/2)
+
+        const s = Math.sqrt(1 - w2);
+        rotation.x = axis.x * s;
+        rotation.y = axis.y * s;
+        rotation.z = axis.z * s;
+
+        // normalize to protect from rounding errors
+        return rotation.normal;
+      } else {
+        // otherwise, find the rotation axis by cross product.
+        // cross= \sin(\theta) \vec{A}, with \vec{A} the unit vector of the rotation axis
+        const cross = vector0.crossProduct({vector: vector1});
+
+        // s= 2 \cos(\theta/2)
+        const s = Math.sqrt(2 * (1 + innerProduct));
+        rotation.w = s / 2;
+
+        // \sin(\theta)/(2\cos(\theta/2)) = \sin(\theta/2)
+        rotation.x = cross.x / s;
+        rotation.y = cross.y / s;
+        rotation.z = cross.z / s;
+
+        // normalize to protect from rounding errors
+        return rotation.normal;
+      }
     }
-
-    // normalize to protect from rounding errors
-    return rotation.normal;
   }
 }

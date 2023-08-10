@@ -111,6 +111,17 @@ Constructs a Three.js Vector2 object from this <code>XcGm2dPosition</code> objec
 </dl>
 Set the object value from another <code>XcGm2dPosition</code> object.
 
+<h3>rotateBy</h3>
+<code>rotateBy({angle, center})</code>
+
+<dl>
+  <dt>angle</dt>
+  <dd>The rotation angle in radians.</dd>
+  <dt>center</dt>
+  <dd>An <code>XcGm2dPosition</code> object: the rotation center</dd>
+</dl>
+Rotate the current position by the given angle and rotation center.
+
 <h2>XcGm2dVector</h2>
 <code>class XcGm2dVector</code>
 
@@ -208,6 +219,15 @@ Constructs a Three.js Vector2 object from this <code>XcGm2dVector</code> object.
   <dd><code>XcGm2dVector</code> object.</dd>
 </dl>
 Set the object value from another <code>XcGm2dVector</code> object.
+
+<h3>rotate</h3>
+<code>rotate({angle})</code>
+
+<dl>
+  <dt>angle</dt>
+  <dd><code>Number</code> the rotation angle in radians.</dd>
+</dl>
+Rotate the vector by the given angle.
 
 <h2>XcGm3dBCurve</h2>
 <code>class XcGm3dCurve extends XcGmGeometry</code>
@@ -1243,6 +1263,18 @@ Set the object value to the product of the provided matrix and vector.
   <dd><code>XcGm3dMatrix</code> object</dd>
 </dl>
 Transform the object with the provided matrix.
+
+<h3>rotateBy</h3>
+<code>rotateBy({angle, axis})</code>
+
+<dl>
+  <dt>angle</dt>
+  <dd><code>Number</code> the rotation angle in radians</dd>
+  <dt>axis</dt>
+  <dd><code>XcGm3dAxis</code> the rotation axis</dd>
+</dl>
+Rotate the vector by the given angle and axis
+
 
 <h3>perpendicularVector</h3>
 <code>get perpendicularVector()</code>
@@ -2453,6 +2485,17 @@ with parameter t: q0 * (q0’ * q1)^t, q0’ being the conjugate: q0’ = 1/q0 f
   <li>t=1, the result is q1;</li>
   <li>otherwise, the result is a linear interpolation</li>
 </ul>
+
+<h3>fromAxisAngle</h3>
+<code>static fromAxisAngle({axisVector, angle})</code>
+
+<dl>
+  <dt>axisVector</dt>
+  <dd>The <code>XcGm3dVector</code> as the rotation axis direction vector</dd>
+  <dt>angle</dt>
+  <dd>The rotation angle in radians</dd>
+</dl>
+Create a rotation <code>XcGmQuaternion</code> with the rotation direction vector and rotation angle.
 
 <h3>matrix</h3>
 <code>get matrix()</code>

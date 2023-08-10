@@ -145,7 +145,11 @@ class XcGm3dPosition {
   }
 
   rotateBy({angle, axis}) {
-    // TODO
+    const quaterion = XcGmQuaternion.fromAxisAngle({angle:angle, axisVector:axis});
+    const position = axis.position;
+    this.subtract({x: position.x, y: positon.y, z: position.z});
+    this.transform({matrix: quaterion.matrix});
+    this.add({x: position.x, y: positon.y, z: position.z});
   }
 
   mirror({plane}) {

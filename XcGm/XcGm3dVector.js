@@ -164,17 +164,18 @@ class XcGm3dVector {
   }
 
   rotateBy({angle, axis}) {
-    // TODO
+    let quaterion = XcGmQuaternion.fromAxisAngle({angle, axisVector: axis.direction});
+    this.transform({matrix: quaterion.matrix});
   }
 
   mirror({planeNormal}) {
     if (planeNormal.isZeroLength()) {
       return this.clone();
+    } else {
+      const normal = planeNormal.normal;
+      const aligned = XcGm3dVector.multiply({vector: normal, scale: -2 * this.dotProduct(normal)});
+      return XcGm3dVector.add({vector1: this, vector2: aligned});
     }
-
-    const normal = planeNormal.normal;
-    const aligned = XcGm3dVector.multiply({vector: normal, scale: -2 * this.dotProduct(normal)});
-    return XcGm3dVector.add({vector1: this, vector2: aligned});
   }
 
   /**
@@ -236,50 +237,48 @@ class XcGm3dVector {
     // If the second column is already aligned, skip the second mirroring
     if (col2.length < XcGmContext.gTol.linearPrecision) {
       return row3;
+    } else {
+      let nullVector = row3;
+
+      // The second mirroring to place the second column in the xy-plane
+      const sign2 = col2.x > 0 ? 1 : -1;
+      const v2 = new XcGm2dVector({x: col2.x + sign2 * col2.length, y: col2.y});
+
+      // combine the two mirroring matrices
+      nullVector.multiply({scale: v2.y * v2.y - v2.lengthSquared() / 2});
+      nullVector.add({vector: XcGm3dVector.multiply({vector: row2, scale: v2.x * v2.y})});
+
+      const cross = vector1.crossProduct({vector: vector2});
+      if (nullVector.dotProduct({vector: cross}) < 0) {
+        nullVector.negate();
+        return nullVector.normal;
+      } else {
+        return nullVector.normal;
+      }
     }
-
-    let nullVector = row3;
-
-    // The second mirroring to place the second column in the xy-plane
-    const sign2 = col2.x > 0 ? 1 : -1;
-    const v2 = new XcGm2dVector({x: col2.x + sign2 * col2.length, y: col2.y});
-
-    // combine the two mirroring matrices
-    nullVector.multiply({scale: v2.y * v2.y - v2.lengthSquared() / 2});
-    nullVector.add({vector: XcGm3dVector.multiply({vector: row2, scale: v2.x * v2.y})});
-
-    const cross = vector1.crossProduct({vector: vector2});
-    if (nullVector.dotProduct({vector: cross}) < 0) {
-      nullVector.negate();
-    }
-
-    return nullVector.normal;
   }
 
   angleTo({vector}) {
-    if (this.length < XcGmContext.gTol.linearPrecision) {
+    if ((this.length < XcGmContext.gTol.linearPrecision) || (vector.length < XcGmContext.gTol.linearPrecision)) {
       return Math.PI;
+    } else {
+      // for vectors a,b: the length of the cross product is |a| |b| \sin \theta
+      // the dotProduct is |a| |b| \cos \theta
+      const crossLength = this.crossProduct({vector}).length;
+      const dotValue = this.dotProduct({vector});
+      return Math.atan2(crossLength, dotValue);
     }
-
-    if (vector.length < XcGmContext.gTol.linearPrecision) {
-      return Math.PI;
-    }
-
-    // for vectors a,b: the length of the cross product is |a| |b| \sin \theta
-    // the dotProduct is |a| |b| \cos \theta
-    const crossLength = this.crossProduct({vector}).length;
-    const dotValue = this.dotProduct({vector});
-    return Math.atan2(crossLength, dotValue);
   }
 
   rotationAngleTo({vector, axis}) {
-    let angle = this.angleTo({vector});
+    const angle = this.angleTo({vector});
     const tmpVec = this.crossProduct({vector});
     const dotProduct = tmpVec.dotProduct({vector: axis});
     if (dotProduct < 0) {
-      angle = (Math.PI * 2) - angle;
+      return (Math.PI * 2) - angle;
+    } else {
+      return angle;
     }
-    return angle;
   }
 
   get normal() {
@@ -293,9 +292,11 @@ class XcGm3dVector {
       normalizedVector.x /= vecLength;
       normalizedVector.y /= vecLength;
       normalizedVector.z /= vecLength;
-    }
 
-    return normalizedVector;
+      return normalizedVector;
+    } else {
+      return normalizedVector;
+    }
   }
 
   normalize() {
@@ -314,21 +315,12 @@ class XcGm3dVector {
   }
 
   isUnitLength() {
-    if (Math.abs(this.length - 1) < XcGmContext.gTol.anglePrecision) {
-      return true;
-    } else {
-      return false;
-    }
+    return Math.abs(this.length - 1) < XcGmContext.gTol.anglePrecision
   }
 
   isZeroLength() {
     const threshold = XcGmContext.gTol.linearPrecision;
-
-    if (this.lengthSquared() < threshold * threshold) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.lengthSquared() < threshold * threshold;
   }
 
   isParallelTo({vector}) {
@@ -337,12 +329,8 @@ class XcGm3dVector {
 
     if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
-    }
-
-    if (Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < XcGmContext.gTol.anglePrecision) {
-      return true;
     } else {
-      return false;
+      return Math.abs(Math.abs(this.dotProduct({vector})) / (len1 * len2) - 1) < XcGmContext.gTol.anglePrecision;
     }
   }
 
@@ -351,16 +339,12 @@ class XcGm3dVector {
     const len2 = vector.length;
     if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
-    }
-
-    const dist = ((vector.x / len2 - this.x / len1) * (vector.x / len2 - this.x / len1)
-      + (vector.y / len2 - this.y / len1) * (vector.y / len2 - this.y / len1)
-      + (vector.z / len2 - this.z / len1) * (vector.z / len2 - this.z / len1));
-
-    if (dist < XcGmContext.gTol.anglePrecision * XcGmContext.gTol.anglePrecision) {
-      return true;
     } else {
-      return false;
+      const dist = ((vector.x / len2 - this.x / len1) * (vector.x / len2 - this.x / len1)
+        + (vector.y / len2 - this.y / len1) * (vector.y / len2 - this.y / len1)
+        + (vector.z / len2 - this.z / len1) * (vector.z / len2 - this.z / len1));
+
+      return dist < XcGmContext.gTol.anglePrecision * XcGmContext.gTol.anglePrecision;
     }
   }
 
@@ -370,23 +354,15 @@ class XcGm3dVector {
 
     if ((len1 < XcGmContext.gTol.anglePrecision) || (len2 < XcGmContext.gTol.anglePrecision)) {
       return false;
-    }
-
-    if (Math.abs((this.x * vector.x + this.y * vector.y + this.z * vector.z) / (len1 * len2)) > XcGmContext.gTol.anglePrecision) {
-      return false;
     } else {
-      return true;
+      return Math.abs((this.x * vector.x + this.y * vector.y + this.z * vector.z) / (len1 * len2)) > XcGmContext.gTol.anglePrecision;
     }
   }
 
   isEqualTo({vector}) {
-    if ((Math.abs(this.x - vector.x) < XcGmContext.gTol.anglePrecision)
+    return (Math.abs(this.x - vector.x) < XcGmContext.gTol.anglePrecision)
       && (Math.abs(this.y - vector.y) < XcGmContext.gTol.anglePrecision)
-      && (Math.abs(this.z - vector.z) < XcGmContext.gTol.anglePrecision)) {
-      return true;
-    } else {
-      return false;
-    }
+      && (Math.abs(this.z - vector.z) < XcGmContext.gTol.anglePrecision);
   }
 
   crossProduct({vector}) {

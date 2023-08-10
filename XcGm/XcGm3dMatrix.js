@@ -332,7 +332,7 @@ class XcGm3dMatrix {
               }
             } else {
               if (ipiv[k] > 1) {
-                throw 'Inv4DSingular';
+                XcGmAssert({assertion: false, message: 'Singular'});
               }
             }
           }
@@ -349,7 +349,7 @@ class XcGm3dMatrix {
       indxr[i] = irow;
       indxc[i] = icol;
       if (this.entry[icol][icol] == 0.0) {
-        throw 'Inv4DSingular';
+        XcGmAssert({assertion: false, message: 'Singular'});
       }
       pivinv = 1.0 / this.entry[icol][icol];
       this.entry[icol][icol] = 1.0;
