@@ -1,0 +1,4 @@
+class XcGsRaycaster {
+  constructor() {
+  }
+}

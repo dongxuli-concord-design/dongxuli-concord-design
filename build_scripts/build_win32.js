@@ -62,6 +62,18 @@ function build({baseFolderPath}) {
     ]);
   }
 
+  // XcGs
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcGs'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
+      'copy build\\* ..\\XcDebug\\',
+      'copy build\\*.bin ..\\XcMain\\',      
+    ]);
+  }
+
   // XcMath
   {
     const projectFolder = path.resolve(path.join(baseFolderPath, 'XcMath'));

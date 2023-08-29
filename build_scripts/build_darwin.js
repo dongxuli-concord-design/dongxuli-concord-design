@@ -34,9 +34,8 @@ function build({baseFolderPath}) {
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcUI`,
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcMath`,
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcGm`,
-
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcGm2`,
-
+    `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcGs`,
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/XcImage`,
 
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3d`,
@@ -104,6 +103,17 @@ function build({baseFolderPath}) {
     _runCommands([
       `rm -rf build && mkdir build`,
       `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcGm2 && cp -r Documentation/* ../XcMain/Documentation/XcGm2`,
+    ]);
+  }
+
+  // XcGs
+  {
+    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcGs'));
+    process.chdir(projectFolder);
+
+    _runCommands([
+      `rm -rf build && mkdir build`,
+      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../XcDebug/ && cp build/*.bin ../XcMain/ && cp -r Documentation/* ../XcDebug/Documentation/XcGs && cp -r Documentation/* ../XcMain/Documentation/XcGs`,
     ]);
   }
 
