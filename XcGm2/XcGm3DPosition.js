@@ -105,7 +105,7 @@ class XcGm3DPosition {
     return this;
   }
 
-  asVector() {
+  toVector() {
     return new XcGm3DVector({x: this.x, y: this.y, z: this.z});
   }
 

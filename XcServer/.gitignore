@@ -1,6 +1,5 @@
 /.idea/
 /node_modules/
-/git_stats/
 /build/
 /database/
 v8.log

@@ -81,16 +81,16 @@ class Xc3dUIGetFile {
       fileChooser.setAttribute('multiple', "");
     }
     if (this.#directory !== undefined) {
-      fileChooser.setAttribute('directory', "");
+      fileChooser.setAttribute('nwdirectory', "");
     }
     if (this.#directorydesc !== undefined) {
-      fileChooser.setAttribute('directorydesc', this.#directorydesc);
+      fileChooser.setAttribute('nwdirectorydesc', this.#directorydesc);
     }
     if (this.#saveas !== undefined) {
-      fileChooser.setAttribute('saveas', "");
+      fileChooser.setAttribute('nwsaveas', "");
     }
     if (this.#workingdir !== undefined) {
-      fileChooser.setAttribute('workingdir', this.#workingdir);
+      fileChooser.setAttribute('nwworkingdir', this.#workingdir);
     }
 
     fileChooser.addEventListener('change', (event) => {
