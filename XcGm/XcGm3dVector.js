@@ -135,6 +135,10 @@ class XcGm3dVector {
     this.z = z;
   }
 
+  to3dPosition() {
+    return new XcGm3dPosition({x: this.x, y: this.y, z: this.z});
+  }
+
   setToProduct({matrix, vector}) {
     const newVector = XcGm3dVector();
     for (let i = 0; i < 3; i += 1) {

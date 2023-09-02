@@ -446,7 +446,7 @@ class XcGm3dMatrix {
     this.entry[2][3] = vector.z;
   }
 
-  translationVector() {
+  get translationVector() {
     const vector = new XcGm3dVector();
     vector.x = this.entry[0][3];
     vector.y = this.entry[1][3];
