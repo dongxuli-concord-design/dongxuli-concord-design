@@ -86,16 +86,16 @@ class Xc3dUICameraController {
           Xc3dUIManager.orbitCamera({orbitVector: new XcGm2dVector({x: -Xc3dUICameraController.computeCameraChangeDelta(), y: 0})});
           break;
         case `ArrowUp`:
-          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: 0, y: -Xc3dUICameraController.computeCameraChangeDelta()})});
+          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: 0, y: -Xc3dUICameraController.computeCameraChangeDelta() * 6})});
           break;
         case `ArrowDown`:
-          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: 0, y: Xc3dUICameraController.computeCameraChangeDelta()})});
+          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: 0, y: Xc3dUICameraController.computeCameraChangeDelta() * 6})});
           break;
         case `ArrowRight`:
-          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: Xc3dUICameraController.computeCameraChangeDelta(), y: 0})});
+          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: Xc3dUICameraController.computeCameraChangeDelta() * 6, y: 0})});
           break;
         case `ArrowLeft`:
-          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: -Xc3dUICameraController.computeCameraChangeDelta(), y: 0})});
+          Xc3dUIManager.panCamera({panVector: new XcGm2dVector({x: -Xc3dUICameraController.computeCameraChangeDelta() * 6, y: 0})});
           break;
         case `KeyZ`:
           Xc3dUIManager.zoomCamera({factor: 1.2});
