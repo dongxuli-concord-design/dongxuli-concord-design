@@ -1,4 +1,4 @@
-class Xc3dCmdExport {
+class Xc3dCmdExportXT {
   static #CommandState = {
     Done: Symbol('Done'),
     Cancel: Symbol('Cancel'),
@@ -11,14 +11,14 @@ class Xc3dCmdExport {
   #path;
 
   constructor() {
-    this.#state = Xc3dCmdExport.#CommandState.WaitForFile;
+    this.#state = Xc3dCmdExportXT.#CommandState.WaitForFile;
     this.#path = '/tmp/model';
 
     this.#initI18n();
   }
 
   static* command() {
-    const cmd = new Xc3dCmdExport();
+    const cmd = new Xc3dCmdExportXT();
     const ret = yield* cmd.run();
     return ret;
   }
@@ -43,12 +43,12 @@ class Xc3dCmdExport {
   }
 
   * run() {
-    while ((this.#state !== Xc3dCmdExport.#CommandState.Done) && (this.#state !== Xc3dCmdExport.#CommandState.Cancel)) {
+    while ((this.#state !== Xc3dCmdExportXT.#CommandState.Done) && (this.#state !== Xc3dCmdExportXT.#CommandState.Cancel)) {
       switch (this.#state) {
-        case Xc3dCmdExport.#CommandState.WaitForFile:
+        case Xc3dCmdExportXT.#CommandState.WaitForFile:
           this.#state = yield* this.#onWaitForFile();
           break;
-        case Xc3dCmdExport.#CommandState.WaitForObject:
+        case Xc3dCmdExportXT.#CommandState.WaitForObject:
           this.#state = yield* this.#onWaitForObject();
           break;
         default:
@@ -71,9 +71,9 @@ class Xc3dCmdExport {
     });
     if (inputState === Xc3dUIInputState.eInputNormal) {
       this.#path = files[0].path;
-      return Xc3dCmdExport.#CommandState.WaitForObject;
+      return Xc3dCmdExportXT.#CommandState.WaitForObject;
     } else {
-      return Xc3dCmdExport.#CommandState.Cancel;
+      return Xc3dCmdExportXT.#CommandState.Cancel;
     }
   }
 
@@ -85,9 +85,9 @@ class Xc3dCmdExport {
     if (inputState === Xc3dUIInputState.eInputNormal) {
       const body = drawableObject.body;
       XcGmPart.transmitToFile({parts: [body], path: this.#path});
-      return Xc3dCmdExport.#CommandState.Done;
+      return Xc3dCmdExportXT.#CommandState.Done;
     } else {
-      return Xc3dCmdExport.#CommandState.Cancel;
+      return Xc3dCmdExportXT.#CommandState.Cancel;
     }
   }
 }

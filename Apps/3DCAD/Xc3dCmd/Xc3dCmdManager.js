@@ -41,7 +41,7 @@ class Xc3dCmdManager {
       'Rotate': '旋转物体',
       'Coordinate system': '设置坐标系',
       'AppStore': '应用商店',
-      'Export 3D printing': '导出到三维打印',
+      'Export STL': '导出STL',
       'Block': '方块',
       'Cone': '圆锥',
       'Cylinder': '圆柱',
@@ -59,7 +59,7 @@ class Xc3dCmdManager {
       'Sheet from wires': '从线框生成面体',
       'Insert': '插入外部文件',
       'Import': '导入XT文件',
-      'Export': '导出到外部文件',
+      'Export XT': '导出XT',
       'Measure': '测量',
     };
 
@@ -231,8 +231,8 @@ class Xc3dCmdManager {
       }),
 
       new Xc3dUICommand({
-        name: Xc3dCmdManager.#i18n.T`Export 3D printing`,
-        entry: Xc3dCmd3DPrint.command
+        name: Xc3dCmdManager.#i18n.T`Export STL`,
+        entry: Xc3dCmdExportSTL.command
       }),
       new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`Insert`,
@@ -247,8 +247,8 @@ class Xc3dCmdManager {
         entry: Xc3dCmdAppStore.command
       }),
       new Xc3dUICommand({
-        name: Xc3dCmdManager.#i18n.T`Export`,
-        entry: Xc3dCmdExport.command
+        name: Xc3dCmdManager.#i18n.T`Export XT`,
+        entry: Xc3dCmdExportXT.command
       }),
 
       new Xc3dUICommand({

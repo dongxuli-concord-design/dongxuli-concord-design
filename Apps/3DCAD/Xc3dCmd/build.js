@@ -10,7 +10,7 @@ const scripts = [
   'Xc3dCmdReferencePosition.js',
   'Xc3dCmdPoint.js',
   'Xc3dCmdLine.js',
-  'Xc3dCmd3DPrint.js',
+  'Xc3dCmdExportSTL.js',
   'Xc3dCmdImportXT.js',
   'Xc3dCmdBlock.js',
   'Xc3dCmdCone.js',
@@ -50,7 +50,7 @@ const scripts = [
   'Xc3dCmdAppStore.js',
   'Xc3dCmdMeasure.js',
   'Xc3dCmdProperty.js',
-  'Xc3dCmdExport.js',
+  'Xc3dCmdExportXT.js',
 
   'Xc3dCmdGmsh.js',
 ];

@@ -1,4 +1,4 @@
-class Xc3dCmd3DPrint {
+class Xc3dCmdExportSTL {
   static #CommandState = {
     Done: Symbol('Done'),
     Cancel: Symbol('Cancel'), 
@@ -9,12 +9,12 @@ class Xc3dCmd3DPrint {
   #i18n;
 
   constructor() {
-    this.#state = Xc3dCmd3DPrint.#CommandState.WaitForDirectory;
+    this.#state = Xc3dCmdExportSTL.#CommandState.WaitForDirectory;
     this.#initI18n();
   }
 
   static *command() {
-    const cmd = new Xc3dCmd3DPrint();
+    const cmd = new Xc3dCmdExportSTL();
     const ret = yield* cmd.run();
     return ret;
   }
@@ -86,16 +86,16 @@ class Xc3dCmd3DPrint {
     if (inputState === Xc3dUIInputState.eInputNormal) {
       const directory = files[0].path;
       this.#exportDrawableObjects({directory});
-      return Xc3dCmd3DPrint.#CommandState.Done;
+      return Xc3dCmdExportSTL.#CommandState.Done;
     } else {
-      return Xc3dCmd3DPrint.#CommandState.Cancel;
+      return Xc3dCmdExportSTL.#CommandState.Cancel;
     }
   }
 
   * run() {
-    while ((this.#state !== Xc3dCmd3DPrint.#CommandState.Done) && (this.#state !== Xc3dCmd3DPrint.#CommandState.Cancel)) {
+    while ((this.#state !== Xc3dCmdExportSTL.#CommandState.Done) && (this.#state !== Xc3dCmdExportSTL.#CommandState.Cancel)) {
       switch (this.#state) {
-        case Xc3dCmd3DPrint.#CommandState.WaitForDirectory:
+        case Xc3dCmdExportSTL.#CommandState.WaitForDirectory:
           this.#state = yield* this.#onWaitForDirectory();
           break;
         default:
