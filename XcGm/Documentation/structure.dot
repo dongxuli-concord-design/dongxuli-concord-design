@@ -1,0 +1,122 @@
+digraph XcGm {
+   rankdir = LR;
+
+  subgraph cluster_foundation {
+    label="Foundation";
+    graph[style=dotted];
+
+    XcGmPrecision;
+    XcGmContext;
+    XcGmInterval;
+    
+    XcGm2dPosition;
+    XcGm2dVector;
+    XcGm2dMatrix;
+    XcGm2dAxis;
+    XcGm2dCoordinateSystem;
+    XcGm2dBox;
+
+    XcGm3dPosition;
+    XcGm3dVector;
+    XcGm3dMatrix;
+    XcGm3dAxis;
+    XcGm3dCoordinateSystem;
+    XcGm3dBox;
+
+    XcGmUV;
+    XcGmUVBox;
+
+    XcGmEulerAngles;
+    XcGmQuaternion;
+  }
+ 
+  subgraph cluster_entity {
+    label="Entity";
+    graph[style=dotted];
+    
+    XcGmEntity->XcGmTopology;
+    subgraph cluster_topology {
+      label="Topology";
+      graph[style=dotted];
+      XcGmTopology->XcGmLoop;
+      XcGmTopology->XcGmFace;
+      XcGmTopology->XcGmEdge;
+      XcGmTopology->XcGmVertex;
+      XcGmTopology->XcGmRegion;
+      XcGmTopology->XcGmFin;
+      XcGmTopology->XcGmShell;
+      XcGmTopology->XcGmBody;
+    }
+    
+    XcGmEntity->XcGmGeometry;
+    XcGmGeometry->XcGm2dGeometry;
+    XcGmGeometry->XcGm3dGeometry;
+
+    subgraph cluster_geometry {
+      label="Geometry";
+      graph[style=dotted];
+
+      subgraph cluster_2dgeometry {
+        label="2dGeometry";
+        graph[style=dotted];      
+
+        XcGm2dGeometry->XcGm2dPoint;
+        XcGm2dGeometry->XcGm2dCurve;
+        
+        subgraph cluster_2dcurve {
+          label="2dCurve";
+          graph[style=dotted];
+          XcGm2dCurve->XcGm2dLine;
+          XcGm2dCurve->XcGm2dLineSegment;
+          XcGm2dCurve->XcGm2dPolygon;
+          XcGm2dCurve->XcGm2dCircularArc;
+          XcGm2dCurve->XcGm2dCircle;
+          XcGm2dCurve->XcGm2dNurbsCurve;
+          XcGm2dCurve->XcGm2dRay;
+          XcGm2dCurve->XcGm2dEllipticArc;
+          XcGm2dCurve->XcGm2dEllipse;
+          XcGm2dCurve->XcGm2dOffsetCurve;
+        }
+      }
+
+      subgraph cluster_3dgeometry {
+        label="3dGeometry";
+        graph[style=dotted];      
+
+        XcGm3dGeometry->XcGm3dPoint;
+        XcGm3dGeometry->XcGm3dCurve;
+        XcGm3dGeometry->XcGmSurface;
+
+        subgraph cluster_3dcurve {
+          label="3dCurve";
+          graph[style=dotted];
+          XcGm3dCurve->XcGm3dLine;
+          XcGm3dCurve->XcGm3dLineSegment;
+          XcGm3dCurve->XcGm3dCircularArc;
+          XcGm3dCurve->XcGm3dCircle;
+          XcGm3dCurve->XcGm3dNurbsCurve;
+          XcGm3dCurve->XcGm3dRay;
+          XcGm3dCurve->XcGm3dEllipticArc;
+          XcGm3dCurve->XcGm3dEllipse;
+        }
+        
+        subgraph cluster_surface {
+          label="Surface";
+          graph[style=dotted];
+          XcGmSurface->XcGmPlanarSurface;
+          XcGmSurface->XcGmConeSurface;
+          XcGmSurface->XcGmCylinderSurface;
+          XcGmSurface->XcGmSphereSurface;
+          XcGmSurface->XcGmTorusSurface;
+          XcGmSurface->XcGmRuledSurface;
+          XcGmSurface->XcGmResolvedSurface;
+          XcGmSurface->XcGmSpunSurface;
+          XcGmSurface->XcGmSweptSurface;
+          XcGmSurface->XcGmBlendSurface;
+          XcGmSurface->XcGmOffsetSurface;
+          XcGmSurface->XcGmNurbsSurface;
+        }
+      }
+    }
+ }
+}

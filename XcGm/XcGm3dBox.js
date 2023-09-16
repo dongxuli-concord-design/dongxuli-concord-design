@@ -29,12 +29,12 @@ class XcGm3dBox {
 
   toJSON() {
     return {
-      minimumX,
-      minimumY,
-      minimumZ,
-      maximumX,
-      maximumY,
-      maximumZ,
+      minimumX: this.minimumX,
+      minimumY: this.minimumY,
+      minimumZ: this.minimumZ,
+      maximumX: this.maximumX,
+      maximumY: this.maximumY,
+      maximumZ: this.maximumZ,
     }
   }
 

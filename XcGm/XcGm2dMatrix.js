@@ -213,10 +213,6 @@ class XcGm2dMatrix {
     this.entry[2][2] = XcGm2dMatrix.#matrixMuliply({A: matrix1.entry, B: matrix2.entry, i: 2, j: 2});
   }
 
-  /**
-   *
-   * @returns {Boolean} - returns false if the matrix is singular
-   */
   invert() {
     XcGmAssert({assertion: !this.isSingular(), message: 'Singular'});
     this.copy({matrix: this.inverse});
@@ -226,7 +222,7 @@ class XcGm2dMatrix {
     XcGmAssert({assertion: !this.isSingular(), message: 'Singular'});
 
     const inv = this.clone();
-    const det = this.determinant();
+    const det = this.determinant;
 
     const invDet = 1 / det;
 
@@ -247,7 +243,7 @@ class XcGm2dMatrix {
   }
 
   isSingular() {
-    const det = this.determinant();
+    const det = this.determinant;
     return Math.abs(det) < XcGmContext.gTol.anglePrecision;
   }
 
@@ -279,7 +275,7 @@ class XcGm2dMatrix {
     // TODO
   }
 
-  determinant() {
+  get determinant() {
     const m = this.entry;
     const value =
       m[0][0] * m[1][1] * m[2][2] + m[0][1] * m[1][2] * m[2][0] + m[1][0] * m[2][1] * m[0][2]
@@ -363,7 +359,6 @@ class XcGm2dMatrix {
   setToMirroringOverPlane({plane}) {
     // todo
   };
-
 
   // todo: Other useful functions
 }

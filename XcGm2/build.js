@@ -6,14 +6,6 @@ const fs = require('fs');
 // Build single JS file
 const scripts = [
   'XcGmAssert.js',
-  'XcGmPrecision.js',
-  'XcGmContext.js',
-  'XcGm2DPosition.js',
-  'XcGm2DVector.js',
-  'XcGm2DMatrix.js',
-  'XcGm3DPosition.js',
-  'XcGm3DVector.js',
-  'XcGm3DMatrix.js',
 ];
 
 const moduleName = 'XcGm2';

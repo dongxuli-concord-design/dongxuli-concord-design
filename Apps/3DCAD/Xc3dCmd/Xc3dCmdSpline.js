@@ -57,7 +57,7 @@ class Xc3dCmdSpline {
     }
 
     if (this.#state === Xc3dCmdSpline.#CommandState.Done) {
-      const curves = XcGm3dBCurve.createBspline({positions: this.#positions});
+      const curves = XcGm3dNurbsCurve.createBspline({positions: this.#positions});
       const bounds = curves.map(element => new XcGmInterval({low: 0, high: 1}));
       const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: wire, color: new THREE.Color('rgb(50, 50, 50)')})});

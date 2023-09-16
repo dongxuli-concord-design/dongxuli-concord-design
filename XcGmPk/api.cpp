@@ -1224,7 +1224,7 @@ Json::Value BODY_extrude(const Json::Value &params) {
   PK_VECTOR1_t path;
   PK_VECTOR_t_from_JSON(params["path"], &path);
 
-  PK_BODY_extrude_o_t options;
+  _PK_BODY_extrude_o_t options;
   PK_BODY_extrude_o_m(options);
   PK_BODY_extrude_o_t_from_JSON(params["options"], &options);
 

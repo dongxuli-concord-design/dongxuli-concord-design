@@ -45,7 +45,7 @@ class Xc3dUIManager {
   static overlayScene = null;
   static webGLRenderer = null;
   static renderingCamera = null;
-  static #worldCoordinateSystem = new XcGmCoordinateSystem();
+  static #worldCoordinateSystem = new XcGm3dCoordinateSystem();
   static #userCoordinateSystem = Xc3dUIManager.#worldCoordinateSystem;
   static #needRedraw = true;
 

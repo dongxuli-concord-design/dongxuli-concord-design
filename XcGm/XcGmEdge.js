@@ -9,7 +9,7 @@ class XcGmEdge extends XcGmTopology {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const body = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.body});
+    const body = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
   }
 
@@ -20,7 +20,7 @@ class XcGmEdge extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_curve', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const curve = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.curve});
+    const curve = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.curve});
     return curve;
   }
 
@@ -31,7 +31,7 @@ class XcGmEdge extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_faces', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const faces = pkReturnValue.faces.map(faceTag => XcGmEntity.getObjFromTag({entityTag: faceTag}));
+    const faces = pkReturnValue.faces.map(faceTag => XcGmEntity._getObjectFromPkTag({entityTag: faceTag}));
     return faces;
   }
 
@@ -42,8 +42,8 @@ class XcGmEdge extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_vertices', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const vertex1 = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.vertices[0]});
-    const vertex2 = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.vertices[1]});
+    const vertex1 = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.vertices[0]});
+    const vertex2 = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.vertices[1]});
     return {vertex1, vertex2};
   }
 
@@ -56,7 +56,7 @@ class XcGmEdge extends XcGmTopology {
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
-  static makeFacesFrom({edges, senses, sharedLoop}) {
+  static makeFacesFromEdges({edges, senses, sharedLoop}) {
     const edgeTags = edges.map(edge => edge.tag);
     const params = {
       edges: edgeTags,
@@ -66,11 +66,11 @@ class XcGmEdge extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_make_faces_from_wire', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const newFaces = pkReturnValue.new_faces.map(faceTag => XcGmEntity.getObjFromTag({entityTag: faceTag}));
+    const newFaces = pkReturnValue.new_faces.map(faceTag => XcGmEntity._getObjectFromPkTag({entityTag: faceTag}));
     return newFaces;
   }
 
-  static setBlendConstantFor({edges, radius}) {
+  static setBlendConstantForEdges({edges, radius}) {
     const edgeTags = edges.map(edge => edge.tag);
     const params = {
       edges: edgeTags,
@@ -79,7 +79,7 @@ class XcGmEdge extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_set_blend_constant', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const blendEdges = pkReturnValue.blend_edges.map(blendEdgeTag => XcGmEntity.getObjFromTag({entityTag: blendEdgeTag}));
+    const blendEdges = pkReturnValue.blend_edges.map(blendEdgeTag => XcGmEntity._getObjectFromPkTag({entityTag: blendEdgeTag}));
     return blendEdges;
   }
 
@@ -99,7 +99,7 @@ class XcGmEdge extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_find_interval', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const pkInterval = XcGmPK_INTERVAL_t.fromJSON({json: pkReturnValue.interval});
+    const pkInterval = _XcGmPK_INTERVAL_t.fromJSON({json: pkReturnValue.interval});
     const interval = pkInterval.toXcGmInterval();
     return interval;
   }
@@ -112,7 +112,7 @@ class XcGmEdge extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('EDGE_contains_vector', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const topol = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.topol});
+    const topol = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.topol});
     return topol;
   }
 

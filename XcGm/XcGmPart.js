@@ -33,7 +33,7 @@ class XcGmPart extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('PART_receive_b', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const parts = pkReturnValue.parts.map(partTag => XcGmEntity.getObjFromTag({entityTag: partTag}));
+    const parts = pkReturnValue.parts.map(partTag => XcGmEntity._getObjectFromPkTag({entityTag: partTag}));
     return parts;
   }
 
@@ -44,7 +44,7 @@ class XcGmPart extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('PART_receive', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const parts = pkReturnValue.parts.map(partTag => XcGmEntity.getObjFromTag({entityTag: partTag}));
+    const parts = pkReturnValue.parts.map(partTag => XcGmEntity._getObjectFromPkTag({entityTag: partTag}));
     return parts;
   }
 
@@ -57,7 +57,7 @@ class XcGmPart extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('PART_find_entity_by_ident', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const entity = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.entity});
+    const entity = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.entity});
     return entity;
   }
 }

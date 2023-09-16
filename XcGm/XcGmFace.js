@@ -15,7 +15,7 @@ class XcGmFace extends XcGmTopology {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_surf', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const surf = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.srf});
+    const surf = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.srf});
     return surf;
   }
 
@@ -26,7 +26,7 @@ class XcGmFace extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_find_uvbox', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const pkUVBox = XcGmPK_UVBox_t.fromJSON({json: pkReturnValue.uvbox})
+    const pkUVBox = _XcGmPK_UVBox_t.fromJSON({json: pkReturnValue.uvbox})
     const uvbox = pkUVBox.toXcGmUVBox();
     return uvbox;
   }
@@ -37,7 +37,7 @@ class XcGmFace extends XcGmTopology {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const body = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.body});
+    const body = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
   }
 
@@ -48,7 +48,7 @@ class XcGmFace extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_edges', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const edges = pkReturnValue.edges.map(edgeTag => XcGmEntity.getObjFromTag({entityTag: edgeTag}));
+    const edges = pkReturnValue.edges.map(edgeTag => XcGmEntity._getObjectFromPkTag({entityTag: edgeTag}));
     return edges;
   }
 
@@ -59,7 +59,7 @@ class XcGmFace extends XcGmTopology {
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_vertices', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const vertices = pkReturnValue.vertices.map(vertexTag => XcGmEntity.getObjFromTag({entityTag: vertexTag}));
+    const vertices = pkReturnValue.vertices.map(vertexTag => XcGmEntity._getObjectFromPkTag({entityTag: vertexTag}));
     return vertices;
   }
 
@@ -76,8 +76,8 @@ class XcGmFace extends XcGmTopology {
   static transform({facesAndMatrices, tolerance}) {
     const faceTags = facesAndMatrices.map(faceAndMatrix => faceAndMatrix.face.tag);
     const transfTags = facesAndMatrices.map(faceAndMatrix => {
-      const transfSF = XcGmPK_TRANSF_sf_t.fromXcGm3dMatrix({matrix: faceAndMatrix.matrix});
-      const transf = XcGmTransf.create({transfSF});
+      const transfSF = _XcGmPK_TRANSF_sf_t.fromXcGm3dMatrix({matrix: faceAndMatrix.matrix});
+      const transf = _XcGmTransf.create({transfSF});
       return transf.tag;
     });
 
@@ -94,11 +94,11 @@ class XcGmFace extends XcGmTopology {
   static boolean({targets, tools, func}) {
     let PK_boolean_param = 0;
     if (func === XcGmFace.BooleanFunction.Intersection) {
-      PK_boolean_param = PK_boolean_intersect_c;
+      PK_boolean_param = _PK_boolean_intersect_c;
     } else if (func === XcGmFace.BooleanFunction.Subtraction) {
-      PK_boolean_param = PK_boolean_subtract_c;
+      PK_boolean_param = _PK_boolean_subtract_c;
     } else if (func === XcGmFace.BooleanFunction.Union) {
-      PK_boolean_param = PK_boolean_unite_c;
+      PK_boolean_param = _PK_boolean_unite_c;
     }
 
     const targetTags = targets.map(target => target.tag);
@@ -112,7 +112,7 @@ class XcGmFace extends XcGmTopology {
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_boolean_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity.getObjFromTag({entityTag: bodyTag}));
+    const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity._getObjectFromPkTag({entityTag: bodyTag}));
     return resultBodies;
   }
 
@@ -122,7 +122,7 @@ class XcGmFace extends XcGmTopology {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_ask_oriented_surf', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const surf = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.srf});
+    const surf = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.srf});
     return {surf, orientation: pkReturnValue.orientation};
   }
 
@@ -142,7 +142,7 @@ class XcGmFace extends XcGmTopology {
     const params = {
       face: this.tag,
       curves: curves.map(curve => curve.tag),
-      intervals: intervals.map(interval => XcGmPK_INTERVAL_t.fromXcGmInterval({interval}).toJSON()),
+      intervals: intervals.map(interval => _XcGmPK_INTERVAL_t.fromXcGmInterval({interval}).toJSON()),
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('FACE_imprint_curves_2', {params});

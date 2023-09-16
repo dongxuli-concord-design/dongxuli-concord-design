@@ -16,7 +16,7 @@ class XcAtDocBlock extends Xc3dDocDrawableObject {
                 x,
                 y,
                 z,
-                coordinateSystem = new XcGmCoordinateSystem(),
+                coordinateSystem = new XcGm3dCoordinateSystem(),
                 color = new THREE.Color('gray'),
                 transparent = false,
                 opacity = 1.0,

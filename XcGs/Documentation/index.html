@@ -229,8 +229,8 @@ Set the object value from another <code>XcGm2dVector</code> object.
 </dl>
 Rotate the vector by the given angle.
 
-<h2>XcGm3dBCurve</h2>
-<code>class XcGm3dCurve extends XcGmGeometry</code>
+<h2>XcGm3dNurbsCurve</h2>
+<code>class XcGm3dCurve extends XcGm3dGeometry</code>
 
 Represents 3D BCurve.
 
@@ -280,9 +280,9 @@ Return the radius of the object.
 
 <dl>
   <dt>return</dt>
-  <dd><code>XcGmCoordinateSystem</code> object.</dd>
+  <dd><code>XcGm3dCoordinateSystem</code> object.</dd>
 </dl>
-Return <code>XcGmCoordinateSystem</code> object of the object.
+Return <code>XcGm3dCoordinateSystem</code> object of the object.
 
 <h3>create</h3>
 <code>static create({radius, coordinateSystem})</code>
@@ -291,7 +291,7 @@ Return <code>XcGmCoordinateSystem</code> object of the object.
   <dt>radius</dt>
   <dd>Radius value.</dd>
   <dt>coordinateSystem</dt>
-  <dd>XcGmCoordinateSystem object of the object.</dd>
+  <dd>XcGm3dCoordinateSystem object of the object.</dd>
   <dt>return</dt>
   <dd>XcGm3dCircle object</dd>
 </dl>
@@ -303,7 +303,7 @@ Create a XcGm3dCircle object from provided radius and coordinate system.
 Represents a 3D Ellipse.
 
 <h2>XcGm3dCurve</h2>
-<code>class XcGm3dCurve extends XcGmGeometry</code>
+<code>class XcGm3dCurve extends XcGm3dGeometry</code>
 
 <h3>makeWireBodyFromCurves</h3>
 <code>static makeWireBodyFromCurves({curves, bounds})</code>
@@ -587,7 +587,7 @@ Return the transposition of the object.
 Check if this matrix is equal to another matrix.
 
 <h3>determinant</h3>
-<code>determinant()</code>
+<code>get determinant()</code>
 
 <dl>
   <dt>return</dt>
@@ -688,7 +688,7 @@ rotation
 and translation only
 
 <h2>XcGm3dPoint</h2>
-<code>class XcGm3dPoint extends XcGmGeometry</code>
+<code>class XcGm3dPoint extends XcGm3dGeometry</code>
 
 <h3>constructor()</h3>
 <code>constructor()</code>
@@ -1507,27 +1507,27 @@ Return XcGmVertex
 Return XcGmBody.BODY_TYPE
 
 <h3>createSolidBlock</h3>
-<code>static createSolidBlock({x, y, z, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSolidBlock({x, y, z, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 Return XcGmBody
 
 <h3>createSolidCone</h3>
-<code>static createSolidCone({radius, height, semiAngle, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSolidCone({radius, height, semiAngle, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>createSolidCylinder</h3>
-<code>static createSolidCylinder({radius, height, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSolidCylinder({radius, height, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>createSolidPrism</h3>
-<code>static createSolidPrism({radius, height, sides, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSolidPrism({radius, height, sides, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>createSolidSphere</h3>
-<code>static createSolidSphere({radius, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSolidSphere({radius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>createSolidTorus</h3>
-<code>static createSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>createSheetCircle</h3>
-<code>static createSheetCircle({radius, coordinateSystem = new XcGmCoordinateSystem()})</code>
+<code>static createSheetCircle({radius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>extrudeAlong</h3>
 <code>extrudeAlong({direction, options})</code>
@@ -1621,14 +1621,14 @@ Return XcGmVertex
 <h3>toJSON</h3>
 <code>toJSON()</code>
 
-<h2>XcGmBSurface</h2>
-<code>class XcGmBSurface extends XcGmSurface</code>
+<h2>XcGmNurbsSurface</h2>
+<code>class XcGmNurbsSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>XcGmCone</h3>
-<code>class XcGmCone extends XcGmSurface</code>
+<h3>XcGmConeSurface</h3>
+<code>class XcGmConeSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -1642,8 +1642,8 @@ Return XcGmVertex
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h2>XcGmCoordinateSystem</h2>
-<code>class XcGmCoordinateSystem</code>
+<h2>XcGm3dCoordinateSystem</h2>
+<code>class XcGm3dCoordinateSystem</code>
 
 <h3>origin</h3>
 <code>origin</code>
@@ -1670,8 +1670,8 @@ XcGm3dVector
 <h3>toMatrix</h3>
 <code>toMatrix()</code>
 
-<h3>transformToCoordinateSystem</h3>
-<code>transformToCoordinateSystem({coordinateSystem})</code>
+<h3>computeTransformToCoordinateSystem</h3>
+<code>computeTransformToCoordinateSystem({coordinateSystem})</code>
 
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
@@ -1679,8 +1679,8 @@ XcGm3dVector
 <h3>toJSON</h3>
 <code>toJSON()</code>
 
-<h3>XcGmCylinder</h3>
-<code>class XcGmCylinder extends XcGmSurface</code>
+<h3>XcGmCylinderSurface</h3>
+<code>class XcGmCylinderSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -1704,8 +1704,8 @@ Return XcGmFace array
 
 Return {vertex1, vertex2} where vertex1 and vertex2 are XcGmVertex
 
-<h3>makeFacesFrom</h3>
-<code>static makeFacesFrom({edges, senses, sharedLoop})</code>
+<h3>makeFacesFromEdges</h3>
+<code>static makeFacesFromEdges({edges, senses, sharedLoop})</code>
 
 <dl>
   Return XcGmFace array</dd>
@@ -1713,11 +1713,11 @@ Return {vertex1, vertex2} where vertex1 and vertex2 are XcGmVertex
 Example
 <pre><code>
   let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-  let faces = XcGmEdge.makeFacesFrom({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+  let faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
 </code></pre>
 
-<h3>setBlendConstantFor</h3>
-<code>static setBlendConstantFor({edges, radius})</code>
+<h3>setBlendConstantForEdges</h3>
+<code>static setBlendConstantForEdges({edges, radius})</code>
 
 <dl>
   Return blend edges.</dd>
@@ -1725,7 +1725,7 @@ Example
 Example
 <pre><code>
   let edges = ...;
-  XcGmEdge.setBlendConstantFor({edges, radius: 0.01});
+  XcGmEdge.setBlendConstantForEdges({edges, radius: 0.01});
   myBody.fixBlends();
 </code></pre>
 
@@ -1776,11 +1776,11 @@ A unique handle number
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>getObjFromTag</h3>
-<code>static getObjFromTag({entityTag})</code>
+<h3>_getObjectFromPkTag</h3>
+<code>static _getObjectFromPkTag({entityTag})</code>
 
-<h3>PKDelete</h3>
-<code>static PKDelete({entity})</code>
+<h3>_PkDelete</h3>
+<code>static _PkDelete({entity})</code>
 
 <h3>toJSON</h3>
 <code>toJSON()</code>
@@ -1860,7 +1860,7 @@ Example
 Example
 <pre><code>      let face = ...;
       let {surf, orientation} = face.surfAndOrientation();
-      if (surf instanceof XcGmPlane) {
+      if (surf instanceof XcGmPlanarSurface) {
         let coordinateSystem = surf.coordinateSystem;
         let faceDir = coordinateSystem.zAxisDirection;
         if (!orientation) {
@@ -1877,7 +1877,7 @@ Example
 </dl>
 Example
 <pre><code>      let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-      let faces = XcGmEdge.makeFacesFrom({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+      let faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
       XcSysAssert({
         assertion: faces.length === 1,
         message: `Cannot generate sheet body. Single loop supported only`
@@ -1980,7 +1980,7 @@ Example
 <code>replaceTransf({transf})</code>
 
 <dl>
-  transf XcGmTransf</dd>
+  transf _XcGmTransf</dd>
 </dl>
 
 <h3>transformBy</h3>
@@ -2014,8 +2014,8 @@ Example
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h2>XcGmOffset</h2>
-<code>class XcGmOffset extends XcGmSurface</code>
+<h2>XcGmOffsetSurface</h2>
+<code>class XcGmOffsetSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -2041,8 +2041,8 @@ Example
 <h3>findEntityByIdent</h3>
 <code>findEntityByIdent({identifier, cls})</code>
 
-<h2>XcGmPK_CIRCLE_sf_t</h2>
-<code>class XcGmPK_CIRCLE_sf_t</code>
+<h2>_XcGmPK_CIRCLE_sf_t</h2>
+<code>class _XcGmPK_CIRCLE_sf_t</code>
 
 <h3>radius</h3>
 <code>radius</code>
@@ -2050,10 +2050,10 @@ Example
 <h3>basisSet</h3>
 <code>basisSet</code>
 
-XcGmPK_AXIS2_sf_t
+_XcGmPK_AXIS2_sf_t
 
 <h3>constructor</h3>
-<code>constructor({ radius, basisSet = new XcGmPK_AXIS2_sf_t() })</code>
+<code>constructor({ radius, basisSet = new _XcGmPK_AXIS2_sf_t() })</code>
 
 <h3>toJSON</h3>
 <code>toJSON()</code>
@@ -2061,16 +2061,16 @@ XcGmPK_AXIS2_sf_t
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_LINE_sf_t</h2>
-<code>class XcGmPK_LINE_sf_t</code>
+<h2>_XcGmPK_LINE_sf_t</h2>
+<code>class _XcGmPK_LINE_sf_t</code>
 
 <h3>basisSet</h3>
 <code>basisSet</code>
 
-XcGmPK_AXIS1_sf_t
+_XcGmPK_AXIS1_sf_t
 
 <h3>constructor</h3>
-<code>constructor(basisSet = new XcGmPK_AXIS1_sf_t())</code>
+<code>constructor(basisSet = new _XcGmPK_AXIS1_sf_t())</code>
 
 <h3>toJSON</h3>
 <code>toJSON()</code>
@@ -2078,8 +2078,8 @@ XcGmPK_AXIS1_sf_t
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_POINT_sf_t</h2>
-<code>class XcGmPK_POINT_sf_t</code>
+<h2>_XcGmPK_POINT_sf_t</h2>
+<code>class _XcGmPK_POINT_sf_t</code>
 
 <h3>position</h3>
 <code>position</code>
@@ -2095,8 +2095,8 @@ XcGm3dPosition
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_AXIS1_sf_t</h2>
-<code>class XcGmPK_AXIS1_sf_t</code>
+<h2>_XcGmPK_AXIS1_sf_t</h2>
+<code>class _XcGmPK_AXIS1_sf_t</code>
 
 <h3>location</h3>
 <code>location</code>
@@ -2121,8 +2121,8 @@ XcGm3dVector
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_AXIS2_sf_t</h2>
-<code>class XcGmPK_AXIS2_sf_t</code>
+<h2>_XcGmPK_AXIS2_sf_t</h2>
+<code>class _XcGmPK_AXIS2_sf_t</code>
 
 <h3>location</h3>
 <code>location</code>
@@ -2149,8 +2149,8 @@ XcGm3dVector
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_INSTANCE_sf_t</h2>
-<code>class XcGmPK_INSTANCE_sf_t</code>
+<h2>_XcGmPK_INSTANCE_sf_t</h2>
+<code>class _XcGmPK_INSTANCE_sf_t</code>
 
 <h3>assembly</h3>
 <code>assembly</code>
@@ -2175,16 +2175,16 @@ XcGmPart
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_PLANE_sf_t</h2>
-<code>class XcGmPK_PLANE_sf_t</code>
+<h2>_XcGmPK_PLANE_sf_t</h2>
+<code>class _XcGmPK_PLANE_sf_t</code>
 
 <h3>basisSet</h3>
 <code>basisSet</code>
 
-XcGmPK_AXIS2_sf_t
+_XcGmPK_AXIS2_sf_t
 
 <h3>constructor</h3>
-<code>constructor(basisSet = new XcGmPK_AXIS2_sf_t())</code>
+<code>constructor(basisSet = new _XcGmPK_AXIS2_sf_t())</code>
 
 <h3>toJSON</h3>
 <code>toJSON()</code>
@@ -2192,8 +2192,8 @@ XcGmPK_AXIS2_sf_t
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPK_SPHERE_sf_t</h2>
-<code>class XcGmPK_SPHERE_sf_t</code>
+<h2>_XcGmPK_SPHERE_sf_t</h2>
+<code>class _XcGmPK_SPHERE_sf_t</code>
 
 <h3>radius</h3>
 <code>radius</code>
@@ -2201,12 +2201,12 @@ XcGmPK_AXIS2_sf_t
 <h3>basisSet</h3>
 <code>basisSet</code>
 
-XcGmPK_AXIS2_sf_t
+_XcGmPK_AXIS2_sf_t
 
 <h3>constructor</h3>
 <pre><code>  constructor({
                 radius,
-                basisSet = new XcGmPK_AXIS2_sf_t()
+                basisSet = new _XcGmPK_AXIS2_sf_t()
               })
 </code></pre>
 
@@ -2216,8 +2216,8 @@ XcGmPK_AXIS2_sf_t
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmTransf</h2>
-<code>class XcGmTransf extends XcGmEntity</code>
+<h2>_XcGmTransf</h2>
+<code>class _XcGmTransf extends XcGmEntity</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -2231,11 +2231,11 @@ Return XcGm3dMatrix
 <code>static create({transfSF})</code>
 
 <dl>
-  transfSF XcGmPK_TRANSF_sf_t</dd>
+  transfSF _XcGmPK_TRANSF_sf_t</dd>
 </dl>
 
-<h2>XcGmPK_TRANSF_sf_t</h2>
-<code>class XcGmPK_TRANSF_sf_t</code>
+<h2>_XcGmPK_TRANSF_sf_t</h2>
+<code>class _XcGmPK_TRANSF_sf_t</code>
 
 <h3>matrix</h3>
 <code>matrix</code>
@@ -2248,8 +2248,8 @@ XcGm3dMatrix
 <h3>fromJSON</h3>
 <code>static fromJSON({json})</code>
 
-<h2>XcGmPlane</h2>
-<code>class XcGmPlane extends XcGmSurface</code>
+<h2>XcGmPlanarSurface</h2>
+<code>class XcGmPlanarSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -2257,7 +2257,7 @@ XcGm3dMatrix
 <h3>coordinateSystem</h3>
 <code>get coordinateSystem()</code>
 
-Return XcGmCoordinateSystem
+Return XcGm3dCoordinateSystem
 
 <h3>create</h3>
 <code>static create({coordinateSystem})</code>
@@ -2274,8 +2274,8 @@ Return XcGmCoordinateSystem
 <h3>constructor</h3>
 <code>constructor({linearPrecision = 1.0e-8, anglePrecision = 1.0e-11} = {})</code>
 
-<h2>XcGmSphere</h2>
-<code>class XcGmSphere extends XcGmSurface</code>
+<h2>XcGmSphereSurface</h2>
+<code>class XcGmSphereSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -2286,19 +2286,19 @@ Return XcGmCoordinateSystem
 <h3>coordinateSystem</h3>
 <code>get coordinateSystem()</code>
 
-Return XcGmCoordinateSystem
+Return XcGm3dCoordinateSystem
 
 <h3>create</h3>
 <code>static create({radius, coordinateSystem})</code>
 
-<h2>XcGmSpun</h2>
-<code>class XcGmSpun extends XcGmSurface</code>
+<h2>XcGmSpunSurface</h2>
+<code>class XcGmSpunSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
 
 <h2>XcGmSurface</h2>
-<code>class XcGmSurface extends XcGmGeometry</code>
+<code>class XcGmSurface extends XcGm3dGeometry</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -2311,14 +2311,14 @@ Return XcGmCoordinateSystem
   Return XcGm3dPosition</dd>
 </dl>
 
-<h2>XcGmSwept</h2>
-<code>class XcGmSwept extends XcGmSurface</code>
+<h2>XcGmSweptSurface</h2>
+<code>class XcGmSweptSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h2>XcGmTorus</h2>
-<code>class XcGmTorus extends XcGmSurface</code>
+<h2>XcGmTorusSurface</h2>
+<code>class XcGmTorusSurface extends XcGmSurface</code>
 
 <h3>constructor</h3>
 <code>constructor()</code>
@@ -2334,8 +2334,8 @@ Return XcGmCoordinateSystem
 
 Return XcGm3dBox
 
-<h3>evalMassPropsFor</h3>
-<code>static evalMassPropsFor({topols, accuracy})</code>
+<h3>computeMassProps</h3>
+<code>static computeMassProps({topols, accuracy})</code>
 
 <dl>
   topols XcGmTopology object array</dd>
@@ -2343,7 +2343,7 @@ Return XcGm3dBox
   return {amount, mass, cog, mofi, periphery}</dd>
 </dl>
 Example
-<pre><code>      let {cog} = XcGmTopology.evalMassPropsFor({topols: [myTopol], accuracy: 1});
+<pre><code>      let {cog} = XcGmTopology.computeMassProps({topols: [myTopol], accuracy: 1});
 </code></pre>
 
 <h3>render</h3>

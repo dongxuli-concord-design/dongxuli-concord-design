@@ -143,7 +143,7 @@ class Xc3dUIGetDirection {
     const midUV = new XcGmUV({u: (uvbox.lowU + uvbox.highU) / 2.0, v: (uvbox.lowV + uvbox.highV) / 2.0});
 
     const {surf, orientation} = face.surfAndOrientation();
-    if (surf instanceof XcGmPlane) {
+    if (surf instanceof XcGmPlanarSurface) {
       const faceDir = surf.coordinateSystem.zAxisDirection;
       if (!orientation) {
         faceDir.negate();

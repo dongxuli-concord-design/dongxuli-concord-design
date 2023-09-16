@@ -1,10 +1,10 @@
-class XcGmSurface extends XcGmGeometry {
+class XcGmSurface extends XcGm3dGeometry {
   constructor() {
     super();
   }
 
   evaluate({uv}) {
-    const pkUV = XcGmPK_UV_t.fromXcGmUV({uv})
+    const pkUV = _XcGmPK_UV_t.fromXcGmUV({uv})
     const params = {
       surf: this.tag,
       uv: pkUV.toJSON(),
@@ -16,7 +16,7 @@ class XcGmSurface extends XcGmGeometry {
 
     const {error, pkReturnValue} = XcGmCallPkApi('SURF_eval', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const pkVector = XcGmPK_VECTOR_t.fromJSON({json: pkReturnValue.position});
+    const pkVector = _XcGmPK_VECTOR_t.fromJSON({json: pkReturnValue.position});
     const position = pkVector.toXcGm3dPosition();
     return position;
   }

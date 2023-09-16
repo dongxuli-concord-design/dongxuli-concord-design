@@ -1,9 +1,9 @@
-class XcGm3dCurve extends XcGmGeometry {
+class XcGm3dCurve extends XcGm3dGeometry {
   constructor() {
     super();
   }
 
-  evalWithTangent({t, nDerivs}) {
+  _evalWithTangentPk({t, nDerivs}) {
     const params = {
       curve: this.tag,
       t,
@@ -14,11 +14,11 @@ class XcGm3dCurve extends XcGmGeometry {
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const pointAndDerivatives = pkReturnValue.pointAndDerivatives.map(p => {
-      const pkVector = XcGmPK_VECTOR_t.fromJSON({json: p});
+      const pkVector = _XcGmPK_VECTOR_t.fromJSON({json: p});
       return pkVector.toXcGm3dPosition();
     });
     
-    const pkVector = XcGmPK_VECTOR_t.fromJSON({json: pkReturnValue.tangent});
+    const pkVector = _XcGmPK_VECTOR_t.fromJSON({json: pkReturnValue.tangent});
     const tangent = pkVector.toXcGm3dVector();
 
     return {pointAndDerivatives, tangent};
@@ -27,16 +27,16 @@ class XcGm3dCurve extends XcGmGeometry {
   static makeWireBodyFromCurves({curves, bounds}) {
     const params = {
       curves: curves.map(curve => curve.tag),
-      bounds: bounds.map(bound => XcGmPK_INTERVAL_t.fromXcGmInterval({interval: bound}).toJSON()),
+      bounds: bounds.map(bound => _XcGmPK_INTERVAL_t.fromXcGmInterval({interval: bound}).toJSON()),
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('CURVE_make_wire_body_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
-    const wire = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.body});
+    const wire = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.body});
     const newEdges = pkReturnValue.new_edges.map(newEdgeInfo => {
       const edgeTag = newEdgeInfo.edge;
-      const edgeObj = XcGmEntity.getObjFromTag({entityTag: edgeTag});
+      const edgeObj = XcGmEntity._getObjectFromPkTag({entityTag: edgeTag});
       const edgeIndex = newEdgeInfo.edge_index;
 
       return {

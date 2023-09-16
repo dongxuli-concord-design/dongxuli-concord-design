@@ -100,7 +100,7 @@ class Xc3dCmdMove {
     Xc3dUIManager.hideDrawableObject({drawableObject: this.#model});
 
     // TODO: UCS
-    const coordinateSystem = new XcGmCoordinateSystem({
+    const coordinateSystem = new XcGm3dCoordinateSystem({
       origin: this.#basePosition,
     });
 

@@ -101,7 +101,7 @@ class Xc3dCmdCopy {
     Xc3dUIManager.addCustomRenderingObject({renderingObject: renderingObjectCopy});
 
     // TODO: UCS
-    const coordinateSystem = new XcGmCoordinateSystem({
+    const coordinateSystem = new XcGm3dCoordinateSystem({
       origin: this.#basePosition,
     });
 

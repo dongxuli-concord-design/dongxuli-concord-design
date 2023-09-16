@@ -1,4 +1,4 @@
-class XcGm3dPoint extends XcGmGeometry {
+class XcGm3dPoint extends XcGm3dGeometry {
   constructor() {
     super();
   }
@@ -10,7 +10,7 @@ class XcGm3dPoint extends XcGmGeometry {
 
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const pkPointSF = XcGmPK_POINT_sf_t.fromJSON({json: pkReturnValue.point_sf});
+    const pkPointSF = _XcGmPK_POINT_sf_t.fromJSON({json: pkReturnValue.point_sf});
     return pkPointSF.position.toXcGm3dPosition();
   }
 
@@ -20,7 +20,7 @@ class XcGm3dPoint extends XcGmGeometry {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_ask_part', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const part = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.part});
+    const part = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.part});
     return part;
   }
 
@@ -30,18 +30,18 @@ class XcGm3dPoint extends XcGmGeometry {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_ask_vertex', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const vertex = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.vertex});
+    const vertex = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.vertex});
     return vertex;
   }
 
   static create({position}) {
-    const pointSF = new XcGmPK_POINT_sf_t({position: XcGmPK_VECTOR_t.fromXcGm3dPosition({position})});
+    const pointSF = new _XcGmPK_POINT_sf_t({position: _XcGmPK_VECTOR_t.fromXcGm3dPosition({position})});
     const params = {
       point_sf: pointSF.toJSON()
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const point = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.point});
+    const point = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.point});
     return point;
   }
 
@@ -51,7 +51,7 @@ class XcGm3dPoint extends XcGmGeometry {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_make_minimum_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const body = XcGmEntity.getObjFromTag({entityTag: pkReturnValue.body});
+    const body = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
   }
 }

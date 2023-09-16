@@ -62,7 +62,7 @@ class Xc3dCmdPressPullPlanarFace {
       v: (uvbox.lowV + uvbox.highV) / 2.0
     });
     const {surf, orientation} = face.surfAndOrientation();
-    if (surf instanceof XcGmPlane) {
+    if (surf instanceof XcGmPlanarSurface) {
       const coordinateSystem = surf.coordinateSystem;
       const faceDir = coordinateSystem.zAxisDirection;
       if (!orientation) {

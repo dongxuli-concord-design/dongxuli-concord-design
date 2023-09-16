@@ -84,13 +84,13 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
     const origin = new XcGm3dPosition({x: 0, y: 0, z: 0});
     const xAxisDirection = new XcGm3dVector({x: 1, y: 0, z: 0});
     const zAxisDirection = new XcGm3dVector({x: 0, y: 0, z: 1});
-    const coordinateSystemWorld = new XcGmCoordinateSystem({origin: origin, zAxisDirection: zAxisDirection, xAxisDirection: xAxisDirection});
+    const coordinateSystemWorld = new XcGm3dCoordinateSystem({origin: origin, zAxisDirection: zAxisDirection, xAxisDirection: xAxisDirection});
 
     const {finalMatrix} = this.#kinematics.forwardKinematics({angles: this.#angles});
     finalMatrix.preMultiply({matrix: this.#matrix});
     const matrix = coordinateSystemWorld.toMatrix();
     finalMatrix.preMultiply({matrix});
-    this.#target = XcGmCoordinateSystem.fromMatrix({matrix: finalMatrix});
+    this.#target = XcGm3dCoordinateSystem.fromMatrix({matrix: finalMatrix});
     return this.#target.clone();
   }
 
@@ -122,7 +122,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
         z: definition.direction[2],
       });
 
-      const jointCoordinateSystems = new XcGmCoordinateSystem({
+      const jointCoordinateSystems = new XcGm3dCoordinateSystem({
         origin: new XcGm3dPosition({
           x: definition.location[0],
           y: definition.location[1],
@@ -168,7 +168,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       const zAxisDirection = XcGm3dVector.subtract({vector1: endLinkLocation.origin,vector2: startLinkLocation.origin});
       const height = zAxisDirection.length;
       zAxisDirection.normalize();
-      const coordinateSystem = new XcGmCoordinateSystem({
+      const coordinateSystem = new XcGm3dCoordinateSystem({
         origin: startLinkLocation.origin,
         zAxisDirection,
         xAxisDirection: zAxisDirection.perpendicularVector,
@@ -311,7 +311,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
 
     const position = currentPosition.clone();
     for (let i = 0; i < steps; ++i) {
-      const detCoordinateSystem = new XcGmCoordinateSystem();
+      const detCoordinateSystem = new XcGm3dCoordinateSystem();
       position.add({vector: detPosition});
       detCoordinateSystem.origin = position;
       detCoordinateSystem.xAxisDirection = targetXDir;

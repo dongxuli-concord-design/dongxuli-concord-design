@@ -74,7 +74,7 @@ class Xc3dCmdFillet {
     Xc3dUIManager.redraw();
 
     if (this.#state === Xc3dCmdFillet.#CommandState.Done) {
-      XcGmEdge.setBlendConstantFor({edges: this.#edges, radius: this.#radius});
+      XcGmEdge.setBlendConstantForEdges({edges: this.#edges, radius: this.#radius});
       this.#body.fixBlends();
       Xc3dUIManager.document.modifyDrawableObject({drawableObject: this.#model});
       Xc3dUIManager.redraw();

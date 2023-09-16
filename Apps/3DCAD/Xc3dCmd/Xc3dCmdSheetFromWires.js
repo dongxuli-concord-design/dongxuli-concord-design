@@ -71,7 +71,7 @@ class Xc3dCmdSheetFromWires {
 
       // Make a new wire body from all curves and bounds
       const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-      const faces = XcGmEdge.makeFacesFrom({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+      const faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
       XcSysAssert({
         assertion: faces.length === 1,
         message: this.#i18n.T`Cannot generate sheet body. Single loop supported only`

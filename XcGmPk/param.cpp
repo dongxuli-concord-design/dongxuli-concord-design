@@ -453,7 +453,7 @@ Json::Value PK_BSURF_sf_t_to_JSON(const PK_BSURF_sf_t *bsurf_sf) {
   // TODO
 }
 
-void PK_BODY_extrude_o_t_from_JSON(const Json::Value &json, PK_BODY_extrude_o_t *options) {
+void PK_BODY_extrude_o_t_from_JSON(const Json::Value &json, _PK_BODY_extrude_o_t *options) {
   PK_bound_def_s_from_JSON(json["start_bound"], &options->start_bound);
   PK_bound_def_s_from_JSON(json["end_bound"], &options->end_bound);
   options->extruded_body = json["extruded_body"].asInt();
@@ -461,7 +461,7 @@ void PK_BODY_extrude_o_t_from_JSON(const Json::Value &json, PK_BODY_extrude_o_t 
   options->consistent_params = json["consistent_params"].asBool();
 }
 
-Json::Value PK_BODY_extrude_o_t_to_JSON(const PK_BODY_extrude_o_t *options) {
+Json::Value PK_BODY_extrude_o_t_to_JSON(const _PK_BODY_extrude_o_t *options) {
   Json::Value json;
 
   json["start_bound"] = PK_bound_def_s_to_JSON(&options->start_bound);
@@ -472,7 +472,7 @@ Json::Value PK_BODY_extrude_o_t_to_JSON(const PK_BODY_extrude_o_t *options) {
   return json;
 }
 
-void PK_bound_def_s_from_JSON(const Json::Value &json, PK_bound_def_s *bound) {
+void PK_bound_def_s_from_JSON(const Json::Value &json, _PK_bound_def_s *bound) {
   bound->bound = json["bound"].asInt();
   bound->forward = json["forward"].asInt();
   bound->distance = json["distance"].asDouble();
@@ -482,7 +482,7 @@ void PK_bound_def_s_from_JSON(const Json::Value &json, PK_bound_def_s *bound) {
   bound->side = json["side"].asInt();
 }
 
-Json::Value PK_bound_def_s_to_JSON(const PK_bound_def_s *bound) {
+Json::Value PK_bound_def_s_to_JSON(const _PK_bound_def_s *bound) {
   Json::Value json;
   json["bound"] = bound->bound;
   json["forward"] = bound->forward;

@@ -59,8 +59,8 @@ Json::Value PK_BCURVE_sf_t_to_JSON(const PK_BCURVE_sf_t *bcurve_sf);
 void PK_BSURF_sf_t_from_JSON(const Json::Value &json, PK_BSURF_sf_t *bsurf_sf);
 Json::Value PK_BSURF_sf_t_to_JSON(const PK_BSURF_sf_t *bsurf_sf);
 
-void PK_BODY_extrude_o_t_from_JSON(const Json::Value &json, PK_BODY_extrude_o_t *options);
-Json::Value PK_BODY_extrude_o_t_to_JSON(const PK_BODY_extrude_o_t *options);
+void PK_BODY_extrude_o_t_from_JSON(const Json::Value &json, _PK_BODY_extrude_o_t *options);
+Json::Value PK_BODY_extrude_o_t_to_JSON(const _PK_BODY_extrude_o_t *options);
 
-void PK_bound_def_s_from_JSON(const Json::Value &json, PK_bound_def_s *bound);
-Json::Value PK_bound_def_s_to_JSON(const PK_bound_def_s *bound);
+void PK_bound_def_s_from_JSON(const Json::Value &json, _PK_bound_def_s *bound);
+Json::Value PK_bound_def_s_to_JSON(const _PK_bound_def_s *bound);

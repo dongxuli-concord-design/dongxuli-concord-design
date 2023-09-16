@@ -189,7 +189,7 @@ class Xc3dCmdSetupUCS {
     if (inputState === Xc3dUIInputState.eInputNormal) {
       const currentCoordinateSystemMatrix = Xc3dUIManager.ucs.toMatrix();
       const newCoordinateSystemMatrix = XcGm3dMatrix.multiply({matrix1: transform, matrix2: currentCoordinateSystemMatrix});
-      const customCoordinateSystem = XcGmCoordinateSystem.fromMatrix({matrix: newCoordinateSystemMatrix});
+      const customCoordinateSystem = XcGm3dCoordinateSystem.fromMatrix({matrix: newCoordinateSystemMatrix});
       Xc3dUIManager.ucs = customCoordinateSystem;
 
       return Xc3dCmdSetupUCS.#CommandState.Done;
@@ -286,7 +286,7 @@ class Xc3dCmdSetupUCS {
 
     zAxisDirection.normalize();
 
-    const customCoordinateSystem = new XcGmCoordinateSystem({
+    const customCoordinateSystem = new XcGm3dCoordinateSystem({
       origin: this.#origin,
       zAxisDirection,
       xAxisDirection,
@@ -319,7 +319,7 @@ class Xc3dCmdSetupUCS {
     zAxisDirection.normalize();
     xAxisDirection.normalize();
 
-    const customCoordinateSystem = new XcGmCoordinateSystem({
+    const customCoordinateSystem = new XcGm3dCoordinateSystem({
       origin: this.#origin,
       zAxisDirection,
       xAxisDirection,
@@ -349,7 +349,7 @@ class Xc3dCmdSetupUCS {
     zAxisDirection.normalize();
     xAxisDirection.normalize();
 
-    const customCoordinateSystem = new XcGmCoordinateSystem({
+    const customCoordinateSystem = new XcGm3dCoordinateSystem({
       origin: this.#origin,
       zAxisDirection,
       xAxisDirection,

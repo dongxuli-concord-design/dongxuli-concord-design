@@ -407,9 +407,9 @@ typedef  int PK_boolean_function_t;
 #define   PK_boolean_subtract     ((PK_boolean_function_t)BOOPSU)
 #define   PK_boolean_unite        ((PK_boolean_function_t)BOOPUN)
 
-#define   PK_boolean_intersect_c  ((PK_boolean_function_t)BOOPIN)
-#define   PK_boolean_subtract_c   ((PK_boolean_function_t)BOOPSU)
-#define   PK_boolean_unite_c      ((PK_boolean_function_t)BOOPUN)
+#define   _PK_boolean_intersect_c  ((PK_boolean_function_t)BOOPIN)
+#define   _PK_boolean_subtract_c   ((PK_boolean_function_t)BOOPSU)
+#define   _PK_boolean_unite_c      ((PK_boolean_function_t)BOOPUN)
 
 
 /* PK_boolean_region_t */
@@ -9457,7 +9457,7 @@ typedef struct PK_BODY_vertex_matches_s PK_BODY_vertex_matches_t;
 
 #define PK_FACE_instance_bodies_o_m(options)                             \
        ((options).o_t_version            = 2,                            \
-        (options).function               = PK_boolean_unite_c,           \
+        (options).function               = _PK_boolean_unite_c,           \
         (options).configuration          = NULL,                         \
         (options).extend_face_list       = PK_imprint_face_list_no_c,    \
         (options).repair_fa_fa           = PK_instance_repair_fa_fa_yes_c,\
@@ -9482,7 +9482,7 @@ typedef struct PK_BODY_vertex_matches_s PK_BODY_vertex_matches_t;
 
 #define PK_FACE_boolean_o_m(options)                                     \
        ((options).o_t_version            = 17,                           \
-        (options).function               = PK_boolean_unite_c,           \
+        (options).function               = _PK_boolean_unite_c,           \
         (options).configuration          = NULL,                         \
         (options).select_region          = NULL,                         \
         (options).matched_region         = NULL,                         \
@@ -9518,7 +9518,7 @@ typedef struct PK_BODY_vertex_matches_s PK_BODY_vertex_matches_t;
 
 #define PK_BODY_boolean_o_m(options)                                         \
        ((options).o_t_version              = 17,                             \
-        (options).function                 = PK_boolean_unite_c,             \
+        (options).function                 = _PK_boolean_unite_c,             \
         (options).configuration            = NULL,                           \
         (options).selected_topolset        = NULL,                           \
         (options).matched_region           = NULL,                           \
@@ -11154,7 +11154,7 @@ typedef struct PK_BODY_extend_o_s PK_BODY_extend_o_t;
 
 /* PK_bound_def_t */
 
-struct PK_bound_def_s
+struct _PK_bound_def_s
     {
     PK_bound_t        bound;         /* method of defining bound */
     PK_LOGICAL_t      forward;       /* whether bound in positive sense of path */
@@ -11164,11 +11164,11 @@ struct PK_bound_def_s
     int               nth_division;  /* select nth division */
     PK_bound_side_t   side;          /* which side is the first division if */
     };
-typedef struct PK_bound_def_s PK_bound_def_t;
+typedef struct _PK_bound_def_s PK_bound_def_t;
 
 
 
-/* PK_BODY_extrude_o_t */
+/* _PK_BODY_extrude_o_t */
 
 struct PK_BODY_extrude_o_s
     {
@@ -11179,7 +11179,7 @@ struct PK_BODY_extrude_o_s
     PK_LOGICAL_t          allow_disjoint;     /* swept body can have a disjoint */
     PK_PARAM_consistent_t consistent_params;  /* whether to ensure consistent */
     };
-typedef struct PK_BODY_extrude_o_s PK_BODY_extrude_o_t;
+typedef struct PK_BODY_extrude_o_s _PK_BODY_extrude_o_t;
 
 
 
@@ -11408,7 +11408,7 @@ typedef struct PK_BODY_hollow_o_s PK_BODY_hollow_o_t;
 struct PK_BODY_identify_facesets_o_s
     {
     int                     o_t_version;     /* version number of option struct */
-    PK_boolean_function_t   function;        /* (PK_boolean_unite_c) */
+    PK_boolean_function_t   function;        /* (_PK_boolean_unite_c) */
     PK_boolean_fence_t      fence;           /* (PK_boolean_fence_none_c) */
     PK_LOGICAL_t            check_manifold;  /* (PK_LOGICAL_true) */
     PK_boolean_update_t     update;          /* ( PK_boolean_update_default_c ) */
@@ -11423,7 +11423,7 @@ typedef struct PK_BODY_identify_facesets_o_s PK_BODY_identify_facesets_o_t;
 #define PK_BODY_identify_facesets_o_m(options)            \
     (                                                     \
        (options).o_t_version    = 3,                      \
-       (options).function       = PK_boolean_unite_c,     \
+       (options).function       = _PK_boolean_unite_c,     \
        (options).fence          = PK_boolean_fence_none_c,\
        (options).check_manifold = PK_LOGICAL_true,        \
        (options).update         = PK_boolean_update_default_c   \
@@ -25565,7 +25565,7 @@ PK_linkage_m PK_ERROR_code_t PK_BODY_extrude
 /* received */
 PK_BODY_t                   /*profile*/,      /* minimum, wire or sheet profile */
 PK_VECTOR1_t                /*path*/,         /* direction of linear extrusion */
-const PK_BODY_extrude_o_t * /*options*/,      /* options structure */
+const _PK_BODY_extrude_o_t * /*options*/,      /* options structure */
 /* returned */
 PK_BODY_t           *const  /*body*/,         /* resulting extruded body */
 PK_TOPOL_track_r_t  *const  /*tracking*/,     /* tracking information */

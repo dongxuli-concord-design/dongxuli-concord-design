@@ -27,13 +27,13 @@ class Xc3dUIPositionSnapper {
         // TODO: Get midpoint, center point of the edge
         // TODO: Get the edge center, not the prop center.
 
-        const {c_of_g} = XcGmTopology.evalMassPropsFor({topols: [kernelObject], accuracy: 1});
+        const {c_of_g} = XcGmTopology.computeMassProps({topols: [kernelObject], accuracy: 1});
         const objectCenter = new XcGm3dPosition({x: c_of_g[0], y: c_of_g[1], z: c_of_g[2]});
         const mark = this.#makeSnapMark({position: objectCenter, color: new THREE.Color('yellow')});
         positionAndMarks.push({position: objectCenter, mark});
       } else if (kernelObject instanceof XcGmFace) {
         // TODO: Get midpoint, center point of the face, not the prop center
-        const {c_of_g} = XcGmTopology.evalMassPropsFor({topols: [kernelObject], accuracy: 1});
+        const {c_of_g} = XcGmTopology.computeMassProps({topols: [kernelObject], accuracy: 1});
         const objectCenter = new XcGm3dPosition({x: c_of_g[0], y: c_of_g[1], z: c_of_g[2]});
         const mark = this.#makeSnapMark({position: objectCenter, color: new THREE.Color('yellow')});
         positionAndMarks.push({position: objectCenter, mark});

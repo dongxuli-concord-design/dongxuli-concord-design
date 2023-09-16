@@ -108,7 +108,7 @@ class Xc3dCmdCone {
         Xc3dUIManager.removeCustomOverlayRenderingObject({renderingObject: this.#renderingObject});
       }
 
-      const coordinateSystem = new XcGmCoordinateSystem({origin: this.#position});
+      const coordinateSystem = new XcGm3dCoordinateSystem({origin: this.#position});
       this.#body = XcGmBody.createSolidCone({
         radius: this.#radius,
         height: this.#height,

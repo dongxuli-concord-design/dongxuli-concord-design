@@ -10,12 +10,12 @@ class XcGmTopology extends XcGmEntity {
 
     const {error, pkReturnValue} = XcGmCallPkApi('TOPOL_find_box', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const pkBox = XcGmPK_BOX_t.fromJSON({json: pkReturnValue.uvbox});
+    const pkBox = _XcGmPK_BOX_t.fromJSON({json: pkReturnValue.uvbox});
     const box = pkBox.toXcGm3dBox();
     return box;
   }
 
-  static evalMassPropsFor({topols, accuracy}) {
+  static computeMassProps({topols, accuracy}) {
     //TODO:
     //FIXME: this API may not be right.
     const topolTags = topols.map(topol => topol.tag);
@@ -35,7 +35,7 @@ class XcGmTopology extends XcGmEntity {
     };
   }
 
-  render_facet({resolution = 'high'} = {}) {
+  renderFacet({resolution = 'high'} = {}) {
     const params = {
       topol: this.tag,
       resolution,
@@ -49,7 +49,7 @@ class XcGmTopology extends XcGmEntity {
     return renderingFacetData;
   }
 
-  render_line({resolution = 'high'} = {}) {
+  renderLine({resolution = 'high'} = {}) {
     const params = {
       topol: this.tag,
       resolution,

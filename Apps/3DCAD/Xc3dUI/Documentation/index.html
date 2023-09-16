@@ -269,7 +269,7 @@ A <code>Map</code> object manages the names and camera views.
 <code>static get ucs()</code>
 
 <dl>
-<dt>return</dt> <dd>XcGmCoordinateSystem representing the current user coordinate system.</dd>
+<dt>return</dt> <dd>XcGm3dCoordinateSystem representing the current user coordinate system.</dd>
 </dl>
 
 <h3>ucs (setter)</h3>
@@ -277,7 +277,7 @@ A <code>Map</code> object manages the names and camera views.
 <code>static set ucs(coordinateSystem)</code>
 
 <dl>
-<dt>coordinateSystem</dt> <dd>XcGmCoordinateSystem representing the current user coordinate system.</dd>
+<dt>coordinateSystem</dt> <dd>XcGm3dCoordinateSystem representing the current user coordinate system.</dd>
 </dl>
 
 <h3>resetUCS</h3>
@@ -788,13 +788,13 @@ Code to create models:
 Xc3dUIGetObject.inputObject = function() {
   const model1 = new XcAtDocBlock({
     name: '1', x: 0.2, y: 0.6, z: 0.6,
-    coordinateSystem: new XcGmCoordinateSystem({origin: new XcGm3dPosition({x: 0.2, y: 0.5, z: 0})}),
+    coordinateSystem: new XcGm3dCoordinateSystem({origin: new XcGm3dPosition({x: 0.2, y: 0.5, z: 0})}),
     color: new THREE.Color('red')
   });
 
   const model2 = new XcAtDocBlock({
     name: '2', x: 0.2, y: 0.6, z: 0.6,
-    coordinateSystem: new XcGmCoordinateSystem({origin: new XcGm3dPosition({x: -0.2, y: -0.5, z: 0})}),
+    coordinateSystem: new XcGm3dCoordinateSystem({origin: new XcGm3dPosition({x: -0.2, y: -0.5, z: 0})}),
     color: new THREE.Color('skyblue')
   });
 

@@ -198,7 +198,7 @@ class Xc3dDocDocument {
       parameter.y = (parameter.y - uvBOX.lowV) / (uvBOX.highV - uvBOX.lowV);
     }
 
-    const allRenderingFacetData = face.render_facet({resolution});
+    const allRenderingFacetData = face.renderFacet({resolution});
     const geometry = new THREE.BufferGeometry();
     const uvBox = face.UVBox;
     const vertices = [];
@@ -293,7 +293,7 @@ class Xc3dDocDocument {
       resolution = 0.00001;        
     }
 
-    const allRenderingLineData = edge.render_line({resolution});
+    const allRenderingLineData = edge.renderLine({resolution});
     const geometry = new THREE.BufferGeometry();
 
     XcSysAssert({assertion: allRenderingLineData.length === 1});
@@ -410,13 +410,13 @@ class Xc3dDocDocument {
 
       // Map everything to a unit-circle to calculate the parameter (angle).
       // This is because the mapping of the ellipse arc's parameter space and arc points is not uniform.
-      const worldCoordinateSystem = new XcGmCoordinateSystem();
-      const ellipseCoordinateSystem = new XcGmCoordinateSystem({
+      const worldCoordinateSystem = new XcGm3dCoordinateSystem();
+      const ellipseCoordinateSystem = new XcGm3dCoordinateSystem({
         origin: centerPosition,
         zAxisDirection: normalVec,
         xAxisDirection: majorAxisDir,
       });
-      const ellipseToWorldTransform = ellipseCoordinateSystem.transformToCoordinateSystem({
+      const ellipseToWorldTransform = ellipseCoordinateSystem.computeTransformToCoordinateSystem({
         coordinateSystem: worldCoordinateSystem
       });
       startPosition.transform({matrix: ellipseToWorldTransform});
