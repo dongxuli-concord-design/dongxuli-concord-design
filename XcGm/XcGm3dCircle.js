@@ -5,7 +5,7 @@ class XcGm3dCircle extends XcGm3dCurve {
 
   get radius() {
     const params = {
-      circle: this.tag
+      circle: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('CIRCLE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -15,7 +15,7 @@ class XcGm3dCircle extends XcGm3dCurve {
 
   get coordinateSystem() {
     const params = {
-      circle: this.tag
+      circle: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('CIRCLE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -40,7 +40,7 @@ class XcGm3dCircle extends XcGm3dCurve {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('CIRCLE_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const circle = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.circle});
+    const circle = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.circle});
     return circle;
   }
 }

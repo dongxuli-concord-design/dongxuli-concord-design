@@ -9,7 +9,7 @@ class XcGm3dNurbsCurve extends XcGm3dCurve {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('BCURVE_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const curve = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.bcurve});
+    const curve = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.bcurve});
     return curve;
   }
 
@@ -22,11 +22,7 @@ class XcGm3dNurbsCurve extends XcGm3dCurve {
 
     const {error, pkReturnValue} = XcGmCallPkApi('BCURVE_create_spline_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const curves = pkReturnValue.bcurves.map(curveTag => XcGmEntity._getObjectFromPkTag({entityTag: curveTag}));
+    const curves = pkReturnValue.bcurves.map(curveTag => XcGmEntity._getPkObjectFromPkTag({entityTag: curveTag}));
     return curves;
-  }
-
-  foo() {
-
   }
 }

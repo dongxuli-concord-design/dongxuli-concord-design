@@ -3,9 +3,13 @@ class XcGmTopology extends XcGmEntity {
     super();
   }
 
-  get box() {
+  clone() {
+    XcGmAssert({assertion: false, message: 'The subclass has to implement this function'});
+  }
+
+  _pkComputeBox() {
     const params = {
-      topol: this.tag
+      topol: this._pkTag
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('TOPOL_find_box', {params});
@@ -15,10 +19,10 @@ class XcGmTopology extends XcGmEntity {
     return box;
   }
 
-  static computeMassProps({topols, accuracy}) {
+  static _pkComputeMassProps({topols, accuracy}) {
     //TODO:
     //FIXME: this API may not be right.
-    const topolTags = topols.map(topol => topol.tag);
+    const topolTags = topols.map(topol => topol._pkTag);
     const params = {
       topols: topolTags,
       accuracy: accuracy
@@ -35,9 +39,9 @@ class XcGmTopology extends XcGmEntity {
     };
   }
 
-  renderFacet({resolution = 'high'} = {}) {
+  _pkRenderFacet({resolution = 'high'} = {}) {
     const params = {
-      topol: this.tag,
+      topol: this._pkTag,
       resolution,
     };
 
@@ -49,9 +53,9 @@ class XcGmTopology extends XcGmEntity {
     return renderingFacetData;
   }
 
-  renderLine({resolution = 'high'} = {}) {
+  _pkRenderLine({resolution = 'high'} = {}) {
     const params = {
-      topol: this.tag,
+      topol: this._pkTag,
       resolution,
     };
 

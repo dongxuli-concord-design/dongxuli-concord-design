@@ -68,12 +68,12 @@ class Xc3dCmdLine {
       const axis = new XcGm3dAxis({position, direction});
       const line = XcGm3dLine.create({axis});
 
-      const bound = new XcGmInterval({
+      const interval = new XcGmInterval({
         low: 0,
         high: this.#startPosition.distanceToPosition({position: this.#endPosition})
       });
 
-      const {wire} = XcGm3dCurve.makeWireBodyFromCurves({curves: [line], bounds: [bound]});
+      const {wire} = XcGm3dCurve.makeWireBodyFromCurves({curveAndIntervals: [{curve: line, interval}]});
 
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: wire, color: new THREE.Color('rgb(50, 50, 50)')})});
       Xc3dUIManager.redraw();

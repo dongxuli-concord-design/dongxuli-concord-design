@@ -132,7 +132,7 @@ class Xc3dCmdRevolve {
         draggingIntensity: Xc3dUIManager.DraggingIntensity.MEDIUM,
         draggingCallback: (angle) => {
 
-          const newProfile = this.#profileBody.clone();
+          const newProfile = this.#profileBody._pkClone();
           newProfile.spin({axis: this.#axis, angle});
 
           if (tmpRenderingObject) {

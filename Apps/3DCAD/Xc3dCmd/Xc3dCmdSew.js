@@ -102,7 +102,7 @@ class Xc3dCmdSew {
       prompt: this.#i18n.T`Please specify main object`,
       filter: (object) => {
         if (object instanceof Xc3dDocModel) {
-          if (object.body.type === XcGmBody.BODY_TYPE.SHEET) {
+          if (object.body.type === XcGmBody._PKBodyType.SHEET) {
             return true;
           } else {
             return false;
@@ -140,7 +140,7 @@ class Xc3dCmdSew {
       prompt: this.#i18n.T`Please specify tool object`,
       filter: (object) => {
         if (object instanceof Xc3dDocModel) {
-          if (object.body.type === XcGmBody.BODY_TYPE.SHEET) {
+          if (object.body.type === XcGmBody._PKBodyType.SHEET) {
             return true;
           } else {
             return false;

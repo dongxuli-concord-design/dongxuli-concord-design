@@ -125,13 +125,13 @@ class Xc3dDocDocument {
                                   }) {
     const bodyType = body.type;
     let pointSize = null;
-    if (bodyType === XcGmBody.BODY_TYPE.SOLID) {
+    if (bodyType === XcGmBody._PKBodyType.SOLID) {
       pointSize = 1;
-    } else if (bodyType === XcGmBody.BODY_TYPE.SHEET) {
+    } else if (bodyType === XcGmBody._PKBodyType.SHEET) {
       pointSize = 1;
-    } else if (bodyType === XcGmBody.BODY_TYPE.WIRE) {
+    } else if (bodyType === XcGmBody._PKBodyType.WIRE) {
       pointSize = 1;
-    } else if (bodyType === XcGmBody.BODY_TYPE.MINIMUM) {
+    } else if (bodyType === XcGmBody._PKBodyType.MINIMUM) {
       pointSize = 5;
     } else {
       pointSize = 5;
@@ -144,7 +144,7 @@ class Xc3dDocDocument {
     Xc3dDocDocument.#modelingKernelEntityToRenderingObjectMap.set(body, renderingBody);
 
     // Faces
-    body.faces.forEach(face => {
+    body._pkFaces.forEach(face => {
       const renderingMesh = Xc3dDocDocument.generateMeshForFace({face, color, map, opacity, transparent, renderingResolution});
       renderingMesh.visible = showFace;
 
@@ -156,7 +156,7 @@ class Xc3dDocDocument {
     });
 
     // Edges
-    body.edges.forEach(edge => {
+    body._pkEdges.forEach(edge => {
       const renderingLine = Xc3dDocDocument.generateLineForEdge({edge, color, renderingResolution});
       renderingLine.visible = showEdge;
 
@@ -168,7 +168,7 @@ class Xc3dDocDocument {
     });
 
     // Vertices
-    body.vertices.forEach(vertex => {
+    body._pkVertices.forEach(vertex => {
       const renderingPoint = Xc3dDocDocument.generatePointForVertex({vertex, color, size: pointSize});
       renderingPoint.visible = showVertex;
 
@@ -198,7 +198,7 @@ class Xc3dDocDocument {
       parameter.y = (parameter.y - uvBOX.lowV) / (uvBOX.highV - uvBOX.lowV);
     }
 
-    const allRenderingFacetData = face.renderFacet({resolution});
+    const allRenderingFacetData = face._pkRenderFacet({resolution});
     const geometry = new THREE.BufferGeometry();
     const uvBox = face.UVBox;
     const vertices = [];
@@ -211,7 +211,7 @@ class Xc3dDocDocument {
       if (renderingFacetData.type === 'L3TPFI') {
         // Facet plus normals plus parameters
         for (let i = 0; i < renderingFacetData.facets.length; i += 1) {
-          // For each vertices in
+          // For each _pkVertices in
           const facet = renderingFacetData.facets[i];
           const vertex = new THREE.Vector3(facet.point[0], facet.point[1], facet.point[2]);
           const normal = new THREE.Vector3(facet.normal[0], facet.normal[1], facet.normal[2]);
@@ -231,7 +231,7 @@ class Xc3dDocDocument {
       } else if (renderingFacetData.type === 'L3TPTI') {
         // Facet strips plus normals plus parameters
         for (let i = 0; i < renderingFacetData.facets.length; i += 1) {
-          // For each vertices in
+          // For each _pkVertices in
           const facet = renderingFacetData.facets[i];
           const vertex = new THREE.Vector3(facet.point[0], facet.point[1], facet.point[2]);
           const normal = new THREE.Vector3(facet.normal[0], facet.normal[1], facet.normal[2]);
@@ -293,7 +293,7 @@ class Xc3dDocDocument {
       resolution = 0.00001;        
     }
 
-    const allRenderingLineData = edge.renderLine({resolution});
+    const allRenderingLineData = edge._pkRenderLine({resolution});
     const geometry = new THREE.BufferGeometry();
 
     XcSysAssert({assertion: allRenderingLineData.length === 1});
@@ -451,7 +451,7 @@ class Xc3dDocDocument {
       }
       geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
     } else {
-      console.error(renderingLineData.type, 'Not supported edges. To be implemented!');
+      console.error(renderingLineData.type, 'Not supported _pkEdges. To be implemented!');
     }
 
     geometry.computeBoundingBox();

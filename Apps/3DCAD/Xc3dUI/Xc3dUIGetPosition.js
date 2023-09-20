@@ -259,7 +259,7 @@ class Xc3dUIGetPosition {
       if (inputState === Xc3dUIInputState.eInputNormal) {
         let box = null;
         if (drawableObject instanceof Xc3dDocModel) {
-          box = drawableObject.body.box;
+          box = drawableObject.body._pkComputeBox();
         } else {
           XcSysAssert({assertion: false, message: Xc3dUII18n.i18n.T`Internal command state error`});
         }

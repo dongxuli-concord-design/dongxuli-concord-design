@@ -32,6 +32,11 @@ class XcGm2dAxis {
     });
   }
 
+  copy({axis}) {
+    this.position.copy({axis: axis.position});
+    this.direction.copy({axis: axis.direction});
+  }
+
   transform({matrix}) {
     this.position.transform({matrix});
     this.direction.transform({matrix});

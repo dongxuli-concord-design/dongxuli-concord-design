@@ -111,7 +111,7 @@ class Xc3dCmdFillet {
       }
 
       const body = edge.body;
-      if (body.type !== XcGmBody.BODY_TYPE.SOLID) {
+      if (body.type !== XcGmBody._PKBodyType.SOLID) {
         XcSysManager.outputDisplay.warn(this.#i18n.T`Please select all edges from a solid body.`);
         return Xc3dCmdFillet.#CommandState.WaitForEdges;
       }

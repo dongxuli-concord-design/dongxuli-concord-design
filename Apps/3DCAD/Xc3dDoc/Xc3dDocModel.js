@@ -77,7 +77,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   }
 
   clone() {
-    const newBody = this.body.clone();
+    const newBody = this.body._pkClone();
     const newModel = new Xc3dDocModel({
       name: this.name,
       color: this.color.clone(),
@@ -103,7 +103,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
     this.transparent = other.transparent;
     this.opacity = other.opacity;
 
-    const newBody = other.body.clone();
+    const newBody = other.body._pkClone();
     this.body = newBody;
 
     this.showFace = other.showFace;

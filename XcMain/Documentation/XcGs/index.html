@@ -1463,8 +1463,8 @@ XcGm3dVector object
 <h2>XcGmBody</h2>
 <code>class XcGmBody extends XcGmPart</code>
 
-<h3>BODY_TYPE</h3>
-<pre><code>  static BODY_TYPE = {
+<h3>_PKBodyType</h3>
+<pre><code>  static _PKBodyType = {
     MINIMUM: 5603,
     ACORN: 5606,
     WIRE: 5604,
@@ -1477,8 +1477,8 @@ XcGm3dVector object
   };
 </code></pre>
 
-<h3>BooleanFunction</h3>
-<pre><code>  static BooleanFunction = {
+<h3>_PKBooleanFunction</h3>
+<pre><code>  static _PKBooleanFunction = {
     Intersection: 15901, /* intersect */
     Subtraction: 15902, /* subtract */
     Union: 15903 /* unite */
@@ -1488,23 +1488,23 @@ XcGm3dVector object
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>faces</h3>
-<code>get faces()</code>
+<h3>_pkFaces</h3>
+<code>get _pkFaces()</code>
 
-<h3>edges</h3>
-<code>get edges()</code>
+<h3>_pkEdges</h3>
+<code>get _pkEdges()</code>
 
 Return XcGmEdge
 
-<h3>vertices</h3>
-<code>get vertices()</code>
+<h3>_pkVertices</h3>
+<code>get _pkVertices()</code>
 
 Return XcGmVertex
 
 <h3>type</h3>
 <code>get type()</code>
 
-Return XcGmBody.BODY_TYPE
+Return XcGmBody._PKBodyType
 
 <h3>createSolidBlock</h3>
 <code>static createSolidBlock({x, y, z, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
@@ -1562,7 +1562,7 @@ Example:
 
 <dl>
   tools: XcGmBody objects</dd>
-  func XcGmBody.BooleanFunction</dd>
+  func XcGmBody._PKBooleanFunction</dd>
 </dl>
 Return result bodies
 
@@ -1570,10 +1570,10 @@ Return result bodies
 <code>fixBlends()</code>
 
 <h3>hollowFaces</h3>
-<code>hollowFaces({faces, offset})</code>
+<code>hollowFaces({_pkFaces, offset})</code>
 
 <dl>
-  faces: XcGmFace</dd>
+  _pkFaces: XcGmFace</dd>
   offset: A floating point number</dd>
 </dl>
 
@@ -1595,10 +1595,10 @@ Return XcGmVertex
 <code>findFaceByPositions({positions})</code>
 
 <h3>findFaceByEdges</h3>
-<code>findFaceByEdges({edges})</code>
+<code>findFaceByEdges({_pkEdges})</code>
 
 <h3>findFaceByVertices</h3>
-<code>findFaceByVertices({vertices})</code>
+<code>findFaceByVertices({_pkVertices})</code>
 
 <h3>findVertexWithFilter</h3>
 <code>findVertexWithFilter({callback})</code>
@@ -1694,18 +1694,18 @@ XcGm3dVector
 <h3>curve</h3>
 <code>get curve()</code>
 
-<h3>faces</h3>
-<code>get faces()</code>
+<h3>_pkFaces</h3>
+<code>get _pkFaces()</code>
 
 Return XcGmFace array
 
-<h3>vertices</h3>
-<code>get vertices()</code>
+<h3>_pkVertices</h3>
+<code>get _pkVertices()</code>
 
 Return {vertex1, vertex2} where vertex1 and vertex2 are XcGmVertex
 
 <h3>makeFacesFromEdges</h3>
-<code>static makeFacesFromEdges({edges, senses, sharedLoop})</code>
+<code>static makeFacesFromEdges({_pkEdges, senses, sharedLoop})</code>
 
 <dl>
   Return XcGmFace array</dd>
@@ -1713,19 +1713,19 @@ Return {vertex1, vertex2} where vertex1 and vertex2 are XcGmVertex
 Example
 <pre><code>
   let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-  let faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+  let _pkFaces = XcGmEdge.makeFacesFromEdges({_pkEdges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
 </code></pre>
 
 <h3>setBlendConstantForEdges</h3>
-<code>static setBlendConstantForEdges({edges, radius})</code>
+<code>static setBlendConstantForEdges({_pkEdges, radius})</code>
 
 <dl>
-  Return blend edges.</dd>
+  Return blend _pkEdges.</dd>
 </dl>
 Example
 <pre><code>
-  let edges = ...;
-  XcGmEdge.setBlendConstantForEdges({edges, radius: 0.01});
+  let _pkEdges = ...;
+  XcGmEdge.setBlendConstantForEdges({_pkEdges, radius: 0.01});
   myBody.fixBlends();
 </code></pre>
 
@@ -1768,19 +1768,19 @@ Example
 <h2>XcGmEntity</h2>
 <code>class XcGmEntity</code>
 
-<h3>tag</h3>
-<code>tag</code>
+<h3>_pkTag</h3>
+<code>_pkTag</code>
 
 A unique handle number
 
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>_getObjectFromPkTag</h3>
-<code>static _getObjectFromPkTag({entityTag})</code>
+<h3>_getPkObjectFromPkTag</h3>
+<code>static _getPkObjectFromPkTag({entityTag})</code>
 
-<h3>_PkDelete</h3>
-<code>static _PkDelete({entity})</code>
+<h3>_pkDelete</h3>
+<code>static _pkDelete({entity})</code>
 
 <h3>toJSON</h3>
 <code>toJSON()</code>
@@ -1813,27 +1813,27 @@ Return XcGmSurface
   Return XcGmBody</dd>
 </dl>
 
-<h3>edges</h3>
-<code>get edges()</code>
+<h3>_pkEdges</h3>
+<code>get _pkEdges()</code>
 
 <dl>
   Return XcGmEdge array</dd>
 </dl>
 
-<h3>vertices</h3>
-<code>get vertices()</code>
+<h3>_pkVertices</h3>
+<code>get _pkVertices()</code>
 
 <dl>
   Return XcGmVertex array</dd>
 </dl>
 
 <h3>delete</h3>
-<code>static delete({faces})</code>
+<code>static delete({_pkFaces})</code>
 
 <dl>
-  faces XcGmFace array</dd>
+  _pkFaces XcGmFace array</dd>
 </dl>
-Delete faces from a body
+Delete _pkFaces from a body
 
 <h3>transform</h3>
 <code>static transform({facesAndMatrices, tolerance})</code>
@@ -1877,12 +1877,12 @@ Example
 </dl>
 Example
 <pre><code>      let {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
-      let faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+      let _pkFaces = XcGmEdge.makeFacesFromEdges({_pkEdges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
       XcSysAssert({
-        assertion: faces.length === 1,
+        assertion: _pkFaces.length === 1,
         message: `Cannot generate sheet body. Single loop supported only`
       });
-      let face = faces[0];
+      let face = _pkFaces[0];
       let localCheckStatus = face.attachSurfFitting({localCheck: true});
       let faceBody = face.body;
 </code></pre>
@@ -2334,8 +2334,8 @@ Return XcGm3dCoordinateSystem
 
 Return XcGm3dBox
 
-<h3>computeMassProps</h3>
-<code>static computeMassProps({topols, accuracy})</code>
+<h3>_pkComputeMassProps</h3>
+<code>static _pkComputeMassProps({topols, accuracy})</code>
 
 <dl>
   topols XcGmTopology object array</dd>
@@ -2343,7 +2343,7 @@ Return XcGm3dBox
   return {amount, mass, cog, mofi, periphery}</dd>
 </dl>
 Example
-<pre><code>      let {cog} = XcGmTopology.computeMassProps({topols: [myTopol], accuracy: 1});
+<pre><code>      let {cog} = XcGmTopology._pkComputeMassProps({topols: [myTopol], accuracy: 1});
 </code></pre>
 
 <h3>render</h3>
@@ -2401,8 +2401,8 @@ Return XcGmPoint
 
 Return XcGmBody
 
-<h3>faces</h3>
-<code>get faces()</code>
+<h3>_pkFaces</h3>
+<code>get _pkFaces()</code>
 
 Return XcGmFace array
 

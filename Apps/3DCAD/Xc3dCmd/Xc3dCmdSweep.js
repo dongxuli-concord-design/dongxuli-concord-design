@@ -130,7 +130,7 @@ class Xc3dCmdSweep {
 
         return renderingObject;
       }
-      const hintRenderingObjects = drawableObject.body.vertices.map((vertex, index) => {
+      const hintRenderingObjects = drawableObject.body._pkVertices.map((vertex, index) => {
         return makeHintRenderingObject({vertex, index});
       });
       this.#vertexPositionRenderingObjects.push(...hintRenderingObjects);

@@ -127,7 +127,7 @@ class Xc3dCmdPressPullPlanarFace {
     this.#face = value;
     if (inputState !== Xc3dUIInputState.eInputNormal) {
       if (inputState === Xc3dUIInputState.eInputNone) {
-        if (this.faces.length === 0) {
+        if (this._pkFaces.length === 0) {
           return Xc3dCmdPressPullPlanarFace.#CommandState.Cancel;
         } else {
           return Xc3dCmdPressPullPlanarFace.#CommandState.Done;
@@ -165,7 +165,7 @@ class Xc3dCmdPressPullPlanarFace {
     const newModel = this.#model.clone();
     const newBody = newModel.body;
     // Find the "same" face in the new body by the identifier
-    const positionsOfVerticesOfFace = this.#face.vertices.map(vertex => vertex.point.position);
+    const positionsOfVerticesOfFace = this.#face._pkVertices.map(vertex => vertex.point.position);
     const verticesOfNewBody = positionsOfVerticesOfFace.map(position => newBody.findVertexByPosition({position}));
     const newFace = newBody.findFaceByVertices({vertices: verticesOfNewBody})[0];
 

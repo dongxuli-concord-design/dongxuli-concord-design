@@ -105,7 +105,7 @@ class Xc3dCmdLoft {
       const highlightingRenderingObject = Xc3dUIManager.generateHighlightingRenderingObject({renderingObject: renderingObjectOfDrawable});
       this.#hints.add(highlightingRenderingObject);
 
-      drawableObject.body.vertices.forEach((vertex, index) => {
+      drawableObject.body._pkVertices.forEach((vertex, index) => {
         const position = vertex.point.position;
         const geometry = new THREE.BufferGeometry();
         const vertices = new Float32Array([...position.toArray()]);
@@ -151,10 +151,10 @@ class Xc3dCmdLoft {
       this.#hints.add(hint);
 
       // Find the edge
-      const edgesWithStartVertex = lastProfile.body.findEdge({callback: (edge) => ((edge.vertices.vertex1 === startVertex) || (edge.vertices.vertex2 === startVertex))});
+      const edgesWithStartVertex = lastProfile.body.findEdge({callback: (edge) => ((edge._pkVertices.vertex1 === startVertex) || (edge._pkVertices.vertex2 === startVertex))});
       XcSysAssert({assertion: edgesWithStartVertex.length > 0});
       const edgeWithStartVertex = edgesWithStartVertex[0];
-      if (startVertex !== edgeWithStartVertex.vertices.vertex1) {
+      if (startVertex !== edgeWithStartVertex._pkVertices.vertex1) {
         XcGmEdge.reverse({edges: [edgeWithStartVertex]});
       }
       edgeWithStartVertex.propagateOrientation();

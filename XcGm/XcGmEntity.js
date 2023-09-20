@@ -1,23 +1,37 @@
 class XcGmEntity {
-  static #tagObjMap = new Map();
+  static #_pkTagObjMap = new Map();
 
-  static #registry = new FinalizationRegistry(tag => {
+  static #_pkRegistry = new FinalizationRegistry(tag => {
     try {
       // TODO: Delete Parasolid entities.
-      // XcGmEntity._PkDelete({entityTag: tag});
+      // XcGmEntity._pkDelete({entityTag: _pkTag});
     } catch (error) {
       console.debug(error);
     }
   });
 
-  tag;
+  _pkTag;
 
   constructor() {
-    this.tag = null;
+    this._pkTag = null;
+  }
+
+  clone() {
+    XcGmAssert({assertion: false, message: 'The subclass has to implement this function'});
+  }
+
+  _pkClone() {
+    const params = {
+      entity: this._pkTag
+    };
+    const {error, pkReturnValue} = XcGmCallPkApi('ENTITY_copy_2', {params});
+    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
+    const newEntity = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.entity_copy});
+    return newEntity;
   }
 
   // Parasolid stuff
-  static #getClassFromClassToken({classToken}) {
+  static #_getPkClassFromClassToken({classToken}) {
     switch (classToken) {
       case 2004:
         return _XcGmTransf;
@@ -86,18 +100,18 @@ class XcGmEntity {
     }
   }
 
-  static _getObjectFromPkTag({entityTag}) {
+  static _getPkObjectFromPkTag({entityTag}) {
     if (0 === entityTag) {
       return null;
     }
 
-    if (XcGmEntity.#tagObjMap.has(entityTag)) {
-      const ref = XcGmEntity.#tagObjMap.get(entityTag);
+    if (XcGmEntity.#_pkTagObjMap.has(entityTag)) {
+      const ref = XcGmEntity.#_pkTagObjMap.get(entityTag);
       const element = ref.deref();
       if (element) {
         return element;
       } else {
-        XcGmEntity.#tagObjMap.delete(entityTag);
+        XcGmEntity.#_pkTagObjMap.delete(entityTag);
       }
     }
 
@@ -109,45 +123,29 @@ class XcGmEntity {
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     // Create object
-    // Bug: const obj = new XcGmEntity.#getClassFromClassToken({entityClass})();
-    const objConstructor = XcGmEntity.#getClassFromClassToken({classToken: pkReturnValue.cls});
+    // Bug: const obj = new XcGmEntity.#_getPkClassFromClassToken({entityClass})();
+    const objConstructor = XcGmEntity.#_getPkClassFromClassToken({classToken: pkReturnValue.cls});
     const obj = new objConstructor();
 
     XcGmAssert({
-      assertion: !XcGmEntity.#tagObjMap.has(entityTag),
+      assertion: !XcGmEntity.#_pkTagObjMap.has(entityTag),
       message: 'Set _tag should be called once only.'
     });
-    obj.tag = entityTag;
-    XcGmEntity.#tagObjMap.set(entityTag, new WeakRef(obj));
+    obj._pkTag = entityTag;
+    XcGmEntity.#_pkTagObjMap.set(entityTag, new WeakRef(obj));
 
     if (objConstructor === XcGmBody) {
-      XcGmEntity.#registry.register(obj, entityTag);
+      XcGmEntity.#_pkRegistry.register(obj, entityTag);
     }
 
     return obj;
   }
 
-  static _PkDelete({entityTag}) {
+  static _pkDelete({entityTag}) {
     const params = {
       entity: entityTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('ENTITY_delete', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-  }
-
-  toJSON() {
-    return {
-      tag: this.tag
-    };
-  }
-
-  clone() {
-    const params = {
-      entity: this.tag
-    };
-    const {error, pkReturnValue} = XcGmCallPkApi('ENTITY_copy_2', {params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const newEntity = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.entity_copy});
-    return newEntity;
   }
 }

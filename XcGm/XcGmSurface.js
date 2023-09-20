@@ -6,7 +6,7 @@ class XcGmSurface extends XcGm3dGeometry {
   evaluate({uv}) {
     const pkUV = _XcGmPK_UV_t.fromXcGmUV({uv})
     const params = {
-      surf: this.tag,
+      surf: this._pkTag,
       uv: pkUV.toJSON(),
       //TODO: The following arguments are fixed!
       n_u_derivs: 0,

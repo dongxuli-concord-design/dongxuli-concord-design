@@ -5,33 +5,33 @@ class XcGmVertex extends XcGmTopology {
 
   get point() {
     const params = {
-      vertex: this.tag
+      vertex: this._pkTag
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('VERTEX_ask_point', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const point = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.point});
+    const point = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.point});
     return point;
   }
 
   get body() {
     const params = {
-      vertex: this.tag
+      vertex: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('VERTEX_ask_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const body = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.body});
+    const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
   }
 
   get faces() {
     const params = {
-      vertex: this.tag
+      vertex: this._pkTag
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('VERTEX_ask_faces', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const faces = pkReturnValue.faces.map(faceTag =>XcGmEntity._getObjectFromPkTag({entityTag: faceTag}));
+    const faces = pkReturnValue.faces.map(faceTag =>XcGmEntity._getPkObjectFromPkTag({entityTag: faceTag}));
     return faces;
   }
 }

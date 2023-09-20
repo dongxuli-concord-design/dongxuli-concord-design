@@ -5,7 +5,7 @@ class XcGmSphereSurface extends XcGmSurface {
 
   get radius() {
     const params = {
-      sphere: this.tag
+      sphere: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('SPHERE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -15,7 +15,7 @@ class XcGmSphereSurface extends XcGmSurface {
 
   get coordinateSystem() {
     const params = {
-      sphere: this.tag
+      sphere: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('SPHERE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -39,7 +39,7 @@ class XcGmSphereSurface extends XcGmSurface {
 
     const {error, pkReturnValue} = XcGmCallPkApi('SPHERE_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const sphere = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.sphere});
+    const sphere = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.sphere});
     return sphere;
   }
 }

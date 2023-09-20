@@ -5,7 +5,7 @@ class _XcGmTransf extends XcGmEntity {
 
   get matrix() {
     const params = {
-      transf: this.tag
+      transf: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('TRANSF_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -19,7 +19,7 @@ class _XcGmTransf extends XcGmEntity {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('TRANSF_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const transf = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.transf});
+    const transf = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.transf});
     return transf;
   }
 }

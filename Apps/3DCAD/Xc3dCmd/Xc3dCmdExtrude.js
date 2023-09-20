@@ -104,9 +104,9 @@ class Xc3dCmdExtrude {
         if (!(object instanceof Xc3dDocModel)) {
           return false;
         }
-        if ((object.body.type === XcGmBody.BODY_TYPE.MINIMUM) ||
-          (object.body.type === XcGmBody.BODY_TYPE.WIRE) ||
-          (object.body.type === XcGmBody.BODY_TYPE.SHEET)) {
+        if ((object.body.type === XcGmBody._PKBodyType.MINIMUM) ||
+          (object.body.type === XcGmBody._PKBodyType.WIRE) ||
+          (object.body.type === XcGmBody._PKBodyType.SHEET)) {
           return true;
         } else {
           return false;
@@ -125,9 +125,9 @@ class Xc3dCmdExtrude {
       const profile = drawableObject.body;
 
       const type = profile.type;
-      if ((type === XcGmBody.BODY_TYPE.SHEET) ||
-        (type === XcGmBody.BODY_TYPE.WIRE) ||
-        (type === XcGmBody.BODY_TYPE.MINIMUM)) {
+      if ((type === XcGmBody._PKBodyType.SHEET) ||
+        (type === XcGmBody._PKBodyType.WIRE) ||
+        (type === XcGmBody._PKBodyType.MINIMUM)) {
         this.#profileBody = profile;
         this.#model = drawableObject;
 

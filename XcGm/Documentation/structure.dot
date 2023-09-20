@@ -38,14 +38,14 @@ digraph XcGm {
     subgraph cluster_topology {
       label="Topology";
       graph[style=dotted];
+      XcGmTopology->XcGmBody;
+      XcGmTopology->XcGmRegion;
+      XcGmTopology->XcGmShell;
       XcGmTopology->XcGmLoop;
       XcGmTopology->XcGmFace;
       XcGmTopology->XcGmEdge;
-      XcGmTopology->XcGmVertex;
-      XcGmTopology->XcGmRegion;
       XcGmTopology->XcGmFin;
-      XcGmTopology->XcGmShell;
-      XcGmTopology->XcGmBody;
+      XcGmTopology->XcGmVertex;
     }
     
     XcGmEntity->XcGmGeometry;

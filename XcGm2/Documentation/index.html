@@ -1768,19 +1768,19 @@ Example
 <h2>XcGmEntity</h2>
 <code>class XcGmEntity</code>
 
-<h3>tag</h3>
-<code>tag</code>
+<h3>_pkTag</h3>
+<code>_pkTag</code>
 
 A unique handle number
 
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>_getObjectFromPkTag</h3>
-<code>static _getObjectFromPkTag({entityTag})</code>
+<h3>_getPkObjectFromPkTag</h3>
+<code>static _getPkObjectFromPkTag({entityTag})</code>
 
-<h3>_PkDelete</h3>
-<code>static _PkDelete({entity})</code>
+<h3>_pkDelete</h3>
+<code>static _pkDelete({entity})</code>
 
 <h3>toJSON</h3>
 <code>toJSON()</code>
@@ -2334,8 +2334,8 @@ Return XcGm3dCoordinateSystem
 
 Return XcGm3dBox
 
-<h3>computeMassProps</h3>
-<code>static computeMassProps({topols, accuracy})</code>
+<h3>_pkComputeMassProps</h3>
+<code>static _pkComputeMassProps({topols, accuracy})</code>
 
 <dl>
   topols XcGmTopology object array</dd>
@@ -2343,7 +2343,7 @@ Return XcGm3dBox
   return {amount, mass, cog, mofi, periphery}</dd>
 </dl>
 Example
-<pre><code>      let {cog} = XcGmTopology.computeMassProps({topols: [myTopol], accuracy: 1});
+<pre><code>      let {cog} = XcGmTopology._pkComputeMassProps({topols: [myTopol], accuracy: 1});
 </code></pre>
 
 <h3>render</h3>

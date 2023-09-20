@@ -48,10 +48,10 @@ class XcGsColor {
     return new XcGsColor({r: this.r, g: this.g, b: this.b});
   }
 
-  copy({other}) {
-    this.r = other.r;
-    this.g = other.g;
-    this.b = other.b;
+  copy({color}) {
+    this.r = color.r;
+    this.g = color.g;
+    this.b = color.b;
   }
 
   set({r, g, b}) {

@@ -22,7 +22,7 @@ class Xc3dCmdBoolean {
     this.#secondBody = null;
     this.#firstModel = null;
     this.#secondModel = null;
-    this.#booleanType = XcGmBody.BooleanFunction.Union;
+    this.#booleanType = XcGmBody._PKBooleanFunction.Union;
     this.#highlightingRenderingObjects = [];
 
     this.#initI18n();
@@ -194,13 +194,13 @@ class Xc3dCmdBoolean {
     } else {
       switch (choice) {
         case 0:
-          this.#booleanType = XcGmBody.BooleanFunction.Union;
+          this.#booleanType = XcGmBody._PKBooleanFunction.Union;
           break;
         case 1:
-          this.#booleanType = XcGmBody.BooleanFunction.Subtraction;
+          this.#booleanType = XcGmBody._PKBooleanFunction.Subtraction;
           break;
         case 2:
-          this.#booleanType = XcGmBody.BooleanFunction.Intersection;
+          this.#booleanType = XcGmBody._PKBooleanFunction.Intersection;
           break;
         default:
           XcSysAssert({assertion: false, message: this.#i18n.T`Internal command state error`});

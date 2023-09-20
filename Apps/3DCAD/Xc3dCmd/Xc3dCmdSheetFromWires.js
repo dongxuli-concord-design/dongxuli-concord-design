@@ -56,21 +56,16 @@ class Xc3dCmdSheetFromWires {
     }
 
     if (this.#state === Xc3dCmdSheetFromWires.#CommandState.Done) {
-      const curves = [];
-      const bounds = [];
-
-      const edges = this.#wireBodies.map(wireBody => wireBody.edges);
+      const edges = this.#wireBodies.map(wireBody => wireBody._pkEdges);
       edges.flat();
-      const curveAndBounds = edges.forEach(edge => {
-        const curve = edge.curve;
-        curves.push(curve);
-
-        const bound = edge.findInterval();
-        bounds.push(bound);
+      const curveAndIntervals = edges.map(edge => {
+        const curve = edge.curve;          
+        const interval = edge.findInterval();
+        return {curve, interval};
       });
 
       // Make a new wire body from all curves and bounds
-      const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
+      const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curveAndIntervals});
       const faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
       XcSysAssert({
         assertion: faces.length === 1,
@@ -103,7 +98,7 @@ class Xc3dCmdSheetFromWires {
       allowReturnNull: this.#wireBodies.length > 0,
       filter: (object) => {
         if (object instanceof Xc3dDocModel) {
-          if (object.body.type === XcGmBody.BODY_TYPE.WIRE) {
+          if (object.body.type === XcGmBody._PKBodyType.WIRE) {
             return true;
           } else {
             return false;
@@ -125,7 +120,7 @@ class Xc3dCmdSheetFromWires {
     } else {
       const body = drawableObject.body;
       const type = body.type;
-      if (type === XcGmBody.BODY_TYPE.WIRE) {
+      if (type === XcGmBody._PKBodyType.WIRE) {
         const index = this.#wireBodies.indexOf(body);
         if (index === -1) {
           this.#wireBodies.push(body);

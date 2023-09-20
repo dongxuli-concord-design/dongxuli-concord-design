@@ -5,7 +5,7 @@ class XcGm3dLine extends XcGm3dCurve {
 
   get axis() {
     const params = {
-      line: this.tag
+      line: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('LINE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
@@ -24,7 +24,7 @@ class XcGm3dLine extends XcGm3dCurve {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('LINE_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const line = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.line});
+    const line = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.line});
     return line;
   }
 }

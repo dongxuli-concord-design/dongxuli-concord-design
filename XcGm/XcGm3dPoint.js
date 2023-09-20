@@ -5,7 +5,7 @@ class XcGm3dPoint extends XcGm3dGeometry {
 
   get position() {
     const params = {
-      point: this.tag
+      point: this._pkTag
     };
 
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_ask', {params});
@@ -16,21 +16,21 @@ class XcGm3dPoint extends XcGm3dGeometry {
 
   get part() {
     const params = {
-      point: this.tag
+      point: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_ask_part', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const part = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.part});
+    const part = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.part});
     return part;
   }
 
   get vertex() {
     const params = {
-      point: this.tag
+      point: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_ask_vertex', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const vertex = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.vertex});
+    const vertex = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.vertex});
     return vertex;
   }
 
@@ -41,17 +41,17 @@ class XcGm3dPoint extends XcGm3dGeometry {
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const point = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.point});
+    const point = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.point});
     return point;
   }
 
   createMinimumBody() {
     const params = {
-      point: this.tag
+      point: this._pkTag
     };
     const {error, pkReturnValue} = XcGmCallPkApi('POINT_make_minimum_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const body = XcGmEntity._getObjectFromPkTag({entityTag: pkReturnValue.body});
+    const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
   }
 }

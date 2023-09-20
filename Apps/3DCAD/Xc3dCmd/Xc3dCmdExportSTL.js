@@ -61,7 +61,7 @@ class Xc3dCmdExportSTL {
     Xc3dUIManager.document.drawableObjects.forEach((drawableObject, index) => {
       if (drawableObject instanceof Xc3dDocModel) {
         const type = drawableObject.body.type;
-        if ((type === XcGmBody.BODY_TYPE.SOLID) || (type === XcGmBody.BODY_TYPE.SHEET)) {
+        if ((type === XcGmBody._PKBodyType.SOLID) || (type === XcGmBody._PKBodyType.SHEET)) {
           this.#exportDrawableObjectToSTL({drawableObject, directory, index});
         } else {
           XcSysManager.outputDisplay.info(this.#i18n.T`Skip unsupported model`);

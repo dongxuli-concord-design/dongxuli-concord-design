@@ -483,9 +483,9 @@ class _XcGmPK_INSTANCE_sf_t {
 
   static fromJSON({json}) {
     const instanceSF = new _XcGmPK_INSTANCE_sf_t();
-    instanceSF.assembly = XcGmEntity._getObjectFromPkTag({entityTag: json.assembly});
-    instanceSF.transf = json.transf ? XcGmEntity._getObjectFromPkTag({entityTag: json.transf}) : null;
-    instanceSF.part = XcGmEntity._getObjectFromPkTag({entityTag: json.part});
+    instanceSF.assembly = XcGmEntity._getPkObjectFromPkTag({entityTag: json.assembly});
+    instanceSF.transf = json.transf ? XcGmEntity._getPkObjectFromPkTag({entityTag: json.transf}) : null;
+    instanceSF.part = XcGmEntity._getPkObjectFromPkTag({entityTag: json.part});
 
     return instanceSF;
   }

@@ -55,21 +55,18 @@ class Xc3dCmdMergeWires {
     }
 
     if (this.#state === Xc3dCmdMergeWires.#CommandState.Done) {
-      const curves = [];
-      const bounds = [];
+      const curveAndIntervals = [];
 
       this.#wireBodies.forEach((wireBody) => {
-        wireBody.edges.forEach((edge) => {
-          const curve = edge.curve;
-          curves.push(curve);
-          
-          const bound = edge.findInterval();
-          bounds.push(bound);
+        wireBody._pkEdges.forEach((edge) => {
+          const curve = edge.curve;          
+          const interval = edge.findInterval();
+          curveAndIntervals.push({curve, interval});
         });
       });
 
       // Make a new wire body from all curves and bounds
-      const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curves, bounds});
+      const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curveAndIntervals});
 
       // Delete all selected wire bodies and add the one
       this.#wireBodies.forEach((wireBody) => {
@@ -105,7 +102,7 @@ class Xc3dCmdMergeWires {
       const body = drawableObject.body;
 
       const type = body.type;
-      if (type === XcGmBody.BODY_TYPE.WIRE) {
+      if (type === XcGmBody._PKBodyType.WIRE) {
         const index = this.#wireBodies.indexOf(body);
         if (index === -1) {
           this.#wireBodies.push(body);
