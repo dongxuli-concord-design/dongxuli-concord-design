@@ -51,7 +51,7 @@ class Xc3dDocReferencePoint extends Xc3dDocDrawableObject {
   }
 
   generateRenderingObject() {
-    const point = XcGm3dPoint.create({position: this.#position});
+    const point = XcGm3dPoint._pKCreate({position: this.#position});
     const body = point.createMinimumBody();
     return Xc3dDocDocument.generateRenderingForBody({
       body,

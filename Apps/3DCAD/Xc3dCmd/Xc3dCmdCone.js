@@ -109,7 +109,7 @@ class Xc3dCmdCone {
       }
 
       const coordinateSystem = new XcGm3dCoordinateSystem({origin: this.#position});
-      this.#body = XcGmBody.createSolidCone({
+      this.#body = XcGmBody._pkCreateSolidCone({
         radius: this.#radius,
         height: this.#height,
         semiAngle: this.#semiAngle,
@@ -185,7 +185,7 @@ class Xc3dCmdCone {
 
       // Add the cone to the document
       const matrix = XcGm3dMatrix.translationMatrix({vector: this.#position.toVector()});
-      this.#body.transform({matrix});
+      this.#body._pkTransform({matrix});
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: this.#body, color: new THREE.Color('rgb(220, 220, 220)')})});
       Xc3dUIManager.redraw();
 

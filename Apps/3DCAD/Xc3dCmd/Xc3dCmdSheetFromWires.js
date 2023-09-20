@@ -66,7 +66,7 @@ class Xc3dCmdSheetFromWires {
 
       // Make a new wire body from all curves and bounds
       const {wire, newEdges} = XcGm3dCurve.makeWireBodyFromCurves({curveAndIntervals});
-      const faces = XcGmEdge.makeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
+      const faces = XcGmEdge._pkMakeFacesFromEdges({edges: [newEdges[0].edge], senses: [true], sharedLoop: [-1]});
       XcSysAssert({
         assertion: faces.length === 1,
         message: this.#i18n.T`Cannot generate sheet body. Single loop supported only`
@@ -98,7 +98,7 @@ class Xc3dCmdSheetFromWires {
       allowReturnNull: this.#wireBodies.length > 0,
       filter: (object) => {
         if (object instanceof Xc3dDocModel) {
-          if (object.body.type === XcGmBody._PKBodyType.WIRE) {
+          if (object.body._pkType === XcGmBody._PKBodyType.WIRE) {
             return true;
           } else {
             return false;
@@ -119,7 +119,7 @@ class Xc3dCmdSheetFromWires {
       }
     } else {
       const body = drawableObject.body;
-      const type = body.type;
+      const type = body._pkType;
       if (type === XcGmBody._PKBodyType.WIRE) {
         const index = this.#wireBodies.indexOf(body);
         if (index === -1) {

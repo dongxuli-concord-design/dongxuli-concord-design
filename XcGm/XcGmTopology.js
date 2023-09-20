@@ -12,7 +12,7 @@ class XcGmTopology extends XcGmEntity {
       topol: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('TOPOL_find_box', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('TOPOL_find_box', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkBox = _XcGmPK_BOX_t.fromJSON({json: pkReturnValue.uvbox});
     const box = pkBox.toXcGm3dBox();
@@ -28,7 +28,7 @@ class XcGmTopology extends XcGmEntity {
       accuracy: accuracy
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('TOPOL_eval_mass_props', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('TOPOL_eval_mass_props', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     return {
       amount: pkReturnValue.amount,
@@ -45,7 +45,7 @@ class XcGmTopology extends XcGmEntity {
       resolution,
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('TOPOL_render_facet', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('TOPOL_render_facet', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const renderingFacetData = pkReturnValue.graphics.faces;
@@ -59,7 +59,7 @@ class XcGmTopology extends XcGmEntity {
       resolution,
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('TOPOL_render_line', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('TOPOL_render_line', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const renderingLineData = pkReturnValue.graphics.edges;

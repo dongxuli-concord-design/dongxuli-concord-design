@@ -101,7 +101,7 @@ class Xc3dCmdMergeWires {
     } else {
       const body = drawableObject.body;
 
-      const type = body.type;
+      const type = body._pkType;
       if (type === XcGmBody._PKBodyType.WIRE) {
         const index = this.#wireBodies.indexOf(body);
         if (index === -1) {

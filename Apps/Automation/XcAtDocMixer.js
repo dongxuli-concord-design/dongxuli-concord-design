@@ -61,7 +61,7 @@ class XcAtDocMixerTest extends Xc3dDocDrawableObject {
     const coordinateSystem = new XcGm3dCoordinateSystem({
       origin: this.#position,
     });
-    const body = XcGmBody.createSolidBlock({
+    const body = XcGmBody._pkCreateSolidBlock({
       x: Math.random(),
       y: Math.random(),
       z: Math.random(),

@@ -7,7 +7,7 @@ class XcGmEdge extends XcGmTopology {
     const params = {
       edge: this._pkTag
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_body', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_ask_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
@@ -17,7 +17,7 @@ class XcGmEdge extends XcGmTopology {
     const params = {
       edge: this._pkTag
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_curve', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_ask_curve', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const curve = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.curve});
@@ -29,7 +29,7 @@ class XcGmEdge extends XcGmTopology {
       edge: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_faces', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_ask_faces', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const faces = pkReturnValue.faces.map(faceTag => XcGmEntity._getPkObjectFromPkTag({entityTag: faceTag}));
     return faces;
@@ -40,7 +40,7 @@ class XcGmEdge extends XcGmTopology {
       edge: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_ask_vertices', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_ask_vertices', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const vertex1 = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.vertices[0]});
     const vertex2 = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.vertices[1]});
@@ -52,43 +52,43 @@ class XcGmEdge extends XcGmTopology {
     const params = {
       edges: edgeTags,
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_reverse_2', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_reverse_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
-  static makeFacesFromEdges({edges, senses, sharedLoop}) {
+  static _pkMakeFacesFromEdges({edges, senses, sharedLoop}) {
     const edgeTags = edges.map(edge => edge._pkTag);
     const params = {
       edges: edgeTags,
       senses: senses,
       shared_loop: sharedLoop
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_make_faces_from_wire', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_make_faces_from_wire', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const newFaces = pkReturnValue.new_faces.map(faceTag => XcGmEntity._getPkObjectFromPkTag({entityTag: faceTag}));
     return newFaces;
   }
 
-  static setBlendConstantForEdges({edges, radius}) {
+  static _pkSetBlendConstantForEdgesges({edges, radius}) {
     const edgeTags = edges.map(edge => edge._pkTag);
     const params = {
       edges: edgeTags,
       radius: radius
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_set_blend_constant', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_set_blend_constant', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const blendEdges = pkReturnValue.blend_edges.map(blendEdgeTag => XcGmEntity._getPkObjectFromPkTag({entityTag: blendEdgeTag}));
     return blendEdges;
   }
 
-  propagateOrientation() {
+  _pkPropagateOrientationion() {
     const params = {
       edge: this._pkTag,
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_propagate_orientation', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_propagate_orientation', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
@@ -97,20 +97,20 @@ class XcGmEdge extends XcGmTopology {
       edge: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_find_interval', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_find_interval', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkInterval = _XcGmPK_INTERVAL_t.fromJSON({json: pkReturnValue.interval});
     const interval = pkInterval.toXcGmInterval();
     return interval;
   }
 
-  containsVector({vector}) {
+  _pkContainsVector({vector}) {
     const params = {
       edge: this._pkTag,
       vector: vector.toJSON()
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('EDGE_contains_vector', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('EDGE_contains_vector', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const topol = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.topol});
     return topol;

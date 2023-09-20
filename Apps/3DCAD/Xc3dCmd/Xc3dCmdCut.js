@@ -81,7 +81,7 @@ class Xc3dCmdCut {
       Xc3dUIManager.document.removeDrawableObject({drawableObject: this.#secondModel});
 
       try {
-        const resultBodies = targetBody.boolean({tools: [toolBody], func: XcGmBody._PKBooleanFunction.Subtraction});
+        const resultBodies = targetBody._pkBoolean({tools: [toolBody], func: XcGmBody._PKBooleanFunction.Subtraction});
         resultBodies.forEach((body) => {
           const drawableObject = new Xc3dDocModel({body});
           drawableObject.setAttributesFrom({model: this.#firstModel});

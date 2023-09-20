@@ -155,7 +155,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
       vector.multiply({scale: -1 * jointRadius});
       const zTranMatrix = XcGm3dMatrix.translationMatrix({vector})
       coordinateSystem.origin.transform({matrix: zTranMatrix});
-      let joint = XcGmBody.createSolidCylinder({
+      let joint = XcGmBody._pkCreateSolidCylinder({
         radius: jointRadius,
         height: 2 * jointRadius,
         coordinateSystem,
@@ -174,7 +174,7 @@ class XcAtDocGeneralRobot extends Xc3dDocDrawableObject {
         xAxisDirection: zAxisDirection.perpendicularVector,
       });
 
-      const link = XcGmBody.createSolidCylinder({
+      const link = XcGmBody._pkCreateSolidCylinder({
         radius: linkRadius,
         height,
         coordinateSystem,

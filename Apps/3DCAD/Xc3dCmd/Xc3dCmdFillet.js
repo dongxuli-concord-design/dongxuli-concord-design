@@ -74,8 +74,8 @@ class Xc3dCmdFillet {
     Xc3dUIManager.redraw();
 
     if (this.#state === Xc3dCmdFillet.#CommandState.Done) {
-      XcGmEdge.setBlendConstantForEdges({edges: this.#edges, radius: this.#radius});
-      this.#body.fixBlends();
+      XcGmEdge._pkSetBlendConstantForEdges({edges: this.#edges, radius: this.#radius});
+      this.#body._pkFixBlends();
       Xc3dUIManager.document.modifyDrawableObject({drawableObject: this.#model});
       Xc3dUIManager.redraw();
     }
@@ -111,7 +111,7 @@ class Xc3dCmdFillet {
       }
 
       const body = edge.body;
-      if (body.type !== XcGmBody._PKBodyType.SOLID) {
+      if (body._pkType !== XcGmBody._PKBodyType.SOLID) {
         XcSysManager.outputDisplay.warn(this.#i18n.T`Please select all edges from a solid body.`);
         return Xc3dCmdFillet.#CommandState.WaitForEdges;
       }

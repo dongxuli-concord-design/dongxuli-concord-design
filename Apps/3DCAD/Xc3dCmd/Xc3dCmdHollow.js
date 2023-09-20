@@ -76,7 +76,7 @@ class Xc3dCmdHollow {
     Xc3dUIManager.redraw();
 
     if (this.#state === Xc3dCmdHollow.#CommandState.Done) {
-      const error = this.#body.hollowFaces({faces: this.#faces, offset: this.#offset});
+      const error = this.#body._pkHollowFaces({faces: this.#faces, offset: this.#offset});
       if (!error) {
         Xc3dUIManager.document.modifyDrawableObject({drawableObject: this.#model});
         Xc3dUIManager.redraw();

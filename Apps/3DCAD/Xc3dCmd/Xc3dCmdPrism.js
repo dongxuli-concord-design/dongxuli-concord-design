@@ -105,7 +105,7 @@ class Xc3dCmdPrism {
         Xc3dUIManager.removeCustomOverlayRenderingObject({renderingObject: this.#renderingObject});
       }
 
-      this.#body = XcGmBody.createSolidPrism({radius: this.#radius, height: this.#height, sides: this.#sides});
+      this.#body = XcGmBody._pkCreateSolidPrism({radius: this.#radius, height: this.#height, sides: this.#sides});
 
       this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body, color: new THREE.Color('lightblue')});
       this.#renderingObject.position.copy(this.#position.toThreeVector3());
@@ -177,7 +177,7 @@ class Xc3dCmdPrism {
 
       // Add the prism to the document
       const matrix = XcGm3dMatrix.translationMatrix({vector: this.#position.toVector()});
-      this.#body.transform({matrix});
+      this.#body._pkTransform({matrix});
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: this.#body, color: new THREE.Color('rgb(220, 220, 220)')})});
       Xc3dUIManager.redraw();
 

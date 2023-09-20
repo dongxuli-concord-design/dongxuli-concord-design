@@ -52,7 +52,7 @@ class Xc3dCmdPoint {
     }
 
     if (this.#state === Xc3dCmdPoint.#CommandState.Done) {
-      const point = XcGm3dPoint.create({position: this.#position});
+      const point = XcGm3dPoint._pKCreate({position: this.#position});
       const body = point.createMinimumBody();
 
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body, color: new THREE.Color('rgb(50, 50, 50)')})});

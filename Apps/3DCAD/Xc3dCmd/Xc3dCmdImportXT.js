@@ -37,7 +37,7 @@ class Xc3dCmdImportXT {
   }
 
   #importXT({filePath}) {
-    const parts = XcGmPart.receiveFromFile({filePath});
+    const parts = XcGmPart._pkReceiveFromFile({filePath});
     parts.forEach((body) => {
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body, color: new THREE.Color('rgb(220, 220, 220)')})});
     });

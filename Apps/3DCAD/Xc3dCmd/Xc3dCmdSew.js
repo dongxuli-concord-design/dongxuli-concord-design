@@ -79,7 +79,7 @@ class Xc3dCmdSew {
       Xc3dUIManager.document.removeDrawableObject({drawableObject: this.#secondModel});
 
       try {
-        const {sewnBodies, unSewnBodies} = XcGmBody.sew({bodies: [targetBody, toolBody], gapWidthBound: 1e-2});
+        const {sewnBodies, unSewnBodies} = XcGmBody._pkSew({bodies: [targetBody, toolBody], gapWidthBound: 1e-2});
 
         for (let i = 0; i < sewnBodies.length; i += 1) {
           const newModel = new Xc3dDocModel({body: sewnBodies[i]});
@@ -102,7 +102,7 @@ class Xc3dCmdSew {
       prompt: this.#i18n.T`Please specify main object`,
       filter: (object) => {
         if (object instanceof Xc3dDocModel) {
-          if (object.body.type === XcGmBody._PKBodyType.SHEET) {
+          if (object.body._pkType === XcGmBody._PKBodyType.SHEET) {
             return true;
           } else {
             return false;
@@ -140,7 +140,7 @@ class Xc3dCmdSew {
       prompt: this.#i18n.T`Please specify tool object`,
       filter: (object) => {
         if (object instanceof Xc3dDocModel) {
-          if (object.body.type === XcGmBody._PKBodyType.SHEET) {
+          if (object.body._pkType === XcGmBody._PKBodyType.SHEET) {
             return true;
           } else {
             return false;

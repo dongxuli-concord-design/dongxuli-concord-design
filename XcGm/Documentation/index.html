@@ -1506,28 +1506,28 @@ Return XcGmVertex
 
 Return XcGmBody._PKBodyType
 
-<h3>createSolidBlock</h3>
-<code>static createSolidBlock({x, y, z, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSolidBlock</h3>
+<code>static _pkCreateSolidBlock({x, y, z, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 Return XcGmBody
 
-<h3>createSolidCone</h3>
-<code>static createSolidCone({radius, height, semiAngle, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSolidCone</h3>
+<code>static _pkCreateSolidCone({radius, height, semiAngle, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
-<h3>createSolidCylinder</h3>
-<code>static createSolidCylinder({radius, height, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSolidCylinder</h3>
+<code>static _pkCreateSolidCylinder({radius, height, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
-<h3>createSolidPrism</h3>
-<code>static createSolidPrism({radius, height, sides, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSolidPrism</h3>
+<code>static _pkCreateSolidPrism({radius, height, sides, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
-<h3>createSolidSphere</h3>
-<code>static createSolidSphere({radius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSolidSphere</h3>
+<code>static _pkCreateSolidSphere({radius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
-<h3>createSolidTorus</h3>
-<code>static createSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSolidTorus</h3>
+<code>static _pkCreateSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
-<h3>createSheetCircle</h3>
-<code>static createSheetCircle({radius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
+<h3>_pkCreateSheetCircle</h3>
+<code>static _pkCreateSheetCircle({radius, coordinateSystem = new XcGm3dCoordinateSystem()})</code>
 
 <h3>extrudeAlong</h3>
 <code>extrudeAlong({direction, options})</code>
@@ -1543,15 +1543,15 @@ Example
         });
 </code></pre>
 
-<h3>spin</h3>
-<code>spin({axis, angle})</code>
+<h3>_pkSpin</h3>
+<code>_pkSpin({axis, angle})</code>
 
 <dl>
   axis XcGm3dAxis object</dd>
 </dl>
 Example:
 <pre><code>    let axis = ...;
-    this.#profileBody.spin({axis, angle: Math.PI});
+    this.#profileBody._pkSpin({axis, angle: Math.PI});
 </code></pre>
 
 <h3>transformBy</h3>
@@ -2026,20 +2026,20 @@ Example
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>transmitToData</h3>
-<code>static transmitToData({parts})</code>
+<h3>_pkTransmitToData</h3>
+<code>static _pkTransmitToData({parts})</code>
 
-<h3>transmitToFile</h3>
-<code>static transmitToFile({parts, path})</code>
+<h3>_pkTransmitToFile</h3>
+<code>static _pkTransmitToFile({parts, path})</code>
 
-<h3>receiveFromData</h3>
-<code>static receiveFromData({data})</code>
+<h3>_pkReceiveFromData</h3>
+<code>static _pkReceiveFromData({data})</code>
 
-<h3>receiveFromFile</h3>
-<code>static receiveFromFile({fileName})</code>
+<h3>_pkReceiveFromFile</h3>
+<code>static _pkReceiveFromFile({fileName})</code>
 
-<h3>findEntityByIdent</h3>
-<code>findEntityByIdent({identifier, cls})</code>
+<h3>_pkFindEntityByIdent</h3>
+<code>_pkFindEntityByIdent({identifier, cls})</code>
 
 <h2>_XcGmPK_CIRCLE_sf_t</h2>
 <code>class _XcGmPK_CIRCLE_sf_t</code>
@@ -2303,8 +2303,8 @@ Return XcGm3dCoordinateSystem
 <h3>constructor</h3>
 <code>constructor()</code>
 
-<h3>evaluate</h3>
-<code>evaluate({uv})</code>
+<h3>_pkEvaluate</h3>
+<code>_pkEvaluate({uv})</code>
 
 <dl>
   uv XcGmUV</dd>

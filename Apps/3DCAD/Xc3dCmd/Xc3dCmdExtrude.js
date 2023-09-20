@@ -80,7 +80,7 @@ class Xc3dCmdExtrude {
     Xc3dUIManager.redraw();
 
     if (this.#state === Xc3dCmdExtrude.#CommandState.Done) {
-      const extrudedBody = this.#profileBody.extrude({
+      const extrudedBody = this.#profileBody._pkExtrude({
         direction: this.#extrusionDirection,
         distance: this.#distance,
       });
@@ -104,9 +104,9 @@ class Xc3dCmdExtrude {
         if (!(object instanceof Xc3dDocModel)) {
           return false;
         }
-        if ((object.body.type === XcGmBody._PKBodyType.MINIMUM) ||
-          (object.body.type === XcGmBody._PKBodyType.WIRE) ||
-          (object.body.type === XcGmBody._PKBodyType.SHEET)) {
+        if ((object.body._pkType === XcGmBody._PKBodyType.MINIMUM) ||
+          (object.body._pkType === XcGmBody._PKBodyType.WIRE) ||
+          (object.body._pkType === XcGmBody._PKBodyType.SHEET)) {
           return true;
         } else {
           return false;
@@ -124,7 +124,7 @@ class Xc3dCmdExtrude {
     } else {
       const profile = drawableObject.body;
 
-      const type = profile.type;
+      const type = profile._pkType;
       if ((type === XcGmBody._PKBodyType.SHEET) ||
         (type === XcGmBody._PKBodyType.WIRE) ||
         (type === XcGmBody._PKBodyType.MINIMUM)) {
@@ -187,7 +187,7 @@ class Xc3dCmdExtrude {
           this.#extrusionDirection.multiply({scale: -1});
         }
 
-        const extrudedBody = this.#profileBody.extrude({
+        const extrudedBody = this.#profileBody._pkExtrude({
           direction: this.#extrusionDirection,
           distance: this.#distance,
         });

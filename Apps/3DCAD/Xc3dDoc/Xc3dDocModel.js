@@ -37,7 +37,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   static load({json, document}) {
     const name = json.name;
     const bodyData = json.bodyData;
-    const bodies = XcGmPart.receiveFromData({data: bodyData});
+    const bodies = XcGmPart._pkTransmitToFile({data: bodyData});
     XcSysAssert({assertion: bodies.length === 1});
     const body = bodies[0];
 
@@ -113,7 +113,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   }
 
   save({document}) {
-    const bodyData = XcGmPart.transmitToData({parts: [this.body]});
+    const bodyData = XcGmPart._pkTransmitToData({parts: [this.body]});
     const textureData = this.texture ? this.texture.save() : null;
     return {
       name: this.name,
@@ -144,7 +144,7 @@ class Xc3dDocModel extends Xc3dDocDrawableObject {
   }
 
   transform({matrix}) {
-    this.body.transform({matrix});
+    this.body._pkTransform({matrix});
   }
 }
 

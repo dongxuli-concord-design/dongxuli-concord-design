@@ -59,7 +59,7 @@ class Xc3dCmdInsert {
 
     if (this.#state === Xc3dCmdInsert.#CommandState.Done) {
       const matrix = XcGm3dMatrix.translationMatrix({vector: this.#position.toVector()});
-      this.#externalDocument.transform({matrix});
+      this.#externalDocument._pkTransform({matrix});
 
       Xc3dUIManager.document.addDrawableObject({drawableObject: this.#externalDocument});
       Xc3dUIManager.redraw();

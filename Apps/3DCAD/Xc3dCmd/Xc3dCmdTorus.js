@@ -97,7 +97,7 @@ class Xc3dCmdTorus {
         Xc3dUIManager.removeCustomOverlayRenderingObject({renderingObject: this.#renderingObject});
       }
 
-      this.#body = XcGmBody.createSolidTorus({majorRadius: this.#majorRadius, minorRadius: this.#minorRadius});
+      this.#body = XcGmBody._pkCreateSolidTorus({majorRadius: this.#majorRadius, minorRadius: this.#minorRadius});
 
       this.#renderingObject = Xc3dDocDocument.generateRenderingForBody({body: this.#body, color: new THREE.Color('lightblue')});
       this.#renderingObject.position.copy(this.#position.toThreeVector3());
@@ -168,7 +168,7 @@ class Xc3dCmdTorus {
 
       // Add the torus to the document
       const matrix = XcGm3dMatrix.translationMatrix({vector: this.#position.toVector()});
-      this.#body.transform({matrix});
+      this.#body._pkTransform({matrix});
       Xc3dUIManager.document.addDrawableObject({drawableObject: new Xc3dDocModel({body: this.#body, color: new THREE.Color('rgb(220, 220, 220)')})});
       Xc3dUIManager.redraw();
 

@@ -123,7 +123,7 @@ class Xc3dDocDocument {
                                     showVertex = true,
                                     renderingResolution = Xc3dDocDocument.RenderingResolution.High,
                                   }) {
-    const bodyType = body.type;
+    const bodyType = body._pkType;
     let pointSize = null;
     if (bodyType === XcGmBody._PKBodyType.SOLID) {
       pointSize = 1;

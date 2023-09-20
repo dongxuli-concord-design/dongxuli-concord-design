@@ -84,7 +84,7 @@ class Xc3dCmdExportXT {
     });
     if (inputState === Xc3dUIInputState.eInputNormal) {
       const body = drawableObject.body;
-      XcGmPart.transmitToFile({parts: [body], path: this.#path});
+      XcGmPart._pkTransmitToFile({parts: [body], path: this.#path});
       return Xc3dCmdExportXT.#CommandState.Done;
     } else {
       return Xc3dCmdExportXT.#CommandState.Cancel;

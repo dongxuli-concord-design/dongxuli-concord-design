@@ -61,7 +61,7 @@ class Xc3dCmdPressPullPlanarFace {
       u: (uvbox.lowU + uvbox.highU) / 2.0,
       v: (uvbox.lowV + uvbox.highV) / 2.0
     });
-    const {surf, orientation} = face.surfAndOrientation();
+    const {surf, orientation} = face._pkSurfAndOrientation();
     if (surf instanceof XcGmPlanarSurface) {
       const coordinateSystem = surf.coordinateSystem;
       const faceDir = coordinateSystem.zAxisDirection;
@@ -70,7 +70,7 @@ class Xc3dCmdPressPullPlanarFace {
       }
       faceDir.normalize();
 
-      const position = surf.evaluate({uv: midUV});
+      const position = surf._pkEvaluate({uv: midUV});
       const direction = faceDir;
 
       return {
@@ -106,7 +106,7 @@ class Xc3dCmdPressPullPlanarFace {
       this.#direction.multiply({scale: this.#distance});
 
       const matrix = XcGm3dMatrix.translationMatrix({vector: this.#direction});
-      XcGmFace.transform({
+      XcGmFace._pkTransform({
         facesAndMatrices: [{face: this.#face, matrix}],
         tolerance: 1e-5
       });
@@ -166,8 +166,8 @@ class Xc3dCmdPressPullPlanarFace {
     const newBody = newModel.body;
     // Find the "same" face in the new body by the identifier
     const positionsOfVerticesOfFace = this.#face._pkVertices.map(vertex => vertex.point.position);
-    const verticesOfNewBody = positionsOfVerticesOfFace.map(position => newBody.findVertexByPosition({position}));
-    const newFace = newBody.findFaceByVertices({vertices: verticesOfNewBody})[0];
+    const verticesOfNewBody = positionsOfVerticesOfFace.map(position => newBody._pkFindVertexByPosition({position}));
+    const newFace = newBody._pkFindFaceByVertices({vertices: verticesOfNewBody})[0];
 
     let tmpRenderingObject = null;
     const arrowHelper = new THREE.ArrowHelper(this.#direction.toThreeVector3(), this.#position.toThreeVector3(), 100 / Xc3dUIManager.getNumPixelsInUnit(), 0xFF69B4);
@@ -186,7 +186,7 @@ class Xc3dCmdPressPullPlanarFace {
         direction.multiply({scale: deltaDistance});
         const matrix = XcGm3dMatrix.translationMatrix({vector: direction});
         lastDistance = length;
-        XcGmFace.transform({
+        XcGmFace._pkTransform({
           facesAndMatrices: [{face: newFace, matrix}],
           tolerance: 1e-5
         });

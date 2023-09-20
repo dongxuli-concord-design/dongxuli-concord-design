@@ -27,7 +27,7 @@ class XcGmBody extends XcGmPart {
       body: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_ask_faces', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_ask_faces', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const faces = pkReturnValue.faces.map(faceTag => XcGmEntity._getPkObjectFromPkTag({entityTag: faceTag}));
@@ -40,7 +40,7 @@ class XcGmBody extends XcGmPart {
       body: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_ask_edges', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_ask_edges', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const edges = pkReturnValue.edges.map(edgeTag => XcGmEntity._getPkObjectFromPkTag({entityTag: edgeTag}));
@@ -52,23 +52,23 @@ class XcGmBody extends XcGmPart {
       body: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_ask_vertices', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_ask_vertices', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const vertices = pkReturnValue.vertices.map(vertexTag => XcGmEntity._getPkObjectFromPkTag({entityTag: vertexTag}));
     return vertices;
   }
 
-  get type() {
+  get _pkType() {
     const params = {
       body: this._pkTag
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_ask_type', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_ask_type', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     return pkReturnValue._PKBodyType;
   }
 
-  static createSolidBlock({x, y, z, coordinateSystem = null}) {
+  static _pkCreateSolidBlock({x, y, z, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -81,13 +81,13 @@ class XcGmBody extends XcGmPart {
       z: z,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_block', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_solid_block', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const block = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return block;
   }
 
-  static createSolidCone({radius, height, semiAngle, coordinateSystem = null}) {
+  static _pkCreateSolidCone({radius, height, semiAngle, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -100,13 +100,13 @@ class XcGmBody extends XcGmPart {
       semi_angle: semiAngle,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_cone', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_solid_cone', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const cone = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return cone;
   }
 
-  static createSolidCylinder({radius, height, coordinateSystem = null}) {
+  static _pkCreateSolidCylinder({radius, height, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -118,13 +118,13 @@ class XcGmBody extends XcGmPart {
       height: height,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_cyl', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_solid_cyl', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const cylinder = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return cylinder;
   }
 
-  static createSolidPrism({radius, height, sides, coordinateSystem = null}) {
+  static _pkCreateSolidPrism({radius, height, sides, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -137,13 +137,13 @@ class XcGmBody extends XcGmPart {
       n_sides: sides,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_prism', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_solid_prism', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const prism = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return prism;
   }
 
-  static createSolidSphere({radius, coordinateSystem = null}) {
+  static _pkCreateSolidSphere({radius, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -154,13 +154,13 @@ class XcGmBody extends XcGmPart {
       radius: radius,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_sphere', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_solid_sphere', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const sphere = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return sphere;
   }
 
-  static createSolidTorus({majorRadius, minorRadius, coordinateSystem = null}) {
+  static _pkCreateSolidTorus({majorRadius, minorRadius, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -172,13 +172,13 @@ class XcGmBody extends XcGmPart {
       minor_radius: minorRadius,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_solid_torus', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_solid_torus', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const torus = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return torus;
   }
 
-  static createSheetCircle({radius, coordinateSystem = null}) {
+  static _pkCreateSheetCircle({radius, coordinateSystem = null}) {
     let basis_set = null;
 
     if (coordinateSystem) {
@@ -189,13 +189,13 @@ class XcGmBody extends XcGmPart {
       radius: radius,
       basis_set
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_create_sheet_circle', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_create_sheet_circle', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const sheetCircle = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return sheetCircle;
   };
 
-  static sweep({profiles, path, pathVertices}) {
+  static _pkSweep({profiles, path, pathVertices}) {
     const profileTags = profiles.map(profile => profile._pkTag);
     const pathTag = path._pkTag;
     const pathVerticesTags = pathVertices.map(pathVertex => pathVertex._pkTag);
@@ -204,7 +204,7 @@ class XcGmBody extends XcGmPart {
       path: pathTag,
       pathVertices: pathVerticesTags,
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_make_swept_body_2', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_make_swept_body_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
@@ -212,7 +212,7 @@ class XcGmBody extends XcGmPart {
     return body;
   }
 
-  static loft({profiles, startVertices, guideWires}) {
+  static _pkLoft({profiles, startVertices, guideWires}) {
     XcGmAssert({
       assertion: profiles.length === startVertices.length,
       message: `Profiles and start vertices have different length.`
@@ -227,7 +227,7 @@ class XcGmBody extends XcGmPart {
       start_vertices: startVerticesTags,
       guide_wires: guideWiresTags
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_make_lofted_body', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_make_lofted_body', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
@@ -235,7 +235,7 @@ class XcGmBody extends XcGmPart {
     return body;
   }
 
-  static sew({bodies, gapWidthBound}) {
+  static _pkSew({bodies, gapWidthBound}) {
     const bodyTags = bodies.map(body => body._pkTag);
 
     const params = {
@@ -243,7 +243,7 @@ class XcGmBody extends XcGmPart {
       gap_width_bound: gapWidthBound,
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_sew_bodies', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_sew_bodies', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const sewnBodies = pkReturnValue.sewn_bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
@@ -255,7 +255,7 @@ class XcGmBody extends XcGmPart {
     };
   }
 
-  extrude({direction, distance}) {
+  _pkExtrude({direction, distance}) {
     //todo: validate options
 
     const options = new _PK_BODY_extrude_o_t();
@@ -265,14 +265,14 @@ class XcGmBody extends XcGmPart {
       path: new _XcGmPK_VECTOR_t({coord: direction.toArray()}),
       options,
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_extrude', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_extrude', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
     return body;
   }
 
-  spin({axis, angle}) {
+  _pkSpin({axis, angle}) {
     //todo: validate options
 
     const pkAxis1SF = _XcGmPK_AXIS1_sf_t.fromXcGm3dAxis({axis});
@@ -282,22 +282,22 @@ class XcGmBody extends XcGmPart {
       axis: pkAxis1SF.toJSON(),
       angle: angle
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_spin', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_spin', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
-  firstEdge() {
+  _pkFirstEdge() {
     const params = {
       body: this._pkTag,
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_ask_first_edge', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_ask_first_edge', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const firstEdge = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.first_edge});
     return firstEdge;
   }
 
-  transform({matrix}) {
+  _pkTransform({matrix}) {
     const transfSF = _XcGmPK_TRANSF_sf_t.fromXcGm3dMatrix({matrix});
     const transf = _XcGmTransf.create({transfSF});
 
@@ -306,25 +306,25 @@ class XcGmBody extends XcGmPart {
       transf: transf._pkTag
     };
 
-    const {error, returnValue} = XcGmCallPkApi('BODY_transform_2', {params});
+    const {error, returnValue} = _PK_XcGmCallPkApi('BODY_transform_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
-  unite({tools}) {
+  _pkUnite({tools}) {
     const toolTags = tools.map(tool => tool._pkTag);
     const params = {
       target: this._pkTag,
       tools: toolTags,
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_unite_bodies', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_unite_bodies', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
     return resultBodies;
   }
 
-  boolean({tools, func}) {
+  _pkBoolean({tools, func}) {
     let PK_boolean_param = 0;
     if (func === XcGmBody._PKBooleanFunction.Intersection) {
       PK_boolean_param = _PK_boolean_intersect_c;
@@ -341,23 +341,23 @@ class XcGmBody extends XcGmPart {
       func: PK_boolean_param
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_boolean_2', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_boolean_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
     return resultBodies;
   }
 
-  fixBlends() {
+  _pkFixBlends() {
     const params = {
       body: this._pkTag
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_fix_blends', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_fix_blends', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
-  hollowFaces({faces, offset}) {
+  _pkHollowFaces({faces, offset}) {
     const faceTags = faces.map(face => face._pkTag);
 
     const params = {
@@ -366,18 +366,18 @@ class XcGmBody extends XcGmPart {
       offset: offset
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_hollow_2', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_hollow_2', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 
-  imprintCurve({curve, bounds}) {
+  _pkImprintCurve({curve, bounds}) {
     const params = {
       body: this._pkTag,
       curve: curve._pkTag,
       bounds: bounds.map(bound =>  _XcGmPK_INTERVAL_t.fromXcGmInterval({interval: bound}).toJSON()),
     };
 
-    const {error, pkReturnValue} = XcGmCallPkApi('BODY_imprint_curve', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('BODY_imprint_curve', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const newEdges = pkReturnValue.new_edges.map(newEdgeTag => XcGmEntity._getPkObjectFromPkTag({entityTag: newEdgeTag}));
@@ -385,7 +385,7 @@ class XcGmBody extends XcGmPart {
     return {newEdges, newFaces};
   }
 
-  toSTL() {
+  _pkToSTL() {
     const allRenderingFacetData = this._pkRenderFacet({resolution: 'high'});
     const stlFileContent = [];
 
@@ -456,7 +456,7 @@ class XcGmBody extends XcGmPart {
     return stlFileString;
   }
 
-  findVertexByPosition({position}) {
+  _pkFindVertexByPosition({position}) {
     const vertices = this._pkVertices;
     const vertexFound = vertices.find(vertex => {
       const point = vertex.point;
@@ -466,7 +466,7 @@ class XcGmBody extends XcGmPart {
     return vertexFound ? vertexFound: null;
   }
 
-  findEdgeByPositions({position1, position2}) {
+  _pkFindEdgeByPositions({position1, position2}) {
     const edges = this._pkEdges;
     const edgeFound = edges.find(edge => {
       const {vertex1, vertex2} = edge._pkVertices;
@@ -479,7 +479,7 @@ class XcGmBody extends XcGmPart {
     return nuedgeFound ? edgeFound: null;
   }
 
-  findEdgeByVertices({vertex1, vertex2}) {
+  _pkFindEdgeByVertices({vertex1, vertex2}) {
     const edges = this._pkEdges;
     const edgeFound = edges.find(edge => {
       const {v1, v2} = edge._pkVertices;
@@ -489,7 +489,7 @@ class XcGmBody extends XcGmPart {
     return edgeFound ? edgeFound: null;
   }
 
-  findFaceByPositions({positions}) {
+  _pkFindFaceByPositions({positions}) {
     const foundFaces = [];
 
     // TODO
@@ -497,27 +497,27 @@ class XcGmBody extends XcGmPart {
     return foundFaces;
   }
 
-  findFaceByEdges({edges}) {
+  _pkFindFaceByEdges({edges}) {
     const foundFaces = this._pkFaces.filter(face => edges.every(edge => face._pkEdges.includes(edge)));
     return foundFaces;
   }
 
-  findFaceByVertices({vertices}) {
+  _pkFindFaceByVertices({vertices}) {
     const foundFaces = this._pkFaces.filter(face => vertices.every(vertex => face._pkVertices.includes(vertex)));
     return foundFaces;
   }
 
-  findVertex({callback}) {
+  _pkFindVertex({callback}) {
     const vertices = this._pkVertices;
     return vertices.filter(callback);
   }
 
-  findEdge({callback}) {
+  _pkFindEdge({callback}) {
     const edges = this._pkEdges;
     return edges.filter(callback);
   }
 
-  findFace({callback}) {
+  _pkFindFace({callback}) {
     const faces = this._pkFaces;
     return faces.filter(callback);
   }

@@ -81,7 +81,7 @@ class Xc3dCmdCombine {
       Xc3dUIManager.document.removeDrawableObject({drawableObject: this.#secondModel});
 
       try {
-        const resultBodies = targetBody.unite({tools: [toolBody]});
+        const resultBodies = targetBody._pkUnite({tools: [toolBody]});
         resultBodies.forEach((body) => {
           const drawableObject = new Xc3dDocModel({body});
           Xc3dUIManager.document.addDrawableObject({drawableObject});

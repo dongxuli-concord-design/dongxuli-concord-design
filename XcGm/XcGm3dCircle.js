@@ -7,7 +7,7 @@ class XcGm3dCircle extends XcGm3dCurve {
     const params = {
       circle: this._pkTag
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('CIRCLE_ask', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('CIRCLE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkCircleSF = _XcGmPK_CIRCLE_sf_t.fromJSON({json: pkReturnValue.circle_sf});
     return pkCircleSF.radius;
@@ -17,7 +17,7 @@ class XcGm3dCircle extends XcGm3dCurve {
     const params = {
       circle: this._pkTag
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('CIRCLE_ask', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('CIRCLE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkCircleSF = _XcGmPK_CIRCLE_sf_t.fromJSON({json: pkReturnValue.circle_sf});
     const coordinateSystem = new XcGm3dCoordinateSystem({
@@ -29,7 +29,7 @@ class XcGm3dCircle extends XcGm3dCurve {
     return coordinateSystem;
   }
 
-  static create({radius, coordinateSystem}) {
+  static _pkCreate({radius, coordinateSystem}) {
     const circleSF = new _XcGmPK_CIRCLE_sf_t({
       radius,
       basis_set: _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem})
@@ -38,7 +38,7 @@ class XcGm3dCircle extends XcGm3dCurve {
       radius: radius,
       circle_sf: circleSF.toJSON()
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('CIRCLE_create', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('CIRCLE_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const circle = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.circle});
     return circle;

@@ -74,12 +74,12 @@ class Xc3dCmdImprintCurve {
         positionOrVector: this.#position1
       }).normal;
       const axis = new XcGm3dAxis({position, direction});
-      const curve = XcGm3dLine.create({axis});
+      const curve = XcGm3dLine._pkCreate({axis});
       const interval = new XcGmInterval({
         low: 0,
         high: this.#position1.distanceToPosition({position: this.#position2})
       });
-      this.#face.imprintCurve({curves: [curve], intervals: [interval]});
+      this.#face._pkImprintCurve({curves: [curve], intervals: [interval]});
 
       let drawableObject = Xc3dDocDocument.getDrawableObjectFromKernelEntity({kernelEntity: this.#face});
       Xc3dUIManager.document.modifyDrawableObject({drawableObject});

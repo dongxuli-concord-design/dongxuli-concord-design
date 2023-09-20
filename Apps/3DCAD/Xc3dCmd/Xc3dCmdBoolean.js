@@ -94,7 +94,7 @@ class Xc3dCmdBoolean {
       Xc3dUIManager.document.removeDrawableObject({drawableObject: this.#secondModel});
 
       try {
-        const resultBodies = targetBody.boolean({tools: [toolBody], func: this.#booleanType});
+        const resultBodies = targetBody._pkBoolean({tools: [toolBody], func: this.#booleanType});
         resultBodies.forEach((body) => {
           const drawableObject = new Xc3dDocModel({body});
           drawableObject.setAttributesFrom({model: this.#firstModel});

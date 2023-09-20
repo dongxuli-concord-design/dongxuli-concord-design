@@ -7,7 +7,7 @@ class XcGmPlanarSurface extends XcGmSurface {
     const params = {
       plane: this._pkTag
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('PLANE_ask', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('PLANE_ask', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkPlaneSF = _XcGmPK_PLANE_sf_t.fromJSON({json: pkReturnValue.plane_sf});
     const coordinateSystem = new XcGm3dCoordinateSystem({
@@ -19,12 +19,12 @@ class XcGmPlanarSurface extends XcGmSurface {
     return coordinateSystem;
   }
 
-  static create({coordinateSystem}) {
+  static _pkCreate({coordinateSystem}) {
     const planeSF = _XcGmPK_PLANE_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
     const params = {
       plane_sf: planeSF.toJSON()
     };
-    const {error, pkReturnValue} = XcGmCallPkApi('PLANE_create', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi('PLANE_create', {params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const plane = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.plane});
     return plane;

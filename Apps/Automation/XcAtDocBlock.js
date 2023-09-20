@@ -30,7 +30,7 @@ class XcAtDocBlock extends Xc3dDocDrawableObject {
     this.#transparent = transparent;
     this.#opacity = opacity;
 
-    this.#body = XcGmBody.createSolidBlock({
+    this.#body = XcGmBody._pkCreateSolidBlock({
       x: this.x,
       y: this.y,
       z: this.z,

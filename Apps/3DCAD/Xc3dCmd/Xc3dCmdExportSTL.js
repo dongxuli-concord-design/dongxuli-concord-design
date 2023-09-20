@@ -48,7 +48,7 @@ class Xc3dCmdExportSTL {
     const fs = require('fs');
     const path = require('path');
 
-    const stlFileString = drawableObject.body.toSTL();
+    const stlFileString = drawableObject.body._pkToSTL();
 
     fs.writeFile(`${directory}${path.sep}${index}-${drawableObject.name}.stl`, stlFileString, function (error) {
       if (error) {
@@ -60,7 +60,7 @@ class Xc3dCmdExportSTL {
   #exportDrawableObjects({directory}) {
     Xc3dUIManager.document.drawableObjects.forEach((drawableObject, index) => {
       if (drawableObject instanceof Xc3dDocModel) {
-        const type = drawableObject.body.type;
+        const type = drawableObject.body._pkType;
         if ((type === XcGmBody._PKBodyType.SOLID) || (type === XcGmBody._PKBodyType.SHEET)) {
           this.#exportDrawableObjectToSTL({drawableObject, directory, index});
         } else {

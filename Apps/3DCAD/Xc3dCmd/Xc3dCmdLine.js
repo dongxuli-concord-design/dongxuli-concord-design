@@ -66,7 +66,7 @@ class Xc3dCmdLine {
         positionOrVector: this.#startPosition
       });
       const axis = new XcGm3dAxis({position, direction});
-      const line = XcGm3dLine.create({axis});
+      const line = XcGm3dLine._pkCreate({axis});
 
       const interval = new XcGmInterval({
         low: 0,

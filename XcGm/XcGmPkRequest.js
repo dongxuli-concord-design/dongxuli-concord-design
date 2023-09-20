@@ -1,13 +1,13 @@
-let XcGmAddOn = null;
+let _PK_XcGmAddOn = null;
 
 (function loadAddOn() {
   const os = require('os');
   const platform = os.platform();
-  XcGmAddOn = require(`XcGmPk_${platform}`);
+  _PK_XcGmAddOn = require(`XcGmPk_${platform}`);
 })();
 
-function XcGmCallPkApi(method, {params}) {
+function _PK_XcGmCallPkApi(method, {params}) {
   const apiRequest = [method, params];
-  const returnValue = XcGmAddOn.call(JSON.stringify(apiRequest));
+  const returnValue = _PK_XcGmAddOn.call(JSON.stringify(apiRequest));
   return JSON.parse(returnValue);
 }

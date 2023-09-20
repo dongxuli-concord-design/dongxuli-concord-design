@@ -132,7 +132,7 @@ class Xc3dCmdCopy {
       return Xc3dCmdCopy.#CommandState.Quit;
     } else {
       const newModel = this.#model.clone();
-      newModel.transform({matrix: transform});
+      newModel._pkTransform({matrix: transform});
       Xc3dUIManager.document.addDrawableObject({drawableObject: newModel});
       Xc3dUIManager.redraw();
 

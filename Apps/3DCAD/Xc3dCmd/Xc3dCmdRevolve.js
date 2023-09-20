@@ -75,7 +75,7 @@ class Xc3dCmdRevolve {
     Xc3dUIManager.redraw();
 
     if (this.#state === Xc3dCmdRevolve.#CommandState.Done) {
-      this.#profileBody.spin({axis: this.#axis, angle: this.#angle});
+      this.#profileBody._pkExtrude({axis: this.#axis, angle: this.#angle});
       Xc3dUIManager.document.modifyDrawableObject({drawableObject: this.#model});
       Xc3dUIManager.redraw();
     }
@@ -133,7 +133,7 @@ class Xc3dCmdRevolve {
         draggingCallback: (angle) => {
 
           const newProfile = this.#profileBody._pkClone();
-          newProfile.spin({axis: this.#axis, angle});
+          newProfile._pkExtrude({axis: this.#axis, angle});
 
           if (tmpRenderingObject) {
             this.#hints.remove(tmpRenderingObject);

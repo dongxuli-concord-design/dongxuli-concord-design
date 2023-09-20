@@ -57,7 +57,7 @@ class Xc3dCmdSpline {
     }
 
     if (this.#state === Xc3dCmdSpline.#CommandState.Done) {
-      const curves = XcGm3dNurbsCurve.createBspline({positions: this.#positions});
+      const curves = XcGm3dNurbsCurve._pkCreateBspline({positions: this.#positions});
       const curveAndIntervals = curves.map(curve => {
         return {curve, interval: new XcGmInterval({low: 0, high: 1})}
       });

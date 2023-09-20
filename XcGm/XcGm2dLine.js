@@ -4,12 +4,4 @@ class XcGm2dLine extends XcGm2dCurve {
     super();
     this.axis.copy({axis});
   }
-
-  evaluate({t}) {
-    // TODO
-  }
-
-  evaluateTangent({t}) {
-    // TODO
-  }
 }

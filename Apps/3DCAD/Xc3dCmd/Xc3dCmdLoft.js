@@ -70,7 +70,7 @@ class Xc3dCmdLoft {
       const profileBodies = [];
       this.#profiles.forEach((profile) => profileBodies.push(profile.body));
       const guideWires = [];
-      const body = XcGmBody.loft({profiles: profileBodies, startVertices: this.#startVertices, guideWires});
+      const body = XcGmBody._pkLoft({profiles: profileBodies, startVertices: this.#startVertices, guideWires});
 
       Xc3dUIManager.document.addDrawableObject({drawableObject:  new Xc3dDocModel({body})});
     }
@@ -151,13 +151,13 @@ class Xc3dCmdLoft {
       this.#hints.add(hint);
 
       // Find the edge
-      const edgesWithStartVertex = lastProfile.body.findEdge({callback: (edge) => ((edge._pkVertices.vertex1 === startVertex) || (edge._pkVertices.vertex2 === startVertex))});
+      const edgesWithStartVertex = lastProfile.body._pkFindEdge({callback: (edge) => ((edge._pkVertices.vertex1 === startVertex) || (edge._pkVertices.vertex2 === startVertex))});
       XcSysAssert({assertion: edgesWithStartVertex.length > 0});
       const edgeWithStartVertex = edgesWithStartVertex[0];
       if (startVertex !== edgeWithStartVertex._pkVertices.vertex1) {
         XcGmEdge.reverse({edges: [edgeWithStartVertex]});
       }
-      edgeWithStartVertex.propagateOrientation();
+      edgeWithStartVertex._pkPropagateOrientation();
 
       const renderingObjectOfVertex = Xc3dDocDocument.getRenderingObjectFromModelingKernelEntity({kernelEntity: startVertex});
       const highlightingRenderingObject = Xc3dUIManager.generateHighlightingRenderingObject({renderingObject: renderingObjectOfVertex});
