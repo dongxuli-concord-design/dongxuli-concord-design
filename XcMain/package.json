@@ -9,5 +9,6 @@
     "position": "center"
   },
   "dependencies": {
+    "ws": "7.5"
   }
 }
