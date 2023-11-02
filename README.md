@@ -44,6 +44,7 @@
 2. Since macOS has very strict permission control policy or unzip tools may damage the file attributes, we need to right-click and open the executable files so those executables can be loaded or launched.
 3. Build
    1. Build on Mac first
+     * Go to `CAD/XcMain` and run `../XcExternal/node.darwin/bin/node ../XcExternal/node.darwin/bin/npm install` command to install npm packages.
      * Go to the `CAD` folder in terminal and run `./XcExternal/node.darwin/bin/node ./build_scripts/build_darwin.js`
    2. Build on Win32
      * In the VMWare, share `CAD` folder as `Z:\` in the Windows 10.
@@ -59,5 +60,6 @@
 1. Install the right version of Node required by the NW.js.
 2. Install `nw-gyp` using `npm install -g nw-gyp`.
 3. Update the node and nwjs files on `XcExternal` following the `README.md` in `XcExternal`. Please right-click and open all executable files (such as node/nwjc etc.) on macOS for permission control reasons.
-4. Update the XcGmPk (check the README for more information). 
-5. Rebuild all packages.
+4. Delete all node_modules folder and run `../XcExternal/node.darwin/bin/node ../XcExternal/node.darwin/bin/npm install` in XcMain to install packages.
+5. Update the XcGmPk (check the README for more information). 
+6. Rebuild all packages.
