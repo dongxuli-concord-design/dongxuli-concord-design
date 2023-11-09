@@ -1,8 +1,0 @@
-{
-  "name": "build",
-  "version": "1.0.0",
-  "description": "Generate the statistical reports of all git repos",
-  "scripts": {
-    "build": "node build.js"
-  }
-}

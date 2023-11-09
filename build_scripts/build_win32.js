@@ -169,18 +169,6 @@ function build({baseFolderPath}) {
       'copy build\\*.bin ..\\..\\XcMain\\Apps\\Hello',         
     ]);
   }
-
-  // Automation
-  {
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/Automation'));
-    process.chdir(projectFolder);
-
-    _runCommands([
-      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
-      'copy build\\* ..\\..\\XcDebug\\Apps\\3DCAD\\Plugins\\Automation\\',
-      'copy build\\*.bin ..\\..\\XcMain\\Apps\\3DCAD\\Plugins\\Automation\\',          
-    ]);
-  }
 }
 
 build({baseFolderPath: path.join(__dirname, '..')});

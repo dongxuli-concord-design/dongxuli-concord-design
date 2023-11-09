@@ -43,8 +43,6 @@ function build({baseFolderPath}) {
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3dDoc`,
     `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/3DCAD/Xc3dUI`,
 
-    `mkdir -p ${baseFolderPath}/XcMain/Documentation/Apps/Automation`,
-
     `cp -rf ${baseFolderPath}/XcMain/* ${baseFolderPath}/XcDebug/`
   ]);
 
@@ -190,22 +188,6 @@ function build({baseFolderPath}) {
     _runCommands([
       `rm -rf build && mkdir build`,
       `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js && cp build/* ../../XcDebug/Apps/Hello && cp -r res ../../XcDebug/Apps/Hello  && cp build/*.bin ../../XcMain/Apps/Hello && cp -r res ../../XcMain/Apps/Hello`,
-    ]);
-  }
-
-  // Automation
-  {
-    _runCommands([
-      `mkdir -p ${baseFolderPath}/XcMain/Apps/3DCAD/Plugins/Automation`,
-      `mkdir -p ${baseFolderPath}/XcDebug/Apps/3DCAD/Plugins/Automation`,
-    ]);
-
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/Automation'));
-    process.chdir(projectFolder);
-
-    _runCommands([
-      `rm -rf build && mkdir build`,
-      `${baseFolderPath}/XcExternal/node.darwin/bin/node build.js  && cp build/*.bin  ../../XcMain/Apps/3DCAD/Plugins/Automation/ && cp build/*  ../../XcDebug/Apps/3DCAD/Plugins/Automation/ && cp -r Documentation/* ../..//XcDebug/Documentation/Apps/Automation && cp -r Documentation/* ../..//XcMain/Documentation/Apps/Automation`,
     ]);
   }
 }
