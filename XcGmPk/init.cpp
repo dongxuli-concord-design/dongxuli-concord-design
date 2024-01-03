@@ -62,5 +62,4 @@ void init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "call", call);
 }
 
-NODE_MODULE(XcGmPk, init
-)
+NODE_MODULE(XcGmPk, init)
