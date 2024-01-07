@@ -120,13 +120,14 @@ class XcGm3dCurve extends XcGm3dGeometry {
   }
 
   _evalWithTangentPk({t, nDerivs}) {
+    const method = 'CURVE_eval_with_tangent';
     const params = {
       curve: this._pkTag,
       t,
       n_derivs: nDerivs,
     };
 
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('CURVE_eval_with_tangent', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const pointAndDerivatives = pkReturnValue.pointAndDerivatives.map(p => {
@@ -141,12 +142,13 @@ class XcGm3dCurve extends XcGm3dGeometry {
   }
 
   static makeWireBodyFromCurves({curveAndIntervals}) {
+    const method = 'CURVE_make_wire_body_2';
     const params = {
       curves: curveAndIntervals.map(curveAndInterval => curveAndInterval.curve._pkTag),
       bounds: curveAndIntervals.map(curveAndInterval => _XcGmPK_INTERVAL_t.fromXcGmInterval({interval: curveAndInterval.interval}).toJSON()),
     };
 
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('CURVE_make_wire_body_2', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     const wire = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});

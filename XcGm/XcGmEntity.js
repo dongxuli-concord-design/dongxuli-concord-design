@@ -21,10 +21,11 @@ class XcGmEntity {
   }
 
   _pkClone() {
+    const method = 'ENTITY_copy_2';
     const params = {
       entity: this._pkTag
     };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('ENTITY_copy_2', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const newEntity = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.entity_copy});
     return newEntity;
@@ -116,10 +117,11 @@ class XcGmEntity {
     }
 
     // Query the object from the backend using _tag
+    const method = 'ENTITY_ask_class';
     const params = {
       entity: entityTag
     };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('ENTITY_ask_class', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
 
     // Create object
@@ -142,10 +144,11 @@ class XcGmEntity {
   }
 
   static _pkDelete({entityTag}) {
+    const method = 'ENTITY_delete';
     const params = {
       entity: entityTag
     };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('ENTITY_delete', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
   }
 }

@@ -6,7 +6,7 @@ let _PK_XcGmAddOn = null;
   _PK_XcGmAddOn = require(`XcGmPk_${platform}`);
 })();
 
-function _PK_XcGmCallPkApi(method, {params}) {
+function _PK_XcGmCallPkApi({method, params}) {
   const apiRequest = [method, params];
   const returnValue = _PK_XcGmAddOn.call(JSON.stringify(apiRequest));
   return JSON.parse(returnValue);

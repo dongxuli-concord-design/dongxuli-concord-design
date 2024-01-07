@@ -4,20 +4,22 @@ class XcGmSphereSurface extends XcGmSurface {
   }
 
   get radius() {
+    const method = 'SPHERE_ask';
     const params = {
       sphere: this._pkTag
     };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('SPHERE_ask', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkSphereSF = _XcGmPK_SPHERE_sf_t.fromJSON({json: pkReturnValue.sphere_sf});
     return pkSphereSF.radius;
   }
 
   get coordinateSystem() {
+    const method = 'SPHERE_ask';
     const params = {
       sphere: this._pkTag
     };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('SPHERE_ask', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const pkSphereSF = _XcGmPK_SPHERE_sf_t.fromJSON({json: pkReturnValue.sphere_sf});
     const coordinateSystem = new XcGm3dCoordinateSystem({
@@ -33,11 +35,13 @@ class XcGmSphereSurface extends XcGmSurface {
       radius,
       basis_set: _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem}),
     });
+
+    const method = 'SPHERE_create';
     const params = {
       sphere_sf: sphereSF.toJSON()
     };
 
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi('SPHERE_create', {params});
+    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
     XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
     const sphere = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.sphere});
     return sphere;
