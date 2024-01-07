@@ -12,6 +12,6 @@ void apiAssertParamMember(const Json::Value &params, string member);
 
 #define assertParam(param) apiAssertParamMember(params, #param)
 
-#define assertModelingError   apiAssert(error == PK_ERROR_no_errors, "Modeling error: " + to_string(error))
+#define assertAPICallingError apiAssert(error == PK_ERROR_no_errors, "Modeling error: " + to_string(error))
 
 #endif //XCGMPK_UTIL_H

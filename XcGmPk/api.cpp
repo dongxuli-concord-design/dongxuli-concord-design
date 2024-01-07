@@ -555,7 +555,7 @@ Json::Value ASSEMBLY_ask_instances(const Json::Value &params) {
   PK_INSTANCE_t *instances = nullptr;
   PK_ERROR_code_t error = PK_ASSEMBLY_ask_instances(assembly, &n_instances, &instances);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value instanceTags(Json::arrayValue);
   for (int i = 0; i < n_instances; i += 1) {
@@ -579,7 +579,7 @@ Json::Value ASSEMBLY_ask_parts(const Json::Value &params) {
   PK_INSTANCE_t *parts = nullptr;
   PK_ERROR_code_t error = PK_ASSEMBLY_ask_parts(assembly, &n_parts, &parts);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value partTags(Json::arrayValue);
   for (int i = 0; i < n_parts; i += 1) {
@@ -605,7 +605,7 @@ Json::Value ASSEMBLY_ask_parts_transfs(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_ASSEMBLY_ask_parts_transfs(assembly, &n_parts, &parts, &transfs);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value partTags(Json::arrayValue);
   for (int i = 0; i < n_parts; i += 1) {
@@ -633,7 +633,7 @@ Json::Value ASSEMBLY_create_empty(const Json::Value &params) {
   PK_ASSEMBLY_t assembly = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_ASSEMBLY_create_empty(&assembly);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["assembly"] = assembly;
@@ -648,7 +648,7 @@ Json::Value ASSEMBLY_make_level_assembly(const Json::Value &params) {
   PK_ASSEMBLY_t level_assembly = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_ASSEMBLY_make_level_assembly(assembly, &level_assembly);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["level_assembly"] = level_assembly;
@@ -663,7 +663,7 @@ Json::Value ASSEMBLY_transform(const Json::Value &params) {
   PK_TRANSF_t transf = params["transf"].asInt();
   PK_ERROR_code_t error = PK_ASSEMBLY_transform(assembly, transf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -704,7 +704,7 @@ Json::Value BCURVE_create(const Json::Value &params) {
   PK_BCURVE_t bcurve = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_BCURVE_create(&bcurve_sf, &bcurve);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["bcurve"] = bcurve;
@@ -751,7 +751,7 @@ Json::Value BCURVE_create_spline_2(const Json::Value &params) {
   delete[] positions;
   positions = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   apiAssert(results.fault == PK_BCURVE_spline_ok_c, "Modeling error: " + to_string(results.fault));
 
@@ -831,7 +831,7 @@ Json::Value BODY_ask_edges(const Json::Value &params) {
   PK_VERTEX_t *edges = nullptr;
   PK_ERROR_code_t error = PK_BODY_ask_edges(body, &n_edges, &edges);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value edgeTags(Json::arrayValue);
   for (auto i = 0; i < n_edges; i += 1) {
@@ -854,7 +854,7 @@ Json::Value BODY_ask_faces(const Json::Value &params) {
   PK_VERTEX_t *faces = nullptr;
   PK_ERROR_code_t error = PK_BODY_ask_faces(body, &n_faces, &faces);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value faceTags(Json::arrayValue);
   for (auto i = 0; i < n_faces; i += 1) {
@@ -879,7 +879,7 @@ Json::Value BODY_ask_first_edge(const Json::Value &params) {
   PK_EDGE_t first_edge = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_BODY_ask_first_edge(body, &first_edge);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["first_edge"] = first_edge;
@@ -909,7 +909,7 @@ Json::Value BODY_ask_type(const Json::Value &params) {
   PK_BODY_type_t body_type = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_BODY_ask_type(body, &body_type);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body_type"] = body_type;
@@ -924,7 +924,7 @@ Json::Value BODY_ask_vertices(const Json::Value &params) {
   PK_VERTEX_t *vertices = nullptr;
   PK_ERROR_code_t error = PK_BODY_ask_vertices(body, &n_vertices, &vertices);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value vertexTags(Json::arrayValue);
   for (auto i = 0; i < n_vertices; i += 1) {
@@ -972,7 +972,7 @@ Json::Value BODY_boolean_2(const Json::Value &params) {
   delete[] tools;
   tools = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   apiAssert(results.result != PK_boolean_result_failed_c, "Boolean error: " + to_string(results.result));
 
@@ -1017,7 +1017,7 @@ Json::Value BODY_create_sheet_circle(const Json::Value &params) {
     error = PK_BODY_create_sheet_circle(radius, &basis_set, &body);
   }
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -1056,7 +1056,7 @@ Json::Value BODY_create_solid_block(const Json::Value &params) {
     error = PK_BODY_create_solid_block(x, y, z, &basis_set, &body);
   }
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -1076,7 +1076,7 @@ Json::Value BODY_create_solid_cone(const Json::Value &params) {
   PK_BODY_t body = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_ERROR_no_errors;
 
-  assertModelingError;
+  assertAPICallingError;
 
   if (params["basis_set"].isNull()) {
     error = PK_BODY_create_solid_cone(radius, height, semi_angle, NULL, &body);
@@ -1110,7 +1110,7 @@ Json::Value BODY_create_solid_cyl(const Json::Value &params) {
     error = PK_BODY_create_solid_cyl(radius, height, &basis_set, &body);
   }
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -1138,7 +1138,7 @@ Json::Value BODY_create_solid_prism(const Json::Value &params) {
     error = PK_BODY_create_solid_prism(radius, height, n_sides, &basis_set, &body);
   }
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -1162,7 +1162,7 @@ Json::Value BODY_create_solid_sphere(const Json::Value &params) {
     error = PK_BODY_create_solid_sphere(radius, &basis_set, &body);
   }
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -1188,7 +1188,7 @@ Json::Value BODY_create_solid_torus(const Json::Value &params) {
     error = PK_BODY_create_solid_torus(major_radius, minor_radius, &basis_set, &body);
   }
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -1233,7 +1233,7 @@ Json::Value BODY_extrude(const Json::Value &params) {
   PK_BODY_t body = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_BODY_extrude(profile, path, &options, &body, &tracking, &results);
 
-  assertModelingError;
+  assertAPICallingError;
 
   PK_TOPOL_track_r_f(&tracking);
   PK_TOPOL_local_r_f(&results);
@@ -1309,7 +1309,7 @@ Json::Value BODY_fix_blends(const Json::Value &params) {
   PK_ERROR_code_t error =
       PK_BODY_fix_blends(body, &fboptions, &nblends, &blends, &unders, &topolsrepl, &fault, &faultedge, &faultopol);
 
-  assertModelingError;
+  assertAPICallingError;
 
   apiAssert((fault == PK_blend_fault_no_fault_c) || (fault == PK_blend_fault_repaired_c),
             "Blend error: " + to_string(fault));
@@ -1353,7 +1353,7 @@ Json::Value BODY_hollow_2(const Json::Value &params) {
   delete[] faces;
   faces = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   PK_TOPOL_track_r_f(&tracking);
   PK_TOPOL_local_r_f(&results);
@@ -1393,7 +1393,7 @@ Json::Value BODY_imprint_curve(const Json::Value &params) {
   PK_ERROR_code_t
       error = PK_BODY_imprint_curve(body, curve, bounds, &n_new_edges, &new_edges, &n_new_faces, &new_faces);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   Json::Value newEdgesArray(Json::arrayValue);
@@ -1489,7 +1489,7 @@ Json::Value BODY_make_lofted_body(const Json::Value &params) {
   delete[] start_vertices;
   start_vertices = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
   apiAssert(lofted_body.status.fault == PK_BODY_loft_ok_c, "loft error: " + to_string(lofted_body.status.fault));
 
   Json::Value returnValue;
@@ -1555,7 +1555,7 @@ Json::Value BODY_make_swept_body_2(const Json::Value &params) {
   delete[] path_vertices;
   path_vertices = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
   apiAssert(swept_body.status.fault == PK_BODY_sweep_ok_c, "sweep error: " + to_string(swept_body.status.fault));
 
   Json::Value returnValue;
@@ -1649,7 +1649,7 @@ Json::Value BODY_sew_bodies(const Json::Value &params) {
   delete[] bodies;
   bodies = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value sewnBodyTags(Json::arrayValue);
   for (int i = 0; i < n_sewn_bodies; i += 1) {
@@ -1701,7 +1701,7 @@ Json::Value BODY_spin(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_BODY_spin(body, &axis, angle, local_check, &n_laterals, &laterals, &bases, &result);
 
-  assertModelingError;
+  assertAPICallingError;
 
   delete[] laterals;
   laterals = nullptr;
@@ -1735,7 +1735,7 @@ Json::Value BODY_transform_2(const Json::Value &params) {
   double precision = 1e-6;
   PK_ERROR_code_t error = PK_SESSION_ask_precision(&precision);
 
-  assertModelingError;
+  assertAPICallingError;
 
   PK_TOPOL_track_r_t tracking;
   PK_TOPOL_local_r_t results;
@@ -1745,7 +1745,7 @@ Json::Value BODY_transform_2(const Json::Value &params) {
 
   error = PK_BODY_transform_2(body, transf, precision, &options, &tracking, &results);
 
-  assertModelingError;
+  assertAPICallingError;
   apiAssert(results.status == PK_local_status_ok_c, "transform error: " + to_string(results.status));
 
   PK_TOPOL_track_r_f(&tracking);
@@ -1785,7 +1785,7 @@ Json::Value BODY_unite_bodies(const Json::Value &params) {
   delete[] tools;
   tools = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value bodyTags(Json::arrayValue);
   for (int i = 0; i < n_bodies; i += 1) {
@@ -1875,7 +1875,7 @@ Json::Value CIRCLE_ask(const Json::Value &params) {
   PK_CIRCLE_sf_t circle_sf;
   PK_ERROR_code_t error = PK_CIRCLE_ask(circle, &circle_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["circle_sf"] = PK_CIRCLE_sf_t_to_JSON(&circle_sf);
@@ -1891,7 +1891,7 @@ Json::Value CIRCLE_create(const Json::Value &params) {
   PK_CIRCLE_t circle = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_CIRCLE_create(&circle_sf, &circle);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["circle"] = circle;
@@ -1983,7 +1983,7 @@ Json::Value CURVE_eval_with_tangent(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_CURVE_eval_with_tangent(curve, t, n_derivs, p, &tangent);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   Json::Value pointAndDerivatives;
@@ -2108,7 +2108,7 @@ Json::Value CURVE_make_wire_body_2(const Json::Value &params) {
   delete[] pkBounds;
   pkBounds = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
 
@@ -2174,7 +2174,7 @@ Json::Value EDGE_ask_body(const Json::Value &params) {
   PK_BODY_t body = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_EDGE_ask_body(edge, &body);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -2192,7 +2192,7 @@ Json::Value EDGE_ask_curve(const Json::Value &params) {
   PK_CURVE_t curve = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_EDGE_ask_curve(edge, &curve);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["curve"] = curve;
@@ -2211,7 +2211,7 @@ Json::Value EDGE_ask_faces(const Json::Value &params) {
   PK_FACE_t *faces = nullptr;
   PK_ERROR_code_t error = PK_EDGE_ask_faces(edge, &n_faces, &faces);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value faceTags(Json::arrayValue);
   for (auto i = 0; i < n_faces; i += 1) {
@@ -2269,7 +2269,7 @@ Json::Value EDGE_ask_vertices(const Json::Value &params) {
   PK_VERTEX_t vertices[2] = {PK_ENTITY_null, PK_ENTITY_null};
   PK_ERROR_code_t error = PK_EDGE_ask_vertices(edge, vertices);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value vertexTags(Json::arrayValue);
   vertexTags.append(vertices[0]);
@@ -2306,7 +2306,7 @@ Json::Value EDGE_contains_vector(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_EDGE_contains_vector(edge, vector, &topol);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["topol"] = topol;
@@ -2348,7 +2348,7 @@ Json::Value EDGE_find_interval(const Json::Value &params) {
   PK_INTERVAL_t t_int;
   PK_ERROR_code_t error = PK_EDGE_find_interval(edge, &t_int);
 
-  assertModelingError;
+  assertAPICallingError;
   Json::Value interval = PK_INTERVAL_t_to_JSON(&t_int);
   Json::Value returnValue;
   returnValue["interval"] = interval;
@@ -2405,7 +2405,7 @@ Json::Value EDGE_make_faces_from_wire(const Json::Value &params) {
   delete[] shared_loop;
   shared_loop = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value newFaces(Json::arrayValue);
   for (int i = 0; i < n_edges; i += 1) {
@@ -2437,7 +2437,7 @@ Json::Value EDGE_propagate_orientation(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_EDGE_propagate_orientation(edge);
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -2475,7 +2475,7 @@ Json::Value EDGE_reverse_2(const Json::Value &params) {
   delete[] edges;
   edges = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -2506,7 +2506,7 @@ Json::Value EDGE_set_blend_constant(const Json::Value &params) {
   delete[] edges;
   edges = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value blendEdgeArray(Json::arrayValue);
   for (int i = 0; i < n_blend_edges; i += 1) {
@@ -2552,7 +2552,7 @@ Json::Value ENTITY_ask_class(const Json::Value &params) {
   PK_CLASS_t cls = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_ENTITY_ask_class(entity, &cls);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["cls"] = cls;
@@ -2574,7 +2574,7 @@ Json::Value ENTITY_ask_identifier(const Json::Value &params) {
   int identifier = 0;
   PK_ERROR_code_t error = PK_ENTITY_ask_identifier(entity, &identifier);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["identifier"] = identifier;
@@ -2608,7 +2608,7 @@ Json::Value ENTITY_copy_2(const Json::Value &params) {
   PK_ENTITY_copy_o_m(options);
   PK_ERROR_code_t error = PK_ENTITY_copy_2(entity, &options, &entity_copy, &tracking);
 
-  assertModelingError;
+  assertAPICallingError;
   PK_ENTITY_track_r_f(&tracking);
 
   Json::Value returnValue;
@@ -2627,7 +2627,7 @@ Json::Value ENTITY_delete(const Json::Value &params) {
   delete[] entities;
   entities = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -2647,7 +2647,7 @@ Json::Value ENTITY_is_curve(const Json::Value &params) {
   PK_LOGICAL_t is_curve = PK_LOGICAL_false;
   PK_ERROR_code_t error = PK_ENTITY_is_curve(entity, &is_curve);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["is_curve"] = is_curve;
@@ -2661,7 +2661,7 @@ Json::Value ENTITY_is_geom(const Json::Value &params) {
   PK_LOGICAL_t is_geom = PK_LOGICAL_false;
   PK_ERROR_code_t error = PK_ENTITY_is_geom(entity, &is_geom);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["is_geom"] = is_geom;
@@ -2675,7 +2675,7 @@ Json::Value ENTITY_is_part(const Json::Value &params) {
   PK_LOGICAL_t is_part = PK_LOGICAL_false;
   PK_ERROR_code_t error = PK_ENTITY_is_part(entity, &is_part);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["is_part"] = is_part;
@@ -2689,7 +2689,7 @@ Json::Value ENTITY_is_surf(const Json::Value &params) {
   PK_LOGICAL_t is_surf = PK_LOGICAL_false;
   PK_ERROR_code_t error = PK_ENTITY_is_part(entity, &is_surf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["is_surf"] = is_surf;
@@ -2703,7 +2703,7 @@ Json::Value ENTITY_is_topol(const Json::Value &params) {
   PK_LOGICAL_t is_topol = PK_LOGICAL_false;
   PK_ERROR_code_t error = PK_ENTITY_is_topol(entity, &is_topol);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["is_topol"] = is_topol;
@@ -2717,7 +2717,7 @@ Json::Value FACE_ask_body(const Json::Value &params) {
   PK_BODY_t body = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_FACE_ask_body(face, &body);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -2732,7 +2732,7 @@ Json::Value FACE_ask_edges(const Json::Value &params) {
   PK_VERTEX_t *edges = nullptr;
   PK_ERROR_code_t error = PK_FACE_ask_edges(face, &n_edges, &edges);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value edgeTags(Json::arrayValue);
   for (auto i = 0; i < n_edges; i += 1) {
@@ -2771,7 +2771,7 @@ Json::Value FACE_ask_oriented_surf(const Json::Value &params) {
   PK_SURF_t srf = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_FACE_ask_oriented_surf(face, &srf, &orientation);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["srf"] = srf;
@@ -2790,7 +2790,7 @@ Json::Value FACE_ask_surf(const Json::Value &params) {
   PK_SURF_t srf = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_FACE_ask_surf(face, &srf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["srf"] = srf;
@@ -2805,7 +2805,7 @@ Json::Value FACE_ask_vertices(const Json::Value &params) {
   PK_VERTEX_t *vertices = nullptr;
   PK_ERROR_code_t error = PK_FACE_ask_vertices(face, &n_vertices, &vertices);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value vertexTags;
   for (auto i = 0; i < n_vertices; i += 1) {
@@ -2829,7 +2829,7 @@ Json::Value FACE_attach_surf_fitting(const Json::Value &params) {
   PK_local_check_t local_check_result;
   PK_ERROR_code_t error = PK_FACE_attach_surf_fitting(face, local_check, &local_check_result);
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -2879,7 +2879,7 @@ Json::Value FACE_boolean_2(const Json::Value &params) {
   delete[] tools;
   tools = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   apiAssert(results.result != PK_boolean_result_failed_c, "Boolean error: " + to_string(results.result));
 
@@ -2943,7 +2943,7 @@ Json::Value FACE_delete_2(const Json::Value &params) {
   delete[] faces;
   faces = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   PK_TOPOL_track_r_f(&tracking);
 
@@ -3013,7 +3013,7 @@ Json::Value FACE_find_uvbox(const Json::Value &params) {
   PK_UVBOX_t uvbox;
   PK_ERROR_code_t error = PK_FACE_find_uvbox(face, &uvbox);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["uvbox"] = PK_UVBOX_t_to_JSON(&uvbox);
@@ -3059,7 +3059,7 @@ Json::Value FACE_imprint_curves_2(const Json::Value &params) {
   delete[] intervals;
   intervals = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   PK_ENTITY_track_r_f(&tracking);
 
@@ -3227,7 +3227,7 @@ Json::Value FACE_transform_2(const Json::Value &params) {
   delete[] transfs;
   transfs = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   PK_TOPOL_track_r_f(&tracking);
   PK_TOPOL_local_r_f(&results);
@@ -3321,7 +3321,7 @@ Json::Value INSTANCE_ask(const Json::Value &params) {
   PK_INSTANCE_sf_t instance_sf;
   PK_ERROR_code_t error = PK_INSTANCE_ask(instance, &instance_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["instance_sf"] = PK_INSTANCE_sf_t_to_JSON(&instance_sf);
@@ -3336,7 +3336,7 @@ Json::Value INSTANCE_change_part(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_INSTANCE_change_part(instance, part);
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -3349,7 +3349,7 @@ Json::Value INSTANCE_create(const Json::Value &params) {
   PK_INSTANCE_t instance = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_INSTANCE_create(&instance_sf, &instance);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["instance"] = instance;
@@ -3364,7 +3364,7 @@ Json::Value INSTANCE_replace_transf(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_INSTANCE_replace_transf(instance, transf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -3377,7 +3377,7 @@ Json::Value INSTANCE_transform(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_INSTANCE_transform(instance, transf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -3389,7 +3389,7 @@ Json::Value LINE_ask(const Json::Value &params) {
   PK_LINE_sf_t line_sf;
   PK_ERROR_code_t error = PK_LINE_ask(line, &line_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["line_sf"] = PK_LINE_sf_t_to_JSON(&line_sf);
@@ -3404,7 +3404,7 @@ Json::Value LINE_create(const Json::Value &params) {
   PK_LINE_t line = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_LINE_create(&line_sf, &line);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["line"] = line;
@@ -3543,7 +3543,7 @@ Json::Value PART_find_entity_by_ident(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_PART_find_entity_by_ident(part, cls, identifier, &entity);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["entity"] = entity;
@@ -3563,7 +3563,7 @@ Json::Value PART_receive(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_PART_receive(key.c_str(), &options, &n_parts, &parts);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value partTags(Json::arrayValue);
   for (int i = 0; i < n_parts; i += 1) {
@@ -3597,7 +3597,7 @@ Json::Value PART_receive_b(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_PART_receive_b(memblock, &options, &n_parts, &parts);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value partTags(Json::arrayValue);
   for (int i = 0; i < n_parts; i += 1) {
@@ -3658,7 +3658,7 @@ Json::Value PART_transmit(const Json::Value &params) {
   delete[] parts;
   parts = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   return Json::nullValue;
 }
@@ -3686,7 +3686,7 @@ Json::Value PART_transmit_b(const Json::Value &params) {
   delete[] parts;
   parts = nullptr;
 
-  assertModelingError;
+  assertAPICallingError;
 
   string base64_encoded_data = base64_encode(reinterpret_cast<const unsigned char *>(memblock.bytes), memblock.n_bytes);
 
@@ -3709,7 +3709,7 @@ Json::Value PLANE_ask(const Json::Value &params) {
   PK_PLANE_sf_t plane_sf;
   PK_ERROR_code_t error = PK_PLANE_ask(plane, &plane_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["plane_sf"] = PK_PLANE_sf_t_to_JSON(&plane_sf);
@@ -3724,7 +3724,7 @@ Json::Value PLANE_create(const Json::Value &params) {
   PK_PLANE_t plane = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_PLANE_create(&plane_sf, &plane);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["plane"] = plane;
@@ -3738,7 +3738,7 @@ Json::Value POINT_ask(const Json::Value &params) {
   PK_POINT_sf_t point_sf;
   PK_ERROR_code_t error = PK_POINT_ask(point, &point_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["point_sf"] = PK_POINT_sf_t_to_JSON(&point_sf);
@@ -3752,7 +3752,7 @@ Json::Value POINT_ask_part(const Json::Value &params) {
   PK_PART_t part = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_POINT_ask_part(point, &part);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["part"] = part;
@@ -3766,7 +3766,7 @@ Json::Value POINT_ask_vertex(const Json::Value &params) {
   PK_VERTEX_t vertex = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_EDGE_ask_body(point, &vertex);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["vertex"] = vertex;
@@ -3781,7 +3781,7 @@ Json::Value POINT_create(const Json::Value &params) {
   PK_POINT_t point = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_POINT_create(&point_sf, &point);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["point"] = point;
@@ -3799,7 +3799,7 @@ Json::Value POINT_make_minimum_body(const Json::Value &params) {
   PK_BODY_t body = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_POINT_make_minimum_body(point, &body);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -3811,7 +3811,7 @@ Json::Value SESSION_ask_parts(const Json::Value &params) {
   PK_PART_t *parts = NULL; //             --- parts (optional)
   PK_ERROR_code_t error = PK_SESSION_ask_parts(&n_parts, &parts);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value partTags(Json::arrayValue);
   for (int i = 0; i < n_parts; i += 1) {
@@ -3867,7 +3867,7 @@ Json::Value SPHERE_ask(const Json::Value &params) {
   PK_SPHERE_sf_t sphere_sf;
   PK_ERROR_code_t error = PK_SPHERE_ask(sphere, &sphere_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["sphere_sf"] = PK_SPHERE_sf_t_to_JSON(&sphere_sf);
@@ -3882,7 +3882,7 @@ Json::Value SPHERE_create(const Json::Value &params) {
   PK_SPHERE_t sphere = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_SPHERE_create(&sphere_sf, &sphere);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["sphere"] = sphere;
@@ -3941,7 +3941,7 @@ Json::Value SURF_eval(const Json::Value &params) {
   PK_VECTOR_t p[1];
   PK_ERROR_code_t error = PK_SURF_eval(surf, uv, 0, 0, PK_LOGICAL_false, p);
 
-  assertModelingError;
+  assertAPICallingError;
 
   //TODO: we only return the point, there is no derivs!
   Json::Value returnValue;
@@ -4092,7 +4092,7 @@ Json::Value TOPOL_eval_mass_props(const Json::Value &params) {
   PK_ERROR_code_t
       error = PK_TOPOL_eval_mass_props(n_topols, topols, 1, &mass_opts, amount, mass, c_of_g, m_of_i, periphery);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
 
@@ -4140,7 +4140,7 @@ Json::Value TOPOL_find_box(const Json::Value &params) {
   PK_BOX_t uvbox;
   PK_ERROR_code_t error = PK_TOPOL_find_box(topol, &uvbox);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["uvbox"] = PK_BOX_t_to_JSON(&uvbox);
@@ -4229,7 +4229,7 @@ Json::Value TOPOL_render_facet(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_TOPOL_render_facet(1, bodies, NULL, PK_ENTITY_null, &foptions);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["graphics"] = *PKSession::getGraphicsOutputObj();
@@ -4257,7 +4257,7 @@ Json::Value TOPOL_render_line(const Json::Value &params) {
 
   PK_ERROR_code_t error = PK_TOPOL_render_line(1, bodies, NULL, PK_ENTITY_null, &loptions);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["graphics"] = *PKSession::getGraphicsOutputObj();
@@ -4283,7 +4283,7 @@ Json::Value TRANSF_ask(const Json::Value &params) {
   PK_TRANSF_sf_t transf_sf;
   PK_ERROR_code_t error = PK_TRANSF_ask(transf, &transf_sf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["transf_sf"] = PK_TRANSF_sf_t_to_JSON(&transf_sf);
@@ -4306,7 +4306,7 @@ Json::Value TRANSF_create(const Json::Value &params) {
   PK_TRANSF_t transf = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_TRANSF_create(&transf_sf, &transf);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["transf"] = transf;
@@ -4352,7 +4352,7 @@ Json::Value VERTEX_ask_body(const Json::Value &params) {
   PK_BODY_t body = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_VERTEX_ask_body(vertex, &body);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["body"] = body;
@@ -4367,7 +4367,7 @@ Json::Value VERTEX_ask_faces(const Json::Value &params) {
   PK_VERTEX_t *faces = nullptr;
   PK_ERROR_code_t error = PK_VERTEX_ask_faces(vertex, &n_faces, &faces);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value faceTags(Json::arrayValue);
   for (auto i = 0; i < n_faces; i += 1) {
@@ -4397,7 +4397,7 @@ Json::Value VERTEX_ask_point(const Json::Value &params) {
   PK_POINT_t point = PK_ENTITY_null;
   PK_ERROR_code_t error = PK_VERTEX_ask_point(vertex, &point);
 
-  assertModelingError;
+  assertAPICallingError;
 
   Json::Value returnValue;
   returnValue["point"] = point;

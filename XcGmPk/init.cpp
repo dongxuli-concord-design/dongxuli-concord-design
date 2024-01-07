@@ -32,20 +32,21 @@ void call(const FunctionCallbackInfo<Value> &args) {
   v8::String::Utf8Value str(isolate, args[0]);
   std::string apiStr(*str);
   Json::Value returnValue;
-  returnValue["error"] = Json::nullValue;
-  returnValue["pkReturnValue"] = Json::nullValue;
-
   try {
     Json::Value pkReturnValue = callAPI(apiStr);
+    returnValue["error"] = Json::nullValue;
     returnValue["pkReturnValue"] = pkReturnValue;
   } catch (string error) {
     returnValue["error"] = error;
+    returnValue["pkReturnValue"] = Json::nullValue;
     cerr<<"Exception: "<<error<<endl;
   } catch (const std::exception &e) {
     returnValue["error"] = e.what();
+    returnValue["pkReturnValue"] = Json::nullValue;
     cerr<<"Exception: "<< e.what()<<endl;
   } catch (...) {
     returnValue["error"] = "Unknown exception";
+    returnValue["pkReturnValue"] = Json::nullValue;
     std::cerr << "Unknown exception"<<endl;
   }
 

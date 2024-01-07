@@ -22,6 +22,7 @@ const commonFiles = [
   'index.html',
   'main.js',
   '3rd',
+  'node_modules',
 ];
 
 function buildDarwinRelease() {
@@ -38,7 +39,7 @@ function buildDarwinRelease() {
 
   // Copy nw.js
   _runCommands([
-    `cp -R ../XcExternal/nwjs.darwin Concord.darwin`,
+    `cp -R ../XcExternal/nwjs.sdk.darwin Concord.darwin`,
   ]);
 
   // Rename app folders
@@ -55,6 +56,7 @@ function buildDarwinRelease() {
   // Copy files
   const darwinFiles = [
     'XcSys_darwin.bin',
+    'XcGs_darwin.bin',
     'XcGm_darwin.bin',
     'XcGmPk_darwin.node',
     'XcUI_darwin.bin',
@@ -92,7 +94,7 @@ function buildWin32Release() {
 
   // Copy nw.js
   _runCommands([
-    `cp -R ../XcExternal/nwjs.win32 Concord.win32`,
+    `cp -R ../XcExternal/nwjs.sdk.win32 Concord.win32`,
   ]);
 
   // Rename app folders
@@ -109,6 +111,7 @@ function buildWin32Release() {
   // Copy files
   const win32Files = [
     'XcSys_win32.bin',
+    'XcGs_win32.bin',
     'XcGm_win32.bin',
     'XcGmPk_win32.node',
     'XcUI_win32.bin',
