@@ -606,5 +606,19 @@ class XcGm3dMatrix {
     return lerpMatrix;
   }
 
+  // The XYZ-direction vectors of the rotation matrix
+  get XColumnVector3() {
+    const m = this.entry;
+    return [m[0][0], m[1][0], m[2][0]];
+  }
+  get YColumnVector3() {
+    const m = this.entry;
+    return [m[0][1], m[1][1], m[2][1]];
+  }
+  get ZColumnVector3() {
+    const m = this.entry;
+    return [m[0][2], m[1][2], m[2][2]];
+  }
+
   // todo: Other useful functions
 }
