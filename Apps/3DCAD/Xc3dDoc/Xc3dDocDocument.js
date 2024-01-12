@@ -566,18 +566,17 @@ class Xc3dDocDocument {
   }
 
   #disposeRendering (renderingObject) {
-    // TODO
-    // renderingObject.traverse(obj=> {
-    //   if (obj.geometry) {
-    //     obj.geometry.dispose();
-    //     obj.geometry = null;
-    //   }
+    renderingObject.traverse(obj=> {
+      if (obj.geometry) {
+        obj.geometry.dispose();
+        obj.geometry = null;
+      }
 
-    //   if (obj.material) {
-    //     obj.material.dispose();
-    //     obj.material = null;
-    //   }
-    // });
+      if (obj.material) {
+        obj.material.dispose();
+        obj.material = null;
+      }
+    });
   }
 
   #removeDrawableObject({drawableObject}) {
