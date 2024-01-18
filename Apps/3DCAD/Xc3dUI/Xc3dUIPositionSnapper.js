@@ -110,7 +110,6 @@ class Xc3dUIPositionSnapper {
         // Get snap points from rendering objects
         // TODO: Three.js has a bug that the intersect position is not consistent.
         const mark = this.#makeSnapMark({position: intersect.position, color: new THREE.Color('black')});
-        console.log('snap rendering objects', intersect.position, intersect.renderingObject);
         returnValue = {
           position: intersect.position,
           mark,
