@@ -236,8 +236,7 @@ class XcGmQuaternion {
   }
 
   static fromAxisAngle({axisVector, angle}) {
-    const v = {...axisVector};
-    v.normalize();
+    const v = axisVector.normal;
     v.multiply({scale: Math.sin(angle/2)});
     return new XcGmQuaternion({w: Math.cos(angle/2), x: v.x, y: v.y, z: v.z});
   }
