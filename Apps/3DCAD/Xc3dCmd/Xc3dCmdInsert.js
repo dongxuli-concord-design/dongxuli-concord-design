@@ -70,7 +70,7 @@ class Xc3dCmdInsert {
 
   * #onWaitForFile() {
     const {inputState, files} = yield* Xc3dUIManager.getFile({
-      prompt: this.#i18n.T`Please select file`,
+      prompt: this.#i18n.T`Please select xc3d file`,
       accept: '.xc3d',
     });
     if (inputState === Xc3dUIInputState.eInputNormal) {
@@ -89,8 +89,6 @@ class Xc3dCmdInsert {
     const {inputState, position} = yield* Xc3dUIManager.getPosition({
       prompt: this.#i18n.T`Please specify location`,
       draggingCallback: function (point) {
-        //console.log('update graphics in cmd... Screenpoint:', pointInScreen.x, pointInScreen.y,
-        //   '3D point ', point.x, point.y, point.z);
         renderingObject.position.copy(point.toThreeVector3());
         Xc3dUIManager.redraw();
       }

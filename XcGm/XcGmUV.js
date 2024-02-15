@@ -8,7 +8,7 @@ class XcGmUV {
   }
 
   static fromJSON({json}) {
-    const uv = new XcGmUV({u: json.u, v: json.v});
+    let uv = new XcGmUV({u: json.u, v: json.v});
     return uv;
   }
 

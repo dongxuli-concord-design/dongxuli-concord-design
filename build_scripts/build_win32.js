@@ -86,18 +86,6 @@ function build({baseFolderPath}) {
     ]);
   }
 
-  // XcGm2
-  {
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcGm2'));
-    process.chdir(projectFolder);
-
-    _runCommands([
-      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
-      'copy build\\* ..\\XcDebug\\',
-      'copy build\\*.bin ..\\XcMain\\',      
-    ]);
-  }
-
   // XcImage
   {
     const projectFolder = path.resolve(path.join(baseFolderPath, 'XcImage'));

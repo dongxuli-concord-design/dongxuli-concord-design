@@ -12,7 +12,7 @@ class XcGmUVBox {
   }
 
   static fromJSON({json}) {
-    const uvBox = new XcGmUVBox({
+    let uvBox = new XcGmUVBox({
       lowU: json.lowU,
       lowV: json.lowV,
       highU: json.highU,

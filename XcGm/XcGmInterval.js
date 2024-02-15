@@ -8,7 +8,7 @@ class XcGmInterval {
   }
 
   static fromJSON({json}) {
-    const interval = new XcGmInterval({low: json.low, high: json.high});
+    let interval = new XcGmInterval({low: json.low, high: json.high});
     return interval;
   }
 

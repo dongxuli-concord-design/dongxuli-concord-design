@@ -41,6 +41,7 @@ class Xc3dCmdManager {
       'Rotate': '旋转物体',
       'Coordinate system': '设置坐标系',
       'AppStore': '应用商店',
+      'Import STL': '导入STL',
       'Export STL': '导出STL',
       'Block': '方块',
       'Cone': '圆锥',
@@ -58,8 +59,6 @@ class Xc3dCmdManager {
       'Save': '保存',
       'Sheet from wires': '从线框生成面体',
       'Insert': '插入外部文件',
-      'Import': '导入XT文件',
-      'Export XT': '导出XT',
       'Measure': '测量',
     };
 
@@ -231,6 +230,10 @@ class Xc3dCmdManager {
       }),
 
       new Xc3dUICommand({
+        name: Xc3dCmdManager.#i18n.T`Import STL`,
+        entry: Xc3dCmdInsertSTL.command
+      }),
+      new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`Export STL`,
         entry: Xc3dCmdExportSTL.command
       }),
@@ -239,23 +242,13 @@ class Xc3dCmdManager {
         entry: Xc3dCmdInsert.command
       }),
       new Xc3dUICommand({
-        name: Xc3dCmdManager.#i18n.T`Import`,
-        entry: Xc3dCmdImportXT.command
-      }),
-      new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`AppStore`,
         entry: Xc3dCmdAppStore.command
       }),
       new Xc3dUICommand({
-        name: Xc3dCmdManager.#i18n.T`Export XT`,
-        entry: Xc3dCmdExportXT.command
-      }),
-
-      new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`Programmable modeling`,
         entry: Xc3dCmdProgrammableModel.command
       }),
-
       new Xc3dUICommand({
         name: Xc3dCmdManager.#i18n.T`Code`,
         entry: Xc3dCmdCode.command

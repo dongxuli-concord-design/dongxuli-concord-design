@@ -51,12 +51,17 @@ class Xc3dDocReferencePoint extends Xc3dDocDrawableObject {
   }
 
   generateRenderingObject() {
-    const point = XcGm3dPoint._pKCreate({position: this.#position});
-    const body = point.createMinimumBody();
-    return Xc3dDocDocument.generateRenderingForBody({
-      body,
-      color: new THREE.Color('purple')
+    const vertices = new Float32Array([...this.#position.toArray()]);
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+
+    const material = new THREE.PointsMaterial({
+      color: new THREE.Color('purple'),
+      size: 10,
+      sizeAttenuation: false
     });
+    const renderingObject = new THREE.Points(geometry, material);
+    return renderingObject;
   }
 
   transform({matrix}) {

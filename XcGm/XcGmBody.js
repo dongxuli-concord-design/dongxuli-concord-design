@@ -1,551 +1,162 @@
 class XcGmBody extends XcGmPart {
 
-  static _PKBodyType = {
-    MINIMUM: 5603,
-    ACORN: 5606,
-    WIRE: 5604,
-    SHEET: 5602,
-    SOLID: 5601,
-    GENERAL: 5605,
-    UNSPECIFIED: 5607,
-    EMPTY: 5608,
-    COMPOUND: 5609
+  static BODY_TYPE = {
+    MINIMUM: Symbol('MINIMUM'),
+    ACORN: Symbol('ACORN'),
+    WIRE: Symbol('WIRE'),
+    SHEET: Symbol('SHEET'),
+    SOLID: Symbol('SOLID'),
+    GENERAL: Symbol('GENERAL'),
+    UNSPECIFIED: Symbol('UNSPECIFIED'),
+    EMPTY: Symbol('EMPTY'),
+    COMPOUND: Symbol('COMPOUND')
   };
 
-  static _PKBooleanFunction = {
-    Intersection: Symbol('Intersection'),
-    Subtraction: Symbol('Subtraction'),
-    Union: Symbol('Union'),
+  static BOOLEAN_FUNCTION = {
+    INTERSECTION: Symbol('INTERSECTION'),
+    SUBTRACTION: Symbol('SUBTRACTION'),
+    UNION: Symbol('UNION')
   };
 
   constructor() {
     super();
   }
 
-  get _pkFaces() {
-    const method = 'BODY_ask_faces';
-    const params = {
-      body: this._pkTag
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const faces = pkReturnValue.faces.map(faceTag => XcGmEntity._getPkObjectFromPkTag({entityTag: faceTag}));
-
-    return faces;
+  get faces() {
   }
 
-  get _pkEdges() {
-    const method = 'BODY_ask_edges';
-    const params = {
-      body: this._pkTag
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const edges = pkReturnValue.edges.map(edgeTag => XcGmEntity._getPkObjectFromPkTag({entityTag: edgeTag}));
-    return edges;
+  get edges() {
   }
 
-  get _pkVertices() {
-    const method = 'BODY_ask_vertices';
-    const params = {
-      body: this._pkTag
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const vertices = pkReturnValue.vertices.map(vertexTag => XcGmEntity._getPkObjectFromPkTag({entityTag: vertexTag}));
-    return vertices;
+  get vertices() {
   }
 
-  get _pkType() {
-    const method = 'BODY_ask_type';
-    const params = {
-      body: this._pkTag
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    return pkReturnValue._PKBodyType;
+  get type() {
   }
 
-  static _pkCreateSolidBlock({x, y, z, coordinateSystem = null}) {
-    let basis_set = null;
+  static createMinimumBody({position}) {
 
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_solid_block';
-    const params = {
-      x: x,
-      y: y,
-      z: z,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const block = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return block;
   }
 
-  static _pkCreateSolidCone({radius, height, semiAngle, coordinateSystem = null}) {
-    let basis_set = null;
-
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_solid_cone';
-    const params = {
-      radius: radius,
-      height: height,
-      semi_angle: semiAngle,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const cone = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return cone;
+  static createSolidBlock({x, y, z, coordinateSystem = new XcGmCoordinateSystem()}) {
   }
 
-  static _pkCreateSolidCylinder({radius, height, coordinateSystem = null}) {
-    let basis_set = null;
-
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_solid_cyl';
-    const params = {
-      radius: radius,
-      height: height,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const cylinder = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return cylinder;
+  static createSolidCone({radius, height, semiAngle, coordinateSystem = new XcGmCoordinateSystem()}) {
   }
 
-  static _pkCreateSolidPrism({radius, height, sides, coordinateSystem = null}) {
-    let basis_set = null;
-
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_solid_prism';
-    const params = {
-      radius: radius,
-      height: height,
-      n_sides: sides,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const prism = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return prism;
+  static createSolidCylinder({radius, height, coordinateSystem = new XcGmCoordinateSystem()}) {
   }
 
-  static _pkCreateSolidSphere({radius, coordinateSystem = null}) {
-    let basis_set = null;
-
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_solid_sphere';
-    const params = {
-      radius: radius,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const sphere = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return sphere;
+  static createSolidPrism({radius, height, sides, coordinateSystem = new XcGmCoordinateSystem()}) {
   }
 
-  static _pkCreateSolidTorus({majorRadius, minorRadius, coordinateSystem = null}) {
-    let basis_set = null;
-
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_solid_torus';
-    const params = {
-      major_radius: majorRadius,
-      minor_radius: minorRadius,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const torus = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return torus;
+  static createSolidSphere({radius, coordinateSystem = new XcGmCoordinateSystem()}) {
   }
 
-  static _pkCreateSheetCircle({radius, coordinateSystem = null}) {
-    let basis_set = null;
+  static createSolidTorus({majorRadius, minorRadius, coordinateSystem = new XcGmCoordinateSystem()}) {
+  }
 
-    if (coordinateSystem) {
-      basis_set = _XcGmPK_AXIS2_sf_t.fromXcGm3dCoordinateSystem({coordinateSystem});
-    }
-
-    const method = 'BODY_create_sheet_circle';
-    const params = {
-      radius: radius,
-      basis_set
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-    const sheetCircle = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return sheetCircle;
+  static createSheetCircle({radius, coordinateSystem = new XcGmCoordinateSystem()}) {
   };
 
-  static _pkSweep({profiles, path, pathVertices}) {
-    const profileTags = profiles.map(profile => profile._pkTag);
-    const pathTag = path._pkTag;
-    const pathVerticesTags = pathVertices.map(pathVertex => pathVertex._pkTag);
-
-    const method = 'BODY_make_swept_body_2';
-    const params = {
-      profiles: profileTags,
-      path: pathTag,
-      pathVertices: pathVerticesTags,
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-
-    return body;
+  extrudeAlong({direction, options}) {
   }
 
-  static _pkLoft({profiles, startVertices, guideWires}) {
-    XcGmAssert({
-      assertion: profiles.length === startVertices.length,
-      message: `Profiles and start vertices have different length.`
-    });
-
-    const profileTags = profiles.map(profile => profile._pkTag);
-    const startVerticesTags = startVertices.map(startVertex => startVertex._pkTag);
-    const guideWiresTags = guideWires.map(guideWire => guideWire._pkTag);
-
-    const method = 'BODY_make_lofted_body';
-    const params = {
-      profiles: profileTags,
-      start_vertices: startVerticesTags,
-      guide_wires: guideWiresTags
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-
-    return body;
+  spinAround({axis, angle}) {
   }
 
-  static _pkSew({bodies, gapWidthBound}) {
-    const bodyTags = bodies.map(body => body._pkTag);
-
-    const method = 'BODY_sew_bodies';
-    const params = {
-      bodies: bodyTags,
-      gap_width_bound: gapWidthBound,
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const sewnBodies = pkReturnValue.sewn_bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
-    const unSewnBodies = pkReturnValue.unsewn_bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
-
-    return {
-      sewnBodies,
-      unSewnBodies,
-    };
+  transformBy({matrix}) {
   }
 
-  _pkExtrude({direction, distance}) {
-    //todo: validate options
-
-    const options = new _PK_BODY_extrude_o_t();
-    options.end_bound.distance = distance;
-
-    const method = 'BODY_extrude';
-    const params = {
-      profile: this._pkTag,
-      path: new _XcGmPK_VECTOR_t({coord: direction.toArray()}),
-      options,
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const body = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.body});
-    return body;
+  boolean({tools, func}) {
   }
 
-  _pkSpin({axis, angle}) {
-    //todo: validate options
-
-    const pkAxis1SF = _XcGmPK_AXIS1_sf_t.fromXcGm3dAxis({axis});
-
-    const method = 'BODY_spin';
-    const params = {
-      body: this._pkTag,
-      axis: pkAxis1SF.toJSON(),
-      angle: angle
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
+  fixBlends() {
   }
 
-  _pkFirstEdge() {
-    const method = 'BODY_ask_first_edge';
-    const params = {
-      body: this._pkTag,
-    };
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const firstEdge = XcGmEntity._getPkObjectFromPkTag({entityTag: pkReturnValue.first_edge});
-    return firstEdge;
+  hollowFaces({faces, offset}) {
   }
 
-  _pkTransform({matrix}) {
-    const transfSF = _XcGmPK_TRANSF_sf_t.fromXcGm3dMatrix({matrix});
-    const transf = _XcGmTransf.create({transfSF});
-
-    const method = 'BODY_transform_2';
-    const params = {
-      body: this._pkTag,
-      transf: transf._pkTag
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
+  imprintCurve({curve, bounds}) {
   }
 
-  _pkUnite({tools}) {
-    const toolTags = tools.map(tool => tool._pkTag);
-
-    const method = 'BODY_unite_bodies';
-    const params = {
-      target: this._pkTag,
-      tools: toolTags,
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
-    return resultBodies;
-  }
-
-  _pkBoolean({tools, func}) {
-    let PK_boolean_param = 0;
-    if (func === XcGmBody._PKBooleanFunction.Intersection) {
-      PK_boolean_param = _PK_boolean_intersect_c;
-    } else if (func === XcGmBody._PKBooleanFunction.Subtraction) {
-      PK_boolean_param = _PK_boolean_subtract_c;
-    } else if (func === XcGmBody._PKBooleanFunction.Union) {
-      PK_boolean_param = _PK_boolean_unite_c;
-    }
-
-    const toolTags = tools.map(tool => tool._pkTag);
-
-    const method = 'BODY_boolean_2';
-    const params = {
-      target: this._pkTag,
-      tools: toolTags,
-      func: PK_boolean_param
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const resultBodies = pkReturnValue.bodies.map(bodyTag => XcGmEntity._getPkObjectFromPkTag({entityTag: bodyTag}));
-    return resultBodies;
-  }
-
-  _pkFixBlends() {
-    const method = 'BODY_fix_blends';
-    const params = {
-      body: this._pkTag
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-  }
-
-  _pkHollowFaces({faces, offset}) {
-    const faceTags = faces.map(face => face._pkTag);
-
-    const method = 'BODY_hollow_2';
-    const params = {
-      body: this._pkTag,
-      faces: faceTags,
-      offset: offset
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-  }
-
-  _pkImprintCurve({curve, bounds}) {
-    const method = 'BODY_imprint_curve';
-    const params = {
-      body: this._pkTag,
-      curve: curve._pkTag,
-      bounds: bounds.map(bound =>  _XcGmPK_INTERVAL_t.fromXcGmInterval({interval: bound}).toJSON()),
-    };
-
-    const {error, pkReturnValue} = _PK_XcGmCallPkApi({method, params});
-    XcGmAssert({assertion: !error, message: `Modeling error: ${error}`});
-
-    const newEdges = pkReturnValue.new_edges.map(newEdgeTag => XcGmEntity._getPkObjectFromPkTag({entityTag: newEdgeTag}));
-    const newFaces = pkReturnValue.new_faces.map(newFaceTag => XcGmEntity._getPkObjectFromPkTag({entityTag: newFaceTag}));
-    return {newEdges, newFaces};
-  }
-
-  _pkToSTL() {
-    const allRenderingFacetData = this._pkRenderFacet({resolution: 'high'});
-    const stlFileContent = [];
-
-    const vertices = [];
-    const vertexNormals = [];
-    const indices = [];
-    let indexOffset = 0;
-
-    for (const renderingFacetData of allRenderingFacetData) {
-      if (renderingFacetData.type === 'L3TPFI') {
-        // Facet plus normals plus parameters
-        for (let i = 0; i < renderingFacetData.facets.length; i += 1) {
-          // For each _pkVertices in
-          const facet = renderingFacetData.facets[i];
-          const vertex = new THREE.Vector3(facet.point[0], facet.point[1], facet.point[2]);
-          const normal = new THREE.Vector3(facet.normal[0], facet.normal[1], facet.normal[2]);
-
-          vertices.push(vertex);
-          vertexNormals.push(normal);
-        }
-
-        // Set indices
-        for (let i = 0; i < renderingFacetData.facets.length - 2; i += 3) {
-          indices.push(indexOffset + i, indexOffset + i + 1, indexOffset + i + 2);
-        }
-        indexOffset += renderingFacetData.facets.length;
-      } else if (renderingFacetData.type === 'L3TPTI') {
-        // Facet strips plus normals plus parameters
-        for (let i = 0; i < renderingFacetData.facets.length; i += 1) {
-          // For each _pkVertices in
-          const facet = renderingFacetData.facets[i];
-          const vertex = new THREE.Vector3(facet.point[0], facet.point[1], facet.point[2]);
-          const normal = new THREE.Vector3(facet.normal[0], facet.normal[1], facet.normal[2]);
-
-          vertices.push(vertex);
-          vertexNormals.push(normal);
-        }
-
-        // Set indices
-        for (let i = 0; i < renderingFacetData.facets.length - 2; i += 1) {
-          if ((i % 2) == 0) {
-            indices.push(indexOffset + i, indexOffset + i + 1, indexOffset + i + 2);
-          } else {
-            indices.push(indexOffset + i + 1, indexOffset + i, indexOffset + i + 2);
-          }
-        }
-
-        indexOffset += renderingFacetData.facets.length;
-      } else {
-        XcSysAssert({assertion: 'Unexpected facet type.'});
+  findVertexByPosition({position}) {
+    let vertices = this.vertices;
+    for (const vertex of vertices) {
+      let point = vertex.point;
+      if (position.isEqualTo({position: point.position})) {
+        return vertex;
       }
     }
 
-    // Generate STL file
-    stlFileContent.push(`solid body`);
-    for (let i = 0; i < indices.length - 2; i += 3) {
-      stlFileContent.push(` facet normal ${vertexNormals[indices[i]].x} ${vertexNormals[indices[i]].y} ${vertexNormals[indices[i]].z}`);
-      stlFileContent.push(`  outer loop`);
-      stlFileContent.push(`   vertex ${vertices[indices[i]].x} ${vertices[indices[i]].y} ${vertices[indices[i]].z}`);
-      stlFileContent.push(`   vertex ${vertices[indices[i+1]].x} ${vertices[indices[i+1]].y} ${vertices[indices[i+1]].z}`);
-      stlFileContent.push(`   vertex ${vertices[indices[i+2]].x} ${vertices[indices[i+2]].y} ${vertices[indices[i+2]].z}`);
-      stlFileContent.push(`  endloop`);
-      stlFileContent.push(` endfacet`);
+    return null;
+  }
+
+  findEdgeByPositions({positions}) {
+    //TODO
+    return null;
+  }
+
+  findEdgeByVertices({vertex1, vertex2}) {
+    let edges = this.edges;
+    for (const edge of edges) {
+      let {v1, v2} = edge.vertices;
+      if ((v1 === vertex1) && (v2 === vertex2)) {
+        return edge;
+      }
     }
-    stlFileContent.push(`endsolid body`);
-    const stlFileString = stlFileContent.join('\r\n');
 
-    return stlFileString;
+    return null;
   }
 
-  _pkFindVertexByPosition({position}) {
-    const vertices = this._pkVertices;
-    const vertexFound = vertices.find(vertex => {
-      const point = vertex.point;
-      return position.isEqualTo({position: point.position})
-    });
-
-    return vertexFound ? vertexFound: null;
-  }
-
-  _pkFindEdgeByPositions({position1, position2}) {
-    const edges = this._pkEdges;
-    const edgeFound = edges.find(edge => {
-      const {vertex1, vertex2} = edge._pkVertices;
-      const positions = [vertex1.point.position, vertex2.point.position];
-      const position1Found = positions.find(position => position.isEqualTo({position: position1}));
-      const position2Found = positions.find(position => position.isEqualTo({position: position2}));
-      return position1Found && position2Found;
-    });
-
-    return nuedgeFound ? edgeFound: null;
-  }
-
-  _pkFindEdgeByVertices({vertex1, vertex2}) {
-    const edges = this._pkEdges;
-    const edgeFound = edges.find(edge => {
-      const {v1, v2} = edge._pkVertices;
-      return (v1 === vertex1) && (v2 === vertex2);
-    });
-
-    return edgeFound ? edgeFound: null;
-  }
-
-  _pkFindFaceByPositions({positions}) {
-    const foundFaces = [];
+  findFaceByPositions({positions}) {
+    let foundFaces = [];
 
     // TODO
 
     return foundFaces;
   }
 
-  _pkFindFaceByEdges({edges}) {
-    const foundFaces = this._pkFaces.filter(face => edges.every(edge => face._pkEdges.includes(edge)));
+  findFaceByEdges({edges}) {
+    let foundFaces = [];
+
+    let faces = this.faces;
+    for (const face of faces) {
+      let edgesOfFace = face.edges;
+      if (edges.every(edge => edgesOfFace.includes(edge))) {
+        foundFaces.push(face);
+      }
+    }
+
     return foundFaces;
   }
 
-  _pkFindFaceByVertices({vertices}) {
-    const foundFaces = this._pkFaces.filter(face => vertices.every(vertex => face._pkVertices.includes(vertex)));
+  findFaceByVertices({vertices}) {
+    let foundFaces = [];
+
+    let faces = this.faces;
+    for (const face of faces) {
+      let verticesOfFace = face.vertices;
+      if (vertices.every(vertex => verticesOfFace.includes(vertex))) {
+        foundFaces.push(face);
+      }
+    }
+
     return foundFaces;
   }
 
-  _pkFindVertex({callback}) {
-    const vertices = this._pkVertices;
+  findVertexWithFilter({callback}) {
+    let vertices = this.vertices;
     return vertices.filter(callback);
   }
 
-  _pkFindEdge({callback}) {
-    const edges = this._pkEdges;
+  findEdgeWithFilter({callback}) {
+    let edges = this.edges;
     return edges.filter(callback);
   }
 
-  _pkFindFace({callback}) {
-    const faces = this._pkFaces;
+  findFaceWithFilter({callback}) {
+    let faces = this.faces;
     return faces.filter(callback);
   }
 }

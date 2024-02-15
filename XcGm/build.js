@@ -5,9 +5,6 @@ const fs = require('fs');
 
 // Build single JS file
 const scripts = [
-  '_XcGmPkTokens.js',
-  '_XcGmPkParams.js',
-
   'XcGmAssert.js',
 
   'XcGmPrecision.js',
@@ -50,9 +47,7 @@ const scripts = [
   'XcGmUV.js',
   'XcGmUVBox.js',
   'XcGm3dBox.js',
-  'XcGmPkRequest.js',
 
-  '_XcGmTransf.js',
   'XcGmPart.js',
   'XcGmBody.js',
   'XcGmRegion.js',
