@@ -56,11 +56,9 @@ function buildDarwinRelease() {
   // Copy files
   const darwinFiles = [
     'XcSys_darwin.bin',
-    'XcGs_darwin.bin',
     'XcGm_darwin.bin',
     'XcGmPk_darwin.node',
     'XcUI_darwin.bin',
-    'libpskernel.dylib',
   ];
 
   // Common files
@@ -111,11 +109,9 @@ function buildWin32Release() {
   // Copy files
   const win32Files = [
     'XcSys_win32.bin',
-    'XcGs_win32.bin',
     'XcGm_win32.bin',
     'XcGmPk_win32.node',
     'XcUI_win32.bin',
-    'pskernel.dll',
   ];
 
   // Common files
