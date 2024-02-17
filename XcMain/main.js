@@ -15,5 +15,4 @@ function ___xc_load_lib(lib) {
 
 ___xc_load_lib('XcUI');
 ___xc_load_lib('XcGm');
-___xc_load_lib('XcGs');
 ___xc_load_lib('XcSys');
