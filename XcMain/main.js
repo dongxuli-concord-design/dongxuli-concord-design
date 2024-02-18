@@ -4,7 +4,7 @@ const win = nw.Window.get();
 
 function ___xc_load_lib(lib) {
   if (fs.existsSync(`${lib}.js`)) {
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     script.setAttribute('src', `${lib}.js`);
     script.setAttribute('async', false);
     document.head.appendChild(script);

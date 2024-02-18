@@ -123,10 +123,10 @@ class Xc3dUIManager {
     Xc3dUIManager.ucsScene = new THREE.Scene();
 
     // Lights
-    Xc3dUIManager.mainScene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    Xc3dUIManager.mainScene.add(new THREE.AmbientLight(0xffffff, 1));
     Xc3dUIManager.mainScene.add(new THREE.HemisphereLight(0x404040, 0xffffff, 0.5));
 
-    Xc3dUIManager.overlayScene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    Xc3dUIManager.overlayScene.add(new THREE.AmbientLight(0xffffff, 1));
     Xc3dUIManager.overlayScene.add(new THREE.HemisphereLight(0x404040, 0xffffff, 0.5));
 
     Xc3dUIManager.webGLRenderer = new THREE.WebGLRenderer({
@@ -147,7 +147,7 @@ class Xc3dUIManager {
     Xc3dUIManager.renderingCamera = new THREE.OrthographicCamera(-10, 10, 10, -10, 1, 2000);
 
     // Camera light
-    Xc3dUIManager.renderingCamera.add(new THREE.PointLight(0xffffff, 0.5));
+    Xc3dUIManager.renderingCamera.add(new THREE.PointLight(0xffffff, 0.8));
     Xc3dUIManager.mainScene.add(Xc3dUIManager.renderingCamera);
 
     Xc3dUIManager.resetCamera();
