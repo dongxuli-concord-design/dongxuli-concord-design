@@ -74,18 +74,6 @@ function build({baseFolderPath}) {
     ]);
   }
 
-  // XcImage
-  {
-    const projectFolder = path.resolve(path.join(baseFolderPath, 'XcImage'));
-    process.chdir(projectFolder);
-
-    _runCommands([
-      `${baseFolderPath}\\XcExternal\\node.win32\\node build.js`,
-      'copy build\\* ..\\XcDebug\\',
-      'copy build\\*.bin ..\\XcMain\\',      
-    ]);
-  }
-
   // Xc3d
   {
     const projectFolder = path.resolve(path.join(baseFolderPath, 'Apps/3DCAD/Xc3d'));

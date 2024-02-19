@@ -1,8 +1,0 @@
-class XcImageTest {
-  constructor() {
-  }
-
-  foo() {
-
-  }
-}
