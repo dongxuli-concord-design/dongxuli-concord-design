@@ -128,14 +128,14 @@ class Xc3dCmdCopy {
 
     Xc3dUIManager.removeCustomRenderingObject({renderingObject: renderingObjectCopy});
 
-    if (inputState !== Xc3dUIInputState.eInputNormal) {
-      return Xc3dCmdCopy.#CommandState.Quit;
-    } else {
+    if (inputState === Xc3dUIInputState.eInputNormal) {
       const newModel = this.#model.clone();
-      newModel._pkTransform({matrix: transform});
+      newModel.transform({matrix: transform});
       Xc3dUIManager.document.addDrawableObject({drawableObject: newModel});
       Xc3dUIManager.redraw();
 
+      return Xc3dCmdCopy.#CommandState.Quit;
+    } else {
       return Xc3dCmdCopy.#CommandState.Quit;
     }
   }

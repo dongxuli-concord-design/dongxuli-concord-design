@@ -128,13 +128,12 @@ class Xc3dCmdMove {
     Xc3dUIManager.showDrawableObject({drawableObject: this.#model});
     Xc3dUIManager.removeCustomRenderingObject({renderingObject: renderingObjectCopy});
 
-    if (inputState !== Xc3dUIInputState.eInputNormal) {
-      return Xc3dCmdMove.#CommandState.Quit;
-    } else {
+    if (inputState === Xc3dUIInputState.eInputNormal) {
       this.#model.transform({matrix: transform});
       Xc3dUIManager.document.modifyDrawableObject({drawableObject: this.#model});
       Xc3dUIManager.redraw();
-
+      return Xc3dCmdMove.#CommandState.Quit;
+    } else {
       return Xc3dCmdMove.#CommandState.Quit;
     }
   }

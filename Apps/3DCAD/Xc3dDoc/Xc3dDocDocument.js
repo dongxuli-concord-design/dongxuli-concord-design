@@ -660,6 +660,8 @@ class Xc3dDocDocument {
   }
 
   modifyDrawableObject({drawableObject}) {
+    XcSysAssert({assertion: this.getObjectID({object: drawableObject}), message: 'drawableObject is not found.'});
+    
     if (this.#undoEnabled) {
       // Record undo
       this.#undoDeltas.push(new Xc3dDocOperationDelta({
